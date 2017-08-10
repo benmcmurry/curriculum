@@ -1,0 +1,296 @@
+html {
+	font-size: 16px;
+	padding: 0px;
+
+}
+
+@media all and (max-width: 900px) {
+	html {font-size: 13px;}
+}
+
+@media all and (max-width: 600px) {
+	html {font-size: 12px;}
+}
+
+@media all and (max-width: 300px){
+	html {font-size: 10px;}
+}
+body {
+
+	padding: 0px;
+	font-family: "Martel";
+	font-weight: 200;
+	background-color: #efefef;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	float: clear;
+	font-family: "Roboto";
+	font-weight: 100;
+	display: block;
+	padding: 0px;
+	margin:0px;
+}
+
+h1 {
+	font-size: 2em;
+	border-bottom: 1px solid black;
+	margin-bottom: 20px;
+
+}
+
+h2 {
+	font-size: 1.5em;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 1.3em;
+	background-color: #dadada;
+	padding: .5em;
+
+}
+
+
+h4 {
+	font-size: .8em;
+	font-family: "Lucida Sans", sans-serif;
+}
+
+p {
+	margin-left: .5em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+/* 	display: block; */
+
+}
+
+header {
+	margin: 0px auto;
+	max-width: 1218px;
+	padding: 1em;
+	background-color: white;
+	position: relative;
+}
+
+div#user {
+	background-color: #16357a;
+	color: white;
+	font-size: 1em;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	padding: 0px 10px;
+		border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+div.boxed-text {
+/* 	border: 1px solid black; */
+	background-color: #dadada;
+	padding: 10px;
+	margin: 10px;
+	}
+
+header div.content {
+		background-color: white;
+
+
+
+}
+
+
+div.content {
+	margin: 0px auto;
+	max-width: 1218px;
+	padding: 1em;
+	border-top: black solid 1px;
+		border-bottom: black solid 1px;
+
+
+}
+
+div.editable {
+	border: 1px grey dashed;
+	padding: 5px;
+/* 	margin: 40px 0px 10px; */
+
+}
+
+
+
+article {
+	margin: 0px auto;
+
+}
+
+button.active {
+	border: 2px black solid;
+}
+
+div.separator {
+	/* border: 1px black solid; */
+	padding: 10px;
+	background-color:white;
+	margin: 10px 0px;
+	/*
+-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+*/
+}
+
+a.button {
+	display: inline;
+	font-size: 1em;
+	font-family: sans-serif;
+	font-weight: bold;
+	color: white;
+	background-color: #3498db;
+	padding: 10px;
+	text-align: center;
+	box-shadow: 2px 2px 5px #888;
+	cursor: pointer;
+	text-decoration: none;
+/* 	text-shadow: 1px 1px 3px #666666; */
+	margin-right: 10px;
+
+}
+
+a.button:hover {
+
+	background-color: #3cb0fd;
+	box-shadow: 2px 2px 5px #888;
+	}
+
+a.button:active {
+	position: relative;
+	top: 1px;
+}
+
+a#add_semester {
+	display: inline-block;
+	width: 43px;
+	height: 43px;
+	border-radius: 43px;
+	font-size: 2em;
+	padding: 0px;
+	margin: 0px;
+
+}
+.save_dialog {
+	display: inline;
+	margin-left: 25px;
+}
+OL { counter-reset: item }
+OL LI { display: block }
+OL LI:before { content: counters(item, ".") ". "; counter-increment: item }
+
+#attached, #unattached {
+    border: 1px solid #eee;
+    width: 350px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+
+    margin-right: 10px;
+  }
+  #attached li, #unattached li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1em;
+    width: 320px;
+    cursor: pointer;
+    border: 1px black solid;
+    background-color: white;
+
+  }
+  #attached li:hover, #unattached li:hover {
+	  background-color: #efefef;
+	  }
+
+.course_list {
+	text-align: left;
+	width: 250px;
+	padding: 10px;
+	margin: 10px;
+	border: white solid 6px;
+	display: inline-block;
+	background-color: #036;
+	color:white;
+	-moz-box-shadow: 2px 2px 10px #888;
+	-webkit-box-shadow: 2px 2px 10px #888;
+	box-shadow: 2px 2px 10px #888;
+
+}
+  .course_list a {
+	font-size: 1em;
+/* 	padding: 1.2em 0em 1.2em 1.2em; */
+display:block;
+color:#d1e4f6;
+margin-left:8px;
+	}
+
+.course_list a:active {
+	position: relative;
+	top: 1px;
+}
+
+#faded-background {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	background-color: rgba(0,0,0,0.7);
+	width:100%;
+	height: 100%;
+
+}
+
+#popup {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	text-align: left;
+	color: black;
+	background-color: white;
+	padding: 10px;
+	border-radius: 7px;
+	top: 0;
+	left: 0;
+}
+
+table#teaching {
+	border-collapse: collapse;
+
+}
+#teaching td  {
+	background-color: white;
+	color: black;
+	border: 1px solid;
+	text-align: center;
+
+}
+
+th.rotate {
+  /* Something you can count on */
+  height: 200px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform:
+    /* Magic Numbers */
+    translate(30px, 71px)
+    /* 45 is really 360 - 45 */
+    rotate(315deg);
+  width: 50px;
+}
+th.rotate > div > span {
+	width: 200px;
+  padding: 5px 10px;
+	border-bottom: 1px solid black;
+
+}

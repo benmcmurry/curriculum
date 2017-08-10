@@ -1,0 +1,257 @@
+[05-Jun-2015 13:28:05 America/Denver] PHP Notice:  Undefined index: level in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 3
+[05-Jun-2015 13:28:05 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 7
+[05-Jun-2015 13:28:05 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 7
+[05-Jun-2015 13:28:06 America/Denver] PHP Notice:  Undefined index: level in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 3
+[05-Jun-2015 13:28:06 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 7
+[05-Jun-2015 13:28:06 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 7
+[05-Jun-2015 13:30:36 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:36 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:36 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:30:36 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:36 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:36 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:36 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:36 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:30:36 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:36 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:41 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:41 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:41 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:30:41 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:41 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:41 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:41 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:30:41 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:30:41 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:30:41 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:18 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:18 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:18 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:18 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:18 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:18 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:18 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:18 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:18 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:18 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:50 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:50 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:50 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:50 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:50 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:50 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:50 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:50 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:50 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:50 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:54 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:54 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:54 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:54 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:54 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:54 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:54 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 2
+[05-Jun-2015 13:31:54 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 13:31:54 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:31:54 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 9
+[05-Jun-2015 13:32:24 America/Denver] PHP Notice:  Undefined index: level_id in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 6
+[05-Jun-2015 15:41:32 America/Denver] PHP Notice:  Undefined index: level_descriptor in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 5
+[05-Jun-2015 15:41:44 America/Denver] PHP Notice:  Undefined index: level_descriptor in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 5
+[05-Jun-2015 15:48:24 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 13
+[05-Jun-2015 15:48:24 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 13
+[05-Jun-2015 15:48:24 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 13
+[05-Jun-2015 15:48:24 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 13
+[20-Jul-2015 15:06:54 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:18:11 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:32:38 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:32:52 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:33:24 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:34:01 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:50:03 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 15:50:35 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 109
+[20-Jul-2015 16:49:29 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 110
+[21-Jul-2015 08:57:46 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 114
+[21-Jul-2015 11:46:09 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:46:09 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:46:37 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:46:39 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:48:02 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:48:02 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:49:06 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:49:06 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:49:16 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:49:16 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 11:50:32 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:50:32 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:51:18 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:51:18 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:51:35 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:51:36 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:53:55 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:53:55 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 126
+[21-Jul-2015 11:56:41 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 128
+[21-Jul-2015 11:56:41 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 128
+[21-Jul-2015 11:56:49 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 128
+[21-Jul-2015 11:56:49 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 128
+[21-Jul-2015 11:57:58 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 129
+[21-Jul-2015 11:57:58 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 129
+[21-Jul-2015 11:59:33 America/Denver] PHP Parse error:  syntax error, unexpected '<' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 1
+[21-Jul-2015 11:59:33 America/Denver] PHP Parse error:  syntax error, unexpected '<' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 1
+[21-Jul-2015 12:02:04 America/Denver] PHP Notice:  Undefined index: learing_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 16
+[21-Jul-2015 12:03:13 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 12:03:13 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 125
+[21-Jul-2015 12:03:40 America/Denver] PHP Notice:  Undefined variable: level_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 92
+[21-Jul-2015 12:04:43 America/Denver] PHP Notice:  Undefined variable: level_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 92
+[21-Jul-2015 12:07:28 America/Denver] PHP Notice:  Undefined variable: level_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 92
+[21-Jul-2015 12:13:26 America/Denver] PHP Notice:  Undefined variable: learing_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 133
+[21-Jul-2015 12:18:05 America/Denver] PHP Notice:  Undefined index: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 9
+[21-Jul-2015 12:19:30 America/Denver] PHP Notice:  Undefined index: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 9
+[21-Jul-2015 12:23:03 America/Denver] PHP Notice:  Undefined index: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 9
+[21-Jul-2015 14:06:09 America/Denver] PHP Parse error:  syntax error, unexpected '$level_name' (T_VARIABLE) in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 120
+[21-Jul-2015 14:06:09 America/Denver] PHP Parse error:  syntax error, unexpected '$level_name' (T_VARIABLE) in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 120
+[21-Jul-2015 14:43:49 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:45:23 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:46:39 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:46:53 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:46:58 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:47:38 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:47:42 America/Denver] PHP Notice:  Undefined index: course_id in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 2
+[21-Jul-2015 14:56:28 America/Denver] PHP Notice:  Undefined variable: timedate in /home1/benmcmur/public_html/curriculum/editors/save-level.php on line 15
+[21-Jul-2015 16:47:48 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 115
+[21-Jul-2015 17:24:25 America/Denver] PHP Notice:  Undefined index: course_short_name in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 5
+[21-Jul-2015 17:24:25 America/Denver] PHP Notice:  Undefined index: course_short_name in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 5
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 148
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 149
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 150
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 151
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[21-Jul-2015 17:36:29 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 148
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 149
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 150
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 151
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[21-Jul-2015 17:36:44 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 135
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 148
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 149
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 150
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 151
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[21-Jul-2015 17:37:45 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 136
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 136
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 149
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 150
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 151
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[23-Jul-2015 15:30:22 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 154
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 29
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 136
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 136
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 149
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 150
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 151
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[23-Jul-2015 15:31:37 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 154
+[23-Jul-2015 16:33:52 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 7
+[23-Jul-2015 16:33:52 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-course.php on line 7
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 30
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 30
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: level_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 139
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 139
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_short_name in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 152
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_description in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 153
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_emphasis in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 154
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: course_materials in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 155
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 156
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: assessment in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 157
+[27-Jul-2015 08:38:25 America/Denver] PHP Notice:  Undefined variable: learning_experiences in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 158
+[27-Jul-2015 08:44:26 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[27-Jul-2015 08:44:36 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[27-Jul-2015 08:44:36 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[27-Jul-2015 11:54:56 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[27-Jul-2015 17:06:59 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 2
+[27-Jul-2015 17:06:59 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 2
+[27-Jul-2015 17:06:59 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 6
+[27-Jul-2015 17:06:59 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 6
+[27-Jul-2015 17:06:59 America/Denver] PHP Warning:  include_once(../../connectFiles/connect_cis.php): failed to open stream: No such file or directory in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 2
+[27-Jul-2015 17:06:59 America/Denver] PHP Warning:  include_once(): Failed opening '../../connectFiles/connect_cis.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 2
+[27-Jul-2015 17:06:59 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 6
+[27-Jul-2015 17:06:59 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 6
+[29-Jul-2015 08:46:25 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[29-Jul-2015 08:46:30 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 127
+[29-Jul-2015 12:35:23 America/Denver] PHP Deprecated:  mysql_escape_string(): This function is deprecated; use mysql_real_escape_string() instead. in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:35:27 America/Denver] PHP Deprecated:  mysql_escape_string(): This function is deprecated; use mysql_real_escape_string() instead. in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:35:56 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:35:56 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:14 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:14 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:22 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:22 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:24 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:24 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:49 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:36:49 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:37:29 America/Denver] PHP Warning:  mysql_real_escape_string(): Access denied for user 'skumar'@'localhost' (using password: NO) in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:37:29 America/Denver] PHP Warning:  mysql_real_escape_string(): A link to the server could not be established in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:13 America/Denver] PHP Notice:  Undefined variable: mysqli in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:13 America/Denver] PHP Fatal error:  Call to a member function real_escape_string() on a non-object in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:21 America/Denver] PHP Notice:  Undefined variable: mysqli in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:21 America/Denver] PHP Fatal error:  Call to a member function real_escape_string() on a non-object in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:28 America/Denver] PHP Notice:  Undefined variable: mysqli in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[29-Jul-2015 12:42:28 America/Denver] PHP Fatal error:  Call to a member function real_escape_string() on a non-object in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 6
+[30-Jul-2015 15:43:52 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[30-Jul-2015 15:43:56 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 127
+[30-Jul-2015 17:41:09 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:10 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:11 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:12 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:20 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:24 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 17:41:30 America/Denver] PHP Notice:  Undefined index: learning_outcomes in /home1/benmcmur/public_html/curriculum/editors/save-outcome.php on line 4
+[30-Jul-2015 18:30:20 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 14
+[30-Jul-2015 18:31:37 America/Denver] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting '(' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:37 America/Denver] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting '(' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:41 America/Denver] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting '(' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:41 America/Denver] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting '(' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:52 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:53 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:56 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:31:56 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:32:40 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:32:40 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:10 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:10 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:15 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:15 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:21 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:33:21 America/Denver] PHP Parse error:  syntax error, unexpected '{' in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 31
+[30-Jul-2015 18:34:59 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:35:08 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:36:08 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:38:01 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:39:54 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[30-Jul-2015 18:40:52 America/Denver] PHP Notice:  Undefined index: edit in /home1/benmcmur/public_html/curriculum/editors/lo_by_skill.php on line 35
+[03-Aug-2015 11:31:02 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[03-Aug-2015 11:31:03 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 127
+[07-Aug-2015 09:38:42 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 141
+[07-Aug-2015 09:38:45 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/level-edit.php on line 127
+[07-Aug-2015 16:37:47 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 142
+[07-Aug-2015 16:38:11 America/Denver] PHP Notice:  Undefined index: HTTP_REFERER in /home1/benmcmur/public_html/curriculum/editors/course-edit.php on line 142

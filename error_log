@@ -1,0 +1,96 @@
+[05-Jun-2015 10:42:14 America/Denver] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 27
+[05-Jun-2015 11:59:11 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:11 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:11 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:11 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:36 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:36 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:36 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:36 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:41 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:41 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:41 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 11:59:41 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:16 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:16 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:16 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:16 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:23 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:23 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:23 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:00:23 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 6
+[05-Jun-2015 12:01:13 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:13 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:13 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:13 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:46 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:46 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:46 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:01:46 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:02:22 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:02:22 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:02:22 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:02:22 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:16 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:16 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:16 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:16 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:22 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:22 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:22 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:22:22 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:26:26 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:26:26 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:26:26 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:26:26 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:27:15 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:27:15 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:27:15 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:27:15 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:31:07 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:31:07 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:31:07 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[05-Jun-2015 12:31:07 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-edit.php on line 7
+[20-Jul-2015 17:19:34 America/Denver] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 28
+[20-Jul-2015 17:19:56 America/Denver] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 28
+[21-Jul-2015 08:51:17 America/Denver] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 35
+[21-Jul-2015 08:51:40 America/Denver] PHP Notice:  Undefined index: level_is in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 35
+[21-Jul-2015 08:54:05 America/Denver] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 35
+[21-Jul-2015 08:54:17 America/Denver] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 35
+[21-Jul-2015 11:17:04 America/Denver] PHP Notice:  Undefined index: id in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 41
+[21-Jul-2015 11:17:09 America/Denver] PHP Notice:  Undefined variable: course_id in /home1/benmcmur/public_html/curriculum/course.php on line 37
+[21-Jul-2015 11:17:51 America/Denver] PHP Notice:  Undefined index: id in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 41
+[21-Jul-2015 11:33:04 America/Denver] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/course_information.php on line 9
+[21-Jul-2015 11:37:52 America/Denver] PHP Notice:  Undefined index: learning_experiences in /home1/benmcmur/public_html/curriculum/course_information.php on line 27
+[21-Jul-2015 13:57:56 America/Denver] PHP Parse error:  syntax error, unexpected '$course' (T_VARIABLE), expecting ',' or ';' in /home1/benmcmur/public_html/curriculum/course_information.php on line 7
+[21-Jul-2015 14:01:45 America/Denver] PHP Notice:  Undefined variable: query in /home1/benmcmur/public_html/curriculum/course.php on line 5
+[21-Jul-2015 14:01:45 America/Denver] PHP Warning:  mysqli::query(): Empty query in /home1/benmcmur/public_html/curriculum/course.php on line 5
+[21-Jul-2015 14:19:33 America/Denver] PHP Warning:  include(): Failed opening 'course-list.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear:/home1/benmcmur/google-api-php-client') in /home1/benmcmur/public_html/curriculum/courses.php on line 36
+[21-Jul-2015 14:26:35 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home1/benmcmur/public_html/curriculum/course-list.php on line 24
+[21-Jul-2015 14:29:29 America/Denver] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home1/benmcmur/public_html/curriculum/course-list.php on line 15
+[21-Jul-2015 14:30:09 America/Denver] PHP Parse error:  syntax error, unexpected end of file in /home1/benmcmur/public_html/curriculum/course-list.php on line 25
+[23-Jul-2015 16:15:40 America/Denver] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting identifier (T_STRING) in /home1/benmcmur/public_html/curriculum/course-list.php on line 23
+[27-Jul-2015 11:42:25 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 11:42:25 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 11:42:42 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 11:42:42 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 11:43:11 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 11:43:11 America/Denver] PHP Parse error:  syntax error, unexpected '=' in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 13
+[27-Jul-2015 12:45:38 America/Denver] PHP Notice:  Undefined variable: ids in /home1/benmcmur/public_html/curriculum/lo_by_skill.php on line 9
+[29-Jul-2015 10:27:53 America/Denver] PHP Fatal error:  Class 'PDFlib' not found in /home1/benmcmur/public_html/curriculum/pdf.php on line 4
+[29-Jul-2015 10:27:53 America/Denver] PHP Fatal error:  Class 'PDFlib' not found in /home1/benmcmur/public_html/curriculum/pdf.php on line 4
+[29-Jul-2015 10:28:22 America/Denver] PHP Fatal error:  Class 'PDFlib' not found in /home1/benmcmur/public_html/curriculum/pdf.php on line 4
+[30-Jul-2015 14:33:55 America/Denver] PHP Notice:  Undefined variable: program_mission in /home1/benmcmur/public_html/curriculum/mission.php on line 4
+[30-Jul-2015 14:35:11 America/Denver] PHP Notice:  Undefined variable: result in /home1/benmcmur/public_html/../connectFiles/connect_cis.php on line 25
+[30-Jul-2015 14:35:11 America/Denver] PHP Fatal error:  Call to a member function free() on a non-object in /home1/benmcmur/public_html/../connectFiles/connect_cis.php on line 25
+[30-Jul-2015 14:35:28 America/Denver] PHP Notice:  Undefined variable: program_mission in /home1/benmcmur/public_html/curriculum/mission.php on line 4
+[30-Jul-2015 14:35:56 America/Denver] PHP Notice:  Undefined variable: mission in /home1/benmcmur/public_html/curriculum/mission.php on line 4
+[30-Jul-2015 14:36:00 America/Denver] PHP Notice:  Undefined variable: mission in /home1/benmcmur/public_html/curriculum/mission.php on line 4
+[19-Aug-2015 11:15:34 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:15:34 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:15:34 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:15:34 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:54:09 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:54:09 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:54:09 America/Denver] PHP Notice:  Undefined variable: db in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
+[19-Aug-2015 11:54:09 America/Denver] PHP Fatal error:  Call to a member function query() on a non-object in /home1/benmcmur/public_html/curriculum/level-descriptors.php on line 19
