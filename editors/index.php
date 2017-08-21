@@ -77,7 +77,7 @@ if ($net_id == "blm39") {
       echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'>".$Courses_review['course_name']."</a><br />";
   	}
 
-		$review_level_query = "Select * from Levels_review where needs_review = 1";
+		$review_level_query = $db->prepare("Select * from Levels_review where needs_review = 1");
 		$review_level_query->execute();
 		$review_level_query_results = $review_level_query->get_result();
 
