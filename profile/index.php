@@ -34,9 +34,7 @@
 $query_stats = $db->prepare("Select * from Statistics order by year DESC, Semester DESC");
 $query_stats->execute();
 $result_stats = $query_stats->get_result();
-if(!$result_stats = $db->query($query_stats)){
-die('There was an error running the query [' . $db->error . ']');
-}
+
 $semester_year = "<td><h1>By Semester</h1></td>";
 $classes_taught  = "<td class='first_column'>Classes Taught</td>";
 $supplemental_classes_taught = "<td class='first_column'>Supplemental Classes Taught</td>";
@@ -100,9 +98,7 @@ EOF;
 $query_stats = $db->prepare("Select * from Statistics order by year DESC, Semester DESC");
 $query_stats->execute();
 $result_stats = $query_stats->get_result();
-	if(!$result_stats = $db->query($query_stats)){
-		die('There was an error running the query [' . $db->error . ']');
-	}
+
 $semester_year = "<td><h1>By Academic Year</h1></td>";
 $classes_taught  = "<td class='first_column'>Classes Taught</td>";
 $supplemental_classes_taught = "<td class='first_column'>Supplemental Classes Taught</td>";
@@ -140,14 +136,12 @@ $graduate_internships_count = 0;
 $undergraduate_internships_count = 0;
 
 	$end_year = $start_year+1;
-	$query_academic_year = "Select * from Statistics where (year = ? and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year = ? and (semester like '%3Fall%'))";
+	$query_academic_year = $db->prepare("Select * from Statistics where (year = ? and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year = ? and (semester like '%3Fall%'))");
 	$query_academic_year->bind_param("ss", $end_year, $start_year);
 	$query_academic_year->execute();
   $result_academic_year = $query_academic_year->get_result();
 
-		if(!$result_academic_year = $db->query($query_academic_year)){
-				die('There was an error running the query [' . $db->error . ']');
-		}
+
 		while($academic_year = $result_academic_year->fetch_assoc()){
 			$classes_taught_count += $academic_year['classes_taught'];
 			$supplemental_classes_taught_count += $academic_year['supplemental_classes_taught'];
@@ -178,13 +172,11 @@ $undergraduate_internships = $undergraduate_internships."<td ".$class_cell.">".$
 $limit = 6 - $i;
 if($i % 2 == 0) {$i=2;} else {$i=1;}
 
-$query_stats = "Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?";
+$query_stats = $db->prepare("Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?");
 $query_stats->bind_param("s", $limit);
 $query_stats->execute();
 $result = $query_stats->get_result();
-if(!$result_stats = $db->query($query_stats)){
-die('There was an error running the query [' . $db->error . ']');
-}
+
 
 
 while($stats = $result_stats->fetch_assoc()){
@@ -268,13 +260,11 @@ $graduate_internships_count = 0;
 $undergraduate_internships_count = 0;
 
 
-	$query_year = "Select * from Statistics where year = ?";
+	$query_year = $db->prepare("Select * from Statistics where year = ?");
 	$query_year->bind_param("s", $start_year);
 $query_year->execute();
 $result_year = $query_year->get_result();
-		if(!$result_year = $db->query($query_year)){
-				die('There was an error running the query [' . $db->error . ']');
-		}
+
 		while($year_data = $result_year->fetch_assoc()){
 			$classes_taught_count += $year_data['classes_taught'];
 			$supplemental_classes_taught_count += $year_data['supplemental_classes_taught'];
@@ -330,78 +320,74 @@ EOF;
 <table class='teaching'>
 
 <?php
-$i=2; $class_cell = "class='odd'";
-$query_stats = "Select type, COUNT(*) from Citations group by type";
-$query_stats->execute();
-  $result_stats = $query_stats->get_result();
-if(!$result_stats = $db->query($query_stats)){
-die('There was an error running the query [' . $db->error . ']');
-}
-while($stats = $result_stats->fetch_assoc()){
-	$$stats['type']=$stats['COUNT(*)'];
-
-}
-
-$result_stats->free();
-$years = "<td><h1>Year</h1></td><td ".$class_cell.">Total**</td>";
-$dissertations  = "<td class='first_column'>Dissertations</td><td ".$class_cell.">".$Dissertation."</td>";
-$theses = "<td class='first_column'>MA Theses</td><td ".$class_cell.">".$Thesis."</td>";
-$projects = "<td class='first_column'>MA Projects</td><td ".$class_cell.">".$Project."</td>";
-$publications = "<td class='first_column'>Publications</td><td ".$class_cell.">".$Publication."</td>";
-$presentations = "<td class='first_column'>Presentations</td><td ".$class_cell.">".$Presentation."</td>";
-$year = date("Y");
-$loop_year = $year;
-while($loop_year > $year - 5) {
-	if($loop_year == $year) {$current_year = "*";} else {$current_year = "";}
-	if ($i % 2 == 0) {$class_cell = "class='even'";} else {$class_cell = "class='odd'";}
-	$Dissertation = $Thesis = $Project = $Publication = $Presentation = 0;
-
-
-	$query_stats = "Select type, COUNT(*) from Citations where year = ? group by type";
-	$query_stats->bind_param("s", $loop_year);
-	$query_stats->execute();
-	$result_stats = $query_stats->get_result();
-	if(!$result_stats = $db->query($query_stats)){
-	die('There was an error running the query [' . $db->error . ']');
-	}
-	while($stats = $result_stats->fetch_assoc()){
-			$$stats['type']=$stats['COUNT(*)'];
-
-	}
-
-	$result_stats->free();
-
-	$years = $years."<td ".$class_cell.">".$loop_year.$current_year."</td>";
-	$dissertations = $dissertations. "<td ".$class_cell.">".$Dissertation."</td>";
-	$theses = $theses."<td ".$class_cell.">".$Thesis."</td>";
-	$projects = $projects."<td ".$class_cell.">".$Project."</td>";
-	$publications = $publications."<td ".$class_cell.">".$Publication."</td>";
-	$presentations = $presentations."<td ".$class_cell.">".$Presentation."</td>";
-
-	$loop_year = $loop_year -1;$i++;
-
-}
-
-
-
-
-
-echo <<<EOF
-<thead><tr>$years</tr></thead>
-<tr class='odd'>$dissertations</tr>
-<tr>$theses</tr>
-<tr class='odd'>$projects</tr>
-<tr>$publications</tr>
-<tr class='odd'>$presentations</tr>
-
-
-
-
-	</table>
-	<p align="center">**Data collection started in 2008, but there are recorded citations as early as 2001. </p>
-	<p align="center">*current year</p>
-	</div>
-EOF;
+// $i=2; $class_cell = "class='odd'";
+// $query_stats = $db->prepare("Select type, COUNT(*) from Citations group by type");
+// $query_stats->execute();
+//   $result_stats = $query_stats->get_result();
+//
+// while($stats = $result_stats->fetch_assoc()){
+// 	$$stats['type']=$stats['COUNT(*)'];
+//
+// }
+//
+// $result_stats->free();
+// $years = "<td><h1>Year</h1></td><td ".$class_cell.">Total**</td>";
+// $dissertations  = "<td class='first_column'>Dissertations</td><td ".$class_cell.">".$Dissertation."</td>";
+// $theses = "<td class='first_column'>MA Theses</td><td ".$class_cell.">".$Thesis."</td>";
+// $projects = "<td class='first_column'>MA Projects</td><td ".$class_cell.">".$Project."</td>";
+// $publications = "<td class='first_column'>Publications</td><td ".$class_cell.">".$Publication."</td>";
+// $presentations = "<td class='first_column'>Presentations</td><td ".$class_cell.">".$Presentation."</td>";
+// $year = date("Y");
+// $loop_year = $year;
+// while($loop_year > $year - 5) {
+// 	if($loop_year == $year) {$current_year = "*";} else {$current_year = "";}
+// 	if ($i % 2 == 0) {$class_cell = "class='even'";} else {$class_cell = "class='odd'";}
+// 	$Dissertation = $Thesis = $Project = $Publication = $Presentation = 0;
+//
+//
+// 	$query_stats = $db->prepare("Select type, COUNT(*) from Citations where year = ? group by type");
+// 	$query_stats->bind_param("s", $loop_year);
+// 	$query_stats->execute();
+// 	$result_stats = $query_stats->get_result();
+//
+// 	while($stats = $result_stats->fetch_assoc()){
+// 			$$stats['type']=$stats['COUNT(*)'];
+//
+// 	}
+//
+// 	$result_stats->free();
+//
+// 	$years = $years."<td ".$class_cell.">".$loop_year.$current_year."</td>";
+// 	$dissertations = $dissertations. "<td ".$class_cell.">".$Dissertation."</td>";
+// 	$theses = $theses."<td ".$class_cell.">".$Thesis."</td>";
+// 	$projects = $projects."<td ".$class_cell.">".$Project."</td>";
+// 	$publications = $publications."<td ".$class_cell.">".$Publication."</td>";
+// 	$presentations = $presentations."<td ".$class_cell.">".$Presentation."</td>";
+//
+// 	$loop_year = $loop_year -1;$i++;
+//
+// }
+//
+//
+//
+//
+//
+// echo <<<EOF
+// <thead><tr>$years</tr></thead>
+// <tr class='odd'>$dissertations</tr>
+// <tr>$theses</tr>
+// <tr class='odd'>$projects</tr>
+// <tr>$publications</tr>
+// <tr class='odd'>$presentations</tr>
+//
+//
+//
+//
+// 	</table>
+// 	<p align="center">**Data collection started in 2008, but there are recorded citations as early as 2001. </p>
+// 	<p align="center">*current year</p>
+// 	</div>
+// EOF;
 ?>
 <h2 id='c'>Citations </h2>
 <div id='research_data_nav'>
@@ -426,10 +412,8 @@ EOF;
 	<?php
 		$query = $db->prepare("Select * from Citations  where type='publication' order by year DESC");
 		$query->execute();
-  $result = $query_stats->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+  $result = $query->get_result();
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>
@@ -459,9 +443,7 @@ EOF;
 		$query = $db->prepare("Select * from Citations  where type='presentation' order by year DESC");
 		$query->execute();
   $result = $query->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>
@@ -491,9 +473,7 @@ EOF;
 		$query = $db->prepare("Select * from Citations  where type='thesis' order by year DESC");
 		$query->execute();
   	$result = $query->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>
@@ -523,9 +503,7 @@ EOF;
 		$query = $db->prepare("Select * from Citations  where type='project' order by year DESC");
 		$query->execute();
   $result = $query->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>
@@ -555,9 +533,7 @@ EOF;
 		$query = $db->prepare("Select * from Citations  where type='dissertation' order by year DESC");
 		$query->execute();
   $result = $query->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>

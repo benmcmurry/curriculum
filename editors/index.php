@@ -70,7 +70,7 @@ if ($net_id == "blm39") {
 
 
 
-		$review_query = "Select * from Courses_review where needs_review = 1";
+		$review_query = $db->prepare("Select * from Courses_review where needs_review = 1");
 		$review_query->execute();
 		$result = $review_query->get_result();
   	while ($Courses_review = $result->fetch_assoc()) {
