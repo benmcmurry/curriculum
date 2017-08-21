@@ -14,7 +14,7 @@ $google_drive_folder_id = $_POST['google_drive_folder_id'];
 $needs_review = $_POST['needs_review'];
 
 
-$query = $db->prepare("UPDATE Courses_Review SET needs_review= ?, course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=$course_id");
+$query = $db->prepare("UPDATE Courses_Review SET needs_review= ?, course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=?");
 $query->bind_param("ssssssssssss", $needs_review, $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
 $query->execute();
 $result = $query->get_result();
