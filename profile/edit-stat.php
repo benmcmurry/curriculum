@@ -21,10 +21,14 @@ if ($field == "semester") {
 			$value = "4".$value;
 			break;
 		}
-	
+
 }
 
 $query = "UPDATE Statistics SET ".$field."='$value' WHERE id='$stat_id'";
+$query->bind_param("sss", $field, $value, $stat_id );
+$query->execute();
+$result = $query->get_result();
+
 	if(!$results = $db->query($query)){
 	die('There was an error running the query [' . $db->error . ']');
 	}

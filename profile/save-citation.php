@@ -7,7 +7,10 @@ $year = $_POST['year'];
 $authors = $_POST['authors'];
 $type = $_POST['type'];
 
-$search = "Select * from Citations where citation='$citation'";
+$search = $db->prepare("Select * from Citations where citation = ? ");
+$search->bind_param("s", $citation);
+  $search->execute();
+    $result = $search->get_result();
 		if(!$result = $db->query($search)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -15,7 +18,10 @@ $search = "Select * from Citations where citation='$citation'";
 
 			if (mysqli_num_rows($result) < 1) {
 				echo "<script>console.log('it does not exist!');</script>";
-				$query = "Insert into Citations (citation, year, authors, type) Values ('$citation','$year','$authors', '$type')";
+				$query = $db->prepare("Insert into Citations (citation, year, authors, type) Values (?, ?, ?, ?)");
+				$query->bind_param("sss", $citation, $year, $authors, $type);
+				  $query->execute();
+				    $result = $query->get_result();
 					if(!$results = $db->query($query)){
 					die('There was an error running the query [' . $db->error . ']');
 					}

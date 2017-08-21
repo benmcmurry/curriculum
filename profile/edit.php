@@ -113,7 +113,10 @@ function editPopup(id) {
 					</tr>
 				</thead>
 <?php
-$query_stats = "Select * from Statistics order by year DESC, Semester DESC";
+  $query_stats = "Select * from Statistics order by year DESC, Semester DESC";
+  $query_stats->execute();
+  $result_stats = $query_stats->get_result();
+
 if(!$result_stats = $db->query($query_stats)){
 	die('There was an error running the query [' . $db->error . ']');
 }
@@ -155,7 +158,9 @@ if(!$result_stats = $db->query($query_stats)){
 				</thead>
 
 	<?php
-		$query = "Select * from Citations order by id DESC";
+		$query = $db->prepare("Select * from Citations order by id DESC");
+    $query->execute();
+    $result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}

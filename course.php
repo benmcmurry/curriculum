@@ -2,11 +2,12 @@
 session_start();
     include_once("../../connectFiles/connect_cis.php");
     $course_id = $_GET['course_id'];
-    $title_query = "Select Courses.course_name, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=$course_id";
-        if (!$title_query_result = $db->query($title_query)) {
-            die('There was an error running the query [' . $db->error . ']');
-        }
-        while ($title = $title_query_result->fetch_assoc()) {
+    $title_query = $db->prepare("Select Courses.course_name, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id= ?");
+    $title_query->bind_param('s', $course_id);
+    $title_query->execute();
+    $result = $title_query->get_result();
+
+        while ($title = $result->fetch_assoc()) {
             $course_name = $title['course_name'];
             $level_name = $title['level_name'];
         }

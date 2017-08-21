@@ -5,11 +5,11 @@
 
 <?php
 	echo "<div class='main'><div class='content-background'><div class='content'>";
-	$query = "Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=$course_id";
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
-		while($course = $result->fetch_assoc()){
+	$query = $db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=?");
+	$query->bind_param('s', $course_id);
+	$query->execute();
+	$result = $query->get_result();
+	while($course = $result->fetch_assoc()){
 echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course.php?print_id=".$course['course_id']."'></a>";
 echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 

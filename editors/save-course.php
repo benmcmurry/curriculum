@@ -14,7 +14,10 @@ $google_drive_folder_id = $_POST['google_drive_folder_id'];
 $needs_review = $_POST['needs_review'];
 
 
-$query = "UPDATE Courses_Review SET needs_review='$needs_review', course_name='$course_name', course_short_name='$course_short_name',course_description='$course_description', course_emphasis='$course_emphasis',course_materials='$course_materials', learning_outcomes ='$learning_outcomes', assessment='$assessment', learning_experiences='$learning_experiences', updated_by='$net_id', google_drive_folder_id='$google_drive_folder_id' WHERE course_id=$course_id";
+$query = $db->prepare("UPDATE Courses_Review SET needs_review= ?, course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=$course_id");
+$query->bind_param("ssssssssssss", $needs_review, $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+$query->execute();
+$result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -22,19 +25,26 @@ $query = "UPDATE Courses_Review SET needs_review='$needs_review', course_name='$
 			echo "Saved ".date('l jS \of F Y h:i:s A').".";
 		}
 if ($needs_review == 0) {
-	$query_final = "UPDATE Courses SET course_name='$course_name', course_short_name='$course_short_name',course_description='$course_description', course_emphasis='$course_emphasis',course_materials='$course_materials', learning_outcomes ='$learning_outcomes', assessment='$assessment', learning_experiences='$learning_experiences', updated_by='$net_id', google_drive_folder_id='$google_drive_folder_id' WHERE course_id=$course_id";
+	$query_final = $db->prepare("UPDATE Courses SET course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=?");
+	$query_final->bind_param("sssssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+	$query_final->execute();
+	$result_final = $query_final->get_result();
+
 			if(!$result_final = $db->query($query_final)){
 				die('There was an error running the query [' . $db->error . ']');
 			}
 			else {
-				
+
 			}
 
 
 }
 
 
-$query_backup = "Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, assessment, learning_experiences, google_drive_folder_id, updated_on, updated_by) Values ('$course_id','$course_name','$course_short_name','$course_description','$course_emphasis','$course_materials','$learning_outcomes','$assessment','$learning_experiences','$google_drive_folder_id', now(), '$net_id' )";
+$query_backup = $db->prepare("Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, assessment, learning_experiences, google_drive_folder_id, updated_on, updated_by) Values (?,?,?,?,?,?,?,?,?,?, now(), ? )");
+$query_backup->bind_param("sssssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+$query_backup->execute();
+$result_backup = $query_backup->get_result();
 if(!$result_backup = $db->query($query_backup)){
 			die('There was an error running the query [' . $db->error . ']');
 		}

@@ -31,7 +31,9 @@
 <table class='teaching'>
 
 <?php
-$query_stats = "Select * from Statistics order by year DESC, Semester DESC";
+$query_stats = $db->prepare("Select * from Statistics order by year DESC, Semester DESC");
+$query_stats->execute();
+$result_stats = $query_stats->get_result();
 if(!$result_stats = $db->query($query_stats)){
 die('There was an error running the query [' . $db->error . ']');
 }
@@ -95,7 +97,9 @@ EOF;
 <table class='teaching'>
 
 <?php
-$query_stats = "Select * from Statistics order by year DESC, Semester DESC";
+$query_stats = $db->prepare("Select * from Statistics order by year DESC, Semester DESC");
+$query_stats->execute();
+$result_stats = $query_stats->get_result();
 	if(!$result_stats = $db->query($query_stats)){
 		die('There was an error running the query [' . $db->error . ']');
 	}
@@ -136,7 +140,11 @@ $graduate_internships_count = 0;
 $undergraduate_internships_count = 0;
 
 	$end_year = $start_year+1;
-	$query_academic_year = "Select * from Statistics where (year='".$end_year."' and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year='".$start_year."' and (semester like '%3Fall%'))";
+	$query_academic_year = "Select * from Statistics where (year = ? and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year = ? and (semester like '%3Fall%'))";
+	$query_academic_year->bind_param("ss", $end_year, $start_year);
+	$query_academic_year->execute();
+  $result_academic_year = $query_academic_year->get_result();
+
 		if(!$result_academic_year = $db->query($query_academic_year)){
 				die('There was an error running the query [' . $db->error . ']');
 		}
@@ -170,7 +178,10 @@ $undergraduate_internships = $undergraduate_internships."<td ".$class_cell.">".$
 $limit = 6 - $i;
 if($i % 2 == 0) {$i=2;} else {$i=1;}
 
-$query_stats = "Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit $limit";
+$query_stats = "Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?";
+$query_stats->bind_param("s", $limit);
+$query_stats->execute();
+$result = $query_stats->get_result();
 if(!$result_stats = $db->query($query_stats)){
 die('There was an error running the query [' . $db->error . ']');
 }
@@ -257,7 +268,10 @@ $graduate_internships_count = 0;
 $undergraduate_internships_count = 0;
 
 
-	$query_year = "Select * from Statistics where year='$start_year'";
+	$query_year = "Select * from Statistics where year = ?";
+	$query_year->bind_param("s", $start_year);
+$query_year->execute();
+$result_year = $query_year->get_result();
 		if(!$result_year = $db->query($query_year)){
 				die('There was an error running the query [' . $db->error . ']');
 		}
@@ -318,6 +332,8 @@ EOF;
 <?php
 $i=2; $class_cell = "class='odd'";
 $query_stats = "Select type, COUNT(*) from Citations group by type";
+$query_stats->execute();
+  $result_stats = $query_stats->get_result();
 if(!$result_stats = $db->query($query_stats)){
 die('There was an error running the query [' . $db->error . ']');
 }
@@ -341,8 +357,10 @@ while($loop_year > $year - 5) {
 	$Dissertation = $Thesis = $Project = $Publication = $Presentation = 0;
 
 
-	$query_stats = "Select type, COUNT(*) from Citations where year='$loop_year' group by type";
-
+	$query_stats = "Select type, COUNT(*) from Citations where year = ? group by type";
+	$query_stats->bind_param("s", $loop_year);
+	$query_stats->execute();
+	$result_stats = $query_stats->get_result();
 	if(!$result_stats = $db->query($query_stats)){
 	die('There was an error running the query [' . $db->error . ']');
 	}
@@ -406,7 +424,9 @@ EOF;
 				</thead>
 
 	<?php
-		$query = "Select * from Citations  where type='publication' order by year DESC";
+		$query = $db->prepare("Select * from Citations  where type='publication' order by year DESC");
+		$query->execute();
+  $result = $query_stats->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -436,7 +456,9 @@ EOF;
 				</thead>
 
 	<?php
-		$query = "Select * from Citations  where type='presentation' order by year DESC";
+		$query = $db->prepare("Select * from Citations  where type='presentation' order by year DESC");
+		$query->execute();
+  $result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -466,7 +488,9 @@ EOF;
 				</thead>
 
 	<?php
-		$query = "Select * from Citations  where type='thesis' order by year DESC";
+		$query = $db->prepare("Select * from Citations  where type='thesis' order by year DESC");
+		$query->execute();
+  	$result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -496,7 +520,9 @@ EOF;
 				</thead>
 
 	<?php
-		$query = "Select * from Citations  where type='project' order by year DESC";
+		$query = $db->prepare("Select * from Citations  where type='project' order by year DESC");
+		$query->execute();
+  $result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -526,7 +552,9 @@ EOF;
 				</thead>
 
 	<?php
-		$query = "Select * from Citations  where type='dissertation' order by year DESC";
+		$query = $db->prepare("Select * from Citations  where type='dissertation' order by year DESC");
+		$query->execute();
+  $result = $query->get_result();
 		if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}

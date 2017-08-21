@@ -93,10 +93,11 @@ function save(id) {
 
 
 	<?php
-		$query = "Select * from Citations where id=$id";
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+		$query = "Select * from Citations where id = ? ";
+		$query->bind_param("s", $id);
+		$query->execute();
+		$result = $query->get_result();
+	
 			while($pubs = $result->fetch_assoc()){
 
 			?>

@@ -29,10 +29,10 @@ date_default_timezone_set("America/Denver");
 	$pdf->SetCreator(PDF_CREATOR);
 	$pdf->SetAuthor(PDF_AUTHOR);
 
-	$query = "Select * from Levels where level_id=$print_id order by level_order ASC";
-		if(!$result = $db->query($query)){
-			die("There was an error running the query [" . $db->error . "]");
-		}
+	$query = $db->prepare("Select * from Levels where level_id = ? order by level_order ASC");
+	$query->bind_param("s", $print_id);
+$query->execute();
+$result = $query->get_result();
 
 		while($levels = $result->fetch_assoc()){
 			//This splits the descriptor content into two separate strings to cross two pages.

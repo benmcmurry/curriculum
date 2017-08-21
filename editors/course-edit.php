@@ -5,10 +5,11 @@ $course_id = $_GET['course_id'];
 	include_once("../../../connectFiles/connect_cis.php");
 $net_id = Authenticator::getUser();
 
-$query = "Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id=$course_id";
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+$query = $db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
+$query->bind_param("s", $course_id);
+$query->execute();
+$result = $query->get_result();
+
 		while($course = $result->fetch_assoc()){
 			$level_name = $course['level_name'];
 			$course_name = $course['course_name'];

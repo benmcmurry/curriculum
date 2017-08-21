@@ -31,7 +31,9 @@ else {exit();}
 <body>
 <div id="main">
 	<?php
-		$contributors = "Select * from Contributors";
+		$contributors = $db->prepare("Select * from Contributors");
+    $contributors->execute();
+  $contributors_result = $contributors->get_result();
 		if(!$contributors_result = $db->query($contributors)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
@@ -43,8 +45,11 @@ else {exit();}
 
 	$message = "<h1>Academic Work by ".$people['first_name']." ".$people['last_name']." </h1>";
 	$message .= "<h3>Publications</h3>";
-	$query = "Select * from Citations where authors like '%$author%' and type='Publication' order by year DESC";
-		if(!$result = $db->query($query)){
+	$query = $db->prepare("Select * from Citations where authors like '%?%' and type='Publication' order by year DESC");
+  $query->bind_param("s", $author);
+  $query->execute();
+    $result = $query->get_result();
+    if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
@@ -59,8 +64,11 @@ else {exit();}
 
 $message .= "<h3>Presentations</h3>";
 
-	$query = "Select * from Citations where authors like '%$author%' and type='Presentation' order by year DESC";
-		if(!$result = $db->query($query)){
+	$query = $db->prepare("Select * from Citations where authors like '%?%' and type='Presentation' order by year DESC");
+  $query->bind_param("s", $author);
+  $query->execute();
+    $result = $query->get_result();
+    	if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
@@ -72,8 +80,11 @@ $message .= "<h3>Presentations</h3>";
 
 $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
-	$query = "Select * from Citations where authors like '%$author%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC";
-		if(!$result = $db->query($query)){
+	$query = $db->prepare("Select * from Citations where authors like '%?%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC");
+  $query->bind_param("s", $author);
+    $query->execute();
+      $result = $query->get_result();
+  if(!$result = $db->query($query)){
 			die('There was an error running the query [' . $db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
@@ -87,7 +98,8 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
 echo $message;
 
-$to      = $people['email_address'].", ben_mcmurry@byu.edu";
+// $to      = $people['email_address'].", ben_mcmurry@byu.edu";
+$to = "ben_mcmurry@byu.edu";
 $subject = "ELC Profile Update Request";
 $content = "<html><body><p>".$people['first_name']." ".$author.",</p>".
 			"<p>We are updating the list of scholarly work in the ELC profile. Please examine the list below and send me any updates or additions By January 17th, 2017. Recent Grads, please double check that your thesis or project is listed properly.

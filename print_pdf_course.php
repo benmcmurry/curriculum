@@ -30,10 +30,10 @@ date_default_timezone_set("America/Denver");
 	$pdf->SetCreator(PDF_CREATOR);
 	$pdf->SetAuthor(PDF_AUTHOR);
 
-	$query = "Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=$print_id";
-		if(!$result = $db->query($query)){
-			die("There was an error running the query [" . $db->error . "]");
-		}
+	$query = $db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ? ";
+	$query->bind_param("s", $print_id);
+	$query->execute();
+	$result = $query->get_result();
 
 		while($course = $result->fetch_assoc()){
 

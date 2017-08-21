@@ -7,10 +7,10 @@ include_once("../CASauthinator.php");
 		$net_id = Authenticator::getUser();
 		$level_id = $_GET['level_id'];
 
-$query = "Select * from Levels where level_id='".$level_id."'";
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+		$query = $db->prepare("Select * from Levels where level_id= ? ";)
+		$query->bind_param("s", $level_id);
+		$query->execute();
+		$result = $query->get_result();
 		while($level = $result->fetch_assoc()){
 			$level_name = $level['level_name'];
 			$level_short_name = $level['level_short_name'];

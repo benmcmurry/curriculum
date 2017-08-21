@@ -5,14 +5,11 @@ include_once("../../../connectFiles/connect_cis.php");
 
 
 
-$query = "insert into Statistics (semester) values('0000')";
-	if(!$results = $db->query($query)){
-	die('There was an error running the query [' . $db->error . ']');
-	}
-	else {
+$query = $db->prepare("insert into Statistics (semester) values('0000')");
+$query->execute();
+$result = $query->get_result();
 		echo "<script>location.reload(true);</script>";
 
-	}
 
 
 

@@ -2,15 +2,19 @@
 		include_once("../CASauthinator.php");
 
 include_once("../../../connectFiles/connect_cis.php");
-$id=$_POST['id'];
-$citation =$db->real_escape_string($_POST['citation']);
-$year = $_POST['year'];
-$authors = $_POST['authors'];
-$type = $_POST['type'];
+$id=mysqli_real_escape_string($db, $_POST['id']);
+$citation = mysqli_real_escape_string($db, $_POST['citation']);
+$year = mysqli_real_escape_string($db, $_POST['year']);
+$authors = mysqli_real_escape_string($db, $_POST['authors']);
+$type = mysqli_real_escape_string($db, $_POST['type']);
 
 
 echo "<script>console.log('it does not exist!');</script>";
-$query = "UPDATE Citations SET citation='$citation', year='$year', authors='$authors', type='$type' WHERE id='$id'";
+$query = "UPDATE Citations SET citation = ? , year = ?, authors = ?, type = ? WHERE id = ? ";
+$query->bind_param("ssss", $citation, $year, $authors, $type, $id);
+$query->execute();
+$result = $query->get_result();
+
 	if(!$results = $db->query($query)){
 	die('There was an error running the query [' . $db->error . ']');
 	}

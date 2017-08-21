@@ -11,14 +11,21 @@ $level_updated_by = $_POST['level_updated_by'];
 
 $level_descriptor = $db ->real_escape_string($level_descriptor);
 
-$query = "UPDATE Levels_review SET needs_review='$needs_review', level_name='$level_name', level_short_name='$level_short_name', level_descriptor='$level_descriptor', level_updated_by='$level_updated_by' WHERE level_id=$level_id";
-        if (!$result = $db->query($query)) {
+$query = $db->prepare("UPDATE Levels_review SET needs_review=?, level_name=?, level_short_name=?, level_descriptor=?, level_updated_by=? WHERE level_id= ?");
+$query->bind_param("ssssss", $needs_review, $level_name, $level_short_name, $level_descriptor, $level_updated_by, $level_id);
+	$query->execute();
+	$result = $query->get_result();
+      if (!$result = $db->query($query)) {
             die('There was an error running the query [' . $db->error . ']');
         } else {
             echo "Saved ".date('l jS \of F Y h:i:s A').".";
         }
 if ($needs_review == 0) {
-  $query_final = "UPDATE Levels SET level_name='$level_name', level_short_name='$level_short_name', level_descriptor='$level_descriptor', level_updated_by='$level_updated_by' WHERE level_id=$level_id";
+  $query_final = $db->prepare("UPDATE Levels SET level_name=?, level_short_name=?, level_descriptor=?, level_updated_by=? WHERE level_id=?");
+  $query_final->bind_param("sssss",  $level_name, $level_short_name, $level_descriptor, $level_updated_by, $level_id);
+  	$query_final->execute();
+  	$result_final = $query_final->get_result();
+
           if (!$result_final = $db->query($query_final)) {
               die('There was an error running the query [' . $db->error . ']');
           } else {
@@ -26,7 +33,10 @@ if ($needs_review == 0) {
           }
 }
 
-$query_backup = "Insert into Levels_backup (level_id, level_name, level_short_name, level_descriptor, level_updated_by, level_updated_on) Values ('$level_id', '$level_name', '$level_short_name', '$level_descriptor', '$level_updated_by', now() )";
+$query_backup = $db->prepare("Insert into Levels_backup (level_id, level_name, level_short_name, level_descriptor, level_updated_by, level_updated_on) Values (?, ?, ?, ?, ?, now() )");
+$query_backup->bind_param("ssssss", $level_id, $level_name, $level_short_name, $level_descriptor, $level_updated_by, $level_id);
+	$query_backup->execute();
+	$result_backup = $query_backup->get_result();
 if (!$result_backup = $db->query($query_backup)) {
     die('There was an error running the query [' . $db->error . ']');
 }
