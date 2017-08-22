@@ -19,7 +19,7 @@ $result = $query->get_result();
       $level_updated_on = $level['level_updated_on'];
   }
 
-$query_edits = $db->prepare()"Select * from Levels_review where level_id = ? ");
+$query_edits = $db->prepare("Select * from Levels_review where level_id = ? ");
 $query_edits->bind_param("s", $level_id);
 $query_edits->execute();
 $result_edits = $query_edits->get_result();
