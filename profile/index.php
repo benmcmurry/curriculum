@@ -320,74 +320,107 @@ EOF;
 <table class='teaching'>
 
 <?php
-// $i=2; $class_cell = "class='odd'";
-// $query_stats = $db->prepare("Select type, COUNT(*) from Citations group by type");
-// $query_stats->execute();
-//   $result_stats = $query_stats->get_result();
-//
-// while($stats = $result_stats->fetch_assoc()){
-// 	$$stats['type']=$stats['COUNT(*)'];
-//
-// }
-//
-// $result_stats->free();
-// $years = "<td><h1>Year</h1></td><td ".$class_cell.">Total**</td>";
-// $dissertations  = "<td class='first_column'>Dissertations</td><td ".$class_cell.">".$Dissertation."</td>";
-// $theses = "<td class='first_column'>MA Theses</td><td ".$class_cell.">".$Thesis."</td>";
-// $projects = "<td class='first_column'>MA Projects</td><td ".$class_cell.">".$Project."</td>";
-// $publications = "<td class='first_column'>Publications</td><td ".$class_cell.">".$Publication."</td>";
-// $presentations = "<td class='first_column'>Presentations</td><td ".$class_cell.">".$Presentation."</td>";
-// $year = date("Y");
-// $loop_year = $year;
-// while($loop_year > $year - 5) {
-// 	if($loop_year == $year) {$current_year = "*";} else {$current_year = "";}
-// 	if ($i % 2 == 0) {$class_cell = "class='even'";} else {$class_cell = "class='odd'";}
-// 	$Dissertation = $Thesis = $Project = $Publication = $Presentation = 0;
-//
-//
-// 	$query_stats = $db->prepare("Select type, COUNT(*) from Citations where year = ? group by type");
-// 	$query_stats->bind_param("s", $loop_year);
-// 	$query_stats->execute();
-// 	$result_stats = $query_stats->get_result();
-//
-// 	while($stats = $result_stats->fetch_assoc()){
-// 			$$stats['type']=$stats['COUNT(*)'];
-//
-// 	}
-//
-// 	$result_stats->free();
-//
-// 	$years = $years."<td ".$class_cell.">".$loop_year.$current_year."</td>";
-// 	$dissertations = $dissertations. "<td ".$class_cell.">".$Dissertation."</td>";
-// 	$theses = $theses."<td ".$class_cell.">".$Thesis."</td>";
-// 	$projects = $projects."<td ".$class_cell.">".$Project."</td>";
-// 	$publications = $publications."<td ".$class_cell.">".$Publication."</td>";
-// 	$presentations = $presentations."<td ".$class_cell.">".$Presentation."</td>";
-//
-// 	$loop_year = $loop_year -1;$i++;
-//
-// }
-//
-//
-//
-//
-//
-// echo <<<EOF
-// <thead><tr>$years</tr></thead>
-// <tr class='odd'>$dissertations</tr>
-// <tr>$theses</tr>
-// <tr class='odd'>$projects</tr>
-// <tr>$publications</tr>
-// <tr class='odd'>$presentations</tr>
-//
-//
-//
-//
-// 	</table>
-// 	<p align="center">**Data collection started in 2008, but there are recorded citations as early as 2001. </p>
-// 	<p align="center">*current year</p>
-// 	</div>
-// EOF;
+$i=2; $class_cell = "class='odd'";
+$query_stats = $db->prepare("Select type, COUNT(*) from Citations group by type");
+$query_stats->execute();
+  $result_stats = $query_stats->get_result();
+
+while($stats = $result_stats->fetch_assoc()){
+	switch ($stats['type']) {
+	    case "Dissertation":
+	       $dissertation = $stats['COUNT(*)'];
+	        break;
+	    case "Thesis":
+	        $thesis = $stats['COUNT(*)'];
+	        break;
+	    case "Project":
+	        $project = $stats['COUNT(*)'];
+	        break;
+			case "Publication":
+	        $publication = $stats['COUNT(*)'];
+	        break;
+			case "Presentation":
+	        $presentation = $stats['COUNT(*)'];
+	        break;
+	}
+
+
+}
+
+$result_stats->free();
+$years = "<td><h1>Year</h1></td><td ".$class_cell.">Total**</td>";
+$dissertations  = "<td class='first_column'>Dissertations</td><td ".$class_cell.">".$dissertation."</td>";
+$theses = "<td class='first_column'>MA Theses</td><td ".$class_cell.">".$thesis."</td>";
+$projects = "<td class='first_column'>MA Projects</td><td ".$class_cell.">".$project."</td>";
+$publications = "<td class='first_column'>Publications</td><td ".$class_cell.">".$publication."</td>";
+$presentations = "<td class='first_column'>Presentations</td><td ".$class_cell.">".$presentation."</td>";
+$year = date("Y");
+$loop_year = $year;
+while($loop_year > $year - 5) {
+	if($loop_year == $year) {$current_year = "*";} else {$current_year = "";}
+	if ($i % 2 == 0) {$class_cell = "class='even'";} else {$class_cell = "class='odd'";}
+	$dissertation = $thesis = $project = $publication = $presentation = 0;
+
+
+	$query_stats = $db->prepare("Select type, COUNT(*) from Citations where year = ? group by type");
+	$query_stats->bind_param("s", $loop_year);
+	$query_stats->execute();
+	$result_stats = $query_stats->get_result();
+
+	while($stats = $result_stats->fetch_assoc()){
+		switch ($stats['type']) {
+				case "Dissertation":
+					 $dissertation = $stats['COUNT(*)'];
+						break;
+				case "Thesis":
+						$thesis = $stats['COUNT(*)'];
+						break;
+				case "Project":
+						$project = $stats['COUNT(*)'];
+						break;
+				case "Publication":
+						$publication = $stats['COUNT(*)'];
+						break;
+				case "Presentation":
+						$presentation = $stats['COUNT(*)'];
+						break;
+		}
+
+	}
+
+	$result_stats->free();
+
+	$years = $years."<td ".$class_cell.">".$loop_year.$current_year."</td>";
+	$dissertations = $dissertations. "<td ".$class_cell.">".$dissertation."</td>";
+	$theses = $theses."<td ".$class_cell.">".$thesis."</td>";
+	$projects = $projects."<td ".$class_cell.">".$project."</td>";
+	$publications = $publications."<td ".$class_cell.">".$publication."</td>";
+	$presentations = $presentations."<td ".$class_cell.">".$presentation."</td>";
+
+	$loop_year = $loop_year -1;$i++;
+
+}
+
+
+
+
+
+echo <<<EOF
+<thead><tr>$years</tr></thead>
+<tr class='odd'>$dissertations</tr>
+<tr>$theses</tr>
+<tr class='odd'>$projects</tr>
+<tr>$publications</tr>
+<tr class='odd'>$presentations</tr>
+
+
+
+
+	</table>
+	<p align="center">**Data collection started in 2008, but there are recorded citations as early as 2001. </p>
+	<p align="center">*current year</p>
+	</div>
+EOF;
 ?>
 <h2 id='c'>Citations </h2>
 <div id='research_data_nav'>
