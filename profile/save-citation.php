@@ -7,7 +7,7 @@ if ($local == 0) {
 } else {
     $net_id = "blm39";
 }
-$citation =mysqli_real_escape_string($db, $_POST['citation']);
+$citation = $_POST['citation'];
 $year = $_POST['year'];
 $authors = $_POST['authors'];
 $type = $_POST['type'];

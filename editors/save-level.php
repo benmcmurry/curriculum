@@ -1,12 +1,12 @@
 <?php
 include_once("../../../connectFiles/connect_cis.php");
-$level_id = mysqli_real_escape_string($db, $_POST['level_id']);
-$net_id = mysqli_real_escape_string($db, $_POST['net_id']);
-$level_name = mysqli_real_escape_string($db, $_POST['level_name']);
-$level_short_name = mysqli_real_escape_string($db, $_POST['level_short_name']);
-$level_descriptor = mysqli_real_escape_string($db, $_POST['level_descriptor']);
-$needs_review = mysqli_real_escape_string($db, $_POST['needs_review']);
-$level_updated_by = mysqli_real_escape_string($db, $_POST['level_updated_by']);
+$level_id = $_POST['level_id'];
+$net_id = $_POST['net_id'];
+$level_name = $_POST['level_name'];
+$level_short_name = $_POST['level_short_name'];
+$level_descriptor = $_POST['level_descriptor'];
+$needs_review = $_POST['needs_review'];
+$level_updated_by = $_POST['level_updated_by'];
 
 
 $query = $db->prepare("UPDATE Levels_review SET needs_review=?, level_name=?, level_short_name=?, level_descriptor=?, level_updated_by=? WHERE level_id= ?");

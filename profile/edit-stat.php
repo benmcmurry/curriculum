@@ -10,9 +10,9 @@ if ($local == 0) {
 if ($net_id == 'blm39') {echo "cleared!";}
 else {exit();}
 
-$stat_id=mysqli_real_escape_string($db, $_POST['stat_id']);
-$stat_field = mysqli_real_escape_string($db, $_POST['field']);
-$stat_value = mysqli_real_escape_string($db, $_POST['value']);
+$stat_id=$_POST['stat_id'];
+$stat_field = $_POST['field'];
+$stat_value = $_POST['value'];
 
 if ($stat_field == "semester") {
 	switch($stat_value) {

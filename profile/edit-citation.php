@@ -10,11 +10,11 @@ if ($local == 0) {
 }
 if ($net_id == 'blm39') {echo "cleared!";}
 else {exit();}
-$id=mysqli_real_escape_string($db, $_POST['id']);
-$citation = mysqli_real_escape_string($db, $_POST['citation']);
-$year = mysqli_real_escape_string($db, $_POST['year']);
-$authors = mysqli_real_escape_string($db, $_POST['authors']);
-$type = mysqli_real_escape_string($db, $_POST['type']);
+$id=$_POST['id'];
+$citation = $_POST['citation'];
+$year = $_POST['year'];
+$authors = $_POST['authors'];
+$type = $_POST['type'];
 
 
 echo "<script>console.log('it does not exist!');</script>";
