@@ -1,11 +1,12 @@
 <?php
-include_once("../CASauthinator.php");
 $course_id = $_GET['course_id'];
 
     include_once("../../../connectFiles/connect_cis.php");
+if ($local == 0) {
+include_once("../CASauthinator.php");
 $net_id = Authenticator::getUser();
-
-$query = $db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=$course_id");
+} else {$net_id = "blm39";}
+$query = $db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");
 $query->bind_param("s", $course_id);
 $query->execute();
 $result = $query->get_result();
@@ -167,7 +168,7 @@ function save() {
 					</tr>
 					<tr>
 						<td width="50%"><?php echo $course_emphasis; ?></td>
-						<td width="50%" id="course_emphasis" <?php if ($course_emphasis !== $course_emphasis_edit) {
+						<td width="50%" id="course_emphasis" <?php if ($course_emphasis !== $course_emphasis_edits) {
     echo "style='color: green;background-color:#efefef;'";
 }?> ><?php echo $course_emphasis_edits; ?></td>
 					</tr>

@@ -1,13 +1,13 @@
 <?php
 
-include_once("../CASauthinator.php");
-
-
 		include_once("../../../connectFiles/connect_cis.php");
+		if ($local == 0) {
+		include_once("../CASauthinator.php");
 		$net_id = Authenticator::getUser();
+	} else {$net_id = "blm39";}
 		$level_id = $_GET['level_id'];
 
-		$query = $db->prepare("Select * from Levels where level_id= ? ";)
+		$query = $db->prepare("Select * from Levels where level_id= ? ");
 		$query->bind_param("s", $level_id);
 		$query->execute();
 		$result = $query->get_result();
