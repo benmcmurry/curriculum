@@ -101,7 +101,7 @@ function save(id) {
 
 
 	<?php
-		$query = "Select * from Citations where id = ? ";
+		$query = $db->prepare("Select * from Citations where id = ? ");
 		$query->bind_param("s", $id);
 		$query->execute();
 		$result = $query->get_result();
