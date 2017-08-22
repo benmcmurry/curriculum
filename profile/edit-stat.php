@@ -11,39 +11,35 @@ if ($net_id == 'blm39') {echo "cleared!";}
 else {exit();}
 
 $stat_id=mysqli_real_escape_string($db, $_POST['stat_id']);
-$field = mysqli_real_escape_string($db, $_POST['field']);
-$value = mysqli_real_escape_string($db, $_POST['value']);
+$stat_field = mysqli_real_escape_string($db, $_POST['field']);
+$stat_value = mysqli_real_escape_string($db, $_POST['value']);
 
-if ($field == "semester") {
-	switch($value) {
+if ($stat_field == "semester") {
+	switch($stat_value) {
 		case "Fall":
-			$value = "3Fall";
+			$stat_value = "3Fall";
 			break;
 		Case "Summer":
-		$value = "2Summer";
+		$stat_value = "2Summer";
 		break;
 		Case "Winter":
-			$value = "1Winter	";
+			$stat_value = "1Winter	";
 			break;
 		default:
-			$value = "4".$value;
+			$stat_value = "4".$stat_value;
 			break;
 		}
 
 }
 
-$query = "UPDATE Statistics SET ".$field."='$value' WHERE id='$stat_id'";
-$query->bind_param("sss", $field, $value, $stat_id );
+$query = $db->prepare("UPDATE Statistics SET $stat_field = ? WHERE id= ?");
+$query->bind_param("ss", $stat_value, $stat_id );
 $query->execute();
 $result = $query->get_result();
 
-	if(!$results = $db->query($query)){
-	die('There was an error running the query [' . $db->error . ']');
-	}
-	else {
-		echo "Saved ".date('l jS \of F Y h:i:s A').".";
+echo "Saved ".date('l jS \of F Y h:i:s A').".";
 
-	}
+
 
 
 
