@@ -1,8 +1,13 @@
 <?php
-include_once("../CASauthinator.php");
 
 include_once("../../../connectFiles/connect_cis.php");
-$citation =$db->real_escape_string($_POST['citation']);
+if ($local == 0) {
+    include_once("../CASauthinator.php");
+    $net_id = Authenticator::getUser();
+} else {
+    $net_id = "blm39";
+}
+$citation =mysqli_real_escape_string($db, $_POST['citation']);
 $year = $_POST['year'];
 $authors = $_POST['authors'];
 $type = $_POST['type'];

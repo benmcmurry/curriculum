@@ -2,46 +2,46 @@
 
 $course_id = $_GET['course_id'];
 
-	include_once("../../../connectFiles/connect_cis.php");
+include_once("../../../connectFiles/connect_cis.php");
+
 if ($local == 0) {
-	include_once("../CASauthinator.php");
-$net_id = Authenticator::getUser();
+    include_once("../CASauthinator.php");
+    $net_id = Authenticator::getUser();
+} else {
+    $net_id = "blm39";
 }
-else {$net_id = "blm39";}
+
 $query = $db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
 $query->execute();
 $result = $query->get_result();
 
-		while($course = $result->fetch_assoc()){
-			$level_name = $course['level_name'];
-			$course_name = $course['course_name'];
-			$course_short_name = $course['course_short_name'];
-			$course_description = $course['course_description'];
-			$course_emphasis = $course['course_emphasis'];
-			$course_materials = $course['course_materials'];
-			$learning_outcomes = $course['learning_outcomes'];
-			$assessment = $course['assessment'];
-			$learning_experiences = $course['learning_experiences'];
-			$google_drive_folder_id = $course['google_drive_folder_id'];
-
-
-
-			}
+  while ($course = $result->fetch_assoc()) {
+      $level_name = $course['level_name'];
+      $course_name = $course['course_name'];
+      $course_short_name = $course['course_short_name'];
+      $course_description = $course['course_description'];
+      $course_emphasis = $course['course_emphasis'];
+      $course_materials = $course['course_materials'];
+      $learning_outcomes = $course['learning_outcomes'];
+      $assessment = $course['assessment'];
+      $learning_experiences = $course['learning_experiences'];
+      $google_drive_folder_id = $course['google_drive_folder_id'];
+  }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="">
 <head>
-	<title>Course Editor - <?php echo $level_name." - ".$course_name; ?></title>
+<title>Course Editor - <?php echo $level_name." - ".$course_name; ?></title>
 
 <!-- 	Meta Information -->
-	<meta charset="utf-8">
-	<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
-	<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
+<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 <?php include("styles_and_scripts.html"); ?>

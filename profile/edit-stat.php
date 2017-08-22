@@ -1,10 +1,18 @@
 <?php
-		// include_once("../CASauthinator.php");
 
 include_once("../../../connectFiles/connect_cis.php");
-$stat_id=$_POST['stat_id'];
-$field = $_POST['field'];
-$value = $_POST['value'];
+if ($local == 0) {
+    include_once("../CASauthinator.php");
+    $net_id = Authenticator::getUser();
+} else {
+    $net_id = "blm39";
+}
+if ($net_id == 'blm39') {echo "cleared!";}
+else {exit();}
+
+$stat_id=mysqli_real_escape_string($db, $_POST['stat_id']);
+$field = mysqli_real_escape_string($db, $_POST['field']);
+$value = mysqli_real_escape_string($db, $_POST['value']);
 
 if ($field == "semester") {
 	switch($value) {

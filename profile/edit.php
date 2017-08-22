@@ -1,7 +1,14 @@
 <?php
-// include_once("../CASauthinator.php");
-//
+
 include_once("../../../connectFiles/connect_cis.php");
+if ($local == 0) {
+    include_once("../CASauthinator.php");
+    $net_id = Authenticator::getUser();
+} else {
+    $net_id = "blm39";
+}
+if ($net_id == 'blm39') {echo "cleared!";}
+else {exit();}
 ?>
 
 <!DOCTYPE html>
@@ -113,13 +120,10 @@ function editPopup(id) {
 					</tr>
 				</thead>
 <?php
-  $query_stats = "Select * from Statistics order by year DESC, Semester DESC";
+  $query_stats = $db->prepare("Select * from Statistics order by year DESC, Semester DESC");
   $query_stats->execute();
   $result_stats = $query_stats->get_result();
 
-if(!$result_stats = $db->query($query_stats)){
-	die('There was an error running the query [' . $db->error . ']');
-}
 	while($stats = $result_stats->fetch_assoc()){
 		?>
 				<tr>
@@ -161,9 +165,7 @@ if(!$result_stats = $db->query($query_stats)){
 		$query = $db->prepare("Select * from Citations order by id DESC");
     $query->execute();
     $result = $query->get_result();
-		if(!$result = $db->query($query)){
-			die('There was an error running the query [' . $db->error . ']');
-		}
+		
 			while($pubs = $result->fetch_assoc()){
 
 			?>

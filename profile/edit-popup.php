@@ -1,6 +1,14 @@
 <?php
-	include_once("../CASauthinator.php");
+
 include_once("../../../connectFiles/connect_cis.php");
+if ($local == 0) {
+    include_once("../CASauthinator.php");
+    $net_id = Authenticator::getUser();
+} else {
+    $net_id = "blm39";
+}
+if ($net_id == 'blm39') {echo "cleared!";}
+else {exit();}
 	$id = $_POST['id'];
 ?>
 
@@ -97,7 +105,7 @@ function save(id) {
 		$query->bind_param("s", $id);
 		$query->execute();
 		$result = $query->get_result();
-	
+
 			while($pubs = $result->fetch_assoc()){
 
 			?>

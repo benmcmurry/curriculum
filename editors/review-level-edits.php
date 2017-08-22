@@ -1,8 +1,8 @@
 <?php
 include_once("../../../connectFiles/connect_cis.php");
 if ($local == 0) {
-include_once("../CASauthinator.php");
-$net_id = Authenticator::getUser();
+  include_once("../CASauthinator.php");
+  $net_id = Authenticator::getUser();
 } else {$net_id = "blm39";}
 $level_id = $_GET['level_id'];
 
@@ -11,26 +11,26 @@ $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();
 
-        while ($level = $result->fetch_assoc()) {
-            $level_name = $level['level_name'];
-            $level_short_name = $level['level_short_name'];
-            $level_descriptor = $level['level_descriptor'];
-            $level_updated_by = $level['level_updated_by'];
-            $level_updated_on = $level['level_updated_on'];
-        }
+  while ($level = $result->fetch_assoc()) {
+      $level_name = $level['level_name'];
+      $level_short_name = $level['level_short_name'];
+      $level_descriptor = $level['level_descriptor'];
+      $level_updated_by = $level['level_updated_by'];
+      $level_updated_on = $level['level_updated_on'];
+  }
 
-            $query_edits = $db->prepare()"Select * from Levels_review where level_id = ? ");
-            $query_edits->bind_param("s", $level_id);
-            $query_edits->execute();
-            $result_edits = $query_edits->get_result();
+$query_edits = $db->prepare()"Select * from Levels_review where level_id = ? ");
+$query_edits->bind_param("s", $level_id);
+$query_edits->execute();
+$result_edits = $query_edits->get_result();
 
-                    while ($level_edits = $result_edits->fetch_assoc()) {
-                        $level_name_edits = $level_edits['level_name'];
-                        $level_short_name_edits = $level_edits['level_short_name'];
-                        $level_descriptor_edits = $level_edits['level_descriptor'];
-                        $level_updated_by_edits = $level_edits['level_updated_by'];
-                        $level_updated_on_edits = $level_edits['level_updated_on'];
-                    }
+  while ($level_edits = $result_edits->fetch_assoc()) {
+      $level_name_edits = $level_edits['level_name'];
+      $level_short_name_edits = $level_edits['level_short_name'];
+      $level_descriptor_edits = $level_edits['level_descriptor'];
+      $level_updated_by_edits = $level_edits['level_updated_by'];
+      $level_updated_on_edits = $level_edits['level_updated_on'];
+  }
 
 ?>
 
