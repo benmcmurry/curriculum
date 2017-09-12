@@ -53,11 +53,14 @@ h3 {
 }
 
 h4 {
-    font-size: 1em;
-    font-family: "Lucida Sans", sans-serif;
-    color: dark-grey;
+	font-size: 1.3em;
+	font-weight: bold;
+  color: rgb(148, 148, 148);
 }
-
+h5 {
+	font-size:1em;
+  color: rgb(148, 148, 148);
+}
 p {
     margin-left: .5em;
 }

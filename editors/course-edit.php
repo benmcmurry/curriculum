@@ -78,8 +78,8 @@ $result = $query->get_result();
    			paste_auto_cleanup_on_paste : true,
             style_formats: [
 			{title: 'Normal', inline: 'p'},
-			{title: 'Heading', block: 'h3'},
-			{title: "Sub-heading", block: 'h4'}
+			{title: 'Heading', block: 'h4'},
+			{title: "Sub-heading", block: 'h5'}
 
     ],
     		toolbar: "undo redo | cut copy pasterollup | styleselect | bold italic removeformat | table | alignrollup | bullist numlist | insertrollup | linksrollup | coderollup | ",
