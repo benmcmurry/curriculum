@@ -37,7 +37,8 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		echo $course['learning_experiences'];
 
 		if(isset($_SESSION['password'])){
-		echo "<h3 class='course_data'>Course Resources</h3>";
+		echo "<h3 class='course_data'>Teacher Resources</h3>";
+		echo "<p>".$course['teacher_resources']."</p>";
 		echo "<iframe class='google_folder' src='https://drive.google.com/embeddedfolderview?id=".$course['google_drive_folder_id']."#list' width='100%' height='500px' frameborder='0'></iframe>";
 		}
 		else {echo "<h1><a id='login-link'>Login</a> to see additional resources available to teachers.</h1>";}
