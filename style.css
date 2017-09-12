@@ -163,10 +163,11 @@ a.inDocumentLink {
 
 a.inDocumentLink:hover {
     background-color: white;
+    text-align: center;
 }
 
 .square {
-    margin-top: .5em;
+    margin: .5em auto;
     width: 2em;
     height: 2em;
     line-height: 2em;
