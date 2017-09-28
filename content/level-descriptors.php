@@ -18,7 +18,7 @@
 	</div>
 		</div>
 	<?php
-        $query = $db->prepare("Select * from Levels order by level_order ASC");
+        $query = $database_curriculum->prepare("Select * from Levels order by level_order ASC");
 				$query->execute();
 				$result = $query->get_result();
         while ($levels = $result->fetch_assoc()) {
@@ -34,7 +34,7 @@
             echo $levels['level_descriptor'];
             echo "<h3>Courses</h3>";
                 echo "<div class='course_list'>";
-                $course_query = $db->prepare("Select * from Courses where level_id = ? order by course_order");
+                $course_query = $database_curriculum->prepare("Select * from Courses where level_id = ? order by course_order");
 								$course_query->bind_param("s",$levels['level_id']);
 								$course_query->execute();
             		$courses_result = $course_query->get_result();

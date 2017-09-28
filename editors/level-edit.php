@@ -8,7 +8,7 @@ if ($local == 0) {
 
 $level_id = $_GET['level_id'];
 
-$query = $db->prepare("Select * from Levels where level_id= ? ");
+$query = $database_curriculum->prepare("Select * from Levels where level_id= ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();

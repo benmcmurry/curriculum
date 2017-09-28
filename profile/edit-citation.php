@@ -18,7 +18,7 @@ $type = $_POST['type'];
 
 
 echo "<script>console.log('it does not exist!');</script>";
-$query = $db->prepare("UPDATE Citations SET citation = ? , year = ?, authors = ?, type = ? WHERE id = ? ");
+$query = $database_curriculum->prepare("UPDATE Citations SET citation = ? , year = ?, authors = ?, type = ? WHERE id = ? ");
 $query->bind_param("sssss", $citation, $year, $authors, $type, $id);
 $query->execute();
 $result = $query->get_result();
