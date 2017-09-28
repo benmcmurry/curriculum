@@ -6,7 +6,7 @@
  *  permissions to create a table.
  *  All database settings have to be set in the config.php file. Or the
  *  CAS_PGTStorage_Db() options:
- *  $db, $db_user, $db_password, $db_table, $driver_options
+ *  $elc_db, $elc_db_user, $elc_db_password, $elc_db_table, $driver_options
  *  have to filled out directly. Option examples can be found in the
  *  config.example.php
  *
@@ -33,7 +33,7 @@ $client = new CAS_Client(
 
 // Set the torage object
 $cas_obj = new CAS_PGTStorage_Db(
-    $client, $db, $db_user, $db_password, $db_table, $driver_options
+    $client, $elc_db, $elc_db_user, $elc_db_password, $elc_db_table, $driver_options
 );
 $cas_obj->init();
 $cas_obj->createTable();
@@ -46,7 +46,7 @@ $cas_obj->createTable();
 <body>
 <div class="success">
 <?php
-echo 'Table <b>' . $db_table . '</b> successfully created in database <b>' . $db . '</b>';
+echo 'Table <b>' . $elc_db_table . '</b> successfully created in database <b>' . $elc_db . '</b>';
 ?>
 </div>
 </body>

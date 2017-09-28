@@ -1,8 +1,11 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-require_once '../CAS.php';
-
+if ($local == 0) {
+include_once("../CASauthinator.php");
+$net_id = Authenticator::getUser();
+}
+else {$net_id = "blm39";}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +45,7 @@ require_once '../CAS.php';
 			<div class="main">
 			<h2> Levels and Courses </h2>
 			<?php
-                $query = $database_curriculum->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
+                $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
 								$query->execute();
 								$result = $query->get_result();
 
@@ -53,8 +56,8 @@ require_once '../CAS.php';
             echo "<div class='course_list'>";
             echo "<h2><a href='level-edit.php?level_id=".$levels['level_id']."'>".$levels['level_name']."</a></h2>";
             $course_query = "Select Courses.course_id, Courses.course_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";
-            if (!$course_result = $database_curriculum->query($course_query)) {
-                die('There was an error running the query [' . $database_curriculum->error . ']');
+            if (!$course_result = $elc_db->query($course_query)) {
+                die('There was an error running the query [' . $elc_db->error . ']');
             }
 
             while ($courses = $course_result->fetch_assoc()) {
@@ -71,14 +74,14 @@ if ($net_id == "blm39") {
 
 
 
-		$review_query = $database_curriculum->prepare("Select * from Courses_review where needs_review = 1");
+		$review_query = $elc_db->prepare("Select * from Courses_review where needs_review = 1");
 		$review_query->execute();
 		$result = $review_query->get_result();
   	while ($Courses_review = $result->fetch_assoc()) {
       echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'>".$Courses_review['course_name']."</a><br />";
   	}
 
-		$review_level_query = $database_curriculum->prepare("Select * from Levels_review where needs_review = 1");
+		$review_level_query = $elc_db->prepare("Select * from Levels_review where needs_review = 1");
 		$review_level_query->execute();
 		$review_level_query_results = $review_level_query->get_result();
 

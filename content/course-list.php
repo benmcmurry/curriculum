@@ -3,7 +3,7 @@
 	<?php
 
 $i=0;
-		$query = $database_curriculum->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
+		$query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
 		$query->execute();
 		$result = $query->get_result();
 		//echo "<div style='text-align:center' class='content'>";
@@ -12,11 +12,11 @@ $i=0;
 
 			echo "<h1>".$levels['level_name']."</h1>";
 			echo "<div class='course_list'>";
-				$course_query = $database_curriculum->prepare("Select Courses.course_id, Courses.course_name, Courses.level_id from Courses where Courses.level_id = ? order by course_order ASC");
+				$course_query = $elc_db->prepare("Select Courses.course_id, Courses.course_name, Courses.level_id from Courses where Courses.level_id = ? order by course_order ASC");
 				$course_query->bind_param('s', $levels['level_id']);
 				$course_query->execute();
 				$course_result=$course_query->get_result();
-
+				
 
 			while($courses = $course_result->fetch_assoc()){
 

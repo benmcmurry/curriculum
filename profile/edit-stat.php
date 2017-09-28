@@ -32,7 +32,7 @@ if ($stat_field == "semester") {
 
 }
 
-$query = $db_curriculum->prepare("UPDATE Statistics SET $stat_field = ? WHERE id= ?");
+$query = $elc_db->prepare("UPDATE Statistics SET $stat_field = ? WHERE id= ?");
 $query->bind_param("ss", $stat_value, $stat_id );
 $query->execute();
 $result = $query->get_result();

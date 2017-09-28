@@ -31,7 +31,7 @@
 		<table class='teaching'>
 
 <?php
-$query_stats = $database_curriculum->prepare("Select * from Statistics order by year DESC, Semester DESC");
+$query_stats = $elc_db->prepare("Select * from Statistics order by year DESC, Semester DESC");
 $query_stats->execute();
 $result_stats = $query_stats->get_result();
 
@@ -102,7 +102,7 @@ EOF;
 <table class='teaching'>
 
 <?php
-$query_stats = $database_curriculum->prepare("Select * from Statistics order by year DESC, Semester DESC");
+$query_stats = $elc_db->prepare("Select * from Statistics order by year DESC, Semester DESC");
 $query_stats->execute();
 $result_stats = $query_stats->get_result();
 
@@ -149,7 +149,7 @@ while ($start_year > 2013) {
     $undergraduate_internships_count = 0;
 
     $end_year = $start_year+1;
-    $query_academic_year = $database_curriculum->prepare("Select * from Statistics where (year = ? and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year = ? and (semester like '%3Fall%'))");
+    $query_academic_year = $elc_db->prepare("Select * from Statistics where (year = ? and (semester like '%2Summer%' or semester like '%1Winter%')) OR (year = ? and (semester like '%3Fall%'))");
     $query_academic_year->bind_param("ss", $end_year, $start_year);
     $query_academic_year->execute();
     $result_academic_year = $query_academic_year->get_result();
@@ -193,7 +193,7 @@ if ($i % 2 == 0) {
     $i=1;
 }
 
-$query_stats = $database_curriculum->prepare("Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?");
+$query_stats = $elc_db->prepare("Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?");
 $query_stats->bind_param("s", $limit);
 $query_stats->execute();
 $result = $query_stats->get_result();
@@ -286,7 +286,7 @@ while ($start_year > $end_year) {
     $undergraduate_internships_count = 0;
 
 
-    $query_year = $database_curriculum->prepare("Select * from Statistics where year = ?");
+    $query_year = $elc_db->prepare("Select * from Statistics where year = ?");
     $query_year->bind_param("s", $start_year);
     $query_year->execute();
     $result_year = $query_year->get_result();
@@ -351,7 +351,7 @@ EOF;
 
 <?php
 $i=2; $class_cell = "class='odd'";
-$query_stats = $database_curriculum->prepare("Select type, COUNT(*) from Citations group by type");
+$query_stats = $elc_db->prepare("Select type, COUNT(*) from Citations group by type");
 $query_stats->execute();
   $result_stats = $query_stats->get_result();
 
@@ -398,7 +398,7 @@ while ($loop_year > $year - 5) {
     $dissertation = $thesis = $project = $publication = $presentation = 0;
 
 
-    $query_stats = $database_curriculum->prepare("Select type, COUNT(*) from Citations where year = ? group by type");
+    $query_stats = $elc_db->prepare("Select type, COUNT(*) from Citations where year = ? group by type");
     $query_stats->bind_param("s", $loop_year);
     $query_stats->execute();
     $result_stats = $query_stats->get_result();
@@ -478,7 +478,7 @@ EOF;
 				</thead>
 
 	<?php
-        $query = $database_curriculum->prepare("Select * from Citations  where type='publication' order by year DESC");
+        $query = $elc_db->prepare("Select * from Citations  where type='publication' order by year DESC");
         $query->execute();
   $result = $query->get_result();
 
@@ -507,7 +507,7 @@ EOF;
 				</thead>
 
 	<?php
-        $query = $database_curriculum->prepare("Select * from Citations  where type='presentation' order by year DESC");
+        $query = $elc_db->prepare("Select * from Citations  where type='presentation' order by year DESC");
         $query->execute();
   $result = $query->get_result();
 
@@ -536,7 +536,7 @@ EOF;
 				</thead>
 
 	<?php
-        $query = $database_curriculum->prepare("Select * from Citations  where type='thesis' order by year DESC");
+        $query = $elc_db->prepare("Select * from Citations  where type='thesis' order by year DESC");
         $query->execute();
     $result = $query->get_result();
 
@@ -565,7 +565,7 @@ EOF;
 				</thead>
 
 	<?php
-        $query = $database_curriculum->prepare("Select * from Citations  where type='project' order by year DESC");
+        $query = $elc_db->prepare("Select * from Citations  where type='project' order by year DESC");
         $query->execute();
   $result = $query->get_result();
 
@@ -594,7 +594,7 @@ EOF;
 				</thead>
 
 	<?php
-        $query = $database_curriculum->prepare("Select * from Citations  where type='dissertation' order by year DESC");
+        $query = $elc_db->prepare("Select * from Citations  where type='dissertation' order by year DESC");
         $query->execute();
   $result = $query->get_result();
 

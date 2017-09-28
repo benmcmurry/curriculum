@@ -11,7 +11,7 @@ if ($local == 0) {
     $net_id = "blm39";
 }
 
-$query = $database_curriculum->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
+$query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
 $query->execute();
 $result = $query->get_result();

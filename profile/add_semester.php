@@ -13,7 +13,7 @@ else {exit();}
 
 
 
-$query = $database_curriculum->prepare("insert into Statistics (semester) values('0000')");
+$query = $elc_db->prepare("insert into Statistics (semester) values('0000')");
 $query->execute();
 $result = $query->get_result();
 		echo "<script>location.reload(true);</script>";

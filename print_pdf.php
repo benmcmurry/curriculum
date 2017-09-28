@@ -29,7 +29,7 @@ date_default_timezone_set("America/Denver");
 	$pdf->SetCreator(PDF_CREATOR);
 	$pdf->SetAuthor(PDF_AUTHOR);
 
-	$query = $database_curriculum->prepare("Select * from Levels where level_id = ? order by level_order ASC");
+	$query = $elc_db->prepare("Select * from Levels where level_id = ? order by level_order ASC");
 	$query->bind_param("s", $print_id);
 $query->execute();
 $result = $query->get_result();

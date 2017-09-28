@@ -5,7 +5,7 @@
 
 <?php
 	echo "<div class='main'><div class='content-background'><div class='content'>";
-	$query = $database_curriculum->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=?");
+	$query = $elc_db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=?");
 	$query->bind_param('s', $course_id);
 	$query->execute();
 	$result = $query->get_result();

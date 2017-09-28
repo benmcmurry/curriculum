@@ -6,7 +6,7 @@ if ($local == 0) {
 } else {$net_id = "blm39";}
 $level_id = $_GET['level_id'];
 
-$query = $database_curriculum->prepare("Select * from Levels where level_id = ? ");
+$query = $elc_db->prepare("Select * from Levels where level_id = ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();
@@ -19,7 +19,7 @@ $result = $query->get_result();
       $level_updated_on = $level['level_updated_on'];
   }
 
-$query_edits = $database_curriculum->prepare("Select * from Levels_review where level_id = ? ");
+$query_edits = $elc_db->prepare("Select * from Levels_review where level_id = ? ");
 $query_edits->bind_param("s", $level_id);
 $query_edits->execute();
 $result_edits = $query_edits->get_result();

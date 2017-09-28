@@ -31,11 +31,11 @@ else {exit();}
 <body>
 <div id="main">
 	<?php
-		$contributors = $database_curriculum->prepare("Select * from Contributors");
+		$contributors = $elc_db->prepare("Select * from Contributors");
     $contributors->execute();
   $contributors_result = $contributors->get_result();
-		if(!$contributors_result = $database_curriculum->query($contributors)){
-			die('There was an error running the query [' . $database_curriculum->error . ']');
+		if(!$contributors_result = $elc_db->query($contributors)){
+			die('There was an error running the query [' . $elc_db->error . ']');
 		}
 			while($people = $contributors_result->fetch_assoc()){
       $first_initial = substr($people['first_name'], 0,1);
@@ -45,12 +45,12 @@ else {exit();}
 
 	$message = "<h1>Academic Work by ".$people['first_name']." ".$people['last_name']." </h1>";
 	$message .= "<h3>Publications</h3>";
-	$query = $database_curriculum->prepare("Select * from Citations where authors like '%?%' and type='Publication' order by year DESC");
+	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type='Publication' order by year DESC");
   $query->bind_param("s", $author);
   $query->execute();
     $result = $query->get_result();
-    if(!$result = $database_curriculum->query($query)){
-			die('There was an error running the query [' . $database_curriculum->error . ']');
+    if(!$result = $elc_db->query($query)){
+			die('There was an error running the query [' . $elc_db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
 
@@ -64,12 +64,12 @@ else {exit();}
 
 $message .= "<h3>Presentations</h3>";
 
-	$query = $database_curriculum->prepare("Select * from Citations where authors like '%?%' and type='Presentation' order by year DESC");
+	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type='Presentation' order by year DESC");
   $query->bind_param("s", $author);
   $query->execute();
     $result = $query->get_result();
-    	if(!$result = $database_curriculum->query($query)){
-			die('There was an error running the query [' . $database_curriculum->error . ']');
+    	if(!$result = $elc_db->query($query)){
+			die('There was an error running the query [' . $elc_db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
 
@@ -80,12 +80,12 @@ $message .= "<h3>Presentations</h3>";
 
 $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
-	$query = $database_curriculum->prepare("Select * from Citations where authors like '%?%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC");
+	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC");
   $query->bind_param("s", $author);
     $query->execute();
       $result = $query->get_result();
-  if(!$result = $database_curriculum->query($query)){
-			die('There was an error running the query [' . $database_curriculum->error . ']');
+  if(!$result = $elc_db->query($query)){
+			die('There was an error running the query [' . $elc_db->error . ']');
 		}
 			while($pubs = $result->fetch_assoc()){
 

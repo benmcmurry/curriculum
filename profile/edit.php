@@ -120,7 +120,7 @@ function editPopup(id) {
 					</tr>
 				</thead>
 <?php
-  $query_stats = $database_curriculum->prepare("Select * from Statistics order by year DESC, Semester DESC");
+  $query_stats = $elc_db->prepare("Select * from Statistics order by year DESC, Semester DESC");
   $query_stats->execute();
   $result_stats = $query_stats->get_result();
 
@@ -162,10 +162,10 @@ function editPopup(id) {
 				</thead>
 
 	<?php
-		$query = $database_curriculum->prepare("Select * from Citations order by id DESC");
+		$query = $elc_db->prepare("Select * from Citations order by id DESC");
     $query->execute();
     $result = $query->get_result();
-
+		
 			while($pubs = $result->fetch_assoc()){
 
 			?>

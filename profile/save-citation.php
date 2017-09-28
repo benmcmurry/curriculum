@@ -12,23 +12,23 @@ $year = $_POST['year'];
 $authors = $_POST['authors'];
 $type = $_POST['type'];
 
-$search = $database_curriculum->prepare("Select * from Citations where citation = ? ");
+$search = $elc_db->prepare("Select * from Citations where citation = ? ");
 $search->bind_param("s", $citation);
   $search->execute();
     $result = $search->get_result();
-		if(!$result = $database_curriculum->query($search)){
-			die('There was an error running the query [' . $database_curriculum->error . ']');
+		if(!$result = $elc_db->query($search)){
+			die('There was an error running the query [' . $elc_db->error . ']');
 		}
 		else {
 
 			if (mysqli_num_rows($result) < 1) {
 				echo "<script>console.log('it does not exist!');</script>";
-				$query = $database_curriculum->prepare("Insert into Citations (citation, year, authors, type) Values (?, ?, ?, ?)");
+				$query = $elc_db->prepare("Insert into Citations (citation, year, authors, type) Values (?, ?, ?, ?)");
 				$query->bind_param("sss", $citation, $year, $authors, $type);
 				  $query->execute();
 				    $result = $query->get_result();
-					if(!$results = $database_curriculum->query($query)){
-					die('There was an error running the query [' . $database_curriculum->error . ']');
+					if(!$results = $elc_db->query($query)){
+					die('There was an error running the query [' . $elc_db->error . ']');
 					}
 					else {
 						echo "Saved ".date('l jS \of F Y h:i:s A').".";
