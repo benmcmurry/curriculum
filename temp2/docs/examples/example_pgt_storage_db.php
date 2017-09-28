@@ -37,7 +37,7 @@ phpCAS::proxy(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
 phpCAS::setNoCasServerValidation();
 
 // set PGT storage to file in plain format in the same directory as session files
-phpCAS::setPGTStorageDB($elc_db, $elc_db_user, $elc_db_password, $elc_db_table);
+phpCAS::setPGTStorageDB($db, $db_user, $db_password, $db_table);
 
 // force CAS authentication
 phpCAS::forceAuthentication();

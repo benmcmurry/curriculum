@@ -51,11 +51,11 @@ $client_httpOnly = true;
 $client_lifetime = 0;
 
 // Database config for PGT Storage
-$elc_db = 'pgsql:host=localhost;dbname=phpcas';
-//$elc_db = 'mysql:host=localhost;dbname=phpcas';
-$elc_db_user = 'phpcasuser';
-$elc_db_password = 'mysupersecretpass';
-$elc_db_table = 'phpcastabel';
+$db = 'pgsql:host=localhost;dbname=phpcas';
+//$db = 'mysql:host=localhost;dbname=phpcas';
+$db_user = 'phpcasuser';
+$db_password = 'mysupersecretpass';
+$db_table = 'phpcastabel';
 $driver_options = '';
 
 ///////////////////////////////////////////

@@ -1,15 +1,12 @@
 <?php
 
-$course_id = $_GET['course_id'];
+$course_id = $_GET['course_id']; $message ="";
+if ($course_id < 1) {$message =  "Invalid course. Showing first course."; $course_id = 1;}
+if ($course_id > 33) {$message =  "Invalid course. showing last course."; $course_id = 33;}
 
 include_once("../../../connectFiles/connect_cis.php");
 
-if ($local == 0) {
-    include_once("../CASauthinator.php");
-    $net_id = Authenticator::getUser();
-} else {
-    $net_id = "blm39";
-}
+include_once("cas.php");
 
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
@@ -147,8 +144,9 @@ function save() {
 </head>
 <body>
 	<header>
+    <?php echo $message; ?>
 			<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
-			<div id="user"><?php echo $net_id; ?></div>
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 
 			<!-- <button id="save">Save</button> -->
 			<a class="button" id="go_back" href="index.php">Main Menu</a>

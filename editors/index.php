@@ -1,11 +1,36 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-if ($local == 0) {
-include_once("../CASauthinator.php");
-$net_id = Authenticator::getUser();
+// Load the settings from the central config file
+require_once '../config.php';
+// Load the CAS lib
+require_once '../CAS.php';
+// Enable debugging
+phpCAS::setDebug();
+// Enable verbose error messages. Disable in production!
+phpCAS::setVerbose(true);
+
+// Initialize phpCAS
+phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
+
+// For production use set the CA certificate that is the issuer of the cert
+// on the CAS server and uncomment the line below
+// phpCAS::setCasServerCACert($cas_server_ca_cert_path);
+
+// For quick testing you can disable SSL validation of the CAS server.
+// THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION.
+// VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL!
+phpCAS::setNoCasServerValidation();
+
+if (isset($_REQUEST['logout'])) {
+    phpCAS::logout();
 }
-else {$net_id = "blm39";}
+if (isset($_REQUEST['login'])) {
+    phpCAS::forceAuthentication();
+}
+
+// check CAS authentication
+$auth = phpCAS::checkAuthentication();
 ?>
 
 <!DOCTYPE html>
@@ -37,11 +62,18 @@ else {$net_id = "blm39";}
 <body>
 	<header>
 			<h1>Curriculum Editor</h1>
-			<div id="user"><?php echo $net_id; ?></div>
+			<div id="user">
+				<?php
+if ($auth) {echo phpCAS::getUser()." | <a href='?logout='>Logout</a>";}
+else {echo "<a href='?login='>Login</a>";}
+				?>
+			</div>
 			<a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
 				</header>
 <article>
+		<?php if ($auth) { ?>
 			<hr />
+
 			<div class="main">
 			<h2> Levels and Courses </h2>
 			<?php
@@ -67,7 +99,7 @@ else {$net_id = "blm39";}
         }
         $result->free();
 
-if ($net_id == "blm39") {
+if (phpCAS::getUser() == "blm39") {
     ?>
 		<h2> Review Submitted Changes </h2>
 		<?php
@@ -94,7 +126,7 @@ if ($net_id == "blm39") {
 ?>
 			</div>
 	<hr />
-
+<?php } else {?> <p></p><?php } ?>
 	</article>
 </body>
 </html>
