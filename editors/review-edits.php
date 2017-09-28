@@ -6,7 +6,7 @@ if ($local == 0) {
   include_once("../CASauthinator.php");
   $net_id = Authenticator::getUser();
 } else {$net_id = "blm39";}
-$query = $db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");
+$query = $database_curriculum->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");
 $query->bind_param("s", $course_id);
 $query->execute();
 $result = $query->get_result();
@@ -26,7 +26,7 @@ while ($course = $result->fetch_assoc()) {
     $updated_by = $course['updated_by'];
 }
 
-$edits_query = $db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id = ? ");
+$edits_query = $database_curriculum->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id = ? ");
 $edits_query->bind_param("s", $course_id);
 $edits_query->execute();
 $edit_result = $edits_query->get_result();
