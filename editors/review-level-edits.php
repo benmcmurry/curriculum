@@ -98,8 +98,8 @@ function save() {
 <body>
 	<header>
 			<h1> Review Level Edits: <?php echo $level_name; ?></h1>
-			<div id="user"><?php echo $net_id; ?></div>
-			<!-- <button id="save">Save</button> -->
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+
 			<a class="button" id="go_back" href="index.php">Main Menu</a>
 			<a class="button" id="save">Save</a>
 			<div id="save_dialog"></div>
@@ -128,8 +128,8 @@ function save() {
 				<tr>
 					<td width="50%"><?php echo $level_short_name; ?></td>
 					<td width="50%" id="level_short_name" <?php if ($level_short_name !== $level_short_name_edits) {
-			echo "style='color: green;background-color:#efefef;'";
-		}?> ><?php echo $level_short_name_edits; ?></td>
+    echo "style='color: green;background-color:#efefef;'";
+}?> ><?php echo $level_short_name_edits; ?></td>
 				</tr>
 
 				<tr>
@@ -138,8 +138,8 @@ function save() {
 				<tr>
 					<td width="50%"><?php echo $level_descriptor; ?></td>
 					<td width="50%" id="level_descriptor" <?php if ($level_descriptor !== $level_descriptor_edits) {
-				echo "style='color: green;background-color:#efefef;'";
-				}?> ><?php echo $level_descriptor_edits; ?></td>
+    echo "style='color: green;background-color:#efefef;'";
+}?> ><?php echo $level_descriptor_edits; ?></td>
 				</tr>
 
 			</table>

@@ -115,7 +115,7 @@ function save() {
 <body>
 	<header>
 			<h1> Review Edits: <?php echo $level_name." - ".$course_name; ?></h1>
-			<div id="user"><?php echo $net_id; ?></div>
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 
 			<!-- <button id="save">Save</button> -->
 			<a class="button" id="go_back" href="index.php">Main Menu</a>

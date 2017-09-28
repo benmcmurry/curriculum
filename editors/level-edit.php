@@ -42,13 +42,16 @@ while($level = $result->fetch_assoc()){
 	<script>
 	$(document).ready(function() {
 
+		current_level_name = $("#level_name").text();
+		current_level_descriptor = $("#level_descriptor").text();
+		current_level_short_name = $("#level_short_name").text();
 
 	$("#save").click(function(){
-		save();
+		save("save button");
 	});
 
 	$("div").blur(function(){
-		save();
+		save(this.id);
 	});
 
 	 $(window).keydown(function (e){
@@ -97,7 +100,20 @@ while($level = $result->fetch_assoc()){
 
 });
 
-function save() {
+function save(field) {
+	console.log(field);
+		switch (field) {
+			case "level_name":
+				 if (current_level_name == $("#level_name").text()) {console.log("same"); return;}
+				break;
+			case "level_descriptor":
+				if (current_level_descriptor == $("#level_descriptor").text()) {console.log("same");return;}
+				break;
+			case "level_short_name":
+				if (current_level_short_name == $("#level_short_name").text()) {console.log("same");return;}
+				break;
+		}
+		// if ( ==  ||  ==  ||  == $("#level_short_name").text())
 		level_id = <?php echo $level_id; ?>;
 		level_name = $("#level_name").text();
 		level_short_name = $("#level_short_name").text();
