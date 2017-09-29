@@ -7,7 +7,7 @@ if ($course_id > 33) {$message =  "Invalid course. showing last course."; $cours
 include_once("../../../connectFiles/connect_cis.php");
 
 include_once("cas.php");
-
+include_once("admins.php");
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
 $query->execute();
@@ -46,13 +46,22 @@ $result = $query->get_result();
 	<script>
 	$(document).ready(function() {
 
+    current_course_name = $("#course_name").text();
+		current_course_description = $("#course_description").text(); console.log("current_course_description");
+		current_course_short_name = $("#course_short_name").text();
+		current_course_emphasis = $("#course_emphasis").text();
+		current_course_materials = $("#course_materials").text();
+		current_learning_outcomes = $("#learning_outcomes").text();
+		current_assessment = $("#assessment").text();
+		current_learning_experiences = $("#learning_experiences").text();
+		current_google_drive_folder_id = $("#google_drive_folder_id").text();
 
 	$("#save").click(function(){
-		save();
+		save("button");
 	});
 
 	$("div").blur(function(){
-		save();
+		save(this.id);
 	});
 
 	 $(window).keydown(function (e){
@@ -105,7 +114,37 @@ $(".editable").click(function(){
 
 });
 
-function save() {
+function save(field) {
+
+  switch (field) {
+    case "course_name":
+       if (current_course_name == $("#course_name").text()) {console.log("same"); return;}
+      break;
+    case "course_description":
+      if (current_course_description == $("#course_description").text()) {console.log("same");return;}
+      break;
+    case "course_short_name":
+      if (current_course_short_name == $("#course_short_name").text()) {console.log("same");return;}
+      break;
+    case "course_emphasis":
+       if (current_course_emphasis == $("#course_emphasis").text()) {console.log("same"); return;}
+      break;
+    case "course_materials":
+      if (current_course_materials == $("#course_materials").text()) {console.log("same");return;}
+      break;
+    case "learning_outcomes":
+      if (current_learning_outcomes == $("#learning_outcomes").text()) {console.log("same");return;}
+      break;
+    case "assessment":
+       if (current_assessment == $("#assessment").text()) {console.log("same"); return;}
+      break;
+    case "learning_experiences":
+      if (current_learning_experiences == $("#learning_experiences").text()) {console.log("same");return;}
+      break;
+    case "google_drive_folder_id":
+      if (current_google_drive_folder_id == $("#google_drive_folder_id").text()) {console.log("same");return;}
+      break;
+  }
 		course_id = <?php echo $course_id; ?>;
 		net_id = '<?php echo $net_id; ?>';
 		course_name = $("#course_name").text();
@@ -144,19 +183,23 @@ function save() {
 </head>
 <body>
 	<header>
-    <?php echo $message; ?>
+
+
 			<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
 			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+      <?php echo $message;
 
-			<!-- <button id="save">Save</button> -->
+      if ($auth && $access) { ?>
+
 			<a class="button" id="go_back" href="index.php">Main Menu</a>
-			<a class="button" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>">Previous Level</a>
-			<a class="button" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Level</a>
+			<a class="button" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>">Previous Course</a>
+			<a class="button" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Course</a>
 			<a class="button" id="save">Save</a>
 
 			<div id="save_dialog"></div>
 	</header>
 <article>
+
 		<div class="content-background">
 			<div class="main">
 				<div class="separator">
@@ -178,6 +221,7 @@ function save() {
 
 			</div>
 		</div>
+    <? } ?>
 	</article>
 </body>
 </html>

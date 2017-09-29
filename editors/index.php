@@ -1,36 +1,8 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-// Load the settings from the central config file
-require_once '../config.php';
-// Load the CAS lib
-require_once '../CAS.php';
-// Enable debugging
-phpCAS::setDebug();
-// Enable verbose error messages. Disable in production!
-phpCAS::setVerbose(true);
-
-// Initialize phpCAS
-phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context);
-
-// For production use set the CA certificate that is the issuer of the cert
-// on the CAS server and uncomment the line below
-// phpCAS::setCasServerCACert($cas_server_ca_cert_path);
-
-// For quick testing you can disable SSL validation of the CAS server.
-// THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION.
-// VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL!
-phpCAS::setNoCasServerValidation();
-
-if (isset($_REQUEST['logout'])) {
-    phpCAS::logout();
-}
-if (isset($_REQUEST['login'])) {
-    phpCAS::forceAuthentication();
-}
-
-// check CAS authentication
-$auth = phpCAS::checkAuthentication();
+include_once("cas.php");
+include_once("admins.php");
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +43,9 @@ else {echo "<a href='?login='>Login</a>";}
 			<a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
 				</header>
 <article>
-		<?php if ($auth) { ?>
+		<?php
+    echo $message;
+    if ($auth && $access) { ?>
 			<hr />
 
 			<div class="main">

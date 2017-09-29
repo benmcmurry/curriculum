@@ -212,7 +212,7 @@ OL LI:before { content: counters(item, ".") ". "; counter-increment: item }
 	text-align: left;
 	width: 250px;
 	padding: 10px;
-	margin: 10px;
+	margin: 5px;
 	border: white solid 6px;
 	display: inline-block;
 	background-color: #036;
