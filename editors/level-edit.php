@@ -6,7 +6,7 @@ if ($level_id < 1) {$message = "Invalid level. Showing first level."; $level_id 
 if ($level_id > 8) {$message = "Invalid level. Showing last level."; $level_id = 8;}
 
 include_once("../../../connectFiles/connect_cis.php");
-include_once("cas.php");
+include_once("cas-go.php");
 include_once("admins.php");
 
 $query = $elc_db->prepare("Select * from Levels where level_id= ? ");
@@ -142,7 +142,7 @@ function save(field) {
 </head>
 <body>
 	<header>
-		
+
 			<h1> Level Editor: <?php echo $level_name; ?></h1>
 			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 			<?php echo $message;

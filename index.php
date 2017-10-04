@@ -1,6 +1,8 @@
 <?php
 session_start();
     include_once("../../connectFiles/connect_cis.php");
+    include_once("cas-go.php");
+    include_once("teachers.php");
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -30,6 +32,6 @@ session_start();
 	<footer>
 		<?php include("content/footer.html"); ?>
 	</footer>
-		<?php include("content/other.php"); ?>
+
 </body>
 </html>

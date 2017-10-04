@@ -2,7 +2,7 @@
 $course_id = $_GET['course_id'];
 
 include_once("../../../connectFiles/connect_cis.php");
-include_once("cas.php");
+include_once("cas-go.php");
 
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");
 $query->bind_param("s", $course_id);

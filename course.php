@@ -11,6 +11,8 @@ session_start();
             $course_name = $title['course_name'];
             $level_name = $title['level_name'];
         }
+        include_once("cas-go.php");
+        include_once("teachers.php");
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -40,6 +42,6 @@ session_start();
 	<footer>
 		<?php include("content/footer.html"); ?>
 	</footer>
-			<?php include("content/other.php"); ?>
+
 </body>
 </html>

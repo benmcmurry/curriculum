@@ -1,6 +1,6 @@
 <?php
 include_once("../../../connectFiles/connect_cis.php");
-include_once("cas.php");
+include_once("cas-go.php");
 
 $level_id = $_GET['level_id'];
 

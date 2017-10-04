@@ -1,6 +1,8 @@
 <?php
-	include_once("authenticate.php");
+
 	include_once("../../connectFiles/connect_cis.php");
+	include_once("cas-go.php");
+	include_once("teachers.php");
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -14,7 +16,7 @@
 	<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	
+
 <?php include("content/styles_and_scripts.html"); ?>
 </head>
 <body>
@@ -24,7 +26,7 @@
 	<nav>
 		<?php include("content/nav-bar.php"); ?>
 	</nav>
-	
+
 	<article>
 		<div class="main">
 		<p> The following resources are available to support teaching at the English Language Center. </p>
@@ -33,7 +35,7 @@
 	<footer>
 		<?php include("content/footer.html"); ?>
 	</footer>
-			<?php include("content/other.php"); ?>
+
 
 </body>
 </html>
