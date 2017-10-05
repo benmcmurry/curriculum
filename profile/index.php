@@ -64,7 +64,9 @@ while ($stats = $result_stats->fetch_assoc()) {
         $classes_taught  = $classes_taught."<td ".$class_cell.">".$stats['classes_taught']."</td>";
         $supplemental_classes_taught = $supplemental_classes_taught."<td ".$class_cell.">".$stats['supplemental_classes_taught']."</td>";
         $classes_taught_by_students = $classes_taught_by_students."<td ".$class_cell.">".$stats['classes_taught_by_students']."</td>";
-        $classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($stats['classes_taught_by_students'])/($stats['supplemental_classes_taught']+$stats['classes_taught']))*100)."%"."</td>";
+
+				if ($stats['classes_taught_by_students'] == 0) {$classes_taught_by_students_p=$classes_taught_by_students_p."<td ".$class_cell."></td>";}
+				else {$classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($stats['classes_taught_by_students'])/($stats['supplemental_classes_taught']+$stats['classes_taught']))*100)."%"."</td>";}
         $graduate_practicum_students = $graduate_practicum_students."<td ".$class_cell.">".$stats['graduate_practicum_students']."</td>";
         $undergraduate_practicum_students     = $undergraduate_practicum_students."<td ".$class_cell.">".$stats['undergraduate_practicum_students']."</td>";
         $tutoring_hours = $tutoring_hours."<td ".$class_cell.">".$stats['tutoring_hours']."</td>";
