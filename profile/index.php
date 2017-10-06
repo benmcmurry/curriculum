@@ -48,9 +48,18 @@ $graduate_internships = "<td class='first_column'>Graduate Internships</td>";
 $undergraduate_internships = "<td class='first_column'>Undergraduate Internships</td>";
 $i=1;
 $year = date("Y");
+$month = date("m");
+
 while ($stats = $result_stats->fetch_assoc()) {
     if ($stats['year'] == $year) {
-        $current_year = "*";
+				if (substr($stats['semester'], 1)=="Winter" && $month < 5) {
+					$current_year = "*";
+				} elseif (substr($stats['semester'], 1)=="Fall" && $month > 8) {
+					$current_year = "*";
+				} elseif (substr($stats['semester'], 1)=="Summer" && $month > 4 && $month < 9)  {
+					$current_year = "*";
+				} else {$current_year = "";}
+
     } else {
         $current_year = "";
     }
@@ -168,17 +177,22 @@ while ($start_year > 2013) {
         $graduate_internships_count += $academic_year['graduate_internships'];
         $undergraduate_internships_count += $academic_year['undergraduate_internships'];
     }
-    if ($end_year == $year) {
+    if ($end_year == $year && $month < 9) {
+        $current_year = "*";
+    } elseif ($end_year == $year+1 && $month > 8) {
         $current_year = "*";
     } else {
-        $current_year = "";
-    }
+			$current_year = "";
+		}
     $semester_year = $semester_year."<td ".$class_cell.">".$start_year."-".$end_year.$current_year."</td>";
 
     $classes_taught  = $classes_taught."<td ".$class_cell.">".$classes_taught_count."</td>";
     $supplemental_classes_taught = $supplemental_classes_taught."<td ".$class_cell.">".$supplemental_classes_taught_count."</td>";
     $classes_taught_by_students = $classes_taught_by_students."<td ".$class_cell.">".$classes_taught_by_students_count."</td>";
-    $classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($classes_taught_by_students_count)/($supplemental_classes_taught_count+$classes_taught_count))*100)."%"."</td>";
+		if ($classes_taught_by_students_count == 0) {$classes_taught_by_students_p=$classes_taught_by_students_p."<td ".$class_cell."></td>";}
+		else {$classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($classes_taught_by_students_count)/($supplemental_classes_taught_count+$classes_taught_count))*100)."%"."</td>";}
+
+		//
     $graduate_practicum_students = $graduate_practicum_students."<td ".$class_cell.">".$graduate_practicum_students_count."</td>";
     $undergraduate_practicum_students     = $undergraduate_practicum_students."<td ".$class_cell.">".$undergraduate_practicum_students_count."</td>";
     $tutoring_hours = $tutoring_hours."<td ".$class_cell.">".$tutoring_hours_count."</td>";
@@ -191,18 +205,20 @@ while ($start_year > 2013) {
 $limit = 6 - $i;
 if ($i % 2 == 0) {
     $i=2;
+		
 } else {
     $i=1;
+
 }
 
-$query_stats = $elc_db->prepare("Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit ?");
-$query_stats->bind_param("s", $limit);
+$query_stats = $elc_db->prepare("Select * from Statistics where semester not like '%1Winter%' AND semester not like '%2Summer%' AND semester not like '%3Fall%' order by year DESC, Semester DESC Limit 1");
+// $query_stats->bind_param("s", $limit);
 $query_stats->execute();
 $result = $query_stats->get_result();
 
 
 
-while ($stats = $result_stats->fetch_assoc()) {
+while ($stats = $result->fetch_assoc()) {
     if ($i % 2 == 0) {
         $class_cell = "class='even'";
     } else {
@@ -214,7 +230,9 @@ while ($stats = $result_stats->fetch_assoc()) {
     $classes_taught  = $classes_taught."<td ".$class_cell.">".$stats['classes_taught']."</td>";
     $supplemental_classes_taught = $supplemental_classes_taught."<td ".$class_cell.">".$stats['supplemental_classes_taught']."</td>";
     $classes_taught_by_students = $classes_taught_by_students."<td ".$class_cell.">".$stats['classes_taught_by_students']."</td>";
-    $classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($stats['classes_taught_by_students'])/($stats['supplemental_classes_taught']+$stats['classes_taught']))*100)."%"."</td>";
+		if ($stats['classes_taught_by_students'] == 0) {$classes_taught_by_students_p=$classes_taught_by_students_p."<td ".$class_cell."></td>";}
+		else {$classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($stats['classes_taught_by_students'])/($stats['supplemental_classes_taught']+$stats['classes_taught']))*100)."%"."</td>";}
+		// $classes_taught_by_students_p = $classes_taught_by_students_p."<td ".$class_cell.">".round((($stats['classes_taught_by_students'])/($stats['supplemental_classes_taught']+$stats['classes_taught']))*100)."%"."</td>";
     $graduate_practicum_students = $graduate_practicum_students."<td ".$class_cell.">".$stats['graduate_practicum_students']."</td>";
     $undergraduate_practicum_students     = $undergraduate_practicum_students."<td ".$class_cell.">".$stats['undergraduate_practicum_students']."</td>";
     $tutoring_hours = $tutoring_hours."<td ".$class_cell.">".$stats['tutoring_hours']."</td>";
