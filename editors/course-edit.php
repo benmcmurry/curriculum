@@ -114,37 +114,19 @@ $(".editable").click(function(){
 
 });
 
-function save(field) {
+function save() {
 
-  switch (field) {
-    case "course_name":
-       if (current_course_name == $("#course_name").text()) {console.log("same"); return;}
-      break;
-    case "course_description":
-      if (current_course_description == $("#course_description").text()) {console.log("same");return;}
-      break;
-    case "course_short_name":
-      if (current_course_short_name == $("#course_short_name").text()) {console.log("same");return;}
-      break;
-    case "course_emphasis":
-       if (current_course_emphasis == $("#course_emphasis").text()) {console.log("same"); return;}
-      break;
-    case "course_materials":
-      if (current_course_materials == $("#course_materials").text()) {console.log("same");return;}
-      break;
-    case "learning_outcomes":
-      if (current_learning_outcomes == $("#learning_outcomes").text()) {console.log("same");return;}
-      break;
-    case "assessment":
-       if (current_assessment == $("#assessment").text()) {console.log("same"); return;}
-      break;
-    case "learning_experiences":
-      if (current_learning_experiences == $("#learning_experiences").text()) {console.log("same");return;}
-      break;
-    case "google_drive_folder_id":
-      if (current_google_drive_folder_id == $("#google_drive_folder_id").text()) {console.log("same");return;}
-      break;
-  }
+       if (current_course_name == $("#course_name").text() &&
+          current_course_description == $("#course_description").text() &&
+          current_course_short_name == $("#course_short_name").text() &&
+          current_course_emphasis == $("#course_emphasis").text() &&
+          current_course_materials == $("#course_materials").text() &&
+          current_learning_outcomes == $("#learning_outcomes").text() &&
+          current_assessment == $("#assessment").text() &&
+          current_learning_experiences == $("#learning_experiences").text() &&
+          current_google_drive_folder_id == $("#google_drive_folder_id").text())
+          {return ;}
+
 		course_id = <?php echo $course_id; ?>;
 		net_id = '<?php echo $net_id; ?>';
 		course_name = $("#course_name").text();
