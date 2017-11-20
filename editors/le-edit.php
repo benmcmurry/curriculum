@@ -73,9 +73,23 @@ while ($learningExperience = $result->fetch_assoc()) {
     });
 
     $('input:checkbox').change(function(){save();}); //calls save function when checkbox status changes.
-
+    $( "#connected_courses" ).on( "sortstop", function( event, ui ) {console.log} );
     $("#connected_courses, #potential_courses").sortable({
-        connectWith: ".connectedSortable"
+        connectWith: ".connectedSortable",
+        stop: function( event, ui ) {
+            var id = ui.item.attr("id"); //gets id of sorted item
+            console.log(id);
+            console.log(this.id);
+            if (this.id == "potential_courses") {
+                $("#"+id).removeClass("potential_course").addClass("connected_course"); //changes class on sort
+                connect_to_course(id, "add"); //calls function for ajax add to database
+                } 
+            if (this.id == "connected_courses") {
+                $("#"+id).removeClass("connected_course").addClass("potential_course");//changes class on sort
+                connect_to_course(id, "remove");//calls function for ajax remove from database
+            } 
+
+            }
       }).disableSelection();
 
      tinymce.init({
@@ -114,7 +128,22 @@ while ($learningExperience = $result->fetch_assoc()) {
         });
         
 }); // End Document Ready
-
+net_id = '<?php echo $net_id; ?>';
+learningExperienceId = <?php echo $learningExperienceId; ?>;
+    function connect_to_course(id, action) {
+        $.ajax({
+            type: "POST",
+            url: "connect_to_course",
+            data: {
+                net_id: net_id,
+                learningExperienceId: learningExperienceId,
+                id: id,
+                action: action
+            }}).done(function(phpfile){
+                $("#save_dialog").html(phpfile);
+            });
+        
+    }
 
     function save() {
         if ($("#required").prop('checked')) {required=1;} else {required=0;} 
@@ -126,8 +155,8 @@ while ($learningExperience = $result->fetch_assoc()) {
     //       current_assessment == assessment)
     //       {return ;}
 
-     learningExperienceId = <?php echo $learningExperienceId; ?>;
-     net_id = '<?php echo $net_id; ?>';
+     
+     
      name = $("#name").text();
      description = $("#description").html();
      $.ajax({

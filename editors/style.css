@@ -278,4 +278,5 @@ div.columns {
     display: inline-block;
     height: 24em;
     overflow-y: scroll;
+    width: 18em
 }
