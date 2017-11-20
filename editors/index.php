@@ -71,8 +71,19 @@ else {echo "<a href='?login='>Login</a>";}
             }
             echo "</div>";
         }
-        $result->free();
-
+		$result->free();
+		?>
+		<h2>Learning Experiences</h2><hr />
+		<?php 
+		$learningExperienceQuery = $elc_db->prepare("Select * from Learning_experiences order by name ASC");
+		$learningExperienceQuery->execute();
+		$result = $learningExperienceQuery->get_result();
+  	while ($learningExperience = $result->fetch_assoc()) {
+		echo "<a href='le-edit.php?learningExperienceId=".$learningExperience['learning_experience_id']."'>".$learningExperience['name']."</a><br />";
+		
+	}
+	  ?>
+<?php
 if (phpCAS::getUser() == "blm39") {
     ?>
 		<h2> Review Submitted Changes </h2>
