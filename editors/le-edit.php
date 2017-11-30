@@ -133,7 +133,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
     function connect_to_course(id, action) {
         $.ajax({
             type: "POST",
-            url: "connect_to_course",
+            url: "connect_to_course.php",
             data: {
                 net_id: net_id,
                 learningExperienceId: learningExperienceId,
@@ -216,10 +216,10 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                     Levels.level_short_name,
                     LE_Courses.id 
                 from LE_Courses 
-                inner join 
-                    Courses on Courses.course_id=LE_Courses.course_id 
-                inner join 
-                    Levels on Levels.level_id=Courses.level_id
+                natural left join 
+                    Courses 
+                natural left join 
+                    Levels
                 where `learning_experience_id`=?");
                     $query->bind_param("s", $learningExperienceId);
                     $query->execute();
@@ -228,7 +228,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                     while ($selectedCourse = $result->fetch_assoc()) {
                         $courseName = $selectedCourse['course_name'];
                         $levelShortName = $selectedCourse['level_short_name'];
-                        $courseId = $selectedCourse['id'];
+                        $courseId = $selectedCourse['course_id'];
                         echo "<li class='connected_course' id='$courseId'>$levelShortName $courseName</li>";
                         array_push($courses,$selectedCourse['course_id']);
                     }
