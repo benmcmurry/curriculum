@@ -54,7 +54,7 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 			if ($le['assessment'] == 0 && $le['required'] == 0 && $lenr) {echo "</ol><h4>Optional Learning Experiences</h4><ol>";$lenr=FALSE;}
 			
 			
-			echo "<li><a href='learning_experience.php?id=".$le['id']."'>".$le['name']."</a>. ".$le['short_description']."</li>";
+			echo "<li><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</li>";
 		}
 		echo "</ol>";
 		// end getting learning Experiences

@@ -12,7 +12,7 @@ $i=0;
 
 			echo "<h1>".$levels['level_name']."</h1>";
 			echo "<div class='course_list'>";
-				$course_query = $elc_db->prepare("Select Courses.course_id, Courses.course_name, Courses.level_id from Courses where Courses.level_id = ? order by course_order ASC");
+				$course_query = $elc_db->prepare("Select Courses.course_id, Courses.course_name, Courses.level_id, Courses.course_short_name from Courses where Courses.level_id = ? order by course_order ASC");
 				$course_query->bind_param('s', $levels['level_id']);
 				$course_query->execute();
 				$course_result=$course_query->get_result();
@@ -21,8 +21,8 @@ $i=0;
 			while($courses = $course_result->fetch_assoc()){
 
 				$courses['course_name'] = str_replace('Fluency', '', $courses['course_name']);
-
-				echo "<a class='course_icon' href='course.php?course_id=".$courses['course_id']."'><span align='center'>".$courses['course_name']."</a>";
+				
+				echo "<a title='".$courses['course_name']."' class='course_icon' href='course.php?course_id=".$courses['course_id']."'><span align='center'>".$courses['course_name']."</a>";
 
 
 

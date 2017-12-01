@@ -246,12 +246,41 @@ a#scrolly {
 }
 
 .course_list {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    display: inline-block;
+}
+
+.course_list {
+    text-align: left;
+    width: 250px;
+    padding: 10px;
+    margin: 5px;
+    border: white solid 6px;
+    display: inline-block;
+    background-color: #036;
+    color: white;
+    -moz-box-shadow: 2px 2px 10px #888;
+    -webkit-box-shadow: 2px 2px 10px #888;
+    box-shadow: 2px 2px 10px #888;
 }
 
 .course_list a {
+    font-size: 1em;
+    /* 	padding: 1.2em 0em 1.2em 1.2em; */
+    display: block;
+    color: #d1e4f6;
+    margin-left: 8px;
+}
+
+.course_list a:active {
+    position: relative;
+    top: 1px;
+}
+
+
+/* .course_list a {
     border: none;
     font: inherit;
     font-size: 1em;
@@ -259,20 +288,21 @@ a#scrolly {
     font-weight: bold;
     color: white;
     background-color: #3498db;
-    padding: 8px;
+    padding: 18px;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
     margin: 10px;
     margin-top: 30px;
     width: 200px;
     height: 40px;
-    text-overflow: clip;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .course_list a:hover {
@@ -282,7 +312,7 @@ a#scrolly {
 .course_list a:active {
     position: relative;
     top: 1px;
-}
+} */
 
 footer {
     font-family: "Roboto";
