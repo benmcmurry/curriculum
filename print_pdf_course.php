@@ -40,7 +40,7 @@ date_default_timezone_set("America/Denver");
 
 
 			//Style information for the PDF
-			$style='
+			$content='
 			<style>
 
 			h2 {
@@ -52,17 +52,18 @@ date_default_timezone_set("America/Denver");
 
 			}
 
-			p {
-				font-family: "freeserif";
+			p, a, li{
+				font-family: "times";
 				font-size: 12pt;
 				font-weight: normal;
+				line-height: 18pt;
 
 			}
 
 			h4 {
 				font-family: "dejavusansextralight";
 				font-size: 10pt;
-				font-weight: normal;
+				font-weight: bold;
 
 			}
 			OL {
@@ -73,7 +74,6 @@ date_default_timezone_set("America/Denver");
 			}
 			OL LI { display: block;  }
 			OL LI:before { content: counters(item, ".") ". "; counter-increment: item;  }
-
 			table { width: 600px; }
 			</style>
 			<h2> Description</h2>
@@ -87,11 +87,41 @@ date_default_timezone_set("America/Denver");
 
 			<h2> Learning Outcomes</h2>
 			<p>'.$course['learning_outcomes'].'</p>
+			<h2>Assessments and Learning Experiences</h2><ol>';
+			
+			// Get learning experiences
+			
+			$queryRequiredLearningExperiences = $elc_db->prepare("select *, Learning_experiences.name, Learning_experiences.learning_experience_id 
+			from `LE_Courses`
+					natural left join
+						Learning_experiences 
+					where LE_Courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
+			$queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
+			$queryRequiredLearningExperiences->execute();
+			$resultLe = $queryRequiredLearningExperiences->get_result();
+			$ar = TRUE; //assessment, required counter
+			$anr =TRUE; //assessment, not required counter
+			$ler = TRUE; //learning experience, required counter
+			$lenr = TRUE; //learning experience, not required counter
+			
+			while($le = $resultLe->fetch_assoc()){
+				if ($le['assessment'] == 1 && $le['required'] == 1 && $ar) {$content .='</ol><h4>Required Assessments</h4><ol>';$ar=FALSE;}
+				if ($le['assessment'] == 1 && $le['required'] == 0 && $anr) {$content .='</ol><br /><h4>Optional Assessments</h4><ol>';$anr=FALSE;}
+				if ($le['assessment'] == 0 && $le['required'] == 1 && $ler) {$content .='</ol><br /><h4>Required Learning Experiences</h4><ol>';$ler=FALSE;}
+				if ($le['assessment'] == 0 && $le['required'] == 0 && $lenr) {$content .='</ol><br /><h4>Optional Learning Experiences</h4><ol>';$lenr=FALSE;}
+				
+				
+				$content .='<li><a href="http://elc.byu.edu/curriculum/learning_experience.php?id='.$le["id"].'">'.$le["name"].'</a>. '.$le["short_description"].'</li><br />';
+			}
+			$content .="</ol>";
+			// end getting learning Experiences
 
-			<h2> Assessment</h2>
+			$content .= '
+
+			<h2> Assessment OLD</h2>
 			<p>'.$course['assessment'].'</p>
 
-			<h2> Learning Experiences</h2>
+			<h2> Learning Experiences OLD</h2>
 			<p>'.$course['learning_experiences'].'</p>'
 			;
 
@@ -122,7 +152,7 @@ date_default_timezone_set("America/Denver");
 			$pdf->setHtmlVSpace($tagvs);
 
 			$pdf->AddPage();
-			$pdf->writeHTML($style, true, false, true, false, "");
+			$pdf->writeHTML($content, true, false, true, false, "");
 			$filename=$course["level_name"]." ".$course['course_name'];
 		}
 	$result->free(); //Free MYSQL request

@@ -12,7 +12,12 @@ body {
     height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     float: clear;
     font-family: "Roboto";
     font-weight: 300;
@@ -53,14 +58,16 @@ h3 {
 }
 
 h4 {
-	font-size: 1.3em;
-	font-weight: bold;
-  color: rgb(148, 148, 148);
+    font-size: 1em;
+    font-weight: bold;
+    color: black
 }
+
 h5 {
-	font-size:1em;
-  color: rgb(148, 148, 148);
+    font-size: 1em;
+    color: rgb(148, 148, 148);
 }
+
 p {
     margin-left: .5em;
 }
@@ -182,23 +189,18 @@ a.inDocumentLink:hover {
     border: 6px solid white;
 }
 
-
 .pdf_icon {
-  float: right;
+    float: right;
     background-image: url("images/pdf-flat.png");
     background-size: 48px 48px;
     background-repeat: no-repeat;
     padding: 24px 24px;
     border-radius: 24px;
-
-
 }
 
 a.pdf_icon:hover {
-  background-image: url("images/pdf-flat2.png");
+    background-image: url("images/pdf-flat2.png");
 }
-
-
 
 article {}
 
@@ -326,22 +328,30 @@ OL {
     position: relative;
     left: -20px;
     z-index: 8;
+    display: table;
+    list-style-position: outside;
+    border-spacing: .3em 0em;
+    border-spacing:
 }
 
-OL LI {
+OL>LI {
     display: block;
+    display: table-row;
+    padding-left: 10px;
 }
 
-OL LI:before {
+OL>LI::before {
     content: counters(item, ".") ". ";
     counter-increment: item;
+    display: table-cell;
 }
 
 a.button.active {
     border: 2px black solid;
 }
 
-a.button, #submit_button {
+a.button,
+#submit_button {
     border: none;
     font: inherit;
     display: inline;
@@ -358,17 +368,21 @@ a.button, #submit_button {
     margin-right: 10px;
 }
 
-a.button:hover, #submit_button:hover {
+a.button:hover,
+#submit_button:hover {
     background-color: #3cb0fd;
     text-shadow: none;
 }
 
-a.button:active, , #submit_button:hover {
+a.button:active,
+,
+#submit_button:hover {
     position: relative;
     top: 1px;
 }
 
-#teacher-login, #teacher-logout {
+#teacher-login,
+#teacher-logout {
     position: absolute;
     top: .1em;
     right: .1em;
@@ -438,7 +452,6 @@ div.citations p {
 }
 
 @media all and (max-width: 800px) {
-
     a.pdf_icon {
         background-size: 32px 32px;
         padding: 32px 32px 5px 32px;
@@ -459,23 +472,24 @@ div.citations p {
         width: 45px;
     }
     nav a {
-      margin: 5px;
+        margin: 5px;
     }
     a.inDocumentLink {
         width: 12%;
     }
-.square {
-  width: 1.6em;
-  height: 1.6em;
-  line-height: 1.6em;
-  font-size: 1.6em;
-  border: 3px solid white;
-}
-
-    #teacher-login span, #teacher-logout span {
+    .square {
+        width: 1.6em;
+        height: 1.6em;
+        line-height: 1.6em;
+        font-size: 1.6em;
+        border: 3px solid white;
+    }
+    #teacher-login span,
+    #teacher-logout span {
         display: none;
     }
-    #teacher-login, #teacher-logout {
+    #teacher-login,
+    #teacher-logout {
         background-image: url('images/login.png');
         background-size: 32px 32px;
         padding: 16px;
@@ -496,90 +510,93 @@ div.citations p {
         width: 35px;
         margin-right: .5em;
     }
-
 }
+
 table.teaching {
-	border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Martel";
-
-
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Martel";
 }
 
 table.teaching thead {
-  font-family: "Roboto";
-  font-weight: bold;
+    font-family: "Roboto";
+    font-weight: bold;
 }
 
 table.teaching thead td {
-  padding: 0px 5px;
+    padding: 0px 5px;
 }
 
-.teaching td  {
-	background-color: white;
-	color: black;
-	border: 1px solid;
-	text-align: center;
-  height: 3em;
-
-
+.teaching td {
+    background-color: white;
+    color: black;
+    border: 1px solid;
+    text-align: center;
+    height: 3em;
 }
+
 td.first_column {
-  text-align: left;
-  padding-left: 10px;
-  font-family: sans-serif;
-
-  /*font-weight: bold;*/
-
+    text-align: left;
+    padding-left: 10px;
+    font-family: sans-serif;
+    /*font-weight: bold;*/
 }
 
-tr.odd > td{
-  /*background-color: rgba(163, 163, 167, 0.52);*/
+tr.odd>td {
+    /*background-color: rgba(163, 163, 167, 0.52);*/
 }
 
 td.odd {
-  background-color: rgba(235, 225, 163, 0.5);
+    background-color: rgba(235, 225, 163, 0.5);
 }
 
-div#data_nav, div#research_data_nav {
-  width: 100%;
-  margin: 2em 0em 0em;
-
-}
-div#data_nav ul, div#research_data_nav ul {
-  margin: 0px;
-  padding: 0px;
-}
-div#data_nav li, div#research_data_nav li {
-  cursor: pointer;
-  text-decoration: none;
-  display:inline-block;
-  color: white;
-  background-color:rgba(70, 162, 222, 1);
-  padding: 0px 5px;
-  margin: 0px 5px;
-  border-radius: 10px 10px 0px 0px;
-  position: relative;
-  top: 1px;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-
-
-
-}
-div#data_nav li:hover, div#research_data_nav li:hover {
-  background-color: blue;
+div#data_nav,
+div#research_data_nav {
+    width: 100%;
+    margin: 2em 0em 0em;
 }
 
-div#data_view, div#research_data_view {
-  padding: 2em 0em 0em;
-  border: 1px solid #ccc;
-  margin: 0px 0px 2em;
+div#data_nav ul,
+div#research_data_nav ul {
+    margin: 0px;
+    padding: 0px;
 }
 
-div.folder, div.research_folder {
-  display: none;
+div#data_nav li,
+div#research_data_nav li {
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    background-color: rgba(70, 162, 222, 1);
+    padding: 0px 5px;
+    margin: 0px 5px;
+    border-radius: 10px 10px 0px 0px;
+    position: relative;
+    top: 1px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
 
+div#data_nav li:hover,
+div#research_data_nav li:hover {
+    background-color: blue;
+}
+
+div#data_view,
+div#research_data_view {
+    padding: 2em 0em 0em;
+    border: 1px solid #ccc;
+    margin: 0px 0px 2em;
+}
+
+div.folder,
+div.research_folder {
+    display: none;
+}
+
+span.short_description {
+    display: inline;
 }

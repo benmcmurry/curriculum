@@ -4,7 +4,13 @@ include_once("../../../connectFiles/connect_cis.php");
 $learningExperienceId = $_GET['learningExperienceId'];
 include_once("cas-go.php");
 include_once("admins.php");
-
+if ($learningExperienceId == "new") {
+    $query = $elc_db->prepare("Insert into Learning_experiences (name, created_by, created_on) values ('Untitled Learning Experience', ?, NOW())");
+    $query->bind_param("s", $net_id);
+    
+    $query->execute();
+    $learningExperienceId = $elc_db->insert_id;
+}
 $query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id = ?");
 $query->bind_param("s", $learningExperienceId);
 $query->execute();
@@ -12,6 +18,7 @@ $result = $query->get_result();
 
 while ($learningExperience = $result->fetch_assoc()) {
     $name = $learningExperience['name'];
+    $short_description = $learningExperience['short_description'];
     $description = $learningExperience['description'];
     $required = $learningExperience['required'];
     $assessment = $learningExperience['assessment'];
@@ -53,6 +60,7 @@ while ($learningExperience = $result->fetch_assoc()) {
         ?>
 
         current_name = $("#name").text();
+        current_short_description = $("#short_description").text();
         current_description = $("#description").text();
         
 
@@ -93,7 +101,7 @@ while ($learningExperience = $result->fetch_assoc()) {
       }).disableSelection();
 
      tinymce.init({
-            selector: "#description",
+            selector: "#description, #short_description",
             inline: true,
             menubar: false,
             nowrap: false,
@@ -159,6 +167,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
      
      name = $("#name").text();
      description = $("#description").html();
+     short_description = $("#short_description").html();
      $.ajax({
          method: "POST",
          url: "save-le.php",
@@ -167,6 +176,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
              net_id: net_id,
              name: name,
              description: description,
+             short_description: short_description,
              required: required,
              assessment: assessment
              }
@@ -194,6 +204,9 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
             <div class="main">
                 <div class="separator">
                 <h2>Learning Experience Name</h2> <div id="name" class="editable" contenteditable="true"><?php echo $name; ?></div>
+                </div>
+                <div class="separator">
+                    <h2>Short Description</h2> <div id="short_description" class="editable" contenteditable="true"><?php echo $short_description; ?></div>
                 </div>
                 <div class="separator">
                     <h2>Description</h2> <div id="description" class="editable" contenteditable="true"><?php echo $description; ?></div>

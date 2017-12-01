@@ -31,13 +31,9 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		echo "<h3 class='course_data'>Course Learning Outcomes</h3>";
 		echo $course['learning_outcomes'];
 
-		echo "<h3 class='course_data'>Course Assessment</h3>";
-		echo $course['assessment'];
-
-		echo "<h3 class='course_data'>Course Learning Experiences</h3>";
-		echo $course['learning_experiences'];
-
-		// Get required learning experiences
+	
+		echo "<h3 class='course_data'>Assessments and Learning Experiences</h3>";
+		// Get learning experiences
 		$queryRequiredLearningExperiences = $elc_db->prepare("select *, Learning_experiences.name, Learning_experiences.learning_experience_id 
 		from `LE_Courses`
 				natural left join
@@ -46,10 +42,27 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		$queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
 		$queryRequiredLearningExperiences->execute();
 		$resultLe = $queryRequiredLearningExperiences->get_result();
+		$ar = TRUE; //assessment, required counter
+		$anr =TRUE; //assessment, not required counter
+		$ler = TRUE; //learning experience, required counter
+		$lenr = TRUE; //learning experience, not required counter
+		echo "<ol>";
 		while($le = $resultLe->fetch_assoc()){
-			echo "<a href='learning_experience.php?id=".$le['id']."'>".$le['name']."</a><br />";
+			if ($le['assessment'] == 1 && $le['required'] == 1 && $ar) {echo "</ol><h4>Required Assessments</h4><ol>";$ar=FALSE;}
+			if ($le['assessment'] == 1 && $le['required'] == 0 && $anr) {echo "</ol><h4>Optional Assessments</h4><ol>";$anr=FALSE;}
+			if ($le['assessment'] == 0 && $le['required'] == 1 && $ler) {echo "</ol><h4>Required Learning Experiences</h4><ol>";$ler=FALSE;}
+			if ($le['assessment'] == 0 && $le['required'] == 0 && $lenr) {echo "</ol><h4>Optional Learning Experiences</h4><ol>";$lenr=FALSE;}
+			
+			
+			echo "<li><a href='learning_experience.php?id=".$le['id']."'>".$le['name']."</a>. ".$le['short_description']."</li>";
 		}
-		// end getting Required learning Experiences
+		echo "</ol>";
+		// end getting learning Experiences
+		echo "<h3 class='course_data'>Course Assessment OLD</h3>";
+		echo $course['assessment'];
+
+		echo "<h3 class='course_data'>Course Learning Experiences OLD</h3>";
+		echo $course['learning_experiences'];
 
 		if ($auth && $access){
 		echo "<h3 class='course_data'>Teacher Resources</h3>";

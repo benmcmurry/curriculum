@@ -74,6 +74,7 @@ else {echo "<a href='?login='>Login</a>";}
 		$result->free();
 		?>
 		<h2>Learning Experiences</h2><hr />
+		<a id='new_le' class='button' href='le-edit.php?learningExperienceId=new'> + Learning Experience<a><br />
 		<?php 
 		$learningExperienceQuery = $elc_db->prepare("Select * from Learning_experiences order by name ASC");
 		$learningExperienceQuery->execute();

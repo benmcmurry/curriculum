@@ -60,9 +60,9 @@ h3 {
 }
 
 h4 {
-    font-size: 1.3em;
+    font-size: 1em;
     font-weight: bold;
-    color: rgb(100, 100, 100);
+    color: black;
 }
 
 h5 {
@@ -147,7 +147,7 @@ div.separator {
 }
 
 a.button {
-    display: inline;
+    display: inline-block;
     font-size: 1em;
     font-family: sans-serif;
     font-weight: bold;
@@ -160,6 +160,7 @@ a.button {
     text-decoration: none;
     /* 	text-shadow: 1px 1px 3px #666666; */
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 a.button:hover {
