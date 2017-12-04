@@ -23,14 +23,12 @@ session_start();
 	<header>
 		<?php include("content/header.php"); ?>
 	</header>
-	<div id='flex_content'>
 	<nav>
-		 <?php include("content/nav-bar.php"); ?> 
+		<?php include("content/nav-bar.php"); ?>
 	</nav>
 	<article>
 		<?php include("content/mission.php"); ?>
 	</article>
-</div>
 	<footer>
 		<?php include("content/footer.html"); ?>
 	</footer>

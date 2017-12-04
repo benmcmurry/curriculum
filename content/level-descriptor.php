@@ -1,40 +1,6 @@
 <?php
-session_start();
-	include_once("../../connectFiles/connect_cis.php");
-	include_once("cas-go.php");
-	include_once("teachers.php");
-	$level_id=$_GET['level_id'];
-	
 
-?>
-<!DOCTYPE html>
-<html lang="">
-<head>
-	<title>Curriculum Portfolio - English Language Center</title>
-
-<!-- 	Meta Information -->
-	<meta charset="utf-8">
-	<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
-	<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<?php include("content/styles_and_scripts.html"); ?>
-</head>
-<body>
-
-	<header>
-		<?php include("content/header.php"); ?>
-	</header>
-	<div id='flex_content'>
-	<nav>
-		<?php include("content/nav-bar.php"); ?>
-	</nav>
-	<?php include("content/level-nav.php"); ?>
-	<article>
-	<?php
-
+$level_id=$_GET['level_id'];
 echo $level_id;
         $query = $elc_db->prepare("Select * from Levels where level_id = ?");
         $query->bind_param("s", $level_id);
@@ -67,11 +33,3 @@ echo $level_id;
         $result->free();
 
 ?>
-	</article>
-	</div>
-	<footer>
-		<?php include("content/footer.html"); ?>
-	</footer>
-
-</body>
-</html>

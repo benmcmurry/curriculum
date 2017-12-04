@@ -29,9 +29,9 @@ if (isset($course_id)) {$additional ="&course_id=$course_id";} else {$additional
 if ($auth) {
 
   $net_id = phpCAS::getUser();
-  $button = "<a href='?logout$additional' id='teacher-login' class='button'><span>$net_id</span></a>";
+  $button = "<a href='?logout$additional' id='teacher-login' class='button'>$net_id</a>";
 } else {
-  $button = "<a href='?login$additional' id='teacher-login' class='button'><span>Teacher Login</span></a>";
+  $button = "<a href='?login$additional' id='teacher-login' class='button'>Login</a>";
 
 }
 ?>
