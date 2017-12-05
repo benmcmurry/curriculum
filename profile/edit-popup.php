@@ -1,15 +1,9 @@
 <?php
 
-include_once("../../../connectFiles/connect_cis.php");
-if ($local == 0) {
-    include_once("../CASauthinator.php");
-    $net_id = Authenticator::getUser();
-} else {
-    $net_id = "blm39";
-}
-if ($net_id == 'blm39') {echo "cleared!";}
-else {exit();}
-	$id = $_POST['id'];
+session_start();
+include_once("../../connectFiles/connect_cis.php");
+include_once("cas-go.php");
+include_once("teachers.php");
 ?>
 
 
