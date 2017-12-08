@@ -234,7 +234,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                     Courses 
                 natural left join 
                     Levels
-                where learning_experience_id=?");
+                where LE_Courses.learning_experience_id=?");
                     $query->bind_param("s", $learningExperienceId);
                     $query->execute();
                     $result = $query->get_result();
