@@ -38,7 +38,7 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		from `LE_Courses`
 				natural left join
 					Learning_experiences 
-				where LE_Courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
+				where LE_courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
 		$queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
 		$queryRequiredLearningExperiences->execute();
 		$resultLe = $queryRequiredLearningExperiences->get_result();
