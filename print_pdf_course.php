@@ -92,10 +92,10 @@ date_default_timezone_set("America/Denver");
 			// Get learning experiences
 			
 			$queryRequiredLearningExperiences = $elc_db->prepare("select *, Learning_experiences.name, Learning_experiences.learning_experience_id 
-			from `LE_Courses`
+			from `LE_courses`
 					natural left join
 						Learning_experiences 
-					where LE_Courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
+					where LE_courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
 			$queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
 			$queryRequiredLearningExperiences->execute();
 			$resultLe = $queryRequiredLearningExperiences->get_result();
