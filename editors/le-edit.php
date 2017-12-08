@@ -229,7 +229,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                     Levels.level_id, 
                     Levels.level_short_name,
                     LE_courses.id 
-                from LE_Courses 
+                from LE_courses 
                 natural left join 
                     Courses 
                 natural left join 
