@@ -35,7 +35,7 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		echo "<h3 class='course_data'>Assessments and Learning Experiences</h3>";
 		// Get learning experiences
 		$queryRequiredLearningExperiences = $elc_db->prepare("select *, Learning_experiences.name, Learning_experiences.learning_experience_id 
-		from `LE_Courses`
+		from `LE_courses`
 				natural left join
 					Learning_experiences 
 				where LE_courses.course_id=? order by Learning_experiences.assessment DESC, Learning_experiences.required DESC");
