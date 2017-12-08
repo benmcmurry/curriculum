@@ -10,6 +10,7 @@ if ($learningExperienceId == "new") {
     
     $query->execute();
     $learningExperienceId = $elc_db->insert_id;
+    echo $learningExperienceId;
 }
 $query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id = ?");
 $query->bind_param("s", $learningExperienceId);
