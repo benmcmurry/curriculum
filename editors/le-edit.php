@@ -224,17 +224,17 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                 <ul id="connected_courses" class='connectedSortable'>
                 <?php
                     $query = $elc_db->prepare("Select 
-                    LE_Courses.course_id,
+                    LE_courses.course_id,
                     Courses.course_name, 
                     Levels.level_id, 
                     Levels.level_short_name,
-                    LE_Courses.id 
+                    LE_courses.id 
                 from LE_Courses 
                 natural left join 
                     Courses 
                 natural left join 
                     Levels
-                where LE_Courses.learning_experience_id=?");
+                where LE_courses.learning_experience_id=?");
                     $query->bind_param("s", $learningExperienceId);
                     $query->execute();
                     $result = $query->get_result();
