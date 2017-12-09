@@ -190,27 +190,28 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
 </head>
 <body>
     <header>
-    <h1> Learning Experience Editor: <?php echo $name; ?></h1>
-            <div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+        <div>
+    <h1> LE &amp; A Editor: <?php echo $name; ?></h1>
             <?php if ($auth && $access) { ?>
             <a class="button" id="go_back" href="index.php">Main Menu</a>
             <a class="button" id="save">Save</a>
             <div id="save_dialog"></div>
-            
+            </div>
+            <div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+
     </header>
     
     <article>
 
-        <div class="content-background">
-            <div class="main">
+            <div class="content">
                 <div class="separator">
-                <h2>Learning Experience Name</h2> <div id="name" class="editable" contenteditable="true"><?php echo $name; ?></div>
+                <h2 class='editor-style'>Learning Experience Name</h2> <div id="name" class="editable" contenteditable="true"><?php echo $name; ?></div>
                 </div>
                 <div class="separator">
-                    <h2>Short Description</h2> <div id="short_description" class="editable" contenteditable="true"><?php echo $short_description; ?></div>
+                    <h2 class='editor-style'>Short Description</h2> <div id="short_description" class="editable" contenteditable="true"><?php echo $short_description; ?></div>
                 </div>
                 <div class="separator">
-                    <h2>Description</h2> <div id="description" class="editable" contenteditable="true"><?php echo $description; ?></div>
+                    <h2 class='editor-style'>Description</h2> <div id="description" class="editable" contenteditable="true"><?php echo $description; ?></div>
                 </div>
                 <div class="separator">
 
@@ -220,7 +221,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                     <input type='checkbox' id='assessment'>Can be used as assessment</input>
                 </div>
                 <div class='separator'>
-                <h2>Courses</h2>
+                <h2 class='editor-style'>Courses</h2>
                 <ul id="connected_courses" class='connectedSortable'>
                 <?php
                     $query = $elc_db->prepare("Select 
@@ -277,7 +278,6 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                </ul>  <!-- end potential courses list  -->
                 </div>
             
-        </div>
    
     </article>
     <?php } ?>

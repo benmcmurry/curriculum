@@ -68,17 +68,12 @@ h5 {
     color: rgb(148, 148, 148);
 }
 
-p {
-    margin-left: .5em;
-}
-
 header {
     background-image: url("images/elc5.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center center;
     width: 100%;
-    height: 250px;
     z-index: 99;
 }
 
@@ -88,47 +83,80 @@ header h1 {
     text-align: left;
 }
 
-#header-container img#logo {
+header div#header-container {
+    margin: 0px auto;
+    max-width: 1004px;
+    color: white;
+}
+
+header div#byu-bar {
+    margin: 0px auto;
+    max-width: 960px;
+    padding: 0em 1em;
+    display: flex;
+    align-items: center;
+}
+
+header div#byu-bar a {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+header div#byu-bar img {
+    height: 1.2em;
+    margin-top: .5em;
+}
+
+div#user {
+    flex: initial;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: #16357a;
+    color: white;
+    font-size: 1em;
+    line-height: 1em;
+    height: 1em;
+    padding: .5em 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+div#user a {
+    color: white;
+}
+
+header div#elc-bar {
+    margin-top: 5em;
+    max-width: 960px;
+    padding: 0em 1em 5em 1em;
+}
+
+#elc-bar img#logo {
     float: left;
     width: 4em;
     margin-right: 1em;
 }
 
-header div#header-container {
-    margin: 0px auto;
-    max-width: 1004px;
-    color: white;
-    padding: 7em 2em 0;
-}
-
 nav {
-    position: absolute;
-    top: 0;
     width: 100%;
     z-index: 10;
-}
-
-nav div#byu-bar {
-    margin: 0px auto;
-    max-width: 1004px;
-    padding-top: .3em;
-}
-
-nav div#byu-bar img {
-    height: 1em;
-    margin-left: -1em;
-}
-
-nav div#nav-bar {
-    margin: 0px auto;
-    max-width: 1004px;
-    text-align: center;
+    position: absolute;
+    top: 2.3em;
 }
 
 nav div#nav-container {
     height: 3em;
     line-height: 3em;
     background-color: rgba(70, 162, 222, 0.7);
+}
+
+nav div#nav-bar {
+    margin: 0px auto;
+    max-width: 1004px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 nav a {
@@ -143,38 +171,38 @@ nav a:hover {
     text-shadow: 2px 1px 10px black;
 }
 
-div#level-nav {
-    width: 100%;
-    background-color: #efefef;
-    text-align: center;
-    padding: 0px;
-    z-index: 12;
-}
-
 div#level-nav-container {
     width: 100%;
-    max-width: 1070px;
-    display: inline-block;
+    background-color: #efefef;
     padding: 0px;
-}
-
-a.inDocumentLink {
-    width: 12%;
-    margin: 0px;
-    display: inline-block;
+    z-index: 12;
+    display: block;
     text-align: center;
-    text-decoration: none;
-    color: black;
-    padding: 0px;
 }
 
-a.inDocumentLink:hover {
+div#level-nav {
+    max-width: 1004px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+div#level-nav a {
+    background-color: pink;
+    margin: 0px;
+    text-decoration: none;
+    /* padding: 1em; */
+}
+
+div#level-nav a:hover {
     background-color: white;
     text-align: center;
 }
 
 .square {
-    margin: .5em auto;
     width: 2em;
     height: 2em;
     line-height: 2em;
@@ -246,63 +274,43 @@ a#scrolly {
 }
 
 .course_list {
-    /* display: flex;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center; */
-    display: inline-block;
-}
-
-.course_list {
-    text-align: left;
-    width: 250px;
-    padding: 10px;
-    margin: 5px;
-    border: white solid 6px;
-    display: inline-block;
-    background-color: #036;
-    color: white;
-    -moz-box-shadow: 2px 2px 10px #888;
-    -webkit-box-shadow: 2px 2px 10px #888;
-    box-shadow: 2px 2px 10px #888;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-family: sans-serif;
 }
 
 .course_list a {
-    font-size: 1em;
-    /* 	padding: 1.2em 0em 1.2em 1.2em; */
-    display: block;
-    color: #d1e4f6;
-    margin-left: 8px;
-}
-
-.course_list a:active {
-    position: relative;
-    top: 1px;
-}
-
-
-/* .course_list a {
-    border: none;
-    font: inherit;
-    font-size: 1em;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: white;
+    border: 4px solid white;
     background-color: #3498db;
-    padding: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
+    font-size: 1em;
+    color: white;
+    font-weight: bolder;
     text-align: center;
-    justify-content: center;
-    margin: 10px;
-    margin-top: 30px;
-    width: 200px;
-    height: 40px;
+    flex: 1;
+    height: 1em;
+    line-height: 1em;
+    padding: 1em;
+    text-decoration: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.course_list a span {
+    display: none;
+}
+
+.course_list a::before {
+    content: attr(data-name);
+}
+
+.course_list a.level {
+    color: black;
+    background-color: white;
+    border: 1px solid #3498db;
 }
 
 .course_list a:hover {
@@ -312,7 +320,7 @@ a#scrolly {
 .course_list a:active {
     position: relative;
     top: 1px;
-} */
+}
 
 footer {
     font-family: "Roboto";
@@ -384,18 +392,16 @@ a.button,
 #submit_button {
     border: none;
     font: inherit;
-    display: inline;
+    display: inline-block;
     font-size: 1em;
     font-family: sans-serif;
     font-weight: bold;
     color: white;
     background-color: #3498db;
-    padding: 4px 8px;
+    padding: .5em;
     text-align: center;
-    border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    margin-right: 10px;
 }
 
 a.button:hover,
@@ -502,10 +508,7 @@ div.citations p {
         width: 45px;
     }
     nav a {
-        margin: 5px;
-    }
-    a.inDocumentLink {
-        width: 12%;
+        /* margin: 5px; */
     }
     .square {
         width: 1.6em;
@@ -514,15 +517,8 @@ div.citations p {
         font-size: 1.6em;
         border: 3px solid white;
     }
-    #teacher-login span,
-    #teacher-logout span {
-        display: none;
-    }
-    #teacher-login,
-    #teacher-logout {
-        background-image: url('images/login.png');
-        background-size: 32px 32px;
-        padding: 16px;
+    .course_list a::before {
+        content: attr(data-shortName);
     }
 }
 

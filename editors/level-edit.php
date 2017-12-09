@@ -135,9 +135,9 @@ function save() {
 </head>
 <body>
 	<header>
-
+			<div>
 			<h1> Level Editor: <?php echo $level_name; ?></h1>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+			
 			<?php echo $message;
 
       if ($auth && $access) { ?>
@@ -146,24 +146,24 @@ function save() {
 			<a class="button" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next Level</a>
 			<a class="button" id="save">Save</a>
 			<div id="save_dialog"></div>
-
+	  		</div>
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 	</header>
 	<article>
-		<div class="content-background">
-			<div class="main">
-				<div class="separator">
-				<h2>Level Short Name (limit to 1 or 2 characters)</h2> <div id="level_short_name" class="editable" contenteditable="true"><?php echo $level_short_name; ?></div>
-				</div>
-				<div class="separator">
-				<h2>Level Name</h2> <div id="level_name" class="editable rte" contenteditable="true"><?php echo $level_name; ?></div></div>
-				<div class="separator">
-				<h2>Descriptor</h2>
+		<div class="content">
+		<div class="separator">
+		<h2 class='editor-style'>Level Short Name (limit to 1 or 2 characters)</h2> <div id="level_short_name" class="editable" contenteditable="true"><?php echo $level_short_name; ?></div>
+		</div>
+		<div class="separator">
+		<h2 class='editor-style'>Level Name</h2> <div id="level_name" class="editable rte" contenteditable="true"><?php echo $level_name; ?></div></div>
+		<div class="separator">
+		<h2 class='editor-style'>Descriptor</h2>
 
-			        <div id="level_descriptor" class="editable"><?php echo $level_descriptor; ?></div>
-				</div>
+			<div id="level_descriptor" class="editable"><?php echo $level_descriptor; ?></div>
+		</div>
 
 			</div>
-		</div>
+	
 	<?php } ?>
 	</article>
 </body>

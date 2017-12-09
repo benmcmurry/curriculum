@@ -167,8 +167,9 @@ function save() {
 	<header>
 
 
-			<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+			<div>
+				<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
+			
       <?php echo $message;
 
       if ($auth && $access) { ?>
@@ -179,30 +180,21 @@ function save() {
 			<a class="button" id="save">Save</a>
 
 			<div id="save_dialog"></div>
+	  </div>
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 	</header>
 <article>
-
-		<div class="content-background">
-			<div class="main">
-				<div class="separator">
-				<h2>Course Name</h2> <div id="course_name" class="editable" contenteditable="true"><?php echo $course_name; ?></div>
-				</div>
-				<div class="separator">
-					<h2>Course Short Name (Limit to 4-5 characters)</h2> <div id="course_short_name" class="editable" contenteditable="true"><?php echo $course_short_name; ?></div>
-				</div>
-				<div class="separator">
-				<h2>Course Description</h2> <div id="course_description" class="editable" contenteditable="true"><?php echo $course_description; ?></div></div>
-				<div class="separator">
-					<h2>Course Emphasis</h2><div id="course_emphasis" class="editable" contenteditable="true"><?php echo $course_emphasis; ?></div></div>
-				<div class="separator">
-				<h2>Course Books and Materials</h2><div id="course_materials" class="editable" contenteditable="true"><?php echo $course_materials; ?></div></div>
-			    <div class="separator"><h2>Course Learning Outcomes</h2> <div id="learning_outcomes" class="editable" contenteditable="true"><?php echo $learning_outcomes; ?></div></div>
-				<div class="separator"><h2>Course Assessment</h2> <div id="assessment" class="editable" contenteditable="true"><?php echo $assessment; ?></div></div>
-				<div class="separator"><h2>Course Learning Experiences</h2><div id="learning_experiences" class="editable" contenteditable="true"><?php echo $learning_experiences; ?></div> </div>
-				<div class="separator"><h2>Google Drive Folder ID</h2><div id="google_drive_folder_id" class="editable" contenteditable="true"><?php echo $google_drive_folder_id; ?></div>
-
-			</div>
-		</div>
+	<div class="content">
+		<div class="separator"><h2 class='editor-style'>Course Name</h2> <div id="course_name" class="editable" contenteditable="true"><?php echo $course_name; ?></div>	</div>
+		<div class="separator"><h2 class='editor-style'>Course Short Name (Limit to 4-5 characters)</h2> <div id="course_short_name" class="editable" contenteditable="true"><?php echo $course_short_name; ?></div>		</div>
+		<div class="separator"><h2 class='editor-style'>Course Description</h2> <div id="course_description" class="editable" contenteditable="true"><?php echo $course_description; ?></div></div>
+		<div class="separator"><h2 class='editor-style'>Course Emphasis</h2><div id="course_emphasis" class="editable" contenteditable="true"><?php echo $course_emphasis; ?></div></div>
+		<div class="separator"><h2 class='editor-style'>Course Books and Materials</h2><div id="course_materials" class="editable" contenteditable="true"><?php echo $course_materials; ?></div></div>
+		<div class="separator"><h2 class='editor-style'>Course Learning Outcomes</h2> <div id="learning_outcomes" class="editable" contenteditable="true"><?php echo $learning_outcomes; ?></div></div>
+		<div class="separator"><h2 class='editor-style'>Course Assessment</h2> <div id="assessment" class="editable" contenteditable="true"><?php echo $assessment; ?></div></div>
+		<div class="separator"><h2 class='editor-style'>Course Learning Experiences</h2><div id="learning_experiences" class="editable" contenteditable="true"><?php echo $learning_experiences; ?></div> </div>
+		<div class="separator"><h2 class='editor-style'>Google Drive Folder ID</h2><div id="google_drive_folder_id" class="editable" contenteditable="true"><?php echo $google_drive_folder_id; ?></div>
+	</div>
   <?php } ?>
 	</article>
 </body>

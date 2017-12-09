@@ -35,6 +35,6 @@ session_start();
 		<?php include("content/footer.html"); ?>
 	</footer>
 
-	<a href="#top" id='scrolly'>&#x2B06;</a>
+	<a href="#header-container" id='scrolly'>&#x2B06;</a>
 </body>
 </html>

@@ -33,22 +33,26 @@ include_once("admins.php");
 </head>
 <body>
 	<header>
+				<div>
 			<h1>Curriculum Editor</h1>
+			<a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
+</div>
 			<div id="user">
 				<?php
 if ($auth) {echo phpCAS::getUser()." | <a href='?logout='>Logout</a>";}
 else {echo "<a href='?login='>Login</a>";}
 				?>
 			</div>
-			<a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
-				</header>
+			
+
+</header>
 <article>
 		<?php
     echo $message;
     if ($auth && $access) { ?>
 			<hr />
 
-			<div class="main">
+			<div class="content">
 			<h2> Levels and Courses </h2>
 			<?php
                 $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
@@ -60,20 +64,20 @@ else {echo "<a href='?login='>Login</a>";}
 
         while ($levels = $result->fetch_assoc()) {
             echo "<div class='course_list'>";
-            echo "<h2><a href='level-edit.php?level_id=".$levels['level_id']."'>".$levels['level_name']."</a></h2>";
-            $course_query = "Select Courses.course_id, Courses.course_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";
+            echo "<a class='level' href='level-edit.php?level_id=".$levels['level_id']."'>".$levels['level_name']."</a>";
+            $course_query = "Select Courses.course_id, Courses.course_name,Courses.course_short_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";
             if (!$course_result = $elc_db->query($course_query)) {
                 die('There was an error running the query [' . $elc_db->error . ']');
             }
 
             while ($courses = $course_result->fetch_assoc()) {
-                echo "<a class='course-icon ".$courses['course_id']."' href='course-edit.php?course_id=".$courses['course_id']."'>".$courses['course_name']."</a>";
+				echo "<a data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
             }
             echo "</div>";
         }
 		$result->free();
 		?>
-		<h2>Learning Experiences</h2><hr />
+		<hr /><h2>Learning Experiences</h2>
 		<a id='new_le' class='button' href='le-edit.php?learningExperienceId=new'> + Learning Experience<a><br />
 		<?php 
 		$learningExperienceQuery = $elc_db->prepare("Select * from Learning_experiences order by name ASC");
@@ -87,7 +91,7 @@ else {echo "<a href='?login='>Login</a>";}
 <?php
 if (phpCAS::getUser() == "blm39") {
     ?>
-		<h2> Review Submitted Changes </h2>
+		<hr /><h2> Review Submitted Changes </h2>
 		<?php
 
 
