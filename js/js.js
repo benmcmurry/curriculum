@@ -5,22 +5,20 @@ $(document).ready(function() {
     var n = d.getFullYear();
     $("span#year").text(n);
 
+    //gets the value for hiding the BYU bar
     var navStart = $("nav").position();
     var navAboveHeight = $("nav").outerHeight();
     var aboveHeight = $("header").outerHeight() - navAboveHeight;
-    //gets the value for hiding the BYU bar
-    getValues();
 
-    $(window).on("resize", getValues());
 
     //scrolling function
     $(window).scroll(function() {
         if ($(window).scrollTop() > navAboveHeight) {
             var newAboveHeight = 0;
-            $("nav").css({ "position": "fixed", "top": newAboveHeight });
+            $("nav").css({ "position": "fixed", "top": newAboveHeight, "background-color": "rgba(70, 162, 222, 1)" });
             $("article").css({ "margin-top": $("#level-nav-container").outerHeight() });
         } else {
-            $("nav").css({ "position": "absolute", "top": navStart.top });
+            $("nav").css({ "position": "absolute", "top": navStart.top, "background-color": "rgba(70, 162, 222, 0.7)" });
             $("article").css({ "margin-top": 0 });
         }
         if ($(window).scrollTop() > aboveHeight) {
@@ -40,7 +38,8 @@ $(document).ready(function() {
 
     });
 
-
+    $("a#teacher-login, a#login-link").on("click", login_popup);
+    $("#faded-background").on("click", close_popup);
 
     $("div.content-background").filter(":odd").css('background-color', '#f7f9fb');
 });
@@ -68,8 +67,14 @@ $(function() {
     });
 });
 
-function getValues() {
-    var navStart = $("nav").position();
-    var navAboveHeight = $("nav").outerHeight();
-    var aboveHeight = $("header").outerHeight() - navAboveHeight;
+function login_popup() {
+    w = $(window).width();
+    h = $(window).height();
+    $("#faded-background").css({ "width": w + "px", "height": h + "px" }).fadeIn();
+    $("#login_popup").css({ "top": h / 2 - 200, "left": w / 2 - 150 }).fadeIn();
+}
+
+function close_popup() {
+    $(".popup, #faded-background").fadeOut();
+
 }
