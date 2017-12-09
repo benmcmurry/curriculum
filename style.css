@@ -507,8 +507,8 @@ div.citations p {
     #header-container img#logo {
         width: 45px;
     }
-    nav a {
-        /* margin: 5px; */
+    #byu-bar img {
+        display: none;
     }
     .square {
         width: 1.6em;

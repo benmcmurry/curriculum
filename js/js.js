@@ -5,19 +5,28 @@ $(document).ready(function() {
     var n = d.getFullYear();
     $("span#year").text(n);
 
+    var navStart = $("nav").position();
+    var navAboveHeight = $("nav").outerHeight();
+    var aboveHeight = $("header").outerHeight() - navAboveHeight;
     //gets the value for hiding the BYU bar
-    var aboveHeight = $("header").outerHeight();
+    getValues();
+
+    $(window).on("resize", getValues());
 
     //scrolling function
     $(window).scroll(function() {
-
-        if ($(window).scrollTop() > aboveHeight) {
-
-
+        if ($(window).scrollTop() > navAboveHeight) {
             var newAboveHeight = 0;
-            $("#level-nav-container").css({ "position": "fixed", "top": newAboveHeight });
+            $("nav").css({ "position": "fixed", "top": newAboveHeight });
             $("article").css({ "margin-top": $("#level-nav-container").outerHeight() });
-
+        } else {
+            $("nav").css({ "position": "absolute", "top": navStart.top });
+            $("article").css({ "margin-top": 0 });
+        }
+        if ($(window).scrollTop() > aboveHeight) {
+            var newAboveHeight = 0;
+            $("#level-nav-container").css({ "position": "fixed", "top": navAboveHeight });
+            $("article").css({ "margin-top": $("#level-nav-container").outerHeight() });
         } else {
 
 
@@ -31,8 +40,7 @@ $(document).ready(function() {
 
     });
 
-    $("a#teacher-login, a#login-link").on("click", login_popup);
-    $("#faded-background").on("click", close_popup);
+
 
     $("div.content-background").filter(":odd").css('background-color', '#f7f9fb');
 });
@@ -60,14 +68,8 @@ $(function() {
     });
 });
 
-function login_popup() {
-    w = $(window).width();
-    h = $(window).height();
-    $("#faded-background").css({ "width": w + "px", "height": h + "px" }).fadeIn();
-    $("#login_popup").css({ "top": h / 2 - 200, "left": w / 2 - 150 }).fadeIn();
-}
-
-function close_popup() {
-    $(".popup, #faded-background").fadeOut();
-
+function getValues() {
+    var navStart = $("nav").position();
+    var navAboveHeight = $("nav").outerHeight();
+    var aboveHeight = $("header").outerHeight() - navAboveHeight;
 }
