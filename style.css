@@ -2,6 +2,7 @@ html {
     font-size: 16px;
     height: 100%;
     margin: 0px;
+    padding: 0px;
 }
 
 body {
@@ -94,7 +95,7 @@ header div#byu-bar {
     max-width: 960px;
     padding: 0em 1em;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 header div#byu-bar a {
@@ -119,6 +120,7 @@ div#user {
     padding: .5em 1em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    height: vh-2;
 }
 
 div#user a {
@@ -626,3 +628,5 @@ div.research_folder {
 span.short_description {
     display: inline;
 }
+
+c

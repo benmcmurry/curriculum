@@ -38,10 +38,6 @@ $(document).ready(function() {
 
     });
 
-    $("a#teacher-login, a#login-link").on("click", login_popup);
-    $("#faded-background").on("click", close_popup);
-
-    $("div.content-background").filter(":odd").css('background-color', '#f7f9fb');
 });
 
 
@@ -66,15 +62,3 @@ $(function() {
         }
     });
 });
-
-function login_popup() {
-    w = $(window).width();
-    h = $(window).height();
-    $("#faded-background").css({ "width": w + "px", "height": h + "px" }).fadeIn();
-    $("#login_popup").css({ "top": h / 2 - 200, "left": w / 2 - 150 }).fadeIn();
-}
-
-function close_popup() {
-    $(".popup, #faded-background").fadeOut();
-
-}
