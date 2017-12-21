@@ -72,8 +72,9 @@ date_default_timezone_set("America/Denver");
 				left: -20px;
 				z-index: 8;
 			}
-			OL LI { display: block;  }
-			OL LI:before { content: counters(item, ".") ". "; counter-increment: item;  }
+			OL LI { display: block;}
+			OL LI::before { content: counters(item, ".") " "; 
+				counter-increment: item;  }
 			table { width: 600px; }
 			</style>
 			<h2> Description</h2>
