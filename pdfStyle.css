@@ -1,13 +1,22 @@
+html {}
+
 body {
     font-family: "DejaVu Serif";
+    margin-bottom: 1em;
+    font-size: 14px;
+    padding: 0em;
+    margin: 0px;
 }
 
 p {
     padding-left: .5em;
+    margin: 0px;
+    margin-bottom: 1em;
 }
 
 a {
     text-decoration: none;
+    border-bottom: 1px solid blue;
 }
 
 h1,
@@ -22,6 +31,8 @@ h4 {
 h1 {
     font-size: 2em;
     /* text-transform: uppercase; */
+    font-family: "DejaVu Serif";
+    padding: 0px;
 }
 
 h2 {
@@ -44,13 +55,16 @@ h4 {
 header {}
 
 footer {
-    font-family: "Roboto";
-    font-weight: 400;
-    font-size: .9em;
-    margin-bottom: 30px;
+    font-size: .7em;
     text-align: center;
     position: fixed;
     bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid black;
+}
+
+article {
     border-top: 1px solid black;
 }
 
@@ -69,6 +83,7 @@ OL {
 
 OL>LI {
     display: block;
+    margin-bottom: .3em;
 }
 
 OL>LI::before {
@@ -78,4 +93,8 @@ OL>LI::before {
 
 ol.le li {
     margin-bottom: .5em;
+}
+
+ol li ol li {
+    margin-bottom: 0em;
 }

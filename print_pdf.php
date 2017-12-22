@@ -1,114 +1,96 @@
 <?php
-date_default_timezone_set("America/Denver");
-	include_once("../../connectFiles/connect_cis.php");
-	require("tcpdf/tcpdf.php");
+include_once("../../connectFiles/connect_cis.php");
+$level_id=$_GET['print_id'];
 
-	$print_id=$_GET['print_id'];
+$year = date("Y");
+$download_date = date("F\ j\,\ Y");
+            
 
-	class MYPDF extends TCPDF {
-	    // Page footer
-	    public function Footer() {
-	        // Position at 15 mm from bottom
-	        $this->SetY(-15);
-	        // Set font
-	        $this->SetFont("times", "", 10);
-	        // Page number
-	        // $this->Cell(0, 10,"English Language Center", 0, false, "C", 0, "", 0, false, "T", "M");
-			$year = date("Y");
-			$download_date = date("F\ j\,\ Y");
+function convertLinks($inputString) {
+    if (strpos($_SERVER["SERVER_NAME"], 'elc.byu.edu')) {$server = 'href="https://'.$_SERVER["SERVER_NAME"].'/curriculum/';}
+    else {$server = 'href="http://'.$_SERVER["SERVER_NAME"].'/';}
+    
+    return str_replace('href="', $server, $inputString);
+}
 
-			$footerHTML = '<table><tr><td align="left"><a style="color: blue;text-decoration: underline;" href="http://elc.byu.edu/curriculum/">http://elc.byu.edu/curriculum/</a></td><td align="center">&copy; '.$year.'. English Language Center</td><td align="right">Downloaded: '.$download_date.'</td></tr></table>';
+// Include autoloader
+require_once 'dompdf/autoload.inc.php';
 
-	        $this->writeHTMLCell(0, 10, 13, 265, " ".$footerHTML. " ", 0, 0, false, false, "C", true);
-	        $this->Line(13,265,205,265);
+// Reference the Dompdf namespace
+use Dompdf\Dompdf;
 
-	    }
-	}
-
-	$pdf=new myPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, "UTF-8", false);
-	$pdf->SetCreator(PDF_CREATOR);
-	$pdf->SetAuthor(PDF_AUTHOR);
-
-	$query = $elc_db->prepare("Select * from Levels where level_id = ? order by level_order ASC");
-	$query->bind_param("s", $print_id);
+// Instantiate and use the dompdf class
+$dompdf = new Dompdf();
+$query = $elc_db->prepare("Select * from Levels where level_id=?");
+$query->bind_param("s",$level_id);
 $query->execute();
 $result = $query->get_result();
+$level = $result->fetch_assoc();
+$html = "<!DOCTYPE html>
+<html lang=''>
+<head>
+	<title>".$level['level_name']." Level Descriptor</title>
 
-		while($levels = $result->fetch_assoc()){
-			//This splits the descriptor content into two separate strings to cross two pages.
-			$spaces = str_replace("<h3>", "<h3>&nbsp;", $levels["level_descriptor"]); //adds a space to the h3 heading
-
-			//This gest the proficiency info from the first page so it can be used int he second page.
-			$proficiency = explode("</h4>", $spaces);
-
-			$cleanup = array("<h4>", "(", ")");
-
-			$proficiency[0] = str_replace($cleanup, "", $proficiency[0]);
-
-
-			//Style information for the PDF
-			$style='
-			<style>
-
-			h3 {
-				background-color: #dadada;
-				font-family: "dejavusansextralight";
-				font-size: 12pt;
-				line-height: 150%;
+<!-- 	Meta Information -->
+	<meta charset='utf-8'>
+	<meta name='description' content='This section of the ELC website outlines the ELC curriculum.' />
+	<meta name='keywords' content='ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes' />
+	<meta name='robots' content='ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes' />
+    <link href='pdfStyle.css' rel='stylesheet' type='text/css' />
 
 
-			}
+</head>
+<body>
 
-			p {
-				font-family: "Times";
-				font-size: 11pt;
-				font-weight: normal;
+<footer>
+<table>
+    <tr>
+        <td align='left' width='33%'>
+            <a href='https://elc.byu.edu/curriculum/'>https://elc.byu.edu/curriculum/</a>
+        </td>
+        <td align='center' width='33%'>
+            &copy; $year. English Language Center
+        </td>
+        <td align='right' width='33%'>
+            Downloaded: $download_date
+        </td>
+    </tr>
+</table>
+</footer>
+<header>
+<table>
+    <tr>
+        
+        <td>
+        <h1>".$level['level_name']."</h1>
+        <h1>Level Descriptor</h1>
+            
+        </td>
+        <td style=';width:200px'>
+            <img width='200px' src='".$_SERVER["DOCUMENT_ROOT"]."/images/box-logo.jpg' />
+        </td>
+    </tr>
 
-
-			}
-
-			h4 {
-				font-family: "dejavusansextralight";
-				font-size: 10pt;
-				font-weight: normal;
-
-			}
-			</style>
-
-			';
-
-			// PDF Settings
-
-				$pdf->SetTitle($levels["level_name"]." Level Descriptors");
-				$pdf->SetSubject($levels["level_name"]." Level Descriptors");
-				$pdf->SetKeywords('ELC, BYU, Level Descriptor, Proficiency, Listening, Speaking, Reading, Writing');
-
-			//Margins
-
-			$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-			$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-			$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-			//Header and Footer
-			$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $levels["level_name"]." Level Descriptors", $proficiency[0], array(0,34,85), array(0,34,85));
-			$pdf->setFooterData(array(0,34,85), array(0,34,85));
-
-			//Fonts and Spacing
-			$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, "", "18"));
-			$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, "", PDF_FONT_SIZE_DATA));
-			$pdf->SetFont("dejavusans","",8);
-			$pdf->setCellHeightRatio(1); //this is the spacing between lines
-
-			// this takes care of margins and padding for html elements
-			$tagvs = array("p" => array(0 => array("h" => 0, "n" => 0), 1 => array("h" => 1.5, "n" => 2)), "h1" => array(0 => array("h" => 0, "n" => 0), 1 => array("h" => 0, "n" => 0)), "h3" => array(0 => array("h" => 0, "n" => 0), 1 => array("h" => 0, "n" => 0)), "h4" => array(0 => array("h" => 0, "n" => 0), 1 => array("h" => 0, "n" => 0)));
-			$pdf->setHtmlVSpace($tagvs);
-
-			$pdf->AddPage();
-			$pdf->writeHTML($style.$proficiency[1], true, false, true, false, "");
-			$filename=$levels['level_name']." Level Descriptors";
-		}
-	$result->free(); //Free MYSQL request
+<table>
+    
 
 
-$pdf->Output($filename); //Create PDF
+</header>";
+$parts = explode("<h3>Reading", $level['level_descriptor']);
+$html.="<article><div style='page-break-after: always;'>".$parts[0]."</div>
+<h1>".$level['level_name']." Level Descriptor, Page 2</h1>
+
+<h3>Reading".$parts[1]."</article></body></html>";
+
+$dompdf->loadHtml($html);
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('letter', 'portrait');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream($level['level_name']." Level Descriptor");
+exit;
 ?>

@@ -179,7 +179,7 @@ class Options
      *
      * @var bool
      */
-    private $isRemoteEnabled = false;
+    private $isRemoteEnabled = TRUE;
 
     /**
      * Enable inline Javascript
