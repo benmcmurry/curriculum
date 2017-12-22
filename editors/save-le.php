@@ -4,7 +4,7 @@ $learningExperienceId = $_POST['learningExperienceId'];
 $net_id =  $_POST['net_id'];
 $name =  $_POST['name'];
 $description = $_POST['description'];
-$short_description = strip_tags($_POST['short_description'], '<a>');
+$short_description = $_POST['short_description'];
 $required =  $_POST['required'];
 $assessment =  $_POST['assessment'];
 echo "Saved ".date('l jS \of F Y h:i:s A').".";
