@@ -1,0 +1,81 @@
+body {
+    font-family: "DejaVu Serif";
+}
+
+p {
+    padding-left: .5em;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0px;
+    font-family: "DejaVu Sans";
+    font-weight: lighter;
+}
+
+h1 {
+    font-size: 2em;
+    /* text-transform: uppercase; */
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.3em;
+    background-color: #dadada;
+    padding: 0em 0em .3em .5em;
+    font-weight: lighter;
+}
+
+h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-left: .5em;
+}
+
+header {}
+
+footer {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: .9em;
+    margin-bottom: 30px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    border-top: 1px solid black;
+}
+
+table {
+    width: 100%;
+}
+
+OL {
+    counter-reset: item;
+    position: relative;
+    left: -20px;
+    z-index: 8;
+    list-style-position: outside;
+    border-spacing: .3em 0em;
+}
+
+OL>LI {
+    display: block;
+}
+
+OL>LI::before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+}
+
+ol.le li {
+    margin-bottom: .5em;
+}
