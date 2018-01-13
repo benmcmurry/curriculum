@@ -110,15 +110,8 @@ $html = "<!DOCTYPE html>
 			
 			$html .="<li><a class='le_link' href='https://elc.byu.edu/curriculum/learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</li>";
 		}            
-        $html .="</ol>
-		<h3 class='course_data'>Course Assessment OLD</h3>
-        ".$course['assessment']."
-        <h3 class='course_data'>Course Learning Experiences OLD</h3>
-		".$course['learning_experiences'];    
+        $html .="</ol>   
             
-            
-            
-            $html .="
     </article>
 </body>
 </html>";

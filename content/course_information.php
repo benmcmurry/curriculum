@@ -58,11 +58,6 @@ echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 		}
 		echo "</ol>";
 		// end getting learning Experiences
-		echo "<h3 class='course_data'>Course Assessment OLD</h3>";
-		echo $course['assessment'];
-
-		echo "<h3 class='course_data'>Course Learning Experiences OLD</h3>";
-		echo $course['learning_experiences'];
 
 		if ($auth && $access){
 		echo "<h3 class='course_data'>Teacher Resources</h3>";
