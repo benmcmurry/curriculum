@@ -51,9 +51,9 @@ session_start();
         Levels.level_id, 
         Levels.level_short_name,
         LE_courses.id 
-    from LE_Courses 
+    from LE_courses 
     natural join 
-        courses 
+        Courses 
     natural join 
         Levels
     where learning_experience_id=?");
