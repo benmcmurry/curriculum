@@ -45,16 +45,16 @@ session_start();
         echo $description;
         echo "<h3>Connected Courses</h3><div class='course_list'>";
         $query = $elc_db->prepare("Select 
-        LE_Courses.course_id,
+        LE_courses.course_id,
         Courses.course_name, 
         Courses.course_short_name,
         Levels.level_id, 
         Levels.level_short_name,
-        LE_Courses.id 
+        LE_courses.id 
     from LE_Courses 
-    natural left join 
-        Courses 
-    natural left join 
+    natural join 
+        courses 
+    natural join 
         Levels
     where learning_experience_id=?");
         $query->bind_param("s", $learningExperienceId);
