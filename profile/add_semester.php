@@ -3,7 +3,7 @@
 
 include_once("../../../connectFiles/connect_cis.php");
 if ($local == 0) {
-    include_once("../CASauthinator.php");
+    include_once("../../CASauthinator.php");
     $net_id = Authenticator::getUser();
 } else {
     $net_id = "blm39";
