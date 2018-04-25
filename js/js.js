@@ -54,7 +54,7 @@ $(function() {
 
 
                 $('html,body').animate({
-                    scrollTop: target.offset().top - $("#level-nav").innerHeight()
+                    scrollTop: target.offset().top - $("#level-nav").innerHeight() - $("#nav-bar").innerHeight()
                 }, 1000);
 
                 return false;
