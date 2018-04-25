@@ -21,7 +21,7 @@ use Dompdf\Dompdf;
 
 // Instantiate and use the dompdf class
 $dompdf = new Dompdf();
-$query = $elc_db->prepare("Select *, Levels.level_name, Levels.level_short_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=?");
+$query = $elc_db->prepare("Select *, Levels.level_name, Skill_areas.skill_area_philosophy from Courses inner join Levels on Courses.level_id=Levels.level_id inner join Skill_areas on Courses.skill_area=Skill_areas.id where course_id=?");
 $query->bind_param('s', $course_id);
 $query->execute();
 $result = $query->get_result();
@@ -78,6 +78,8 @@ $html = "<!DOCTYPE html>
 
 </header>
 <article>
+    <h3 class='course_data'>Skill Area Philosophy</h3>
+    <p>".$course['skill_area_philosophy']."</p>
     <h3 class='course_data'>Course Description</h3>
     <p>".$course['course_description']."</p>
     <h3 class='course_data'>Course Emphasis</h3>
