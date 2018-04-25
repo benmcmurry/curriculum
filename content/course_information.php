@@ -5,7 +5,7 @@
 
 <?php
 	echo "<div class='main'><div class='content-background'><div class='content'>";
-	$query = $elc_db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id=?");
+	$query = $elc_db->prepare("Select *, Levels.level_name, Skill_areas.skill_area_philosophy from Courses inner join Levels on Courses.level_id=Levels.level_id inner join Skill_areas on Courses.skill_area=Skill_areas.id where course_id=?");
 	$query->bind_param('s', $course_id);
 	$query->execute();
 	$result = $query->get_result();
@@ -15,7 +15,8 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
 echo "<h1>".$course['level_name']." - ".$course['course_name']."</h1><br />";
 
 
-
+echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
+echo "<p>".$course['skill_area_philosophy']."</p>";
 
 
 		echo "<h3 class='course_data'>Course Description</h3>";
