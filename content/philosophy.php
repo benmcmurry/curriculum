@@ -1,0 +1,145 @@
+<div class="main">
+	<div class="content-background">
+		<div class="content">
+        <h2>Our Philosophy</h2>
+        <p>We have articulated a clear philosophy that represents our values and beliefs regarding teaching and curriculum development. Our teaching philosophy revolves around 8 pedagogical practices. Additionally, we have crafted brief statements regarding instruction of each skill area in language learning. At the end of this page, you will find our philosophy that guides us in curriculum development.</p>
+        <p>Click on the links below to learn about our philosophy.</p>
+            <a href='#teaching'>Teaching Philosophy<a><br />
+            <a href='#skill_area'>Skill Area Philosophies</a><br />
+            <a href='#curriculum'>Curriculum Philosophy</a><br /><br />
+		<a id='teaching'><h2>Teaching Philosophy</h2></a>
+        
+		
+<p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and all who may observe their classes.</p>
+<h3>1. Rely on course outcomes</h3>
+<p>
+Teachers understand the course outcomes for the skill and proficiency
+level in which they teach and effectively communicate
+them to students. They can describe student behaviors that
+demonstrate these outcomes, and they successfully design classroom-learning
+activities that help students progress toward
+achieving them. Teachers engage in ongoing informal and formal
+assessment activities and provide personalized feedback
+based on the course outcomes.</p>
+<h3>2. Plan lessons effectively</h3>
+<p>
+Teachers carefully plan lessons so language development will
+be optimized during the class period. Teachers plan to incorporate
+an appropriate number and variety of learning activities that
+are meaningful and engaging. These activities build incrementally
+from more simple uses of language to more complex uses
+that are authentic and communicative. Teachers consider the
+best ways to ensure that communication of explanations and
+expectations are clear and concise in order to maximize student
+language practice. This includes preparing the board or other
+materials well ahead of class time. Teachers also prepare contingency
+plans in order to adjust for a variety of unforeseen circumstances
+and changing student needs.</p>
+<h3>3. Optimize class time</h3>
+<p>
+Teachers feel a sense of urgency about using as much of the
+classroom time as possible for meaningful language practice.
+They convey this sense of urgency to their students by starting
+class on time and by carefully managing activities and transitions
+in order to maximize communicative language practice.
+However, rather than rushing through their lessons, teachers
+skillfully connect activities and ensure that students achieve the
+needed level of mastery before moving on. They anticipate potential
+threats to effective use of class time such as problems
+with technology, excessive student questions, inappropriate student
+behaviors and so on. Their responses to such challenges are
+principled and appropriately bring the class back on course.
+Teachers also end class on time.</p>
+<h3>4. Cultivate a positive learning environment</h3>
+<p>
+Teachers understand the necessity of a positive learning environment
+in order to optimize learning. They recognize that positive
+teacher-student interaction is at the heart of the environment
+they seek to cultivate. They foster genuine concern for their
+students and their learning based on principles of respect and
+trust. They leave personal concerns behind as they plan and
+teach their classes. They are consistent and equitable in their
+classroom practices and help students to see how classroom
+policies and activities facilitate language development. They
+create a non-threatening learning environment that is cheerful,
+upbeat, and optimistic. They inspire students to do their best,
+and they help them experience the joy of effectively applying
+what they learn. They sincerely praise students and regularly
+express confidence in their abilities.</p>
+<h3>5. Evaluate learning effectively</h3>
+<p>
+Teachers are committed to the ongoing evaluation of student
+learning. They skillfully use diagnostic tests, classroom instruction,
+language practice, and formal and informal assessments to
+clarify individual learner needs in relation to established course
+outcomes. They also regularly solicit qualitative input from their
+students regarding learning materials and methods. This information
+is then used to make appropriate adjustments in lesson
+planning and the selection of materials and methods used in the
+classroom. Teachers help students to understand the rationale
+for adjustments that are made as well as areas where continuity
+may be necessary.</p>
+<h3>6. Utilize homework strategically</h3>
+<p>
+Teachers understand the potential for effective homework to
+help students achieve course outcomes. Rather than assigning
+busy work, they carefully consider the quantity and specific
+kinds of learning activities that are needed by their students in
+order to foster language development or to help them better understand
+and diagnose learner needs. They are able to effectively
+communicate the rationale for various types of homework to
+their students. They demonstrate the value of the homework in
+the way they follow up and process the homework. They know
+when it may be appropriate to review certain types of homework
+in class and when the class time should be used for other activities.
+They utilize student performance on homework to inform
+their ongoing instruction in the classroom.</p>
+<h3>7. Provide meaningful and timely feedback</h3>
+<p>
+Teachers know that feedback is essential to effective learning.
+They regularly provide students with feedback that is meaningful—it
+focuses on the most important language elements for
+each learner; students understand the feedback, why it was given,
+and how to apply it. Though teachers ensure that ongoing
+feedback is timely, they are careful not to overload the students’
+cognitive ability to process and apply the feedback. Along with
+feedback, teachers provide students with abundant opportunities
+to practice and apply the feedback in a variety of learning contexts.</p>
+<h3>8. Exemplify professionalism</h3>
+<p>
+Teachers value and participate in orientations, training, and
+workshops. They are well prepared, punctual, and complete all
+administrative tasks on time. They act and look the part of a
+professional in the classroom including adhering to the dress
+and grooming standards and maintaining appropriate teacherstudent
+boundaries. They are respectful and courteous with their
+students and other teachers with whom they share resources
+such as classrooms, offices, technologies, and learning materials.
+They consistently evaluate their own teaching and seek to
+improve through feedback from students, administrators, and
+peers. They appropriately apply the relevant feedback they receive.</p>
+
+        <a id='skill_area'><h2>Skill Area Philosophies</h2></a>
+        <?php
+        	$query = $elc_db->prepare("Select * from Skill_areas where list_order != '0'  order by list_order ASC");
+            $query->execute();
+            $result = $query->get_result();
+           
+        
+            while($skill_areas = $result->fetch_assoc()){
+                echo "<h3>".$skill_areas['skill_area']."</h3>";
+                echo "<p>".$skill_areas['skill_area_philosophy']."</p>";
+            }
+        
+            ?>
+        <a id='curriculum'><h2>Curriculum Philosophy</h2>
+        <p>The ELC curriculum philosophy is based on one definition and three principles. While curriculum has a variety of meanings, Rodgers (1989) offers a functional description. For ELC purposes:</p>
+
+
+<p>“Curriculum is all those activities in which [students] engage under the auspices of the school. This includes not only what [students] learn, but how they learn it, how teachers help them learn, using what supporting materials, styles and methods of assessment, and in what kind of facilities” (p. 26).</p>
+<img style='float:right' src='images/triangle.png' />
+<p>Along with this definition, three interrelated principles are applied to develop and maintain a curriculum that is stable, responsive, and cohesive (see Figure 1). Though each of these principles is delineated in greater detail below, the following serves as a brief outline. Though all effective curricula must embrace some innovation, a stable curriculum implements change in a way that is orderly, systematic, and principled.</p>
+<p>For a curriculum to change in this manner and to remain viable, it must also be responsive to such factors as student needs, institutional and environmental changes, and current research. Without responsiveness, a stable curriculum soon stagnates. Finally, a sound curriculum is cohesive in that there is internal consistency and continuity between and across the various elements of the curriculum.</p>
+	</div>
+	</div>
+</div>
