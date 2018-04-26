@@ -191,8 +191,6 @@ function save() {
 		<div class="separator"><h2 class='editor-style'>Course Emphasis</h2><div id="course_emphasis" class="editable" contenteditable="true"><?php echo $course_emphasis; ?></div></div>
 		<div class="separator"><h2 class='editor-style'>Course Books and Materials</h2><div id="course_materials" class="editable" contenteditable="true"><?php echo $course_materials; ?></div></div>
 		<div class="separator"><h2 class='editor-style'>Course Learning Outcomes</h2> <div id="learning_outcomes" class="editable" contenteditable="true"><?php echo $learning_outcomes; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Course Assessment</h2> <div id="assessment" class="editable" contenteditable="true"><?php echo $assessment; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Course Learning Experiences</h2><div id="learning_experiences" class="editable" contenteditable="true"><?php echo $learning_experiences; ?></div> </div>
 		<div class="separator"><h2 class='editor-style'>Google Drive Folder ID</h2><div id="google_drive_folder_id" class="editable" contenteditable="true"><?php echo $google_drive_folder_id; ?></div>
 	</div>
   <?php } ?>

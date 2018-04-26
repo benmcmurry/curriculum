@@ -22,7 +22,7 @@ $i=0;
 
 				$courses['course_name'] = str_replace('Fluency', '', $courses['course_name']);
 				
-				echo "<a data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
+				echo "<a class='courses' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
 
 
 

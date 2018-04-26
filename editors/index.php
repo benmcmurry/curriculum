@@ -23,10 +23,38 @@ include_once("admins.php");
 <!-- 	Javascript -->
 	<script>
 	$(document).ready(function() {
-
-
+		$(".leBox").each(function(){
+			leCourseID = this.id.split("-");
+			leCourseID = "course-"+leCourseID[1];
+			$(this).css({
+				"top" : findPosition("top", leCourseID)+$("#"+leCourseID).height()+4,
+				"left" : findPosition("left", leCourseID)+4,
+				"width" : $("#"+leCourseID).width()-8
+			});
+		});
+		$("div.leMenu").on("click", function(){
+			
+			
+			courseID = $(this).prev().attr('id');
+			courseID = courseID.split("-");
+			courseID = "LeExp-"+courseID[1];
+			if ($("#"+courseID).css('display') !== 'none') {$("#"+courseID).slideToggle();}
+			else {
+			$(".leBox").slideUp();	
+			$("#"+courseID).slideToggle();
+			}
+		});
 
 });
+
+
+function findPosition(position, courseID) {
+	courseButtonPosition = $("#"+leCourseID).position();
+	courseButtonTop = courseButtonPosition.top;
+	courseButtonRight = courseButtonPosition.left;
+	if (position == "top") {return courseButtonTop;}
+	else {return courseButtonRight;}
+}
 
 
 </script>
@@ -71,8 +99,19 @@ else {echo "<a href='?login='>Login</a>";}
             }
 
             while ($courses = $course_result->fetch_assoc()) {
-				echo "<a data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
-            }
+				echo "<a class='courses' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>
+				<div class='leMenu'>LE</div>";
+			
+				$learningExperienceQuery = $elc_db->prepare("Select *, LE_courses.course_id from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
+				$learningExperienceQuery->bind_param("s", $courses['course_id']);
+				$learningExperienceQuery->execute();
+				$learningExperienceResult = $learningExperienceQuery->get_result();
+				echo "<div class='leBox' id ='LeExp-".$courses['course_id']."'>";
+				while ($le = $learningExperienceResult->fetch_assoc()) {
+				echo "<a class='leOption' href='le-edit.php?learningExperienceId=".$le['learning_experience_id']."'>".$le['name']."</a>";
+				}
+				echo "</div>";
+			}
             echo "</div>";
         }
 		$result->free();

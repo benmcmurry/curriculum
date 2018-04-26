@@ -137,3 +137,51 @@ div.separator {
     padding: .3em;
     margin: .2em;
 }
+
+div.leBox {
+    font-size: 1em;
+    background-color: grey;
+    color: white;
+    position: absolute;
+    padding: 4px;
+    display: none;
+}
+
+div.leMenu {
+    background-color: #efefef;
+    color: #3498db;
+    padding: 1em .2em;
+    font-size: 1em;
+    font-weight: bolder;
+    text-align: center;
+    height: 1em;
+    line-height: 1em;
+    position: relative;
+    left: -4px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bolder;
+}
+
+a.leOption {
+    user-select: none;
+    font-weight: bolder;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+    text-decoration: none;
+    background-color: white;
+    color: #3498db;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .3em;
+    margin: .3em 0em;
+}
+
+a.leOption:hover {
+    color: white;
+    background-color: #3cb0fd;
+    ;
+}
