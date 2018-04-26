@@ -68,6 +68,9 @@ while ($learningExperience = $result->fetch_assoc()) {
     $("#save").on("click", function(){
         save("button");
     });
+    $("#delete").on("click", function(){
+        deleteLe();
+    });
 
     $("div").on("blur", function(){
         save(this.id);
@@ -186,6 +189,21 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
      });
 }
 
+function deleteLe() {
+    $.ajax({
+        method: "post",
+        url: "delete-le.php",
+        data: {
+            learningExperienceId: learningExperienceId,
+        }
+        }).done(function(phpfile) {
+            $("#save_dialog").html(phpfile);
+            window.open("index.php");
+
+        });
+        
+}
+
 </script>
 </head>
 <body>
@@ -195,6 +213,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
             <?php if ($auth && $access) { ?>
             <a class="button" id="go_back" href="index.php">Main Menu</a>
             <a class="button" id="save">Save</a>
+            <a class="button" id="delete">Delete</a>
             <div id="save_dialog"></div>
             </div>
             <div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>

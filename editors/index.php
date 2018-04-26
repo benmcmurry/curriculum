@@ -84,7 +84,7 @@ else {echo "<a href='?login='>Login</a>";}
 		$learningExperienceQuery->execute();
 		$result = $learningExperienceQuery->get_result();
   	while ($learningExperience = $result->fetch_assoc()) {
-		echo "<a href='le-edit.php?learningExperienceId=".$learningExperience['learning_experience_id']."'>".$learningExperience['name']."</a><br />";
+		echo "<a class='le_button' href='le-edit.php?learningExperienceId=".$learningExperience['learning_experience_id']."'>".$learningExperience['name']."<br />created by:".$learningExperience['created_by']." on ".$learningExperience['created_on']."</a>";
 		
 	}
 	  ?>
