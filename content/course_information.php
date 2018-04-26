@@ -5,6 +5,7 @@
 
 <?php
 	echo "<div class='main'><div class='content-background'><div class='content'>";
+	echo "<a id='editorPopup' href='editors/course-edit.php?course_id=$course_id'>Edit</a>";
 	$query = $elc_db->prepare("Select *, Levels.level_name, Skill_areas.skill_area_philosophy from Courses inner join Levels on Courses.level_id=Levels.level_id inner join Skill_areas on Courses.skill_area=Skill_areas.id where course_id=?");
 	$query->bind_param('s', $course_id);
 	$query->execute();
@@ -69,3 +70,4 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 
 	echo "</div></div></div>";
  ?>
+ 

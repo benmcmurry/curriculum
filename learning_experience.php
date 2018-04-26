@@ -38,6 +38,9 @@ session_start();
 		<?php include("content/nav-bar.php"); ?>
 	</nav>
 	<article>
+        <?php
+    echo "<a id='editorPopup' href='editors/le-edit.php?learningExperienceId=$learningExperienceId'>Edit</a>";
+?>
     <div class='main'><div class='content-background'><div class='content'>
         <?php
         echo "<h2>$le_name</h2>";
@@ -77,7 +80,9 @@ session_start();
 		</article>
 	<footer>
 		<?php include("content/footer.html"); ?>
-	</footer>
+    </footer>
+    <div id="faded-background"></div>
+
 
 </body>
 </html>

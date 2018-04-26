@@ -38,8 +38,34 @@ $(document).ready(function() {
 
     });
 
-});
+    $(window).keydown(function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.keyCode == 69) { /*ctrl+e or command+e*/
+            e.preventDefault();
+            w = $(window).width();
+            h = $(window).height();
 
+
+            $("#editorPopup").css({
+                "top": h / 2 - $("#editorPopup").height() / 2,
+                "left": w / 2 - $("#editorPopup").width() / 2
+            }).fadeToggle();
+            $("#faded-background").fadeToggle();
+            return false;
+        }
+        if (e.keyCode == 27) {
+            e.preventDefault();
+            $("#editorPopup").fadeOut();
+            $("#faded-background").fadeOut();
+        }
+    });
+
+    $("#faded-background").on("click", function() {
+        $("#editorPopup").fadeOut();
+        $("#faded-background").fadeOut();
+    });
+
+
+});
 
 // this function does the smooth scrolling
 

@@ -443,6 +443,8 @@ a.button:active,
     position: fixed;
     top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.7);
 }
@@ -640,4 +642,16 @@ span.short_description {
     display: inline;
 }
 
-c
+a#editorPopup {
+    display: block;
+    border: 2px gray solid;
+    background-color: white;
+    text-align: center;
+    font-size: 4em;
+    line-height: 4em;
+    width: 4em;
+    height: 4em;
+    display: none;
+    position: fixed;
+    z-index: 999999;
+}

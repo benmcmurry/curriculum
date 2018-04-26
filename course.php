@@ -42,6 +42,6 @@ session_start();
 	<footer>
 		<?php include("content/footer.html"); ?>
 	</footer>
-
+	<div id="faded-background">hello</div>
 </body>
 </html>
