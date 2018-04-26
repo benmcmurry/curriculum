@@ -66,7 +66,7 @@ session_start();
             $courseShortName = $selectedCourse['course_short_name'];
             $levelShortName = $selectedCourse['level_short_name'];
             $courseId = $selectedCourse['course_id'];
-            echo "<a style='min-width:75px;' title='$levelShortName $courseName' class='course_icon' id='$courseId' href='course.php?course_id=$courseId'>$levelShortName $courseShortName</a>";
+            echo "<a class='courses' style='min-width:75px;' title='$levelShortName $courseName' class='course_icon' id='$courseId' href='course.php?course_id=$courseId'>$levelShortName $courseShortName</a>";
             array_push($courses,$selectedCourse['course_id']);
         }
     
