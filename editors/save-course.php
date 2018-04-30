@@ -31,7 +31,7 @@ if ($needs_review == 0) {
 }
 
 
-$query_backup = $elc_db->prepare("Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, google_drive_folder_id, updated_on, updated_by) Values (?,?,?,?,?,?,?,?,?,?, now(), ? )");
+$query_backup = $elc_db->prepare("Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, google_drive_folder_id, updated_on, updated_by) Values (?,?,?,?,?,?,?,?, now(), ? )");
 $query_backup->bind_param("sssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $google_drive_folder_id, $course_id);
 $query_backup->execute();
 $result_backup = $query_backup->get_result();
