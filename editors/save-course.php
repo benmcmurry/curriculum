@@ -8,14 +8,12 @@ $course_description =  $_POST['course_description'];
 $course_emphasis =  $_POST['course_emphasis'];
 $course_materials =  $_POST['course_materials'];
 $learning_outcomes =  $_POST['learning_outcomes'];
-$assessment =  $_POST['assessment'];
-$learning_experiences =  $_POST['learning_experiences'];
 $google_drive_folder_id =  $_POST['google_drive_folder_id'];
 $needs_review =  $_POST['needs_review'];
 
 
-$query = $elc_db->prepare("UPDATE Courses_review SET needs_review=?, course_name=?, course_short_name=?, course_description=?, course_emphasis=?, course_materials=?, learning_outcomes=?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=?");
-$query->bind_param("ssssssssssss", $needs_review, $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+$query = $elc_db->prepare("UPDATE Courses_review SET needs_review=?, course_name=?, course_short_name=?, course_description=?, course_emphasis=?, course_materials=?, learning_outcomes=?,  updated_by=?, google_drive_folder_id=? WHERE course_id=?");
+$query->bind_param("ssssssssss", $needs_review, $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $google_drive_folder_id, $course_id);
 $query->execute();
 $result = $query->get_result();
 
@@ -23,8 +21,8 @@ $result = $query->get_result();
 			echo "Saved ".date('l jS \of F Y h:i:s A').".";
 
 if ($needs_review == 0) {
-	$query_final = $elc_db->prepare("UPDATE Courses SET course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, assessment=?, learning_experiences=?, updated_by=?, google_drive_folder_id=? WHERE course_id=?");
-	$query_final->bind_param("sssssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+	$query_final = $elc_db->prepare("UPDATE Courses SET course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, updated_by=?, google_drive_folder_id=? WHERE course_id=?");
+	$query_final->bind_param("sssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $google_drive_folder_id, $course_id);
 	$query_final->execute();
 	$result_final = $query_final->get_result();
 
@@ -33,8 +31,8 @@ if ($needs_review == 0) {
 }
 
 
-$query_backup = $elc_db->prepare("Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, assessment, learning_experiences, google_drive_folder_id, updated_on, updated_by) Values (?,?,?,?,?,?,?,?,?,?, now(), ? )");
-$query_backup->bind_param("sssssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $assessment, $learning_experiences, $net_id, $google_drive_folder_id, $course_id);
+$query_backup = $elc_db->prepare("Insert into Courses_backup (course_id, course_name, course_short_name,course_description, course_emphasis,course_materials, learning_outcomes, google_drive_folder_id, updated_on, updated_by) Values (?,?,?,?,?,?,?,?,?,?, now(), ? )");
+$query_backup->bind_param("sssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $google_drive_folder_id, $course_id);
 $query_backup->execute();
 $result_backup = $query_backup->get_result();
 
