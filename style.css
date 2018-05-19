@@ -655,3 +655,11 @@ a#editorPopup {
     position: fixed;
     z-index: 999999;
 }
+
+table.whohas {
+    width: 100%;
+}
+
+table.whohas tr:nth-child(even) {
+    background-color: #efefef;
+}
