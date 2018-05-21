@@ -656,10 +656,20 @@ a#editorPopup {
     z-index: 999999;
 }
 
+h3.whohas {
+    cursor: pointer;
+    margin-bottom: .3em;
+}
+
 table.whohas {
     width: 100%;
+    display: none;
 }
 
 table.whohas tr:nth-child(even) {
     background-color: #efefef;
+}
+
+table.whohas td {
+    width: 50%;
 }
