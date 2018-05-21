@@ -1,13 +1,13 @@
 <div class="main">
 	<div class="content-background">
 		<div class="content">
-        <h2>Our Philosophy</h2>
-        <p>We have articulated a clear philosophy that represents our values and beliefs regarding teaching and curriculum development. Our teaching philosophy revolves around 8 pedagogical practices. Additionally, we have crafted brief statements regarding instruction of each skill area in language learning. At the end of this page, you will find our philosophy that guides us in curriculum development.</p>
-        <p>Click on the links below to learn about our philosophy.</p>
-            <a href='#teaching'>Teaching Philosophy<a><br />
-            <a href='#skill_area'>Skill Area Philosophies</a><br />
-            <a href='#curriculum'>Curriculum Philosophy</a><br /><br />
-		<a id='teaching'><h2>Teaching Philosophy</h2></a>
+        <h2>Our Curricular Philosophy</h2>
+        <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development. Our curricular philosophy is divided into three sections dealing with pedagogical practice, teaching specific language skills, and curricular development and change. 
+        Our curricular philosophy is divided into three sections dealing with  <a href='#ppp'>pedagogical practice</a>, <a href='#skill_area'>teaching specific language skills</a>, and <a href='#curriculum'>curricular development and change</a>. 
+        </p>
+        
+		
+<a id='ppp'><h2>Teaching Philosophy</h2></a>
         
 		
 <p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and all who may observe their classes.</p>
@@ -132,14 +132,14 @@ peers. They appropriately apply the relevant feedback they receive.</p>
             }
         
             ?>
-        <a id='curriculum'><h2>Curriculum Philosophy</h2>
+        <a id='curriculum'><h2>Curriculum Development and Change</h2>
         <p>The ELC curriculum philosophy is based on one definition and three principles. While curriculum has a variety of meanings, Rodgers (1989) offers a functional description. For ELC purposes:</p>
 
 
-<p>“Curriculum is all those activities in which [students] engage under the auspices of the school. This includes not only what [students] learn, but how they learn it, how teachers help them learn, using what supporting materials, styles and methods of assessment, and in what kind of facilities” (p. 26).</p>
+<p>We define curriculum as: all of our school-sponsored activities along with the associated materials, resources, and facilities needed to maximize meaningful student participation. This encompasses what the students are to learn and how they are to learn it, including how the teachers and the institution facilitate, assess, and respond to this learning (adapted from Rogers, 1989, p. 26).</p>
 <img style='float:right' src='images/triangle.png' />
-<p>Along with this definition, three interrelated principles are applied to develop and maintain a curriculum that is stable, responsive, and cohesive (see Figure 1). Though each of these principles is delineated in greater detail below, the following serves as a brief outline. Though all effective curricula must embrace some innovation, a stable curriculum implements change in a way that is orderly, systematic, and principled.</p>
-<p>For a curriculum to change in this manner and to remain viable, it must also be responsive to such factors as student needs, institutional and environmental changes, and current research. Without responsiveness, a stable curriculum soon stagnates. Finally, a sound curriculum is cohesive in that there is internal consistency and continuity between and across the various elements of the curriculum.</p>
+<p>All efforts associated with curriculum development and change seek an appropriate balance between three interrelated principles to ensure the curriculum is stable, responsive, and cohesive (see Figure 1). </p>
+<p>Though all effective curricula must embrace some innovation, a stable curriculum implements change in a way that is orderly, systematic, and principled. For a curriculum to change in this manner and to remain viable, it must also be responsive to such factors as student needs, institutional and environmental changes, and current research. Without responsiveness, a stable curriculum soon stagnates. Finally, a sound curriculum is cohesive in that there is internal consistency and continuity between and across the various elements of the curriculum.</p>
 	</div>
 	</div>
 </div>
