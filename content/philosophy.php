@@ -133,8 +133,7 @@ peers. They appropriately apply the relevant feedback they receive.</p>
         
             ?>
         <a id='curriculum'><h2>Curriculum Development and Change</h2>
-        <p>The ELC curriculum philosophy is based on one definition and three principles. While curriculum has a variety of meanings, Rodgers (1989) offers a functional description. For ELC purposes:</p>
-
+        
 
 <p>We define curriculum as: all of our school-sponsored activities along with the associated materials, resources, and facilities needed to maximize meaningful student participation. This encompasses what the students are to learn and how they are to learn it, including how the teachers and the institution facilitate, assess, and respond to this learning (adapted from Rogers, 1989, p. 26).</p>
 <img style='float:right' src='images/triangle.png' />
