@@ -7,7 +7,7 @@
         </p>
         
 		
-<a id='ppp'><h2>Teaching Philosophy</h2></a>
+<a id='ppp'><h2>Pedagogical Practice</h2></a>
         
 		
 <p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and all who may observe their classes.</p>
@@ -119,7 +119,7 @@ They consistently evaluate their own teaching and seek to
 improve through feedback from students, administrators, and
 peers. They appropriately apply the relevant feedback they receive.</p>
 
-        <a id='skill_area'><h2>Skill Area Philosophies</h2></a>
+        <a id='skill_area'><h2>Teaching Specific Language Skills</h2></a>
         <?php
         	$query = $elc_db->prepare("Select * from Skill_areas where list_order != '0'  order by list_order ASC");
             $query->execute();
@@ -132,6 +132,22 @@ peers. They appropriately apply the relevant feedback they receive.</p>
             }
         
             ?>
+        <a id='students'><h2>Student Learning</h2></a>
+        <p>We believe that student learning is optimized when students are:</p>
+        <h3>Aware</h3>
+        <p>Students know why they are studying English at the ELC. They set specific goals for their English development and prioritize their time commitments. They choose to learn the policies of the ELC and follow them, resulting in a more pleasant and productive experience. They understand their course outcomes and know what assignments are due in each class and when. They identify what they need to do in order to improve their English language skills. </p>
+
+            <h3>Ready to Learn</h3>
+        <p>Students establish beneficial patterns in their lives such as a healthy diet, getting enough water, exercise, and sleep, so they can be alert and optimize their learning. Students seek a positive and optimistic outlook and are patient with themselves and others. They also seek help when they experience mental or emotional difficulties.</p>
+
+        <h3>Invested</h3>
+        <p>Students work hard every day to improve their English. They complete their homework on time and strive to master the principles behind the homework. They are disciplined, focused, and persistent in their English study and practice. They fully participate in class. They also seek opportunities to use English whenever possible outside of class.</p>
+
+        <h3>Strategic</h3>
+        <p>Students learn about a wide variety of strategies for learning and using English effectively. They determine which strategies may work best for them in specific contexts. They identify and successfully implement those strategies that best facilitate their English language learning and use. </p>
+
+        <h3>Evaluative</h3>
+        <p>Students regularly evaluate their English language learning. They are reflective and perceptive about their progress. They understand their own strengths and weaknesses and how to access resources that may help them. They also identify challenges and make appropriate changes in their attitudes, behaviors, routines, or approaches to learning. They continually seek for and apply feedback they receive.</p>
         <a id='curriculum'><h2>Curriculum Development and Change</h2>
         
 
