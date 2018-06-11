@@ -2,8 +2,7 @@
 	<div class="content-background">
 		<div class="content">
         <h2>Our Curricular Philosophy</h2>
-        <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development. Our curricular philosophy is divided into three sections dealing with pedagogical practice, teaching specific language skills, and curricular development and change. 
-        Our curricular philosophy is divided into four sections dealing with  <a href='#ppp'>pedagogical practice</a>, <a href='#skill_area'>teaching specific language skills</a>, <a href="#students">student learning</a>, and <a href='#curriculum'>curricular development and change</a>. 
+        <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development. Our curricular philosophy is divided into four sections dealing with  <a href='#ppp'>pedagogical practice</a>, <a href='#skill_area'>teaching specific language skills</a>, <a href="#students">student learning</a>, and <a href='#curriculum'>curricular development and change</a>. 
         </p>
         
 		
