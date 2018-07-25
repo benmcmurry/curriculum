@@ -1,5 +1,5 @@
 <?php
-include_once("../CASauthinator.php");
+include_once("../../CASauthinator.php");
 include_once("../../../connectFiles/connect_cis.php");
 
 $net_id = Authenticator::getUser();
