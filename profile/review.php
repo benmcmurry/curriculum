@@ -48,9 +48,9 @@ else {exit();}
   $query->bind_param("s", $author);
   $query->execute();
     $result = $query->get_result();
-    if(!$result = $elc_db->query($query)){
-			die('There was an error running the query [' . $elc_db->error . ']');
-		}
+    // if(!$result = $elc_db->query($query)){
+		// 	die('There was an error running the query [' . $elc_db->error . ']');
+		// }
 			while($pubs = $result->fetch_assoc()){
 
 
