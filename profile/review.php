@@ -33,9 +33,9 @@ else {exit();}
 		$contributors = $elc_db->prepare("Select * from Contributors");
     $contributors->execute();
   $contributors_result = $contributors->get_result();
-		if(!$contributors_result = $elc_db->query($contributors)){
-			die('There was an error running the query [' . $elc_db->error . ']');
-		}
+		// if(!$contributors_result = $elc_db->query($contributors)){
+		// 	die('There was an error running the query [' . $elc_db->error . ']');
+		// }
 			while($people = $contributors_result->fetch_assoc()){
       $first_initial = substr($people['first_name'], 0,1);
 			$author = $people['last_name'].", ".$first_initial.".";
