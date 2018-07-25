@@ -98,7 +98,7 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
 echo $message;
 
-// $to      = $people['email_address'].", ben_mcmurry@byu.edu";
+$to      = $people['email_address'].", ben_mcmurry@byu.edu";
 $to = "ben_mcmurry@byu.edu";
 $subject = "ELC Profile Update Request";
 $content = "<html><body><p>".$people['first_name']." ".$author.",</p>".
