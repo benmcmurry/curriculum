@@ -33,9 +33,7 @@ else {exit();}
 		$contributors = $elc_db->prepare("Select * from Contributors");
     $contributors->execute();
   $contributors_result = $contributors->get_result();
-		// if(!$contributors_result = $elc_db->query($contributors)){
-		// 	die('There was an error running the query [' . $elc_db->error . ']');
-		// }
+	
 			while($people = $contributors_result->fetch_assoc()){
       $first_initial = substr($people['first_name'], 0,1);
 			$author = $people['last_name'].", ".$first_initial.".";
@@ -44,13 +42,10 @@ else {exit();}
 
 	$message = "<h1>Academic Work by ".$people['first_name']." ".$people['last_name']." </h1>";
 	$message .= "<h3>Publications</h3>";
-	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type='Publication' order by year DESC");
-  $query->bind_param("s", $author);
+	$query = $elc_db->prepare("Select * from Citations where authors like '%$author%' and type='Publication' order by year DESC");
   $query->execute();
     $result = $query->get_result();
-    // if(!$result = $elc_db->query($query)){
-		// 	die('There was an error running the query [' . $elc_db->error . ']');
-		// }
+  
 			while($pubs = $result->fetch_assoc()){
 
 
@@ -63,13 +58,10 @@ else {exit();}
 
 $message .= "<h3>Presentations</h3>";
 
-	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type='Presentation' order by year DESC");
-  $query->bind_param("s", $author);
+	$query = $elc_db->prepare("Select * from Citations where authors like '%$author%' and type='Presentation' order by year DESC");
   $query->execute();
     $result = $query->get_result();
-    	if(!$result = $elc_db->query($query)){
-			die('There was an error running the query [' . $elc_db->error . ']');
-		}
+   
 			while($pubs = $result->fetch_assoc()){
 
 			$message .= $pubs['citation'];
@@ -79,13 +71,11 @@ $message .= "<h3>Presentations</h3>";
 
 $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
-	$query = $elc_db->prepare("Select * from Citations where authors like '%?%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC");
-  $query->bind_param("s", $author);
+	$query = $elc_db->prepare("Select * from Citations where authors like '%$author%' and type in ('Project', 'Thesis', 'Dissertation') order by year DESC");
+
     $query->execute();
       $result = $query->get_result();
-  if(!$result = $elc_db->query($query)){
-			die('There was an error running the query [' . $elc_db->error . ']');
-		}
+ 
 			while($pubs = $result->fetch_assoc()){
 
 			$message .= $pubs['citation'];
@@ -98,10 +88,10 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 echo $message;
 
 $to      = $people['email_address'].", ben_mcmurry@byu.edu";
-$to = "ben_mcmurry@byu.edu";
+//$to = "ben_mcmurry@byu.edu";
 $subject = "ELC Profile Update Request";
 $content = "<html><body><p>".$people['first_name']." ".$author.",</p>".
-			"<p>We are updating the list of scholarly work in the ELC profile. Please examine the list below and send me any updates or additions By January 17th, 2017. Recent Grads, please double check that your thesis or project is listed properly.
+			"<p>We are updating the list of scholarly work in the ELC profile. Please examine the list below and send me any updates or additions at your earliest convenience. We would like to have our profile up-to-date by August 16, but don't procrastinate. Recent Grads, please double check that your thesis or project is listed properly.
 
 			If you are no longer in a position where you are producing scholarly work connected to the ELC, please email me and I will remove you from this mailing list. Thanks.</p>".$message."</body><html>";
 
