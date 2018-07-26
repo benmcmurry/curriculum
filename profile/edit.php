@@ -181,10 +181,10 @@ function editPopup(id) {
 	</div>
 </article>
 </body>
+
+<div id="faded-background"></div>
 <div id="popup" class="popup">
 	<div id="popup-content">
 	</div>
 </div>
-<div id="faded-background">hello</div>
-
 </html>

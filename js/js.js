@@ -45,23 +45,25 @@ $(document).ready(function() {
             h = $(window).height();
 
 
-            $("#editorPopup").css({
-                "top": h / 2 - $("#editorPopup").height() / 2,
-                "left": w / 2 - $("#editorPopup").width() / 2
-            }).fadeToggle();
-            $("#faded-background").fadeToggle();
+            $("#popup").css({
+                "top": h / 2 - $("#popup").height() / 2,
+                "left": w / 2 - $("#popup").width() / 2
+            }).fadeIn();
+            $("#faded-background").fadeIn();
             return false;
         }
         if (e.keyCode == 27) {
             e.preventDefault();
-            $("#editorPopup").fadeOut();
-            $("#faded-background").fadeOut();
+            $("#popup").hide();
+            $("#faded-background").hide();
+            console.log("hello");
         }
     });
 
     $("#faded-background").on("click", function() {
-        $("#editorPopup").fadeOut();
-        $("#faded-background").fadeOut();
+        $("#popup").hide();
+        $("#faded-background").hide();
+        console.log("clicked");
     });
 
 
