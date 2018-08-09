@@ -88,6 +88,7 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 echo $message;
 
 // $to      = $people['email_address'].", ben_mcmurry@byu.edu";
+if ($people['email_address'] == "ben_mcmurry@byu.edu") {
 $to = "ben_mcmurry@byu.edu";
 $subject = "ELC Profile Update Request";
 $content = "<html><body><p>".$people['first_name']." ".$author.",</p>".
@@ -100,6 +101,8 @@ $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: ben_mcmurry@byu.edu'. "\r\n";
 
 Mail::sendEmail($to, $subject, $content);
+}
+else {exit;}
 
 
 }
