@@ -1,7 +1,7 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Mail.php';
 include_once("cas-go.php");
 if ($net_id == 'blm39') {echo "cleared!";}
 else {exit();}
@@ -87,8 +87,8 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
 echo $message;
 
-$to      = $people['email_address'].", ben_mcmurry@byu.edu";
-//$to = "ben_mcmurry@byu.edu";
+// $to      = $people['email_address'].", ben_mcmurry@byu.edu";
+$to = "ben_mcmurry@byu.edu";
 $subject = "ELC Profile Update Request";
 $content = "<html><body><p>".$people['first_name']." ".$author.",</p>".
 			"<p>We are updating the list of scholarly work in the ELC profile. Please examine the list below and send me any updates or additions at your earliest convenience. We would like to have our profile up-to-date by August 16, but don't procrastinate. Recent Grads, please double check that your thesis or project is listed properly.
@@ -99,7 +99,7 @@ $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: ben_mcmurry@byu.edu'. "\r\n";
 
-mail($to, $subject, $content, $headers);
+Mail::sendEmail($to, $subject, $content);
 
 
 }
