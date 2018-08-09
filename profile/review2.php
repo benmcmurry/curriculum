@@ -23,8 +23,7 @@ else {exit();}
                 // $csv = $csv.$people['first_name'].";".$people['last_name'].";". $people['email_address'].";";
 
 
-	$message = "<h1>Academic Work by ".$people['first_name']." ".$people['last_name']." </h1>";
-	$message .= "<h3>Publications</h3>";
+	$message = "<h3>Publications</h3>";
 	$query = $elc_db->prepare("Select * from Citations where authors like '%$author%' and type='Publication' order by year DESC");
   $query->execute();
     $result = $query->get_result();
@@ -70,7 +69,7 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3>";
 
 // echo $message;
 $out = fopen('php://output', 'w');
-fputcsv($out, array($csv.$people['first_name'], $people['last_name'], $people['email_address'], htmlentities($message)));
+fputcsv($out, array($csv.$people['first_name'], $people['last_name'], $people['email_address'], $message));
 fclose($out);
 
 $message='';
