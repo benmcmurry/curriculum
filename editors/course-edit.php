@@ -116,16 +116,16 @@ $(".editable").click(function(){
 
 function save() {
 
-       if (current_course_name == $("#course_name").text() &&
-          current_course_description == $("#course_description").text() &&
-          current_course_short_name == $("#course_short_name").text() &&
-          current_course_emphasis == $("#course_emphasis").text() &&
-          current_course_materials == $("#course_materials").text() &&
-          current_learning_outcomes == $("#learning_outcomes").text() &&
-          current_assessment == $("#assessment").text() &&
-          current_learning_experiences == $("#learning_experiences").text() &&
-          current_google_drive_folder_id == $("#google_drive_folder_id").text())
-          {return ;}
+    //    if (current_course_name == $("#course_name").text() &&
+    //       current_course_description == $("#course_description").text() &&
+    //       current_course_short_name == $("#course_short_name").text() &&
+    //       current_course_emphasis == $("#course_emphasis").text() &&
+    //       current_course_materials == $("#course_materials").text() &&
+    //       current_learning_outcomes == $("#learning_outcomes").text() &&
+    //       current_assessment == $("#assessment").text() &&
+    //       current_learning_experiences == $("#learning_experiences").text() &&
+    //       current_google_drive_folder_id == $("#google_drive_folder_id").text())
+    //       {return ;}
 
 		course_id = <?php echo $course_id; ?>;
 		net_id = '<?php echo $net_id; ?>';
