@@ -44,7 +44,13 @@ include_once("admins.php");
 			$("#"+courseID).slideToggle();
 			}
 		});
-
+		$('#learning_experiences').dataTable({
+	    aLengthMenu: [
+        [5, 10, 50, -1],
+        [5, 10, 50, "All"]
+    ],
+    ordering: false,
+    });
 });
 
 
@@ -118,15 +124,33 @@ else {echo "<a href='?login='>Login</a>";}
 		?>
 		<hr /><h2>Learning Experiences</h2>
 		<a id='new_le' class='button' href='le-edit.php?learningExperienceId=new'> + Learning Experience<a><br />
+		<br />
+		<table id='learning_experiences'>
+				<thead>
+					<tr>
+						<td></td>
+						<td>Learning Experience</td>
+						<td>Creator </td>
+						<td>Date Created </td>
+						</tr>
+				</thead>
+
 		<?php 
 		$learningExperienceQuery = $elc_db->prepare("Select * from Learning_experiences order by name ASC");
 		$learningExperienceQuery->execute();
 		$result = $learningExperienceQuery->get_result();
   	while ($learningExperience = $result->fetch_assoc()) {
-		echo "<a class='le_button' href='le-edit.php?learningExperienceId=".$learningExperience['learning_experience_id']."'>".$learningExperience['name']."<br />created by:".$learningExperience['created_by']." on ".$learningExperience['created_on']."</a>";
+		echo "<tr><td><a href='le-edit.php?learningExperienceId=".$learningExperience['learning_experience_id']."'>Edit</a></td>";
+		echo "<td>".$learningExperience['name']."</td>";
+		echo "<td>".$learningExperience['created_by']."</td>";
+		echo "<td>".$learningExperience['created_on']."</td>";
+		
+
+		echo "</tr>";
 		
 	}
 	  ?>
+	  </table>
 <?php
 if (phpCAS::getUser() == "blm39") {
     ?>
