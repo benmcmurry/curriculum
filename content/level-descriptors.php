@@ -39,7 +39,7 @@
 								$course_query->execute();
             		$courses_result = $course_query->get_result();
             while ($courses = $courses_result->fetch_assoc()) {
-				echo "<a data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
+				echo "<a class='courses' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course.php?course_id=".$courses['course_id']."'><span>".$courses['course_name']."</span></a>";
             }
                 echo "</div>";
             echo "</div></div>";
