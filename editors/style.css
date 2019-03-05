@@ -138,13 +138,15 @@ div.separator {
     margin: .2em;
 }
 
+
 div.leBox {
     font-size: 1em;
-    background-color: grey;
+    background-color:  #002E5D;
     color: white;
     position: absolute;
     padding: 4px;
     display: none;
+    z-index: 999;
 }
 
 div.leMenu {
@@ -161,6 +163,11 @@ div.leMenu {
     cursor: pointer;
     user-select: none;
     font-weight: bolder;
+}
+
+.leMenu:hover {
+    background-color: #3cb0fd;
+    color: white;
 }
 
 a.leOption {
