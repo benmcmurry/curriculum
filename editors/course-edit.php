@@ -165,7 +165,7 @@ function save() {
 </head>
 <body>
 	<header>
-
+			<div id='holder'>
 
 			<div>
 				<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
@@ -182,7 +182,8 @@ function save() {
 			<div id="save_dialog"></div>
 	  </div>
 			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-	</header>
+	</div>
+			</header>
 <article>
 	<div class="content">
 		<div class="separator"><h2 class='editor-style'>Course Name</h2> <div id="course_name" class="editable" contenteditable="true"><?php echo $course_name; ?></div>	</div>

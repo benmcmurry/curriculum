@@ -1,7 +1,7 @@
 <div id="level-nav-container">
 	<div id="level-nav">
 		<?php
-        $query = $elc_db->prepare("Select * from Levels order by level_order ASC");
+        $query = $elc_db->prepare("Select * from Levels where active=1 order by level_order ASC");
 				$query->execute();
 				$result = $query->get_result();
 				

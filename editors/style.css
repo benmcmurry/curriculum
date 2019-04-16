@@ -1,6 +1,7 @@
 html {
     font-size: 16px;
     padding: 0px;
+    background-color:#efefef;
 }
 
 @media all and (max-width: 900px) {
@@ -24,21 +25,29 @@ html {
     }
 }
 
+header h1 {
+    color: white;
+}
+
 h2.editor-style {
     font-size: 1.5em;
     font-weight: bolder;
 }
+div.content div.block h2 {
+    margin-bottom: .5em;
+}
 
 header {
-    margin: 0px auto;
-    max-width: 1218px;
-    background-image: none;
-    max-height: 120px;
+    /* background-image: none; */
+    height: 120px;
+    width: 100vw;
     padding: 0em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
+    
+    position: relative;
+    position: fixed;
+    
+    
+    
 }
 
 header div {
@@ -46,6 +55,23 @@ header div {
     flex-grow: 1;
     flex-shrink: 1;
 }
+
+header div#holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1218px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    
+    
+   
+    
+    
+}
+
+
 
 div#user {
     flex: initial;
@@ -74,10 +100,17 @@ div.boxed-text {
 }
 
 div.content {
-    margin: 0px auto;
+    position: relative;
+    top: 120px;
     max-width: 1218px;
+    padding: 1em; 
+}
+
+div.block {
+    margin: 1em 0em;
     padding: 1em;
-    background-color: white;
+    background-color:white;
+    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
 }
 
 div.editable {
@@ -150,7 +183,8 @@ div.leBox {
 }
 
 div.leMenu {
-    background-color: #efefef;
+    background-color: #002E5D;
+    
     color: #3498db;
     padding: 1em .2em;
     font-size: 1em;
@@ -191,4 +225,14 @@ a.leOption:hover {
     color: white;
     background-color: #3cb0fd;
     ;
+}
+
+ins, ins * {
+    color: green;
+    background: #dfd;
+}
+
+del, del * {
+    color: red;
+    background: #fdd;
 }

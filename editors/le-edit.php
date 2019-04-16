@@ -208,6 +208,7 @@ function deleteLe() {
 </head>
 <body>
     <header>
+    <div id='holder'>
         <div>
     <h1> LE &amp; A Editor: <?php echo $name; ?></h1>
             <?php if ($auth && $access) { ?>
@@ -217,7 +218,7 @@ function deleteLe() {
             <div id="save_dialog"></div>
             </div>
             <div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-
+            </div>
     </header>
     
     <article>

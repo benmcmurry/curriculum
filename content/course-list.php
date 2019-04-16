@@ -3,7 +3,7 @@
 	<?php
 
 $i=0;
-		$query = $elc_db->prepare("Select Levels.level_id, Levels.level_name, Levels.level_short_name from Levels order by level_order ASC");
+		$query = $elc_db->prepare("Select Levels.level_id, Levels.level_name, Levels.level_short_name from Levels where active=1 order by level_order ASC");
 		$query->execute();
 		$result = $query->get_result();
 		echo "<div class='content-background'><div class='content'>";

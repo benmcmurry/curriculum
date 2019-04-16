@@ -282,6 +282,7 @@ a#scrolly {
     justify-content: space-around;
     flex-wrap: wrap;
     font-family: sans-serif;
+    margin-bottom: .5em;
 }
 
 .course_list a.courses {

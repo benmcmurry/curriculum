@@ -7,10 +7,11 @@ include_once("admins.php");
 
 <!DOCTYPE html>
 <html lang="">
+
 <head>
 	<title>Curriculum Editor</title>
 
-<!-- 	Meta Information -->
+	<!-- 	Meta Information -->
 	<meta charset="utf-8">
 	<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
 	<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
@@ -18,78 +19,84 @@ include_once("admins.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<?php include("styles_and_scripts.html"); ?>
+	<?php include("styles_and_scripts.html"); ?>
 
-<!-- 	Javascript -->
+	<!-- 	Javascript -->
 	<script>
-	$(document).ready(function() {
-		$(".leBox").each(function(){
-			leCourseID = this.id.split("-");
-			leCourseID = "course-"+leCourseID[1];
-			$(this).css({
-				"top" : findPosition("top", leCourseID)+$("#"+leCourseID).height()+4,
-				"left" : findPosition("left", leCourseID)+4,
-				"width" : $("#"+leCourseID).width()-8
+		$(document).ready(function () {
+			$(".leBox").each(function () {
+				leCourseID = this.id.split("-");
+				leCourseID = "course-" + leCourseID[1];
+				$(this).css({
+					"top": findPosition("top", leCourseID) + $("#" + leCourseID).height() + 4,
+					"left": findPosition("left", leCourseID) + 4,
+					"width": $("#" + leCourseID).width() - 8
+				});
+			});
+			$("div.leMenu").on("click", function () {
+
+
+				courseID = $(this).prev().attr('id');
+				courseID = courseID.split("-");
+				courseID = "LeExp-" + courseID[1];
+				if ($("#" + courseID).css('display') !== 'none') {
+					$("#" + courseID).slideToggle();
+				} else {
+					$(".leBox").slideUp();
+					$("#" + courseID).slideToggle();
+				}
+			});
+			$('#learning_experiences').dataTable({
+				aLengthMenu: [
+					[5, 10, 50, -1],
+					[5, 10, 50, "All"]
+				],
+				ordering: false,
 			});
 		});
-		$("div.leMenu").on("click", function(){
-			
-			
-			courseID = $(this).prev().attr('id');
-			courseID = courseID.split("-");
-			courseID = "LeExp-"+courseID[1];
-			if ($("#"+courseID).css('display') !== 'none') {$("#"+courseID).slideToggle();}
-			else {
-			$(".leBox").slideUp();	
-			$("#"+courseID).slideToggle();
+
+
+		function findPosition(position, courseID) {
+			courseButtonPosition = $("#" + leCourseID).position();
+			courseButtonTop = courseButtonPosition.top;
+			courseButtonRight = courseButtonPosition.left;
+			if (position == "top") {
+				return courseButtonTop;
+			} else {
+				return courseButtonRight;
 			}
-		});
-		$('#learning_experiences').dataTable({
-	    aLengthMenu: [
-        [5, 10, 50, -1],
-        [5, 10, 50, "All"]
-    ],
-    ordering: false,
-    });
-});
-
-
-function findPosition(position, courseID) {
-	courseButtonPosition = $("#"+leCourseID).position();
-	courseButtonTop = courseButtonPosition.top;
-	courseButtonRight = courseButtonPosition.left;
-	if (position == "top") {return courseButtonTop;}
-	else {return courseButtonRight;}
-}
-
-
-</script>
+		}
+	</script>
 </head>
+
 <body>
 	<header>
-				<div>
+		<div id='holder'>
+		<div>
 			<h1>Curriculum Editor</h1>
 			<a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
-</div>
-			<div id="user">
-				<?php
+		</div>
+		<div id="user">
+			<?php
 if ($auth) {echo phpCAS::getUser()." | <a href='?logout='>Logout</a>";}
 else {echo "<a href='?login='>Login</a>";}
 				?>
-			</div>
-			
+		</div>
+	</div>
 
-</header>
-<article>
+	</header>
+
+	<article>
 		<?php
     echo $message;
     if ($auth && $access) { ?>
-			<hr />
 
-			<div class="content">
-			<h2> Levels and Courses </h2>
-			<?php
-                $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
+
+		<div class="content">
+			<div class="block">
+				<h2> Levels and Courses </h2>
+				<?php
+                $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels where active=1 order by level_order ASC");
 								$query->execute();
 								$result = $query->get_result();
 
@@ -122,20 +129,23 @@ else {echo "<a href='?login='>Login</a>";}
         }
 		$result->free();
 		?>
-		<hr /><h2>Learning Experiences</h2>
-		<a id='new_le' class='button' href='le-edit.php?learningExperienceId=new'> + Learning Experience<a><br />
-		<br />
-		<table id='learning_experiences'>
-				<thead>
-					<tr>
-						<td></td>
-						<td>Learning Experience</td>
-						<td>Creator </td>
-						<td>Date Created </td>
-						</tr>
-				</thead>
+			</div>
+			<div class='block'>
+				<h2>Learning Experiences</h2>
+				<a id='new_le' class='button' href='le-edit.php?learningExperienceId=new'> + Learning
+					Experience<a><br />
+						<br />
+						<table id='learning_experiences'>
+							<thead>
+								<tr>
+									<td></td>
+									<td>Learning Experience</td>
+									<td>Creator </td>
+									<td>Date Created </td>
+								</tr>
+							</thead>
 
-		<?php 
+							<?php 
 		$learningExperienceQuery = $elc_db->prepare("Select * from Learning_experiences order by name ASC");
 		$learningExperienceQuery->execute();
 		$result = $learningExperienceQuery->get_result();
@@ -150,12 +160,14 @@ else {echo "<a href='?login='>Login</a>";}
 		
 	}
 	  ?>
-	  </table>
-<?php
+						</table>
+			</div>
+			<?php
 if (phpCAS::getUser() == "blm39") {
     ?>
-		<hr /><h2> Review Submitted Changes </h2>
-		<?php
+			<div class="block">
+				<h2> Review Submitted Changes </h2>
+				<?php
 
 
 
@@ -178,8 +190,10 @@ if (phpCAS::getUser() == "blm39") {
 
 ?>
 			</div>
-	<hr />
-<?php } else {?> <p></p><?php } ?>
+		</div>
+
+		<?php } else {?> <p></p><?php } ?>
 	</article>
 </body>
+
 </html>

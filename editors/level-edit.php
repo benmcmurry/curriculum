@@ -135,6 +135,7 @@ function save() {
 </head>
 <body>
 	<header>
+	<div id='holder'>
 			<div>
 			<h1> Level Editor: <?php echo $level_name; ?></h1>
 			
@@ -148,7 +149,8 @@ function save() {
 			<div id="save_dialog"></div>
 	  		</div>
 			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-	</header>
+	  </div>
+		</header>
 	<article>
 		<div class="content">
 		<div class="separator">

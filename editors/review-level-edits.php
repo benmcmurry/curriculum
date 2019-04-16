@@ -97,12 +97,15 @@ function save() {
 </head>
 <body>
 	<header>
+	<div id='holder'>
+		<div>
 			<h1> Review Level Edits: <?php echo $level_name; ?></h1>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 
 			<a class="button" id="go_back" href="index.php">Main Menu</a>
 			<a class="button" id="save">Save</a>
 			<div id="save_dialog"></div>
+</div>
+			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
 
 	</header>
 	<article>
