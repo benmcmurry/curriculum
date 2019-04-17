@@ -9,6 +9,44 @@ $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();
 
+function diff($old, $new){
+    $matrix = array();
+    $maxlen = 0;
+    foreach($old as $oindex => $ovalue){
+        $nkeys = array_keys($new, $ovalue);
+        foreach($nkeys as $nindex){
+            $matrix[$oindex][$nindex] = isset($matrix[$oindex - 1][$nindex - 1]) ?
+                $matrix[$oindex - 1][$nindex - 1] + 1 : 1;
+            if($matrix[$oindex][$nindex] > $maxlen){
+                $maxlen = $matrix[$oindex][$nindex];
+                $omax = $oindex + 1 - $maxlen;
+                $nmax = $nindex + 1 - $maxlen;
+            }
+        }   
+    }
+    if($maxlen == 0) return array(array('d'=>$old, 'i'=>$new));
+    return array_merge(
+        diff(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)),
+        array_slice($new, $nmax, $maxlen),
+        diff(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen)));
+}
+
+function htmldiff($old, $new){
+$ret = '';
+	$old = str_replace("<"," <", $old);
+	$old = str_replace(">","> ", $old);
+	$new = str_replace("<"," <", $new);
+	$new = str_replace(">","> ", $new);
+    $diff = diff(preg_split("/([\s]+|<\*>)/", $old), preg_split("/([\s]+|<\*>)/", $new));
+    foreach($diff as $k){
+        if(is_array($k))
+            $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
+                (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
+        else $ret .= $k . ' ';
+    }
+	return $ret;
+}
+
   while ($level = $result->fetch_assoc()) {
       $level_name = $level['level_name'];
       $level_short_name = $level['level_short_name'];
@@ -109,46 +147,16 @@ function save() {
 
 	</header>
 	<article>
-		<div class="content-background">
-			<div class="main">
-			<table id='differences' width="100%" cellpadding="10" border="1" cellspacing="0">
-				<tr>
-					<td><h2>Original</h2>Last updated at <?php echo $level_updated_on; ?> by <?php echo $level_updated_by; ?></td>
-					<td><a class="button" style="float: right;" href="level-edit.php?level_id=<?php echo $level_id;?>">Click here to edit</a><h2 >Edits</h2>Last updated at <?php echo $level_updated_on_edits; ?> by <?php echo $level_updated_by_edits; ?></td>
-				</tr>
-				<tr>
-					<td colspan="2"><h2>Level Name</h2></td>
-				</tr>
-				<tr>
-					<td width="50%"><?php echo $level_name; ?></td>
-					<td width="50%" id="level_name" <?php if ($level_name !== $level_name_edits) {
-    echo "style='color: green;background-color:#efefef;'";
-}?> ><?php echo $level_name_edits; ?></td>
-				</tr>
-				<tr>
-					<td colspan="2"><h2>Level Short Name</h2></td>
-				</tr>
-				<tr>
-					<td width="50%"><?php echo $level_short_name; ?></td>
-					<td width="50%" id="level_short_name" <?php if ($level_short_name !== $level_short_name_edits) {
-    echo "style='color: green;background-color:#efefef;'";
-}?> ><?php echo $level_short_name_edits; ?></td>
-				</tr>
-
-				<tr>
-					<td colspan="2"><h2>Descriptor</h2></td>
-				</tr>
-				<tr>
-					<td width="50%"><?php echo $level_descriptor; ?></td>
-					<td width="50%" id="level_descriptor" <?php if ($level_descriptor !== $level_descriptor_edits) {
-    echo "style='color: green;background-color:#efefef;'";
-}?> ><?php echo $level_descriptor_edits; ?></td>
-				</tr>
-
-			</table>
-
-
-			</div>
+		<div class="content">
+				<div class='block'>
+					<a class="button" style="float: right;" href="level-edit.php?level_id=<?php echo $level_id;?>">Click here to edit</a><h2 >Edits</h2>Last updated at <?php echo $level_updated_on_edits; ?> by <?php echo $level_updated_by_edits; ?>
+				</div>
+				
+				
+				<?php $diff = htmldiff($level_name, $level_name_edits);	?><div class="block"><h2>Level Name</h2><div id="level_name"> <?php echo $diff; ?></div></div>
+				<?php $diff = htmldiff($level_short_name, $level_short_name_edits);	?><div class="block"><h2>Level Short Name</h2><div id="level_short_name"> <?php echo $diff; ?></div></div>
+				<?php $diff = htmldiff($level_descriptor, $level_descriptor_edits);	?><div class="block"><h2>Descriptor</h2><div id="level_descriptor"> <?php echo $diff; ?></div></div>		
+							
 		</div>
 	</article>
 </body>
