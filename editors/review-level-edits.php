@@ -37,7 +37,8 @@ $ret = '';
 	$old = str_replace(">","> ", $old);
 	$new = str_replace("<"," <", $new);
 	$new = str_replace(">","> ", $new);
-    $diff = diff(preg_split("/([\s]+|<\*>)/", $old), preg_split("/([\s]+|<\*>)/", $new));
+	$diff = diff(preg_split("/([\s]+)/", $old), preg_split("/([\s]+)/", $new));
+// print_r($diff);
     foreach($diff as $k){
         if(is_array($k))
             $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
@@ -109,9 +110,10 @@ $result_edits = $query_edits->get_result();
 
 function save() {
 		level_id = <?php echo $level_id; ?>;
-		level_name = $("#level_name").text();
-		level_short_name = $("#level_short_name").text();
-		level_descriptor = $("#level_descriptor").html();
+		level_name = '<?php echo $level_name_edits; ?>';
+		level_short_name = '<?php echo $level_short_name_edits; ?>';
+		level_descriptor = '<?php echo $level_descriptor_edits; ?>';
+		
 		net_id = '<?php echo $net_id; ?>';
 		$.ajax({
 			method: "POST",

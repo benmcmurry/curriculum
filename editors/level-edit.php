@@ -9,7 +9,7 @@ include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
 include_once("admins.php");
 
-$query = $elc_db->prepare("Select * from Levels where level_id= ? ");
+$query = $elc_db->prepare("Select * from Levels_review where level_id= ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();
