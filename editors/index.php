@@ -170,12 +170,12 @@ if (phpCAS::getUser() == "blm39") {
 				<?php
 
 
-
-		$review_query = $elc_db->prepare("Select * from Courses_review where needs_review = 1");
+		$review_query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where needs_review = 1");
+		// $review_query = $elc_db->prepare("Select * from Courses_review where needs_review = 1");
 		$review_query->execute();
 		$result = $review_query->get_result();
   	while ($Courses_review = $result->fetch_assoc()) {
-      echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'>".$Courses_review['course_name']."</a><br />";
+      echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'>".$Courses_review['level_name']." - ".$Courses_review['course_name']."</a><br />";
   	}
 
 		$review_level_query = $elc_db->prepare("Select * from Levels_review where needs_review = 1");
