@@ -67,7 +67,7 @@ $html = "<!DOCTYPE html>
             
         </td>
         <td style=';width:200px'>
-            <img width='200px' src='".$_SERVER["DOCUMENT_ROOT"]."/images/box-logo.jpg' />
+            <img width='200px' src='".$_SERVER["DOCUMENT_ROOT"]."/curriculum/images/box-logo.jpg' />
         </td>
     </tr>
 
