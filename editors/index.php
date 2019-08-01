@@ -163,7 +163,7 @@ else {echo "<a href='?login='>Login</a>";}
 						</table>
 			</div>
 			<?php
-if (phpCAS::getUser() == "blm39") {
+if (phpCAS::getUser() == "blm39"|| 'karimay') {
     ?>
 			<div class="block">
 				<h2> Review Submitted Changes </h2>
