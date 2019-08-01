@@ -2,7 +2,7 @@
 
 include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
-if ($net_id == 'blm39') {echo "cleared!";}
+if ($net_id == 'blm39' || 'karimay') {echo "cleared!";}
 else {exit();}
 $citation = $_POST['citation'];
 $year = $_POST['year'];

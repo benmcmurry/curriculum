@@ -1,10 +1,10 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/Mail.php';
-include_once("cas-go.php");
-if ($net_id == 'blm39' || 'karimay') {echo "cleared!";}
-else {exit();}
+
+$first_initial = $_GET['first_initial'];
+$first_name = $_GET['first_name'];
+$last_name = $_GET['last_name'];
 ?>
 
 <!DOCTYPE html>
@@ -30,17 +30,12 @@ else {exit();}
 <body>
 <div id="main">
 	<?php
-		$contributors = $elc_db->prepare("Select * from Contributors");
-    $contributors->execute();
-  $contributors_result = $contributors->get_result();
-	
-			while($people = $contributors_result->fetch_assoc()){
-      $first_initial = substr($people['first_name'], 0,1);
-			$author = $people['last_name'].", ".$first_initial.".";
+
+			$author = $last_name.", ".$first_initial.".";
 
 
 
-	$message = "<h1>Academic Work by ".$people['first_name']." ".$people['last_name']." </h1> \n";
+	$message = "<h1>Academic Work by ".$first_name." ".$last_name." </h1> \n";
 	$message .= "<h3>Publications</h3>\n";
 	$query = $elc_db->prepare("Select * from Citations where authors like '%$author%' and type='Publication' order by year DESC");
   $query->execute();
@@ -87,21 +82,6 @@ $message .= "<h3>Thesis, Project, or Dissertation</h3> \n";
 
 echo $message;
 
-$body = "Dear ".$people['first_name'].",%0D%0A%0D%0A
-			We are updating the list of scholarly work in the ELC profile. Please follow the link below and send me any updates or additions at your earliest convenience. We would like to have our profile up-to-date by September 1. Recent Grads, please double check that your thesis or project is listed properly.%0D%0A%0D%0A
-
-			https://elc.byu.edu/curriculum/profile/review3.php?first_initial=".$first_initial."%26last_name=".$people['last_name']."%26first_name=".$people['first_name'];
-echo "<br /><a href='mailto:".$people['email_address']."?subject=ELC Profile Update&body=".$body."'>Request Update</a>";
-
-
-
-// Mail::sendEmail($to, $subject, $content);
-// }
-// else {exit;}
-
-
-}
-		$contributors_result->free();
 ?>
 </div>
 </body>
