@@ -85,6 +85,27 @@ function editPopup(id) {
 
 }
 
+function deletePopup(id) {
+	
+	id = id.split("-");
+
+	var delete_citation = confirm("Do you want to delete this reference?");
+	if (delete_citation == true) {
+		$.ajax({
+			method: "POST",
+			url: "delete.php",
+			data: {
+				id: id[1],
+
+				}
+		}).done(function() {
+		location.reload();
+  		});
+
+		
+	} 
+}
+
 </script>
 </head>
 <body>
@@ -152,6 +173,8 @@ function editPopup(id) {
 						<td width="100px;"> Year </td>
 						<td> Type </td>
 						<td> Citation </td>
+						<td> Delete </td>
+
 					</tr>
 				</thead>
 
@@ -168,6 +191,8 @@ function editPopup(id) {
 				<td> <?php echo $pubs['year']; ?></td>
 				<td> <?php echo $pubs['type']; ?></td>
 				<td> <?php echo $pubs['citation']; ?></td>
+				<td align="center"><a id='delete-<?php echo $pubs['id']; ?>' class='delete' onClick='deletePopup(this.id)'>x</a></td>
+
 			</tr>
 		<?php
 

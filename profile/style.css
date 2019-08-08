@@ -167,6 +167,35 @@ a.button:active {
 	position: relative;
 	top: 1px;
 }
+a.delete {
+	display: block;
+	font-size: 1em;
+	line-height: 1em;
+	width: 1em;
+	font-family: sans-serif;
+	font-weight: bold;
+	color: white;
+	background-color:red ;
+	padding: 5px;
+	text-align: center;
+	box-shadow: 2px 2px 5px #888;
+	cursor: pointer;
+	text-decoration: none;
+	border-radius: 1em;
+/* 	text-shadow: 1px 1px 3px #666666; */
+	margin-right: 10px;
+
+}
+a.delete:hover {
+color: red;
+	background-color: whitesmoke;
+	box-shadow: 2px 2px 5px #888;
+	}
+
+a.delete:active {
+	position: relative;
+	top: 1px;
+}
 
 a#add_semester {
 	display: inline-block;
