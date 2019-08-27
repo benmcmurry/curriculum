@@ -118,14 +118,14 @@ $edit_result = $edits_query->get_result();
 
 		function save() {
 			course_id = <?php echo $course_id; ?>;
-			net_id = '<?php echo $updated_by_edits; ?>';
-			course_name = '<?php echo $course_name_edits; ?>';
-			course_description = '<?php echo $course_description_edits;?>';
-			course_short_name = '<?php echo $course_short_name_edits; ?>';
-			course_emphasis = '<?php echo $course_emphasis_edits; ?>';
-			course_materials = '<?php echo $course_materials_edits; ?>';
-			learning_outcomes = '<?php echo $learning_outcomes_edits; ?>';
-			google_drive_folder_id = '<?php echo $google_drive_folder_id_edits; ?>';
+			net_id = "<?php echo $updated_by_edits; ?>";
+			course_name = "<?php echo $course_name_edits; ?>";
+			course_description = "<?php echo $course_description_edits;?>";
+			course_short_name = "<?php echo $course_short_name_edits; ?>";
+			course_emphasis = "<?php echo $course_emphasis_edits; ?>";
+			course_materials = "<?php echo $course_materials_edits; ?>";
+			learning_outcomes = "<?php echo $learning_outcomes_edits; ?>";
+			google_drive_folder_id = "<?php echo $google_drive_folder_id_edits; ?>";
 
 			$.ajax({
 				method: "POST",
