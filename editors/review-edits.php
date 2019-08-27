@@ -144,6 +144,7 @@ $edit_result = $edits_query->get_result();
 				}
 			}).done(function (phpfile) {
 				$("#save_dialog").html(phpfile);
+				console.log("Did it run?")
 			});
 		}
 	</script>
