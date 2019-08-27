@@ -110,9 +110,9 @@ $result_edits = $query_edits->get_result();
 
 function save() {
 		level_id = <?php echo $level_id; ?>;
-		level_name = '<?php echo $level_name_edits; ?>';
-		level_short_name = '<?php echo $level_short_name_edits; ?>';
-		level_descriptor = '<?php echo $level_descriptor_edits; ?>';
+		level_name = '<?php echo addslashes($level_name_edits); ?>';
+		level_short_name = '<?php echo addslashes($level_short_name_edits); ?>';
+		level_descriptor = '<?php echo addslashes($level_descriptor_edits); ?>';
 		
 		net_id = '<?php echo $net_id; ?>';
 		$.ajax({
