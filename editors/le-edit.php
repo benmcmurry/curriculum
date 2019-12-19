@@ -224,6 +224,7 @@ function deleteLe() {
                     <option value='Writing'>Writing</option>
                     <option value='Pronunciation'>Pronunciation</option>
                     <option value='Vocabulary'>Vocabulary</option>
+                    <option value='Listening and Reading'>Listening and Reading</option>
                     </select>
                 
                 </div>
