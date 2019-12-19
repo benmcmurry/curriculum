@@ -63,7 +63,7 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 			if ($le['emphasis'] == "Writing" && $writing) {echo "</ol><h4>Writing</h4><ol>";$writing=FALSE;}
 			if ($le['emphasis'] == "Vocabulary" && $vocabulary) {echo "</ol><h4>Vocabulary</h4><ol>";$vocabulary=FALSE;}
 			if ($le['emphasis'] == "None Specified" && $none) {echo "</ol><h4>None Specified</h4><ol>";$none=FALSE;}
-			if ($le['emphasis'] == "None Specified" && $$listening_and_reading) {echo "</ol><h4>Listening and Reading</h4><ol>";$none=FALSE;}
+			if ($le['emphasis'] == "Listening and Reading" && $listening_and_reading) {echo "</ol><h4>Listening and Reading</h4><ol>";$listening_and_reading=FALSE;}
 
 			$le['short_description'] = strip_tags($le['short_description']); 
 			$nameSplit = explode(". ", $le['name']);
