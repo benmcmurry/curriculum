@@ -54,21 +54,17 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 		$none = TRUE; //counter
 		// echo "<ol>";
 		while($le = $resultLe->fetch_assoc()){
-			if ($le['emphasis'] == "Speaking" && $speaking) {echo "</ol><h4>Speaking</h4><ol>";$speaking=FALSE;}
-			if ($le['emphasis'] == "Listening" && $listening) {echo "</ol><h4>Listening</h4><ol>";$listening=FALSE;}
-			if ($le['emphasis'] == "Pronunciation" && $pronunciation) {echo "</ol><h4>Pronunciation</h4><ol>";$pronunciation=FALSE;}
-			if ($le['emphasis'] == "Grammar" && $grammar) {echo "</ol><h4>Grammar</h4><ol>";$grammar=FALSE;}
-			if ($le['emphasis'] == "Reading" && $reading) {echo "</ol><h4>Reading</h4><ol>";$reading=FALSE;}
-			if ($le['emphasis'] == "Writing" && $writing) {echo "</ol><h4>Writing</h4><ol>";$writing=FALSE;}
-			if ($le['emphasis'] == "Vocabulary" && $vocabulary) {echo "</ol><h4>Vocabulary</h4><ol>";$vocabulary=FALSE;}
-			if ($le['emphasis'] == "None Specified" && $none) {echo "</ol><h4>None Specified</h4><ol>";$none=FALSE;}
+			if ($le['emphasis'] == "Speaking" && $speaking) {echo "<h4>Speaking</h4>";$speaking=FALSE;}
+			if ($le['emphasis'] == "Listening" && $listening) {echo "<h4>Listening</h4>";$listening=FALSE;}
+			if ($le['emphasis'] == "Pronunciation" && $pronunciation) {echo "<h4>Pronunciation</h4>";$pronunciation=FALSE;}
+			if ($le['emphasis'] == "Grammar" && $grammar) {echo "<h4>Grammar</h4>";$grammar=FALSE;}
+			if ($le['emphasis'] == "Reading" && $reading) {echo "<h4>Reading</h4>";$reading=FALSE;}
+			if ($le['emphasis'] == "Writing" && $writing) {echo "<h4>Writing</h4>";$writing=FALSE;}
+			if ($le['emphasis'] == "Vocabulary" && $vocabulary) {echo "<h4>Vocabulary</h4>";$vocabulary=FALSE;}
+			if ($le['emphasis'] == "None Specified" && $none) {echo "<h4>None Specified</h4>";$none=FALSE;}
 
-			// if ($le['assessment'] == 1 && $le['required'] == 0 && $anr) {echo "</ol><h4>Optional Assessments</h4><ol>";$anr=FALSE;}
-			// if ($le['assessment'] == 0 && $le['required'] == 1 && $ler) {echo "</ol><h4>Required Learning Experiences</h4><ol>";$ler=FALSE;}
-			// if ($le['assessment'] == 0 && $le['required'] == 0 && $lenr) {echo "</ol><h4>Optional Learning Experiences</h4><ol>";$lenr=FALSE;}
-			
-			$le['short_description'] = $le['short_description'];
-			echo "<p><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</p><br />";
+			$le['short_description'] = strip_tags($le['short_description']); //I'm not sure why this is here, but I don't want to remove it
+			echo "<p><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</p>";
 		}
 		// echo "</ol>";
 		// end getting learning Experiences
