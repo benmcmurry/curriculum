@@ -40,7 +40,7 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 		from `LE_courses`
 				natural left join
 					Learning_experiences 
-				where LE_courses.course_id=? order by Emphasis");
+				where LE_courses.course_id=? order by emphasis, name ASC");
 		$queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
 		$queryRequiredLearningExperiences->execute();
 		$resultLe = $queryRequiredLearningExperiences->get_result();
@@ -52,7 +52,7 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 		$pronunciation = TRUE; //counter
 		$vocabulary = TRUE; //counter
 		$none = TRUE; //counter
-		echo "<ol>";
+		// echo "<ol>";
 		while($le = $resultLe->fetch_assoc()){
 			if ($le['emphasis'] == "Speaking" && $speaking) {echo "</ol><h4>Speaking</h4><ol>";$speaking=FALSE;}
 			if ($le['emphasis'] == "Listening" && $listening) {echo "</ol><h4>Listening</h4><ol>";$listening=FALSE;}
@@ -68,9 +68,9 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 			// if ($le['assessment'] == 0 && $le['required'] == 0 && $lenr) {echo "</ol><h4>Optional Learning Experiences</h4><ol>";$lenr=FALSE;}
 			
 			$le['short_description'] = $le['short_description'];
-			echo "<li><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</li><br />";
+			echo "<p><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</p><br />";
 		}
-		echo "</ol>";
+		// echo "</ol>";
 		// end getting learning Experiences
 
 		if ($auth && $access){
