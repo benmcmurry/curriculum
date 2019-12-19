@@ -59,9 +59,11 @@ h3 {
 }
 
 h4 {
-    font-size: 1em;
-    font-weight: bold;
-    color: black
+    font-size: 1.3em;
+    /* font-weight: bold; */
+    color: black;
+    font-family: "Martel";
+
 }
 
 h5 {

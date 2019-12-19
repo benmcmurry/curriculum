@@ -21,8 +21,9 @@ while ($learningExperience = $result->fetch_assoc()) {
     $name = $learningExperience['name'];
     $short_description = $learningExperience['short_description'];
     $description = $learningExperience['description'];
-    $required = $learningExperience['required'];
-    $assessment = $learningExperience['assessment'];
+    $emphasis = $learningExperience['emphasis'];
+    // $required = $learningExperience['required'];
+    // $assessment = $learningExperience['assessment'];
     $updatedBy = $learningExperience['updated_by'];
 }
 
@@ -47,19 +48,7 @@ while ($learningExperience = $result->fetch_assoc()) {
 <script>
     $(document).ready(function() {
 
-        <?php
-        if ($required==1) {
-            echo "current_required = 1;$('#required').prop('checked', true);";
-        } else {
-            echo "current_required = 0;";
-        }
-        if ($assessment==1) {
-            echo "current_assessment = 1;$('#assessment').prop('checked', true);";
-        } else {
-            echo "current_assessment = 0;";
-        }
-        ?>
-
+        $("#emphasis option[value='<?php echo $emphasis; ?>']").prop('selected',true); 
         current_name = $("#name").text();
         current_short_description = $("#short_description").text();
         current_description = $("#description").text();
@@ -158,20 +147,12 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
     }
 
     function save() {
-        if ($("#required").prop('checked')) {required=1;} else {required=0;} 
-        if ($("#assessment").prop('checked')) {assessment=1;} else {assessment=0;}
-
-    //    if (current_name == $("#name").text() &&
-    //       current_description == $("#description").text() &&
-    //       current_required == required &&
-    //       current_assessment == assessment)
-    //       {return ;}
-
-     
+      
      
      name = $("#name").text();
      description = $("#description").html();
      short_description = $("#short_description").html();
+     emphasis = $("#emphasis option:selected").text();
      $.ajax({
          method: "POST",
          url: "save-le.php",
@@ -181,8 +162,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
              name: name,
              description: description,
              short_description: short_description,
-             required: required,
-             assessment: assessment
+             emphasis: emphasis
              }
      }).done(function(phpfile) {
      $("#save_dialog").html(phpfile);
@@ -234,11 +214,18 @@ function deleteLe() {
                     <h2 class='editor-style'>Description</h2> <div id="description" class="editable" contenteditable="true"><?php echo $description; ?></div>
                 </div>
                 <div class="separator">
-
-                    <input type='checkbox' id='required'>Required Learning Experience</input>
-                </div>
-                <div class='separator'>
-                    <input type='checkbox' id='assessment'>Can be used as assessment</input>
+                    <h2 class='editor-style'>Skill Area Emphasis</h2>
+                    <select id='emphasis'>
+                    <option value='None'>None</option>
+                    <option value='Grammar'>Grammar</option>
+                    <option value='Listening'>Listening</option>
+                    <option value='Speaking'>Speaking</option>
+                    <option value='Reading'>Reading</option>
+                    <option value='Writing'>Writing</option>
+                    <option value='Pronunciation'>Pronunciation</option>
+                    <option value='Vocabulary'>Vocabulary</option>
+                    </select>
+                
                 </div>
                 <div class='separator'>
                 <h2 class='editor-style'>Courses</h2>
