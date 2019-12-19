@@ -67,10 +67,10 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 
 			$le['short_description'] = strip_tags($le['short_description']); 
 			$nameSplit = explode(". ", $le['name']);
-			if (isset($nameSplit[1]))
-				{
-					$le['name'] = $nameSplit[1];
-				} else 
+			// if (isset($nameSplit[1]))
+			// 	{
+			// 		$le['name'] = $nameSplit[1];
+			// 	} else 
 				
 			echo "<li><a class='le_link' href='learning_experience.php?id=".$le['learning_experience_id']."'>".$le['name']."</a>. ".$le['short_description']."</li><br />";
 		}
