@@ -1,25 +1,7 @@
 <?php
-include_once("../../../connectFiles/connect_cis.php");
-$learningExperienceId = $_POST['learningExperienceId'];
-$net_id =  $_POST['net_id'];
-$learningExperienceId =  $_POST['learningExperienceId'];
-$courseId = $_POST['id'];
-$action =  $_POST['action'];
-
-if ($action=="add") {
-$query_backup = $elc_db->prepare("Insert into LE_courses (learning_experience_id, course_id) Values (?,?)");
-$query_backup->bind_param("ss", $learningExperienceId, $courseId);
-$query_backup->execute();
-$result_backup = $query_backup->get_result();
-echo "added ".date('l jS \of F Y h:i:s A').".";
-}
-
-if ($action=="remove") {
-    $query_backup = $elc_db->prepare("Delete from LE_courses where learning_experience_id=? and course_id=?");
-    $query_backup->bind_param("ss", $learningExperienceId, $courseId);
-    $query_backup->execute();
-    $result_backup = $query_backup->get_result();
-    echo "removed ".date('l jS \of F Y h:i:s A').".";
-    
-}
-
+$local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$refer_url = str_replace("elc","elctools",$actual_link);
+header('Location: '.$refer_url);
+exit();
+?>
