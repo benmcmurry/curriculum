@@ -3,7 +3,7 @@ $local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
 $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $refer_url = str_replace("localhost","elctools",$actual_link);
 header('Location: '.$refer_url);
-
+?>
 session_start();
     include_once("../../connectFiles/connect_cis.php");
     $course_id = $_GET['course_id'];
