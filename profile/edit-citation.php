@@ -1,31 +1,7 @@
 <?php
-
-session_start();
-include_once("../../../connectFiles/connect_cis.php");
-include_once("cas-go.php");
-
-$id=$_POST['id'];
-$citation = $_POST['citation'];
-$year = $_POST['year'];
-$authors = $_POST['authors'];
-$type = $_POST['type'];
-
-
-echo "<script>console.log('it does not exist!');</script>";
-$query = $elc_db->prepare("UPDATE Citations SET citation = ? , year = ?, authors = ?, type = ? WHERE id = ? ");
-$query->bind_param("sssss", $citation, $year, $authors, $type, $id);
-$query->execute();
-$result = $query->get_result();
-
-		echo "Saved ".date('l jS \of F Y h:i:s A').".";
-		echo "<Script>close_popup();</script>";
-
-
-
-
-
-
-
-
-
+$local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$refer_url = str_replace("elc","elctools",$actual_link);
+header('Location: '.$refer_url);
+exit();
 ?>

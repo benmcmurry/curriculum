@@ -1,14 +1,7 @@
 <?php
-
-session_start();
-include_once("../../../connectFiles/connect_cis.php");
-include_once("cas-go.php");
-
-$id=$_POST['id'];
-
-$query = $elc_db->prepare("DELETE from Citations WHERE id = ? ");
-$query->bind_param("s", $id);
-$query->execute();
-$result = $query->get_result();
-
+$local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$refer_url = str_replace("elc","elctools",$actual_link);
+header('Location: '.$refer_url);
+exit();
 ?>
