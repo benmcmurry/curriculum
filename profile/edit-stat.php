@@ -2,7 +2,7 @@
 session_start();
 include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
-include_once("admins.php");
+
 
 $stat_id=$_POST['stat_id'];
 $stat_field = $_POST['field'];
