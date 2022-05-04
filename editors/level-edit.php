@@ -7,7 +7,6 @@ if ($level_id > 8) {$message = "Invalid level. Showing last level."; $level_id =
 
 include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
-include_once("admins.php");
 
 $query = $elc_db->prepare("Select * from Levels_review where level_id= ? ");
 $query->bind_param("s", $level_id);
