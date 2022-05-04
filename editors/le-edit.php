@@ -3,6 +3,7 @@ include_once("../../../connectFiles/connect_cis.php");
 
 $learningExperienceId = $_GET['learningExperienceId'];
 include_once("cas-go.php");
+include_once("admins.php");
 if ($learningExperienceId == "new") {
     $query = $elc_db->prepare("Insert into Learning_experiences (name, created_by, created_on) values ('Untitled Learning Experience', ?, NOW())");
     $query->bind_param("s", $net_id);
