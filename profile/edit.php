@@ -2,11 +2,7 @@
 
 include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
-<<<<<<< HEAD
-
-=======
 include_once("admins.php");
->>>>>>> parent of e10dc91 (Update edit.php)
 ?>
 
 <!DOCTYPE html>
