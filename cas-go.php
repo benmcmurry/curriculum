@@ -31,9 +31,9 @@ if ($auth) {
   $net_id = phpCAS::getUser();
 
 
-  $button = phpCAS::getUser()." | <a href='?logout='>Logout</a>";;
+  $button = phpCAS::getAttributes()['name']." | <a href='?logout='>Sign Out</a>";;
 } else {
-  $button = "<a href='?login='>Login</a>";
+  $button = "<a href='?login='>Sign In</a>";
 
 }
 ?>

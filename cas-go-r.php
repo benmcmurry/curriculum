@@ -22,7 +22,7 @@ $auth = phpCAS::checkAuthentication();
 if ($auth) {$net_id = phpCAS::getUser();$net_id = phpCAS::getUser();
   
   
-    $button = phpCAS::getUser()." | <a href='?logout='>Logout</a>";;} else {    phpCAS::forceAuthentication();
+    $button = phpCAS::getUser()." | <a href='?logout='>Sign Out</a>";;} else {    phpCAS::forceAuthentication();
 }
 
 ?>
