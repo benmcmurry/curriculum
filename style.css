@@ -74,6 +74,16 @@ h3 {
   text-transform: capitalize;
 }
 
+h4 {
+  color:Black;
+  cursor: default;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
 div#user a {
   color: white;
   text-decoration: none;
