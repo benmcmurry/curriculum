@@ -105,13 +105,6 @@ $result = $query->get_result();
 
 
         });
-        /*
-$(".editable").click(function(){
-
-        });
-*/
-// tinyMCE.execCommand("mceAddControl", true, '#level_descriptor');
-
 });
 
 function save() {
@@ -164,37 +157,64 @@ function save() {
 </script>
 </head>
 <body>
-	<header>
-			<div id='holder'>
-
-			<div>
-				<h1> Course Editor: <?php echo $level_name." - ".$course_name; ?></h1>
+<?php require_once("../content/header-short.php"); 
+if ($message) {
+	echo "<div class='container-md pt-4'>";
+	echo $message;
+	echo "</div>";
+}
+if ($auth && $access) { ?>
+	<div class="container-md sticky-top pt-5 mb-2">
+		<div class="row justify-content-between">
+			<div class="btn-group col-2" role="group">
+				<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-back"></i> Main Menu</a>
+			</div>
+			<div class="btn-group col-3" role="group">
+				<a type="button" class="btn btn-primary" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous Course</a>
+				<a type="button" class="btn btn-primary" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Course <i class="bi bi-arrow-right-circle"></i></a>
+			</div>
+			<div class="btn-group col-2" role="group">
+				<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+			</div>
+		</div>
+	</div>
+	<div class="container-md" id="save_dialog"></div>
+	<div class="container-md bg-light">
+		<h2>Course Editor: <?php echo $level_name." - ".$course_name; ?></h2>
+ 	 </div>
 			
-      <?php echo $message;
+	  <div class="container-md bg-light">
+		
+			<label for="course_name" class="form-label">Course Name</label> 
+			<div id="course_name" class="form-control" contenteditable="true" aria-describedby="courseNameHelp"><?php echo $course_name; ?></div>
+			<div id="courseNameHelp" class="form-text mb-4">Follow pre-determined naming schemes</div>
+	
+		
+		<label for="course_short_name" class="form-label">Course Short Name</label> 
+		<div id="course_short_name" class="form-control" contenteditable="true" aria-describedby="courseShortNameHelp"><?php echo $course_short_name; ?></div>
+		<div id="courseShortNameHelp" class="form-text mb-4">Limit to 4 or 5 characters. (i.e. Gmr)</div>
 
-      if ($auth && $access) { ?>
+		<label for="course_description" class="form-label">Course Description</label> 
+		<div id="course_description" class="form-control" contenteditable="true" aria-describedby="courseDescriptorHelp"><?php echo $course_description; ?></div>
+		<div id="courseDescriptorHelp" class="form-text mb-4">This should be no more than 2 sentences long.</div>
+		
+		<label for="course_emphasis" class="form-label">Course Emphasis</label>
+		<div id="course_emphasis" class="form-control" contenteditable="true" aria-describedby="courseEmphasisHelp"><?php echo $course_emphasis; ?></div>
+		<div id="courseEmphasisHelp" class="form-text mb-4">Use list format to list the skills addressed in this course</div>
+		
+		<label for="course_materials" class="form-label">Course Books and Materials</label>
+		<div id="course_materials" class="form-control" contenteditable="true" aria-describedby="courseMaterialsHelp"><?php echo $course_materials; ?></div>
+		<div id="courseMaterialsHelp" class="form-text mb-4">Use list format to list materials needed for the course</div>
+		
+		<label for="learning_outcomes" class="form-label">Course Learning Outcomes</label> 
+		<div id="learning_outcomes" class="form-control" contenteditable="true" aria-describedby="courseLearningOutcomesHelp"><?php echo $learning_outcomes; ?></div>
+		<div id="courseLearningOutcomesHelp" class="form-text mb-4">This should be an ordered list.</div>
+		
+		<label for="google_drive_folder_id" class="form-label">Google Drive Folder ID</label>
+		<div id="google_drive_folder_id" class="form-control" contenteditable="true" aria-describedby="googleDriveHelp"><?php echo $google_drive_folder_id; ?></div>
+		<div id="googleDriveHelp" class="form-text mb-4">This is the ID of the shared folder.</div>
 
-			<a class="button" id="go_back" href="index.php">Main Menu</a>
-			<a class="button" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>">Previous Course</a>
-			<a class="button" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Course</a>
-			<a class="button" id="save">Save</a>
-
-			<div id="save_dialog"></div>
-	  </div>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-	</div>
-			</header>
-<article>
-	<div class="content">
-		<div class="separator"><h2 class='editor-style'>Course Name</h2> <div id="course_name" class="editable" contenteditable="true"><?php echo $course_name; ?></div>	</div>
-		<div class="separator"><h2 class='editor-style'>Course Short Name (Limit to 4-5 characters)</h2> <div id="course_short_name" class="editable" contenteditable="true"><?php echo $course_short_name; ?></div>		</div>
-		<div class="separator"><h2 class='editor-style'>Course Description</h2> <div id="course_description" class="editable" contenteditable="true"><?php echo $course_description; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Course Emphasis</h2><div id="course_emphasis" class="editable" contenteditable="true"><?php echo $course_emphasis; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Course Books and Materials</h2><div id="course_materials" class="editable" contenteditable="true"><?php echo $course_materials; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Course Learning Outcomes</h2> <div id="learning_outcomes" class="editable" contenteditable="true"><?php echo $learning_outcomes; ?></div></div>
-		<div class="separator"><h2 class='editor-style'>Google Drive Folder ID</h2><div id="google_drive_folder_id" class="editable" contenteditable="true"><?php echo $google_drive_folder_id; ?></div>
-	</div>
+</div>
   <?php } ?>
-	</article>
 </body>
 </html>

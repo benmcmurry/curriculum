@@ -1,9 +1,10 @@
 <?php
 session_start();
-    require_once"../../../connectFiles/connect_cis.php";
+    require_once"../../connectFiles/connect_cis.php";
     require_once"cas-go.php";
-    require_once"../teachers.php";
-    
+    require_once"teachers.php";
+    $localpath=getenv("SCRIPT_NAME");
+    $absolutepath=realpath($localPath);
 ?>
 
 <!DOCTYPE html>
@@ -19,19 +20,18 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<?php include_once("styles_and_scripts.html"); ?>
+<?php include_once("content/styles_and_scripts.html"); ?>
 </head>
 <body>
 
     
 
-<?php require_once("../content/header-short.php"); ?>
-<div id="title" class="container-fluid">
-Levels and Courses
-</div>
-
+<?php require_once("content/header-short.php"); ?>
+<?php
+echo "LP: $localpath, AP: $absolutepath" 
+?>
 <div class="container-md pt-4">
-   
+    <h2> Levels and Courses </h2>
     <?php
     $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels where active=1 order by level_order ASC");
     $query->execute();
@@ -45,16 +45,16 @@ Levels and Courses
         }
         echo "<div class='row m-1 p-0 justify-content-between' id=''>";
         while ($courses = $course_result->fetch_assoc()) {
-            echo "<div class='col p-1'> <div class='list-group'><a class='text-center list-group-item list-group-item-action active' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
+            echo "<div class='col p-1'> <div class='list-group'><a class='text-center list-group-item list-group-item-action active' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='editors/course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
             $learningExperienceQuery = $elc_db->prepare("Select *, LE_courses.course_id from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
             $learningExperienceQuery->bind_param("s", $courses['course_id']);
             $learningExperienceQuery->execute();
             $learningExperienceResult = $learningExperienceQuery->get_result();
             // echo "<div class='row'><div class='col'><div class='list-group'>";
             while ($le = $learningExperienceResult->fetch_assoc()) {
-                echo "<a class='list-group-item list-group-item-action' href='le-edit.php?learningExperienceId=".$le['learning_experience_id']."'><i class='bi bi-pencil-square'></i> ".$le['name']."</a>";
+                echo "<a class='list-group-item list-group-item-action' href='editors/le-edit.php?learningExperienceId=".$le['learning_experience_id']."'><i class='bi bi-pencil-square'></i> ".$le['name']."</a>";
             }
-            echo "<a id='new_le' class='list-group-item bg-info' href='le-edit.php?learningExperienceId=new'><i class='bi bi-plus'></i> Learning
+            echo "<a id='new_le' class='list-group-item bg-info' href='editors/le-edit.php?learningExperienceId=new'><i class='bi bi-plus'></i> Learning
             Experience<a>";
             echo "</div></div>";
         }
@@ -96,7 +96,7 @@ if (phpCAS::getUser() == "blm39"|| 'karimay') {
 
 </div>
 <footer>
-        <?php include("../content/footer.html"); ?>
+        <?php include("content/footer.html"); ?>
     </footer>
 
 </body>

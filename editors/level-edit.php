@@ -7,7 +7,7 @@ if ($level_id > 8) {$message = "Invalid level. Showing last level."; $level_id =
 
 include_once("../../../connectFiles/connect_cis.php");
 include_once("cas-go.php");
-
+include_once("admins.php");
 $query = $elc_db->prepare("Select * from Levels_review where level_id= ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
@@ -133,39 +133,57 @@ function save() {
 </script>
 </head>
 <body>
-	<header>
-	<div id='holder'>
-			<div>
-			<h1> Level Editor: <?php echo $level_name; ?></h1>
-			
-			<?php echo $message;
+	<?php require_once("../content/header-short.php"); 
+	if ($message) {
+		echo "<div class='container-md pt-4'>";
+		echo $message;
+		echo "</div>";
+	}
+
 
       if ($auth && $access) { ?>
-			<a class="button" id="go_back" href="index.php">Main Menu</a>
-			<a class="button" id="previous" href="level-edit.php?level_id=<?php echo $level_id-1;?>">Previous Level</a>
-			<a class="button" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next Level</a>
-			<a class="button" id="save">Save</a>
-			<div id="save_dialog"></div>
+	  	<div class="container-md sticky-top pt-5 mb-2">
+			<div class="row justify-content-between">
+				<div class="btn-group col-2" role="group">
+					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-back"></i> Main Menu</a>
+				</div>
+				<div class="btn-group col-3" role="group">
+					<a type="button" class="btn btn-primary" id="previous" href="level-edit.php?level_id=<?php echo $level_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous Level</a>
+					<a type="button" class="btn btn-primary" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next Level <i class="bi bi-arrow-right-circle"></i></a>
+				</div>
+				<div class="btn-group col-2" role="group">
+					<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+				</div>
 	  		</div>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+			  
+		</div>
+		<div class="container-md" id="save_dialog"></div>
+		<div class="container-md bg-light">
+	  	<h2>Level Editor: <?php echo $level_name; ?></h2>
 	  </div>
-		</header>
-	<article>
-		<div class="content">
-		<div class="separator">
-		<h2 class='editor-style'>Level Short Name (limit to 1 or 2 characters)</h2> <div id="level_short_name" class="editable" contenteditable="true"><?php echo $level_short_name; ?></div>
-		</div>
-		<div class="separator">
-		<h2 class='editor-style'>Level Name</h2> <div id="level_name" class="editable rte" contenteditable="true"><?php echo $level_name; ?></div></div>
-		<div class="separator">
-		<h2 class='editor-style'>Descriptor</h2>
+		
+	  		
+	 
+		
+	  <div class="container-md bg-light">
+		<label for="level_short_name" class="form-label">Level Short Name</label>
+		<div id="level_short_name" class="form-control" contenteditable="true" aria-describedby="shortNameHelp"><?php echo $level_short_name; ?></div>
+		<div id="shortNameHelp" class="form-text mb-4">Limit to 1 or 2 characters. (i.e. FA)</div>
 
-			<div id="level_descriptor" class="editable"><?php echo $level_descriptor; ?></div>
-		</div>
 
+		<label for="level_name" class="form-label">Level Name</label>
+		<div id="level_name" class="form-control rte" contenteditable="true" aria-describedby="levelNameHelp"><?php echo $level_name; ?></div>
+		<div id="levelNameHelp" class="form-text mb-4">Please use standard naming conventions. (i.e. Foundations A)</div>
+
+		<label for="level_descriptor" class="form-label">Descriptor</label>
+			<div id="level_descriptor" class="form-control" aria-describedby="descriptorHelp"><?php echo $level_descriptor; ?></div>
+			<div id="descriptorHelp" class="form-text mb-4">Level Descriptors should include function and text-type.</div>
+
+			
 			</div>
-	
 	<?php } ?>
-	</article>
+	<footer>
+        <?php include("../content/footer.html"); ?>
+    </footer>
 </body>
 </html>

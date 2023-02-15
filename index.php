@@ -176,7 +176,7 @@ session_start();
         <h2>Teaching Specific Language Skills</h2>
     </a>
     <?php
-            $query = $elcDb->prepare("Select * from Skill_areas where list_order != '0'  order by list_order ASC");
+            $query = $elc_db->prepare("Select * from Skill_areas where list_order != '0'  order by list_order ASC");
             $query->execute();
             $result = $query->get_result();
            

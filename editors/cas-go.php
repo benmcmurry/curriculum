@@ -19,6 +19,11 @@ if (isset($_REQUEST['logout'])) {
 }
 $auth = phpCAS::checkAuthentication();
 
-if ($auth) {$net_id = phpCAS::getUser();} else {    phpCAS::forceAuthentication();
+if ($auth) {
+  $net_id = phpCAS::getUser();
+  $button = phpCAS::getAttributes()['name']." | <a href='?logout='>Sign Out</a>";;
+
+} else {    phpCAS::forceAuthentication();
+  $button = "<a href='?login='>Sign In</a>";
 }
 ?>
