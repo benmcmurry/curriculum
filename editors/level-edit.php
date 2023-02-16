@@ -144,14 +144,15 @@ function save() {
       if ($auth && $access) { ?>
 	  	<div class="container-md sticky-top pt-5 mb-2">
 			<div class="row justify-content-between">
-				<div class="btn-group col-2" role="group">
-					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-back"></i> Main Menu</a>
+				<div class="btn-group col-3" role="group">
+					<a type="button" class="btn btn-primary" id="toPortfolio" href="../levels.php#<?php echo $level_short_name;?>"><i class="bi bi-back"></i> Portfolio </a>
+					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i> Editor Menu</a>
 				</div>
 				<div class="btn-group col-3" role="group">
 					<a type="button" class="btn btn-primary" id="previous" href="level-edit.php?level_id=<?php echo $level_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous Level</a>
 					<a type="button" class="btn btn-primary" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next Level <i class="bi bi-arrow-right-circle"></i></a>
 				</div>
-				<div class="btn-group col-2" role="group">
+				<div class="btn-group col-3" role="group">
 					<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
 				</div>
 	  		</div>

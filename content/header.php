@@ -80,7 +80,16 @@ while ($levels = $result->fetch_assoc()) {
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile </a>
                     </li>
-                    
+                    <?php
+                        require_once"editors/admins.php";
+                        if ($auth && $access) {
+                    ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="editors/index.php">Edit </a>
+                    </li>
+                    <?php
+                        }
+                        ?>
 
                 </ul>
 

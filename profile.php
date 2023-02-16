@@ -37,11 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     <?php require "content/header.php"; ?>
 
 
-    <div id="title" class="container-fluid">ELC Profile</div>
+    <div id="title" class="container-fluid">ELC Lab School Profile</div>
     <div class="container-md pt-4">
-
-        
-            <h2>Lab School Profile</h2>
             <p>Assessment is essential to improve and progress. Administrators of the College of Humanities, the
                 Department of Linguistics and English Language, and the English Language Center need to know how well
                 the English Language Center (ELC) is fulfilling its principal purpose as a lab school. Accordingly the

@@ -166,9 +166,9 @@ if ($message) {
 if ($auth && $access) { ?>
 	<div class="container-md sticky-top pt-5 mb-2">
 		<div class="row justify-content-between">
-			<div class="btn-group col-2" role="group">
-				<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-back"></i> Main Menu</a>
-			</div>
+			<div class="btn-group col-3" role="group">
+			<a type="button" class="btn btn-primary" id="toPortfolio" href="../course.php?course_id=<?php echo $course_id;?>"><i class="bi bi-back"></i> Portfolio </a>
+					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i> Editor Menu</a>			</div>
 			<div class="btn-group col-3" role="group">
 				<a type="button" class="btn btn-primary" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous Course</a>
 				<a type="button" class="btn btn-primary" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Course <i class="bi bi-arrow-right-circle"></i></a>

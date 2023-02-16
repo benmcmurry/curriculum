@@ -110,16 +110,27 @@ div#user a {
     font-size: 1.7em;
   }
 
-  /* .square {
-    width: 1.6em;
-    height: 1.6em;
-    line-height: 1.6em;
-    font-size: 1.6em;
-    border: 3px solid white;
-  }
-  .course_list a::before {
-    content: attr(data-shortName);
-  } */
+}
+OL {
+  counter-reset: item;
+  position: relative;
+  left: -20px;
+  z-index: 8;
+  display: table;
+  list-style-position: outside;
+  border-spacing: .3em 0em;
+}
+
+OL>LI {
+  display: block;
+  display: table-row;
+  padding-left: 10px;
+}
+
+OL>LI::before {
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+  display: table-cell;
 }
 
 @media all and (max-width: 372px) {

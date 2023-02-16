@@ -27,9 +27,21 @@ session_start();
 
 <?php require_once("../content/header-short.php"); ?>
 <div id="title" class="container-fluid">
-Levels and Courses
+Curriculum Portfolio Editor Menu
 </div>
-
+<div class="container-md sticky-top pt-5 mb-2">
+			<div class="row justify-content-between">
+            <div class="btn-group col-3" role="group">
+</div>
+				<div class="btn-group col-3" role="group">
+					<a type="button" class="btn btn-primary" id="toPortfolio" href="../index.php"><i class="bi bi-back"></i> Back to the Portfolio </a>
+				</div>
+                <div class="btn-group col-3" role="group">
+</div>
+				
+	  		</div>
+			  
+		</div>
 <div class="container-md pt-4">
    
     <?php

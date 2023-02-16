@@ -82,11 +82,11 @@ while ($learningExperience = $result->fetch_assoc()) {
             console.log(id);
             console.log(this.id);
             if (this.id == "potential_courses") {
-                $("#"+id).removeClass("potential_course").addClass("connected_course"); //changes class on sort
+                $("#"+id).removeClass("text-bg-warning").addClass("text-bg-success"); //changes class on sort
                 connect_to_course(id, "add"); //calls function for ajax add to database
                 } 
             if (this.id == "connected_courses") {
-                $("#"+id).removeClass("connected_course").addClass("potential_course");//changes class on sort
+                $("#"+id).removeClass("text-bg-success").addClass("text-bg-warning");//changes class on sort
                 connect_to_course(id, "remove");//calls function for ajax remove from database
             } 
 
@@ -185,37 +185,57 @@ function deleteLe() {
 }
 
 </script>
+<style>
+    .connectedSortable div {
+        cursor: grabbing;
+    }
+    </style>
 </head>
 <body>
-    <header>
-    <div id='holder'>
-        <div>
-    <h1> LE &amp; A Editor: <?php echo $name; ?></h1>
-            <?php if ($auth && $access) { ?>
-            <a class="button" id="go_back" href="index.php">Main Menu</a>
-            <a class="button" id="save">Save</a>
-            <a class="button" id="delete">Delete</a>
-            <div id="save_dialog"></div>
-            </div>
-            <div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-            </div>
-    </header>
-    
-    <article>
+   <?php require_once("../content/header-short.php"); 
+if ($message) {
+	echo "<div class='container-md pt-4'>";
+	echo $message;
+	echo "</div>";
+}
+?>
+<?php if ($auth && $access) { ?>
+    <div class="container-md sticky-top pt-5 mb-2">
+		<div class="row justify-content-between">
+			<div class="btn-group col-3" role="group">
+			<a type="button" class="btn btn-primary" id="toPortfolio" href="../learning_experience.php?id=<?php echo $learningExperienceId;?>"><i class="bi bi-back"></i> Portfolio </a>
+					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i> Editor Menu</a>			</div>
+			
+			<div class="btn-group col-3" role="group">
+				<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+				<a type="button" class="btn btn-danger" id="delete"><i class="bi bi-trash"></i> Delete</a>
 
+            </div>
+		</div>
+	</div>
+    <div id="save_dialog"></div>
+    </div>
+<div class="container-md bg-light">
+		<h2>LE &amp; A Editor: <?php echo $name; ?></h2>
+ 	 </div>
+    
+<div class='container-md pt-4'>
             <div class="content">
-                <div class="separator">
-                <h2 class='editor-style'>Learning Experience Name</h2> <div id="name" class="editable" contenteditable="true"><?php echo $name; ?></div>
-                </div>
-                <div class="separator">
-                    <h2 class='editor-style'>Short Description</h2> <div id="short_description" class="editable" contenteditable="true"><?php echo $short_description; ?></div>
-                </div>
-                <div class="separator">
-                    <h2 class='editor-style'>Description</h2> <div id="description" class="editable" contenteditable="true"><?php echo $description; ?></div>
-                </div>
-                <div class="separator">
-                    <h2 class='editor-style'>Skill Area Emphasis</h2>
-                    <select id='emphasis'>
+                <label for="name" class="form-label">Learning Experience Name</label> 
+                 <div id="name" class="form-control" contenteditable="true" aria-describedby="learningExperienceNameHelp"><?php echo $name; ?></div>
+                 <div id="learningExperienceNameHelp" class="form-text mb-4">The name should be concise yet clear enough to identify the activity.</div>
+
+                <label for="short_description" class="form-label">Short Description</label> 
+                     <div id="short_description" class="form-control" contenteditable="true" aria-describedby="shortDescriptionHelp"><?php echo $short_description; ?></div>
+                     <div id="shortDescriptionHelp" class="form-text mb-4">This is what is seen in the course list.</div>
+                
+                <label for="description" class="form-label">Description</label> 
+                     <div id="description" class="form-control" contenteditable="true" aria-describedby="descriptionHelp"><?php echo $description; ?></div>
+                     <div id="descriptionHelp" class="form-text mb-4">Describe the activity in as much detail as necessary.</div>
+                
+                <label for="emphasis" class="form-label">Skill Area Emphasis</label> 
+                    
+                    <select class= "form-control" id='emphasis' aria-describedby="emphasisHelp">
                     <option value='None'>None</option>
                     <option value='Grammar'>Grammar</option>
                     <option value='Listening'>Listening</option>
@@ -226,11 +246,18 @@ function deleteLe() {
                     <option value='Vocabulary'>Vocabulary</option>
                     <option value='Listening and Reading'>Listening and Reading</option>
                     </select>
+                    <div id="emphasisHelp" class="form-text mb-4">Which skill area does this learning experience primarily target?</div>
                 
-                </div>
-                <div class='separator'>
+            </div>
                 <h2 class='editor-style'>Courses</h2>
-                <ul id="connected_courses" class='connectedSortable'>
+                <p> Drag the courses from the Other courses list to connect the course with this learning experience. Drag courses from the Connected Courses list to disconnect them from the Learning Experience. </p>
+                <div class='row justify-content-evenly'>
+                <div class='col-3 p2 text-center'><h3>Connectected Courses</h3></div>
+                <div class='col-3 p2 text-center'><h3>Other Courses</h3></div>
+                </div>
+                <div class='row justify-content-evenly'>
+                    <div id="connected_courses" class='col-3 p-2 list-group bg-light connectedSortable border border-primary-subtle border-2'>
+                
                 <?php
                     $query = $elc_db->prepare("Select 
                     LE_courses.course_id,
@@ -252,10 +279,10 @@ function deleteLe() {
                         $courseName = $selectedCourse['course_name'];
                         $levelShortName = $selectedCourse['level_short_name'];
                         $courseId = $selectedCourse['course_id'];
-                        echo "<li class='connected_course' id='$courseId'>$levelShortName $courseName</li>";
+                        echo "<div class='m-1 connected_course list-group-item text-bg-success text-center rounded-2' id='$courseId'>$levelShortName $courseName</div>";
                         array_push($courses,$selectedCourse['course_id']);
                     }
-                echo "</ul><ul id='potential_courses' class='connectedSortable'>";
+                echo "</div><div id='potential_courses' class='col-3 p-2 list-group bg-light connectedSortable border border-primary-subtle border-2'>";
                 
                     $query = $elc_db->prepare("Select 
                     Courses.course_name, 
@@ -278,16 +305,18 @@ function deleteLe() {
                             
                         } else {
                         
-                        echo "<li class='potential_course' id='$courseId'>$levelShortName $courseName</li>";
+                        echo "<div class='m-1 potential_course list-group-item text-bg-warning text-center rounded-2' id='$courseId'>$levelShortName $courseName</div>";
                         }
                     }
 
                 ?>
-               </ul>  <!-- end potential courses list  -->
+               </div>  <!-- end potential courses list  -->
+                
                 </div>
+</div>
             
    
-    </article>
-    <?php } ?>
+<div class='container-md pt-4'>
+        <?php } ?>
 </body>
 </html>
