@@ -25,118 +25,24 @@ html {
     }
 }
 
-header h1 {
-    color: white;
-}
-
-h2.editor-style {
-    font-size: 1.5em;
-    font-weight: bolder;
-}
-div.content div.block h2 {
-    margin-bottom: .5em;
-}
-
-header {
-    /* background-image: none; */
-    height: 120px;
-    width: 100vw;
-    padding: 0em;
-    
-    position: relative;
-    position: fixed;
-    
-    
-    
-}
-
-header div {
-    padding: 0em .3em;
-    flex-grow: 1;
-    flex-shrink: 1;
-}
-
-header div#holder {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1218px;
-    margin-left:auto;
-    margin-right:auto;
-    
-    
-    
-   
-    
-    
-}
 
 
 
-div#user {
-    flex: initial;
-    flex-grow: 0;
-    flex-shrink: 0;
-    background-color: #16357a;
-    color: white;
-    font-size: 1em;
-    line-height: 1em;
-    height: 1em;
-    padding: .5em 1em;
-    margin-right: 1em;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 
-div#user a {
-    color: white;
-}
 
-div.boxed-text {
-    /* 	border: 1px solid black; */
-    background-color: #dadada;
-    padding: 10px;
-    margin: 10px;
-}
-
-div.content {
-    position: relative;
-    top: 120px;
-    max-width: 1218px;
-    padding: 1em; 
-}
-
-div.block {
-    margin: 1em 0em;
-    padding: 1em;
-    background-color:white;
-    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
-}
-
-div.editable {
-    border: 1px grey dashed;
-    padding: 5px;
-}
-
-div.separator {
-    padding: 10px;
-    background-color: white;
-    margin: 10px 0px;
-}
 
 #save_dialog {
     display: inline;
     margin-left: 25px;
 }
 
-.connected_course,
+/* .connected_course,
 .potential_course {
     display: block;
     color: white;
     width: 17em;
     padding: .2em;
     margin: .2em;
-    /* border-radius: .5em; */
     border: gray 1px solid;
     text-align: center;
     font-family: "Martel";
@@ -149,9 +55,9 @@ div.separator {
 
 .potential_course {
     background-color: grey;
-}
+} */
 
-#connected_courses,
+/* #connected_courses,
 #potential_courses {
     margin: 1em;
     padding: 1em;
@@ -180,9 +86,9 @@ div.leBox {
     padding: 4px;
     display: none;
     z-index: 999;
-}
+} */
 
-div.leMenu {
+/* div.leMenu {
     background-color: #002E5D;
     
     color: #3498db;
@@ -202,14 +108,12 @@ div.leMenu {
 .leMenu:hover {
     background-color: #3cb0fd;
     color: white;
-}
+} */
 
-a.leOption {
+/* a.leOption {
     user-select: none;
     font-weight: bolder;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
+   
     text-decoration: none;
     background-color: white;
     color: #3498db;
@@ -225,14 +129,5 @@ a.leOption:hover {
     color: white;
     background-color: #3cb0fd;
     ;
-}
+} */
 
-ins, ins * {
-    color: green;
-    background: #dfd;
-}
-
-del, del * {
-    color: red;
-    background: #fdd;
-}

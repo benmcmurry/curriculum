@@ -161,3 +161,19 @@ OL>LI::before {
     .dropdown-menu > li:hover > .dropdown-submenu {
     display: block;
     }
+
+/* for reviewing edits */
+    ins, ins * {
+      color: green;
+      background: #dfd;
+  }
+  
+  del, del * {
+      color: red;
+      background: #fdd;
+  }
+
+  label {
+    font-weight: 800;
+    font-size: 1.3em;
+  }

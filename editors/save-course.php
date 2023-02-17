@@ -24,7 +24,7 @@ if ($needs_review == 0) {
 	$query_final->bind_param("sssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $google_drive_folder_id, $course_id);
 	$query_final->execute();
 	$result_final = $query_final->get_result();
-echo "reviews saved.";
+
 
 
 }

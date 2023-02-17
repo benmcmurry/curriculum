@@ -18,7 +18,6 @@ $query->execute();
 $result = $query->get_result();
 
 		echo "Saved ".date('l jS \of F Y h:i:s A').".";
-		echo "<Script>close_popup();</script>";
 
 
 

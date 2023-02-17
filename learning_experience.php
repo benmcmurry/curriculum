@@ -1,7 +1,7 @@
 <?php
 session_start();
     include_once("../../connectFiles/connect_cis.php");
-    $learningExperienceId = $_GET['id'];
+    if (isset($_GET['id'])) {$learningExperienceId = $_GET['id'];} else {header("Location: index.php");}
     $query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id= ?");
     $query->bind_param('s', $learningExperienceId);
     $query->execute();
@@ -35,9 +35,8 @@ while ($learningExperience = $result->fetch_assoc()) {
         <?php include("content/header.php"); ?>
     
         <div id="title" class="container-fluid">
-            <?php
-            echo $le_name."</div><div class='container-md pt-4'>";
-            echo "<a id='editorPopup' href='editors/le-edit.php?learningExperienceId=$learningExperienceId'>Edit</a>";
+            <?php echo $le_name."</div><div class='container-md pt-4'>";
+            
             echo $description;
             echo "<h3>Connected Courses</h3>";
             $query = $elc_db->prepare("Select LE_courses.course_id, Courses.course_name, Courses.course_short_name, Levels.level_id, Levels.level_short_name, LE_courses.id 

@@ -15,10 +15,10 @@ else {exit();}
 
 
 
-$query = $elc_db->prepare("insert into Statistics (semester) values('0000')");
+$query = $elc_db->prepare("insert into Statistics (year) values('9999')");
 $query->execute();
 $result = $query->get_result();
-		echo "<script>location.reload(true);</script>";
+		echo "<script>location.reload();</script>";
 
 
 

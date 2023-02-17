@@ -92,99 +92,131 @@ $edit_result = $edits_query->get_result();
 <html lang="">
 
 <head>
-	<title>Review Edits - <?php echo $level_name." - ".$course_name; ?></title>
+    <title>Review Edits - <?php echo $level_name." - ".$course_name; ?></title>
 
-	<!-- 	Meta Information -->
-	<meta charset="utf-8">
-	<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
-	<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-	<?php include("styles_and_scripts.html"); ?>
-	<!-- 	Javascript -->
-	<script>
-		$(document).ready(function () {
+    <!-- 	Meta Information -->
+    <meta charset="utf-8">
+    <meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
+    <meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+    <meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-			$("#save").click(function () {
-				save();
-			});
+    <?php include("styles_and_scripts.html"); ?>
+    <!-- 	Javascript -->
+    <script>
+    $(document).ready(function() {
+
+
+        $("#save").click(function() {
+            save();
+        });
 
 
 
-		});
+    });
 
-		function save() {
-			course_id = <?php echo $course_id; ?>;
-			net_id = '<?php echo addslashes($updated_by_edits); ?>';
-			course_name = '<?php echo addslashes($course_name_edits); ?>';
-			course_description = '<?php echo addslashes($course_description_edits);?>';
-			course_short_name = '<?php echo addslashes($course_short_name_edits); ?>';
-			course_emphasis = '<?php echo addslashes($course_emphasis_edits); ?>';
-			course_materials = '<?php echo addslashes($course_materials_edits); ?>';
-			learning_outcomes = '<?php echo addslashes($learning_outcomes_edits); ?>';
-			google_drive_folder_id = '<?php echo addslashes($google_drive_folder_id_edits); ?>';
+    function save() {
+        course_id = <?php echo $course_id; ?>;
+        net_id = '<?php echo addslashes($updated_by_edits); ?>';
+        course_name = '<?php echo addslashes($course_name_edits); ?>';
+        course_description = '<?php echo addslashes($course_description_edits);?>';
+        course_short_name = '<?php echo addslashes($course_short_name_edits); ?>';
+        course_emphasis = '<?php echo addslashes($course_emphasis_edits); ?>';
+        course_materials = '<?php echo addslashes($course_materials_edits); ?>';
+        learning_outcomes = '<?php echo addslashes($learning_outcomes_edits); ?>';
+        google_drive_folder_id = '<?php echo addslashes($google_drive_folder_id_edits); ?>';
 
-			$.ajax({
-				method: "POST",
-				url: "save-course.php",
-				data: {
-					course_id: course_id,
-					net_id: net_id,
-					course_name: course_name,
-					course_short_name: course_short_name,
-					course_description: course_description,
-					course_emphasis: course_emphasis,
-					course_materials: course_materials,
-					learning_outcomes: learning_outcomes,
-					google_drive_folder_id: google_drive_folder_id,
-					needs_review: "0",
-				}
-			}).done(function (phpfile) {
-				$("#save_dialog").html(phpfile);
-				console.log("Did it run?")
-			});
-		}
-	</script>
+        $.ajax({
+            method: "POST",
+            url: "save-course.php",
+            data: {
+                course_id: course_id,
+                net_id: net_id,
+                course_name: course_name,
+                course_short_name: course_short_name,
+                course_description: course_description,
+                course_emphasis: course_emphasis,
+                course_materials: course_materials,
+                learning_outcomes: learning_outcomes,
+                google_drive_folder_id: google_drive_folder_id,
+                needs_review: "0",
+            }
+        }).done(function(phpfile) {
+            $("#save_dialog").html(phpfile);
+            console.log("Did it run?")
+        });
+    }
+    </script>
 </head>
 
 <body>
-	<header>
-		<div id='holder'>
-			<div>
-				<h1> Review Edits: <?php echo $level_name." - ".$course_name; ?></h1>
-				<a class="button" id="go_back" href="index.php">Main Menu</a>
-				<a class="button" id="save">Save</a>
-			</div>
-			<div id="save_dialog"></div>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
-		</div>
-	</header>
-	
-	<article>
-		<div class="content">
-			<div class="block">
-			<a class="button" style="float: right;"
-								href="course-edit.php?course_id=<?php echo $course_id;?>">Click here to edit</a>
-							<h2>Edits</h2>Last updated at <?php echo $updated_on_edits; ?> by
-							<?php echo $updated_by_edits; ?>
-	</div>
-	</table>
-		<?php $diff = htmldiff($course_name, $course_name_edits);	?><div class="block"><h2 class='editor-style'>Course Name</h2> <div id="course_name"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($course_short_name, $course_short_name_edits);	?><div class="block"><h2 class='editor-style'>Course Short Name (Limit to 4-5 characters)</h2> <div id="course_short_name"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($course_description, $course_description_edits);?><div class="block"><h2 class='editor-style'>Course Description</h2> <div id="course_description"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($course_emphasis, $course_emphasis_edits);?><div class="block"><h2 class='editor-style'>Course Emphasis</h2><div id="course_emphasis"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($course_materials, $course_materials_edits);?><div class="block"><h2 class='editor-style'>Course Books and Materials</h2><div id="course_materials"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($learning_outcomes, $learning_outcomes_edits);?><div class="block"><h2 class='editor-style'>Course Learning Outcomes</h2> <div id="learning_outcomes"><?php echo $diff; ?></div></div>
-		<?php $diff = htmldiff($google_drive_folder_id, $google_drive_folder_id_edits); ?><div class="block"><h2 class='editor-style'>Google Drive Folder ID</h2><div id="google_drive_folder_id"><?php echo $diff; ?></div></div>
-				
+    <?php require_once("../content/header-short.php"); ?>
+    <div id="title" class="container-fluid">
+        Review Edits: <?php echo $level_name." - ".$course_name; ?>
+    </div>
+    <div class="container-md sticky-top pt-5 mb-2">
+        <div class="row justify-content-between">
+            <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i>
+                    Editor Menu</a>
+            </div>
+
+            <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-primary" href="course-edit.php?course_id=<?php echo $course_id;?>"><i
+                        class="bi bi-pencil"></i> Edit</a>
+                <a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <div class="container-md pt-4" id="save_dialog"></div>
+    <div class="container-md pt-4">
 
 
-			
-		</div>
-	</article>
+
+	<label for="level_short_name" class="form-label">Edit Time and Author</label>
+
+        <div id="edits" class='form-control'>Last updated at <?php echo $updated_on_edits; ?> by
+        <?php echo $updated_by_edits; ?></div>
+
+
+    <?php $diff = htmldiff($course_name, $course_name_edits);	?>
+       <label for="course_name" class="form-label">Course Name</label>
+        <div id="course_name" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($course_short_name, $course_short_name_edits);	?>
+       <label for="course_short_name" class="form-label">Course Short Name</label>
+        <div id="course_short_name" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($course_description, $course_description_edits);?>
+       <label for="course_description" class="form-label">Course Description</label>
+        <div id="course_description" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($course_emphasis, $course_emphasis_edits);?>
+       <label for="course_emphasis" class="form-label">Course Emphasis</label>
+        <div id="course_emphasis" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($course_materials, $course_materials_edits);?>
+       <label for="course_materials" class="form-label">Course Books and Materials</label>
+        <div id="course_materials" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($learning_outcomes, $learning_outcomes_edits);?>
+       <label for="learning_outcomes" class="form-label">Course Learning Outcomes</label>
+        <div id="learning_outcomes" class='form-control'><?php echo $diff; ?></div>
+    
+    <?php $diff = htmldiff($google_drive_folder_id, $google_drive_folder_id_edits); ?>
+       <label for="google_drive_folder_id" class="form-label">Google Drive Folder ID</label>
+        <div id="google_drive_folder_id" class='form-control'><?php echo $diff; ?></div>
+    
+
+
+
+
+    </div>
+    
 </body>
 
 </html>

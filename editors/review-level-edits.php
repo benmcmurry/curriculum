@@ -73,93 +73,106 @@ $result_edits = $query_edits->get_result();
 
 <!DOCTYPE html>
 <html lang="">
+
 <head>
-	<title>Level Editor - <?php echo $level_name; ?></title>
+    <title>Level Editor - <?php echo $level_name; ?></title>
 
-<!-- 	Meta Information -->
-	<meta charset="utf-8">
-	<meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
-	<meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<?php include("styles_and_scripts.html"); ?>
+    <!-- 	Meta Information -->
+    <meta charset="utf-8">
+    <meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
+    <meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+    <meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	<!-- 	Javascript -->
-	<script>
-	$(document).ready(function() {
+    <?php include("styles_and_scripts.html"); ?>
 
 
-	$("#save").click(function(){
-		save();
-	});
+    <!-- 	Javascript -->
+    <script>
+    $(document).ready(function() {
+
+
+        $("#save").click(function() {
+            save();
+        });
 
 
 
-	 $(window).keydown(function (e){
-    if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) { /*ctrl+s or command+s*/
-        save();
-        e.preventDefault();
-        return false;
+        $(window).keydown(function(e) {
+            if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) {
+                /*ctrl+s or command+s*/
+                save();
+                e.preventDefault();
+                return false;
+            }
+        });
+
+    });
+
+    function save() {
+        level_id = <?php echo $level_id; ?>;
+        level_name = '<?php echo addslashes($level_name_edits); ?>';
+        level_short_name = '<?php echo addslashes($level_short_name_edits); ?>';
+        level_descriptor = '<?php echo addslashes($level_descriptor_edits); ?>';
+
+        net_id = '<?php echo $net_id; ?>';
+        $.ajax({
+            method: "POST",
+            url: "save-level.php",
+            data: {
+                level_id: level_id,
+                level_name: level_name,
+                level_short_name: level_short_name,
+                level_descriptor: level_descriptor,
+                net_id: net_id,
+                needs_review: "0",
+                level_updated_by: "<?php echo $level_updated_by_edits; ?>"
+
+            }
+        }).done(function(phpfile) {
+            $("#save_dialog").html(phpfile);
+        });
     }
-	});
-
-});
-
-function save() {
-		level_id = <?php echo $level_id; ?>;
-		level_name = '<?php echo addslashes($level_name_edits); ?>';
-		level_short_name = '<?php echo addslashes($level_short_name_edits); ?>';
-		level_descriptor = '<?php echo addslashes($level_descriptor_edits); ?>';
-		
-		net_id = '<?php echo $net_id; ?>';
-		$.ajax({
-			method: "POST",
-			url: "save-level.php",
-			data: {
-				level_id: level_id,
-				level_name: level_name,
-				level_short_name: level_short_name,
-				level_descriptor: level_descriptor,
-				net_id: net_id,
-				needs_review: "0",
-				level_updated_by: "<?php echo $level_updated_by_edits; ?>"
-
-				}
-		}).done(function(phpfile) {
-		$("#save_dialog").html(phpfile);
-  		});
-}
-
-</script>
+    </script>
 </head>
+
 <body>
-	<header>
-	<div id='holder'>
-		<div>
-			<h1> Review Level Edits: <?php echo $level_name; ?></h1>
+    <?php require_once("../content/header-short.php"); ?>
+    <div id="title" class="container-fluid">
+        Review Level Edits: <?php echo $level_name; ?>
+    </div>
+    <div class="container-md sticky-top pt-5 mb-2">
+        <div class="row justify-content-between">
+            <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i>
+                    Editor Menu</a>
+            </div>
 
-			<a class="button" id="go_back" href="index.php">Main Menu</a>
-			<a class="button" id="save">Save</a>
-			<div id="save_dialog"></div>
-</div>
-			<div id="user"><?php echo $net_id." | <a href='?logout='>Logout</a>"; ?></div>
+            <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-primary" href="level-edit.php?level_id=<?php echo $level_id;?>"><i
+                        class="bi bi-pencil"></i> Edit</a>
+                <a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+            </div>
+        </div>
 
-	</header>
-	<article>
-		<div class="content">
-				<div class='block'>
-					<a class="button" style="float: right;" href="level-edit.php?level_id=<?php echo $level_id;?>">Click here to edit</a><h2 >Edits</h2>Last updated at <?php echo $level_updated_on_edits; ?> by <?php echo $level_updated_by_edits; ?>
-				</div>
-				
-				
-				<?php $diff = htmldiff($level_name, $level_name_edits);	?><div class="block"><h2>Level Name</h2><div id="level_name"> <?php echo $diff; ?></div></div>
-				<?php $diff = htmldiff($level_short_name, $level_short_name_edits);	?><div class="block"><h2>Level Short Name</h2><div id="level_short_name"> <?php echo $diff; ?></div></div>
-				<?php $diff = htmldiff($level_descriptor, $level_descriptor_edits);	?><div class="block"><h2>Descriptor</h2><div id="level_descriptor"> <?php echo $diff; ?></div></div>		
-							
-		</div>
-	</article>
+    </div>
+
+    <div class="container-md pt-4" id="save_dialog"></div>
+    <div class="container-md pt-4">
+        <div class="container-md pt-4">
+
+            <?php $diff = htmldiff($level_name, $level_name_edits);	?><div class="block">
+                <label for="level_name" class="form-label">Level Name</label>
+                <div id="level_name"> <?php echo $diff; ?></div>
+                <?php $diff = htmldiff($level_short_name, $level_short_name_edits);	?>
+                <label for="level_short_name" class="form-label">Level Short Name</label>
+                <div id="level_short_name"> <?php echo $diff; ?></div>
+                <?php $diff = htmldiff($level_descriptor, $level_descriptor_edits);	?>
+                <label for="level_descriptor" class="form-label">Descriptor</label>
+                <div id="level_descriptor"> <?php echo $diff; ?></div>
+
+            </div>
 </body>
+
 </html>

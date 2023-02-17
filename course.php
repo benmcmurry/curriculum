@@ -1,7 +1,7 @@
 <?php
 session_start();
     include_once("../../connectFiles/connect_cis.php");
-    $course_id = $_GET['course_id'];
+    if (isset($_GET['course_id'])) {$course_id = $_GET['course_id'];} else {header("Location: index.php";}
     $title_query = $elc_db->prepare("Select Courses.course_name, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id= ?");
     $title_query->bind_param('s', $course_id);
     $title_query->execute();
