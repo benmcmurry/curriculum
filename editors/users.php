@@ -141,27 +141,17 @@ $result = $query->get_result();
 </head>
 
 <body>
-    <header>
-        <div id='holder'>
-            <div>
-                <h1>Curriculum Editor - Access Table</h1>
-                <a class="button" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
-            </div>
-            <div id="user">
-                <?php
-                if ($auth) {
-                    echo phpCAS::getUser() . " | <a href='?logout='>Logout</a>";
-                } else {
-                    echo "<a href='?login='>Login</a>";
-                }
-                ?>
-            </div>
-        </div>
+    <?php require_once("../content/header-short.php"); ?>
+    
+
+        <div id="title" class="container-fluid">
+        Curriculum Editor - Access Table <br />
+        <a class="btn btn-primary" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
+           
 
 
-    </header>
-    <article>
-
+ 
+<div class="container-md pt-4">
         <div class="content">
             <table id="newUser">
                
@@ -236,5 +226,5 @@ $result = $query->get_result();
                 ?>
             </table>
         </div>
-    </article>
+                </div>
 </body>
