@@ -49,8 +49,8 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
 
 
 
-echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
-echo "<p>".$course['skill_area_philosophy']."</p>";
+// echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
+// echo "<p>".$course['skill_area_philosophy']."</p>";
 
 
         echo "<h3 class='course_data'>Course Description</h3>";
@@ -74,7 +74,7 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 		from `LE_courses`
 				natural left join
 					Learning_experiences 
-				where LE_courses.course_id=? order by emphasis, name ASC"
+				where LE_courses.course_id=? order by emphasis, Learning_experiences.name ASC"
         );
         $queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
         $queryRequiredLearningExperiences->execute();
@@ -123,9 +123,10 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
         // end getting learning Experiences
 
         if ($auth && $access){
-        echo "<h3 class='course_data'>Teacher Resources</h3>";
-        echo "<p>".$course['teacher_resources']."</p>";
-        echo "<iframe class='google_folder' src='https://drive.google.com/embeddedfolderview?id=".$course['google_drive_folder_id']."#list' width='100%' height='500px' frameborder='0'></iframe>";
+            echo "<a type='button' class='btn btn-primary'  href='https://byu.box.com/s/3sp7037dloc3ponmddtxk9hhd42po6wb'>Teacher Resources</a>";
+        // echo "<h3 class='course_data'>Teacher Resources</h3>";
+        // echo "<p>".$course['teacher_resources']."</p>";
+        // echo "<iframe class='google_folder' src='https://drive.google.com/embeddedfolderview?id=".$course['google_drive_folder_id']."#list' width='100%' height='500px' frameborder='0'></iframe>";
         }
         else {echo "Teachers can login to see additional resources.";
         }
@@ -137,6 +138,6 @@ echo "<p>".$course['skill_area_philosophy']."</p>";
 
         <?php include("content/footer.html"); ?>
     </footer>
-    <div id="faded-background">hello</div>
+    <div id="faded-background"></div>
 </body>
 </html>
