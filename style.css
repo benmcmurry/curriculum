@@ -177,3 +177,7 @@ OL>LI::before {
     font-weight: 800;
     font-size: 1.3em;
   }
+
+  btn-primary {
+    background-color: black;
+  }

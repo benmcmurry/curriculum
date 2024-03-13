@@ -23,7 +23,7 @@ $result = $query->get_result();
       $learning_outcomes = $course['learning_outcomes'];
       $assessment = $course['assessment'];
       $learning_experiences = $course['learning_experiences'];
-      $google_drive_folder_id = $course['google_drive_folder_id'];
+      $box_folder = $course['box_folder'];
   }
 
 ?>
@@ -54,7 +54,7 @@ $result = $query->get_result();
 		current_learning_outcomes = $("#learning_outcomes").text();
 		current_assessment = $("#assessment").text();
 		current_learning_experiences = $("#learning_experiences").text();
-		current_google_drive_folder_id = $("#google_drive_folder_id").text();
+		current_box_folder = $("#box_folder").text();
 
 	$("#save").click(function(){
 		save("button");
@@ -117,7 +117,7 @@ function save() {
     //       current_learning_outcomes == $("#learning_outcomes").text() &&
     //       current_assessment == $("#assessment").text() &&
     //       current_learning_experiences == $("#learning_experiences").text() &&
-    //       current_google_drive_folder_id == $("#google_drive_folder_id").text())
+    //       current_box_folder == $("#box_folder").text())
     //       {return ;}
 
 		course_id = <?php echo $course_id; ?>;
@@ -130,7 +130,7 @@ function save() {
 		learning_outcomes = $("#learning_outcomes").html();
 		assessment = $("#assessment").html();
 		learning_experiences = $("#learning_experiences").html();
-		google_drive_folder_id = $("#google_drive_folder_id").text();
+		box_folder = $("#box_folder").text();
 
 		$.ajax({
 			method: "POST",
@@ -146,7 +146,7 @@ function save() {
 				learning_outcomes: learning_outcomes,
 				assessment: assessment,
 				learning_experiences: learning_experiences,
-				google_drive_folder_id: google_drive_folder_id,
+				box_folder: box_folder,
 				needs_review: "1",
 				}
 		}).done(function(phpfile) {
@@ -210,9 +210,9 @@ if ($auth && $access) { ?>
 		<div id="learning_outcomes" class="form-control" contenteditable="true" aria-describedby="courseLearningOutcomesHelp"><?php echo $learning_outcomes; ?></div>
 		<div id="courseLearningOutcomesHelp" class="form-text mb-4">This should be an ordered list.</div>
 		
-		<label for="google_drive_folder_id" class="form-label">Google Drive Folder ID</label>
-		<div id="google_drive_folder_id" class="form-control" contenteditable="true" aria-describedby="googleDriveHelp"><?php echo $google_drive_folder_id; ?></div>
-		<div id="googleDriveHelp" class="form-text mb-4">This is the ID of the shared folder.</div>
+		<label for="box_folder" class="form-label">Box Folder Link</label>
+		<div id="box_folder" class="form-control" contenteditable="true" aria-describedby="googleDriveHelp"><?php echo $box_folder; ?></div>
+		<div id="googleDriveHelp" class="form-text mb-4">This the shareable link.</div>
 
 </div>
   <?php } ?>

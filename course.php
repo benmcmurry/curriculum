@@ -123,11 +123,8 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
         // end getting learning Experiences
 
         if ($auth && $access){
-            echo "<a type='button' class='btn btn-primary'  href='https://byu.box.com/s/3sp7037dloc3ponmddtxk9hhd42po6wb'>Teacher Resources</a>";
-        // echo "<h3 class='course_data'>Teacher Resources</h3>";
-        // echo "<p>".$course['teacher_resources']."</p>";
-        // echo "<iframe class='google_folder' src='https://drive.google.com/embeddedfolderview?id=".$course['google_drive_folder_id']."#list' width='100%' height='500px' frameborder='0'></iframe>";
-        }
+            echo "<a type='button' class='btn btn-primary'  href='".$course['box_folder']."'>Box Resources</a>";
+         }
         else {echo "Teachers can login to see additional resources.";
         }
 

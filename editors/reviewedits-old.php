@@ -75,7 +75,7 @@ while ($course = $result->fetch_assoc()) {
     $learning_outcomes = $course['learning_outcomes'];
     $assessment = $course['assessment'];
     $learning_experiences = $course['learning_experiences'];
-    $google_drive_folder_id = $course['google_drive_folder_id'];
+    $box_folder = $course['box_folder'];
     $updated_on = $course['updated_on'];
     $updated_by = $course['updated_by'];
 }
@@ -94,7 +94,7 @@ $edit_result = $edits_query->get_result();
       $learning_outcomes_edits = $course_edits['learning_outcomes'];
       $assessment_edits = $course_edits['assessment'];
       $learning_experiences_edits = $course_edits['learning_experiences'];
-      $google_drive_folder_id_edits = $course_edits['google_drive_folder_id'];
+      $box_folder_edits = $course_edits['box_folder'];
       $updated_on_edits = $course_edits['updated_on'];
       $updated_by_edits = $course_edits['updated_by'];
   }
@@ -141,7 +141,7 @@ $edit_result = $edits_query->get_result();
 			course_emphasis = '<?php echo $course_emphasis_edits; ?>';
 			course_materials = '<?php echo $course_materials_edits; ?>';
 			learning_outcomes = '<?php echo $learning_outcomes_edits; ?>';
-			google_drive_folder_id = '<?php echo $google_drive_folder_id_edits; ?>';
+			box_folder = '<?php echo $box_folder_edits; ?>';
 
 			$.ajax({
 				method: "POST",
@@ -155,7 +155,7 @@ $edit_result = $edits_query->get_result();
 					course_emphasis: course_emphasis,
 					course_materials: course_materials,
 					learning_outcomes: learning_outcomes,
-					google_drive_folder_id: google_drive_folder_id,
+					box_folder: box_folder,
 					needs_review: "0",
 				}
 			}).done(function (phpfile) {
@@ -266,15 +266,15 @@ $edit_result = $edits_query->get_result();
 					</tr>
 
 					<!-- Google Drive Folder -->
-					<?php $diff = get_decorated_diff($google_drive_folder_id, $google_drive_folder_id_edits); ?>
+					<?php $diff = get_decorated_diff($box_folder, $box_folder_edits); ?>
 					<tr>
 						<td colspan="2">
-							<h2>Google Drive Folder ID</h2>
+							<h2>Box Folder Link</h2>
 						</td>
 					</tr>
 					<tr>
 						<td width="50%"><?php echo $diff['old']; ?></td>
-						<td width="50%" id="google_drive_folder_id" ><?php echo $diff['new']; ?></td>
+						<td width="50%" id="box_folder" ><?php echo $diff['new']; ?></td>
 					</tr>
 
 				</table>

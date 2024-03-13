@@ -59,7 +59,7 @@ while ($course = $result->fetch_assoc()) {
     $learning_outcomes = $course['learning_outcomes'];
     $assessment = $course['assessment'];
     $learning_experiences = $course['learning_experiences'];
-    $google_drive_folder_id = $course['google_drive_folder_id'];
+    $box_folder = $course['box_folder'];
     $updated_on = $course['updated_on'];
     $updated_by = $course['updated_by'];
 }
@@ -78,7 +78,7 @@ $edit_result = $edits_query->get_result();
       $learning_outcomes_edits = $course_edits['learning_outcomes'];
       $assessment_edits = $course_edits['assessment'];
       $learning_experiences_edits = $course_edits['learning_experiences'];
-      $google_drive_folder_id_edits = $course_edits['google_drive_folder_id'];
+      $box_folder_edits = $course_edits['box_folder'];
       $updated_on_edits = $course_edits['updated_on'];
       $updated_by_edits = $course_edits['updated_by'];
   }
@@ -125,7 +125,7 @@ $edit_result = $edits_query->get_result();
         course_emphasis = '<?php echo addslashes($course_emphasis_edits); ?>';
         course_materials = '<?php echo addslashes($course_materials_edits); ?>';
         learning_outcomes = '<?php echo addslashes($learning_outcomes_edits); ?>';
-        google_drive_folder_id = '<?php echo addslashes($google_drive_folder_id_edits); ?>';
+        box_folder = '<?php echo addslashes($box_folder_edits); ?>';
 
         $.ajax({
             method: "POST",
@@ -139,7 +139,7 @@ $edit_result = $edits_query->get_result();
                 course_emphasis: course_emphasis,
                 course_materials: course_materials,
                 learning_outcomes: learning_outcomes,
-                google_drive_folder_id: google_drive_folder_id,
+                box_folder: box_folder,
                 needs_review: "0",
             }
         }).done(function(phpfile) {
@@ -207,9 +207,9 @@ $edit_result = $edits_query->get_result();
        <label for="learning_outcomes" class="form-label">Course Learning Outcomes</label>
         <div id="learning_outcomes" class='form-control'><?php echo $diff; ?></div>
     
-    <?php $diff = htmldiff($google_drive_folder_id, $google_drive_folder_id_edits); ?>
-       <label for="google_drive_folder_id" class="form-label">Google Drive Folder ID</label>
-        <div id="google_drive_folder_id" class='form-control'><?php echo $diff; ?></div>
+    <?php $diff = htmldiff($box_folder, $box_folder_edits); ?>
+       <label for="box_folder" class="form-label">Box Folder Link</label>
+        <div id="box_folder" class='form-control'><?php echo $diff; ?></div>
     
 
 
