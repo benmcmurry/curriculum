@@ -123,7 +123,9 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
         // end getting learning Experiences
 
         if ($auth && $access){
-            echo "<a type='button' class='btn btn-primary'  href='".$course['box_folder']."'>Box Resources</a>";
+           // echo "<a type='button' class='btn btn-primary'  href='".$course['box_folder']."'>Box Resources</a>";
+            echo "<a type='button' class='btn btn-primary'  href='https://byu.box.com/s/3sp7037dloc3ponmddtxk9hhd42po6wb'>Box Resources</a>";
+
          }
         else {echo "Teachers can login to see additional resources.";
         }
