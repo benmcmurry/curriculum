@@ -6,7 +6,7 @@ if ($course_id > 33) {$message =  "Invalid course. showing last course."; $cours
 
 include_once("../../../connectFiles/connect_cis.php");
 
-include_once("cas-go.php");
+include_once("../cas-go.php");
 include_once("admins.php");
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);

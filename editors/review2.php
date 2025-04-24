@@ -5,7 +5,7 @@ header("Pragma: no-cache");
 header("Expires: 0");
 include_once("../../../connectFiles/connect_cis.php");
 // require_once $_SERVER['DOCUMENT_ROOT'] . '/Mail.php';
-include_once("cas-go.php");
+include_once("../cas-go.php");
 if ($net_id == 'blm39'|| 'karimay') {echo "cleared!";}
 else {exit();}
 ?>

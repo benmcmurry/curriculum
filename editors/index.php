@@ -1,7 +1,7 @@
 <?php
 session_start();
     require_once"../../../connectFiles/connect_cis.php";
-    require_once"cas-go.php";
+    require_once"../cas-go.php";
     require_once"../teachers.php";
     
 ?>

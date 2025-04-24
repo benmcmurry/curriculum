@@ -1,7 +1,7 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-include_once("cas-go.php");
+include_once("../cas-go.php");
 include_once("admins.php");
 ?>
 
