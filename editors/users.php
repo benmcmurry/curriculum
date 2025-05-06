@@ -176,8 +176,8 @@ $result = $query->get_result();
                     </td>
                     <td>
                         <select name="newAccess" id="newAccess">
-                            <option value='choose' disabled selected> Access Level</option>
-                            <option value="teacher">Teacher</option>
+                            <option value='choose' disabled> Access Level</option>
+                            <option value="teacher" selected>Teacher</option>
                             <option value="admin">Admin</option>
                         </select>
                     </td>
