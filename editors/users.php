@@ -79,9 +79,9 @@ $result = $query->get_result();
                 document.querySelector("#update").innerHTML = "Please complete all fields.";
 
             } else {
-                console.log(full_name);
-                console.log(net_id);
-                console.log(access);
+                // alert("name:" + full_name);
+                // alert(net_id);
+                // alert(access);
                 fd.append('full_name', full_name);
                 fd.append('net_id', net_id);
                 fd.append('access', access);
