@@ -79,9 +79,9 @@ $result = $query->get_result();
                 document.querySelector("#update").innerHTML = "Please complete all fields.";
 
             } else {
-                // alert("name:" + full_name);
-                // alert(net_id);
-                // alert(access);
+                console.log(full_name);
+                console.log(net_id);
+                console.log(access);
                 fd.append('full_name', full_name);
                 fd.append('net_id', net_id);
                 fd.append('access', access);
@@ -93,7 +93,7 @@ $result = $query->get_result();
                 }
                 xmlHttp.open("post", "phpScripts/addUser.php");
                 xmlHttp.send(fd);
-                location.reload();
+                // location.reload();
             }
         }
         function removeUser(id) {

@@ -1,4 +1,5 @@
 <?php
+error_reporting( E_ALL ); 
 include_once("../../../../connectFiles/connect_cis.php");
 
 include_once("../../cas-go.php");
