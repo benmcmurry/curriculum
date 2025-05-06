@@ -11,7 +11,7 @@ $query = $elc_db->prepare("Insert into User_access (net_id, full_name, access) V
 $query->bind_param("sss", $net_id, $full_name, $access);
 $query->execute();
 $result = $query->get_result();
-echo "$full_name has been given $access access with the netid of $net_id.";
+echo "$full_name has been given $access access with the netid of $net_id. <a style='color:blue; cursor:pointer' onclick='location.reload()'>Click here to refresh</a>";
 
 
 

@@ -147,18 +147,19 @@ $result = $query->get_result();
         <div id="title" class="container-fluid">
         Curriculum Editor - Access Table <br />
         <a class="btn btn-primary" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
-           
+    </div>  
 
 
- 
+        <div class="container-fluid" id="update" style="height: 2em; font-size:12px; font-weight:light;text-align:center"></div>
 <div class="container-md pt-4">
         <div class="content">
+       
             <table id="newUser">
                
             </table>
 
 
-            <div id="update" style="height: 2em;"></div>
+           
             <table id="users">
                 <tr>
                     <th>Full Name</th>
