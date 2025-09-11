@@ -56,7 +56,7 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
 // echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
 // echo "<p>".$course['skill_area_philosophy']."</p>";
 
-echo "Access: ".$access;
+
         echo "<h3 class='course_data'>Course Description</h3>";
         echo "<p>".$course['course_description']."</p>";
 
