@@ -2,11 +2,12 @@
 include_once("../../../connectFiles/connect_cis.php");
 
 include_once("../cas-go.php");
+require_once("admins.php"); 
 
-if ($net_id == "blm39" || $net_id == "karimay") {
-} else {
-    echo "access denied";
-}
+// if ($net_id == "blm39" || $net_id == "karimay") {
+// } else {
+//     echo "access denied";
+// }
 
 $query = $elc_db->prepare("Select * from User_access order by id desc");
 $query->execute();
@@ -141,12 +142,28 @@ $result = $query->get_result();
 </head>
 
 <body>
-    <?php require_once("../content/header-short.php"); ?>
+    <?php require_once("../content/header-short.php"); 
+     require_once("../content/header-short.php"); 
+    if ($message) {
+	echo "<div class='container-md pt-4'>";
+	echo $message;
+	echo "</div>";
     
+}
+    if ($auth && $access) { ?>
 
         <div id="title" class="container-fluid">
         Curriculum Editor - Access Table <br />
-        <a class="btn btn-primary" id="go_back" href="https://elc.byu.edu/curriculum/">View the Curriculum Portfolio</a>
+    <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-secondary" id="toPortfolio" href="../index.php"><i class="bi bi-arrow-return-left"></i>
+                    Portfolio </a>
+
+            </div>
+            <div class="btn-group col-3" role="group">
+                <a type="button" class="btn btn-secondary" id="toEditor" href="index.php"><i class="bi bi-pencil"></i>
+                    Edit Menu </a>
+
+            </div>
     </div>  
 
 
@@ -182,7 +199,7 @@ $result = $query->get_result();
                             <option value="admin">Admin</option>
                         </select>
                     </td>
-                    <td> <a class="button full_width" id="addUser" onclick="addUser()">Add User</a>
+                    <td> <a class="btn btn-success" id="addUser" onclick="addUser()"><i class='bi bi-person-fill-add'></i></a>
                     </td>
 
 
@@ -194,7 +211,7 @@ $result = $query->get_result();
                 while ($users = $result->fetch_assoc()) {
                     $teacherAccess = "";
                     $adminAccess = "";
-                    $noaccess = "";
+                  
                     switch ($users['access']) {
                         case "teacher":
                             $teacherAccess = "selected";
@@ -202,9 +219,7 @@ $result = $query->get_result();
                         case "admin":
                             $adminAccess = "selected";
                             break;
-                        case "no access":
-                            $noaccess = "selected";
-                            break;
+                        
                     }
                 ?>
                     <tr>
@@ -216,11 +231,11 @@ $result = $query->get_result();
                             <select id="access" name="access" onchange="updateAccess(<?php echo $users['id']; ?>, this.value)">
                                 <option value="teacher" <?php echo $teacherAccess; ?>>Teacher</option>
                                 <option value="admin" <?php echo $adminAccess; ?>>Admin</option>
-                                <option value="no access" <?php echo $noaccess; ?>>No Access</option>
+                               
                             </select>
                         </td>
                         <td>
-                        <a class="button full_width" id="removeUser" onclick="removeUser(<?php echo $users['id']; ?>)">Remove User</a>
+                        <a class="btn btn-danger" id="removeUser" onclick="removeUser(<?php echo $users['id']; ?>)"><i class='bi bi-person-fill-x'></i></a>
                         </td>
                     </tr>
                 <?php }
@@ -228,4 +243,5 @@ $result = $query->get_result();
             </table>
         </div>
                 </div>
+    <?php } ?>
 </body>

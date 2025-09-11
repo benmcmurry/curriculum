@@ -2,8 +2,8 @@
 session_start();
     require_once"../../../connectFiles/connect_cis.php";
     require_once"../cas-go.php";
-    require_once"../teachers.php";
-    
+    // require_once"../teachers.php";
+    include_once("admins.php");
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,15 @@ session_start();
 
 
 
-    <?php require_once("../content/header-short.php"); ?>
+    <?php require_once("../content/header-short.php"); 
+    if ($message) {
+	echo "<div class='container-md pt-4'>";
+	echo $message;
+	echo "</div>";
+    
+}
+
+if ($auth && $access) { ?>
     <div id="title" class="container-fluid">
         Curriculum Portfolio Editor Menu
     </div>
@@ -36,8 +44,13 @@ session_start();
             <div class="btn-group col-3" role="group">
             </div>
             <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-primary" id="toPortfolio" href="../index.php"><i class="bi bi-back"></i>
+                <a type="button" class="btn btn-secondary" id="toPortfolio" href="../index.php"><i class="bi bi-arrow-return-left"></i>
                     Back to the Portfolio </a>
+
+            </div>
+             <div class="btn-group col-3" role="group">
+                    <a type="button" class="btn btn-secondary" id="toUsers" href="users.php"><i class="bi bi-table"></i>
+                    Access Table</a>
             </div>
             <div class="btn-group col-3" role="group">
             </div>
@@ -54,7 +67,7 @@ session_start();
     $result = $query->get_result();
     while ($levels = $result->fetch_assoc()) {
         echo "<div class='container-md mb-4 p-2 bg-light '>";
-        echo "<div class='row m-1'><div class='col p-2'><a class='w-100 text-center btn btn-primary' href='level-edit.php?level_id=".$levels['level_id']."'><i class='bi bi-pencil-square'></i> ".$levels['level_name']."</a></div></div>";
+        echo "<div class='row m-1'><div class='col p-2'><a class='w-100 text-center btn btn-secondary' href='level-edit.php?level_id=".$levels['level_id']."'><i class='bi bi-pencil-square'></i> ".$levels['level_name']."</a></div></div>";
         $course_query = "Select Courses.course_id, Courses.course_name,Courses.course_short_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";      
         if (!$course_result = $elc_db->query($course_query)) {
             die('There was an error running the query [' . $elc_db->error . ']');
@@ -62,7 +75,7 @@ session_start();
         echo "<div class='row m-1 justify-content-between' id=''>";
         while ($courses = $course_result->fetch_assoc()) {
             echo "<div class='col p-2'>";
-            echo "<a class='btn btn-primary mb-2 w-100' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
+            echo "<a class='btn btn-secondary mb-2 w-100' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
             $learningExperienceQuery = $elc_db->prepare("Select *, LE_courses.course_id from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
             $learningExperienceQuery->bind_param("s", $courses['course_id']);
             $learningExperienceQuery->execute();
@@ -121,7 +134,7 @@ if (phpCAS::getUser() == "blm39"|| 'karimay') {
     <footer>
         <?php include("../content/footer.html"); ?>
     </footer>
-
+ <?php } ?>
 </body>
 
 </html>
