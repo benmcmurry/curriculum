@@ -12,7 +12,7 @@ session_start();
             $level_name = $title['level_name'];
         }
         include_once("cas-go.php");
-        include_once("teachers.php");
+        require_once("teachers.php");
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -31,7 +31,11 @@ session_start();
 </head>
 <body>
     
-        <?php include("content/header.php"); ?>
+    
+        <?php 
+        include("content/header.php"); 
+        
+         ?>
     
 
         <div id="title" class="container-fluid">
@@ -52,7 +56,7 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
 // echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
 // echo "<p>".$course['skill_area_philosophy']."</p>";
 
-
+echo "Access: ".$access;
         echo "<h3 class='course_data'>Course Description</h3>";
         echo "<p>".$course['course_description']."</p>";
 
@@ -76,6 +80,9 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
 					Learning_experiences 
 				where LE_courses.course_id=? order by emphasis, Learning_experiences.name ASC"
         );
+
+        
+        
         $queryRequiredLearningExperiences->bind_param('s', $course['course_id']);
         $queryRequiredLearningExperiences->execute();
         $resultLe = $queryRequiredLearningExperiences->get_result();
@@ -122,7 +129,7 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
         echo "</ol>";
         // end getting learning Experiences
 
-        if ($auth && $access){
+        if ($auth && $teacher_access>0){
            // echo "<a type='button' class='btn btn-primary'  href='".$course['box_folder']."'>Box Resources</a>";
             echo "<a type='button' class='btn btn-primary'  href='https://byu.box.com/s/3sp7037dloc3ponmddtxk9hhd42po6wb'>Box Resources</a>";
 

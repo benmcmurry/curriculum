@@ -278,8 +278,42 @@ EOF;
                 </table>
             
            
+<div id="zotero-bibliography"></div>
+<script>
+  const GROUP_ID = 5548551; // replace with your numeric group ID
+  const STYLE = 'apa';
+  const LIMIT = 25;        // 1–100
+  const START = 0;         // offset for pagination
 
+  async function loadZoteroBib() {
+    const params = new URLSearchParams({
+      format: 'json',
+      include: 'bib',
+      style: STYLE,
+      sort: 'date',
+      direction: 'desc',
+      limit: String(LIMIT),
+      start: String(START),
+      // Optional filters:
+      // collection: 'XXXXXX',
+      // tag: 'Open Access',
+      // itemType: 'journalArticle',
+    });
 
+    const url = `https://api.zotero.org/groups/${GROUP_ID}/items?` + params.toString();
+    const res = await fetch(url, { headers: { 'Zotero-API-Version': '3' } });
+    const data = await res.json();
+
+    // data is an array of items; each has a bib HTML field (either item.meta.bib or item.bib)
+    const html = data.map(it => (it.meta && it.meta.bib) || it.bib || '').join('\n');
+    document.getElementById('zotero-bibliography').innerHTML = html;
+  }
+
+  loadZoteroBib().catch(err => {
+    console.error(err);
+    document.getElementById('zotero-bibliography').textContent = 'Unable to load bibliography.';
+  });
+</script>
 </div>
 <footer>
     <?php require "content/footer.html"; ?>
