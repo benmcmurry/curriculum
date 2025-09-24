@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
     // set year for copyright update
-    var d = new Date();
-    var n = d.getFullYear();
-    $("span#year").text(n);
+    // var d = new Date();
+    // var n = d.getFullYear();
+    // $("span#theYear").text(n);
     
 
     // $(window).keydown(function(e) {

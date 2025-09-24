@@ -2,6 +2,8 @@
   scroll-behavior: smooth;
 }
 /* this fixes the scrolling to the wrong position due to the sticky content */
+
+
 a.anchor {
   display: block;
   position: relative;
@@ -22,6 +24,13 @@ a.anchor {
 }
 #header a {
   text: rgb(0, 46, 93);
+}
+
+footer { 
+Margin-top: 2em;
+  padding: 1.5em;
+  border-top: solid 1px lightgrey;
+  text-align: center;
 }
 div#byu-bar {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -174,10 +183,14 @@ OL>LI::before {
   }
 
   label {
-    font-weight: 800;
-    font-size: 1.3em;
+    /* font-weight: 800;
+    font-size: 1.3em; */
   }
 
   btn-primary {
     background-color: black;
+  }
+
+  .arrow {
+    cursor: pointer;
   }
