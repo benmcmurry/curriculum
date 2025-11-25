@@ -2,14 +2,14 @@
 
 
 include_once("../../../connectFiles/connect_cis.php");
-if ($local == 0) {
+// if ($local == 0) {
     include_once("../../../../cas-go.php");
     include_once("admins.php");
 
     // $net_id = Authenticator::getUser();
-} else {
+// } else {
     $net_id = "blm39";
-}
+// }
 if ($net_id == 'blm39') {echo "cleared!";}
 else {exit();}
 
