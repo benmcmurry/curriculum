@@ -1,8 +1,11 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);	
 
 $course_id = $_GET['course_id']; $message ="";
 if ($course_id < 1) {$message =  "Invalid course. Showing first course."; $course_id = 1;}
-if ($course_id > 33) {$message =  "Invalid course. showing last course."; $course_id = 33;}
+if ($course_id > 37) {$message =  "Invalid course. showing last course."; $course_id = 37;}
 
 include_once("../../../connectFiles/connect_cis.php");
 
