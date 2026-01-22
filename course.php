@@ -50,13 +50,8 @@ session_start();
     $course = $result->fetch_assoc();
     echo $course['level_name']." - ".$course['course_name']."</div><div class='container-md pt-4'>";
 echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course.php?print_id=".$course['course_id']."'></a>";
-
-
-
-// echo "<h3 class='course_data'>Skill Area Philosophy</h3>";
-// echo "<p>".$course['skill_area_philosophy']."</p>";
-
-
+if ($course['active'] == 0) {echo "<div class='alert alert-warning' role='alert'>This course is currently inactive.</div>";}
+else {
         echo "<h3 class='course_data'>Course Description</h3>";
         echo "<p>".$course['course_description']."</p>";
 
@@ -136,7 +131,7 @@ echo "<a class='pdf_icon' title='Save Course information' href='print_pdf_course
          }
         else {echo "Teachers can login to see additional resources.";
         }
-
+}   //end if active
     echo "</div></div></div>";
  ?>
  

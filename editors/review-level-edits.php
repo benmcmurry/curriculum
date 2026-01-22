@@ -9,40 +9,40 @@ $query->bind_param("s", $level_id);
 $query->execute();
 $result = $query->get_result();
 
-function diff($old, $new){
+function diff($old, $new) {
     $matrix = array();
     $maxlen = 0;
-    foreach($old as $oindex => $ovalue){
+    foreach ($old as $oindex => $ovalue) {
         $nkeys = array_keys($new, $ovalue);
-        foreach($nkeys as $nindex){
+        foreach ($nkeys as $nindex) {
             $matrix[$oindex][$nindex] = isset($matrix[$oindex - 1][$nindex - 1]) ?
                 $matrix[$oindex - 1][$nindex - 1] + 1 : 1;
-            if($matrix[$oindex][$nindex] > $maxlen){
+            if ($matrix[$oindex][$nindex] > $maxlen) {
                 $maxlen = $matrix[$oindex][$nindex];
                 $omax = $oindex + 1 - $maxlen;
                 $nmax = $nindex + 1 - $maxlen;
             }
         }   
     }
-    if($maxlen == 0) return array(array('d'=>$old, 'i'=>$new));
+    if ($maxlen == 0) return array(array('d'=>$old, 'i'=>$new));
     return array_merge(
         diff(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)),
         array_slice($new, $nmax, $maxlen),
         diff(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen)));
 }
 
-function htmldiff($old, $new){
+function htmldiff($old, $new) {
 $ret = '';
-	$old = str_replace("<"," <", $old);
-	$old = str_replace(">","> ", $old);
-	$new = str_replace("<"," <", $new);
-	$new = str_replace(">","> ", $new);
+	$old = str_replace("<", " <", $old);
+	$old = str_replace(">", "> ", $old);
+	$new = str_replace("<", " <", $new);
+	$new = str_replace(">", "> ", $new);
 	$diff = diff(preg_split("/([\s]+)/", $old), preg_split("/([\s]+)/", $new));
 // print_r($diff);
-    foreach($diff as $k){
-        if(is_array($k))
-            $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
-                (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
+    foreach ($diff as $k) {
+        if (is_array($k))
+            $ret .= (!empty($k['d'])?"<del>".implode(' ', $k['d'])."</del> ":'').
+                (!empty($k['i'])?"<ins>".implode(' ', $k['i'])."</ins> ":'');
         else $ret .= $k . ' ';
     }
 	return $ret;
@@ -52,6 +52,7 @@ $ret = '';
       $level_name = $level['level_name'];
       $level_short_name = $level['level_short_name'];
       $level_descriptor = $level['level_descriptor'];
+        $level_active = $level['active'];
       $level_updated_by = $level['level_updated_by'];
       $level_updated_on = $level['level_updated_on'];
   }
@@ -65,11 +66,12 @@ $result_edits = $query_edits->get_result();
       $level_name_edits = $level_edits['level_name'];
       $level_short_name_edits = $level_edits['level_short_name'];
       $level_descriptor_edits = $level_edits['level_descriptor'];
+      $level_active_edits = $level_edits['active'];
       $level_updated_by_edits = $level_edits['level_updated_by'];
       $level_updated_on_edits = $level_edits['level_updated_on'];
   }
-
-?>
+ $level_active_label = ($level_active == 1) ? "Active" : "Inactive";
+    $level_active_edits_label = ($level_active_edits == 1) ? "Active" : "Inactive"; ?>
 
 <!DOCTYPE html>
 <html lang="">
@@ -84,20 +86,14 @@ $result_edits = $query_edits->get_result();
     <meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <?php include("styles_and_scripts.html"); ?>
-
 
     <!-- 	Javascript -->
     <script>
     $(document).ready(function() {
-
-
         $("#save").click(function() {
             save();
-        });
-
-
+        } );
 
         $(window).keydown(function(e) {
             if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) {
@@ -106,16 +102,15 @@ $result_edits = $query_edits->get_result();
                 e.preventDefault();
                 return false;
             }
-        });
-
-    });
+        } );
+    } );
 
     function save() {
         level_id = <?php echo $level_id; ?>;
         level_name = '<?php echo addslashes($level_name_edits); ?>';
         level_short_name = '<?php echo addslashes($level_short_name_edits); ?>';
         level_descriptor = '<?php echo addslashes($level_descriptor_edits); ?>';
-
+        level_active = '<?php echo $level_active_edits; ?>';
         net_id = '<?php echo $net_id; ?>';
         $.ajax({
             method: "POST",
@@ -125,16 +120,25 @@ $result_edits = $query_edits->get_result();
                 level_name: level_name,
                 level_short_name: level_short_name,
                 level_descriptor: level_descriptor,
+                level_active: level_active,
                 net_id: net_id,
                 needs_review: "0",
                 level_updated_by: "<?php echo $level_updated_by_edits; ?>"
-
             }
-        }).done(function(phpfile) {
+        } ).done(function(phpfile) {
             $("#save_dialog").html(phpfile);
-        });
+        } );
     }
     </script>
+    <style>
+        .form-label {
+  font-size: 20px;
+  font-weight: 200;
+  color: #333;
+  margin-top: 8px;
+  display: block;
+}
+    </style>
 </head>
 
 <body>
@@ -162,16 +166,21 @@ $result_edits = $query_edits->get_result();
     <div class="container-md pt-4">
         <div class="container-md pt-4">
 
-            <?php $diff = htmldiff($level_name, $level_name_edits);	?><div class="block">
+            <?php $diff = htmldiff($level_name, $level_name_edits);	?>
                 <label for="level_name" class="form-label">Level Name</label>
-                <div id="level_name"> <?php echo $diff; ?></div>
+                <div id="level_name" class='form-control'> <?php echo $diff; ?></div>
                 <?php $diff = htmldiff($level_short_name, $level_short_name_edits);	?>
                 <label for="level_short_name" class="form-label">Level Short Name</label>
-                <div id="level_short_name"> <?php echo $diff; ?></div>
+                <div id="level_short_name"class='form-control'> <?php echo $diff; ?></div>
                 <?php $diff = htmldiff($level_descriptor, $level_descriptor_edits);	?>
                 <label for="level_descriptor" class="form-label">Descriptor</label>
-                <div id="level_descriptor"> <?php echo $diff; ?></div>
-
+                <div id="level_descriptor" class='form-control'> <?php echo $diff; ?></div>
+              
+                <label for="level_active" class="form-label">Active Status</label>
+                <div id="level_active" class='form-control'><?php
+                if ($level_active == $level_active_edits) {echo "Level will remain ".$level_active_label.".<br />"; }
+                else { echo "Level status will change from <del>".$level_active_label."</del> to <ins>".$level_active_edits_label."</ins>.<br />"; }
+                ?>
             </div>
 </body>
 

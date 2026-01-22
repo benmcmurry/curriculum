@@ -17,6 +17,7 @@ while($level = $result->fetch_assoc()){
 	$level_short_name = $level['level_short_name'];
 	$level_descriptor = $level['level_descriptor'];
 	$level_updated_by = $net_id;
+	$level_active = $level['active'];
 
 
 	}
@@ -46,6 +47,7 @@ while($level = $result->fetch_assoc()){
 		current_level_name = $("#level_name").text();
 		current_level_descriptor = $("#level_descriptor").text();
 		current_level_short_name = $("#level_short_name").text();
+		current_level_active = $("#level_active").text();
 
 	$("#save").click(function(){
 		save("save button");
@@ -104,7 +106,8 @@ while($level = $result->fetch_assoc()){
 function save() {
 		 if (current_level_name == $("#level_name").text() &&
 		 current_level_descriptor == $("#level_descriptor").text() &&
-		 current_level_short_name == $("#level_short_name").text())
+		 current_level_short_name == $("#level_short_name").text() &&
+		 current_level_active == $("#level_active").text())
 		 {return;}
 
 		// if ( ==  ||  ==  ||  == $("#level_short_name").text())
@@ -112,6 +115,7 @@ function save() {
 		level_name = $("#level_name").text();
 		level_short_name = $("#level_short_name").text();
 		level_descriptor = $("#level_descriptor").html();
+		level_active = $("#level_active").text();
 		net_id = '<?php echo $net_id; ?>';
 		$.ajax({
 			method: "POST",
@@ -121,6 +125,7 @@ function save() {
 				level_name: level_name,
 				level_short_name: level_short_name,
 				level_descriptor: level_descriptor,
+				level_active: level_active,
 				net_id: net_id,
 				needs_review: "1",
 				level_updated_by: "<?php echo $level_updated_by; ?>"
@@ -179,8 +184,19 @@ function save() {
 		<label for="level_descriptor" class="form-label">Descriptor</label>
 			<div id="level_descriptor" class="form-control" aria-describedby="descriptorHelp"><?php echo $level_descriptor; ?></div>
 			<div id="descriptorHelp" class="form-text mb-4">Level Descriptors should include function and text-type.</div>
+		
+		
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="level_active" <?php if ($level_active == 1) {echo "checked";} ?> onchange="if(this.checked){$('#level_active').text('1');}else{$('#level_active').text('0');}">
+  <label class="form-check-label" for="level_active"><?php if ($level_active == 1) {echo "Active";} else {echo "Inactive";} ?></label>
+</div>
+<script>
+  document.getElementById('level_active').addEventListener('change', function() {
+    const label = document.querySelector('label[for="level_active"]');
+    label.textContent = this.checked ? 'Active' : 'Inactive';
+  });
+</script>
 
-			
 			</div>
 	<?php } ?>
 	<footer>

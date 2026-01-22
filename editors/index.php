@@ -62,7 +62,7 @@ if ($auth && $access) { ?>
 
     </div>
     <?php
-    $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels where active=1 order by level_order ASC");
+    $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
     $query->execute();
     $result = $query->get_result();
     while ($levels = $result->fetch_assoc()) {

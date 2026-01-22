@@ -182,10 +182,13 @@ OL>LI::before {
       background: #fdd;
   }
 
-  label {
-    /* font-weight: 800;
-    font-size: 1.3em; */
-  }
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
 
   btn-primary {
     background-color: black;
