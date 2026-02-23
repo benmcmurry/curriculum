@@ -6,7 +6,7 @@ include_once("admins.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">

@@ -89,7 +89,7 @@ $edit_result = $edits_query->get_result();
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <title>Review Edits - <?php echo $level_name." - ".$course_name; ?></title>

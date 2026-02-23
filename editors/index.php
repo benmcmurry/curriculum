@@ -7,7 +7,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <title>Curriculum Portfolio - English Language Center</title>

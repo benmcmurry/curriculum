@@ -31,7 +31,7 @@ while ($learningExperience = $result->fetch_assoc()) {
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
 <title>Learning Experience Editor - <?php echo $name; ?></title>
 

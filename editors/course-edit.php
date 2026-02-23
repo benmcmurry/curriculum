@@ -32,7 +32,7 @@ $result = $query->get_result();
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
 <title>Course Editor - <?php echo $level_name." - ".$course_name; ?></title>
 

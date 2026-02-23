@@ -74,7 +74,7 @@ $result_edits = $query_edits->get_result();
     $level_active_edits_label = ($level_active_edits == 1) ? "Active" : "Inactive"; ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <title>Level Editor - <?php echo $level_name; ?></title>

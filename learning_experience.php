@@ -16,7 +16,7 @@ while ($learningExperience = $result->fetch_assoc()) {
         include_once("teachers.php");
 ?>
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
     <title><?php echo $le_name; ?></title>
 

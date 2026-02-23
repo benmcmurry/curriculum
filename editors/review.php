@@ -8,7 +8,7 @@ else {exit();}
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
   <meta charset="utf-8">
 	<title>Scholarly Work Review</title>

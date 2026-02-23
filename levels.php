@@ -5,7 +5,7 @@ session_start();
 	include_once("teachers.php");
 ?>
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
 	<title>Curriculum Portfolio - English Language Center</title>
 

@@ -25,7 +25,7 @@ while ($levels = $result->fetch_assoc()) {
 ?>
 <div id="header" class="container-fluid sticky-top">
     <div class="row justify-content-between p-3    " id="byu-bar">
-        <div class="col-4"><a href="http://www.byu.edu"><img src="images/BYU-white.png" /></a></div>
+        <div class="col-4"><a href="http://www.byu.edu"><img src="images/BYU-white.png" alt="BYU logo" /></a></div>
         <div class="col-8" id="user">
 
             <svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">

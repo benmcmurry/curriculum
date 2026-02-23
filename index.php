@@ -5,7 +5,7 @@ session_start();
     require_once"teachers.php";
 ?>
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
     <title>Curriculum Portfolio - English Language Center</title>
 
@@ -47,7 +47,7 @@ session_start();
             resources, and facilities needed to maximize meaningful student participation. This encompasses what the
             students are to learn and how they are to learn it, including how the teachers and the institution
             facilitate, assess, and respond to this learning (adapted from Rogers, 1989, p. 26).</p>
-        <img style='float:right' src='images/triangle.png' />
+        <img style='float:right' src='images/triangle.png' alt='' />
         <p>All efforts associated with curriculum development and change seek an appropriate balance between three
             interrelated principles to ensure the curriculum is stable, responsive, and cohesive (see Figure 1). </p>
         <p>Though all effective curricula must embrace some innovation, a stable curriculum implements change in a way

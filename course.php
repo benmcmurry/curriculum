@@ -15,7 +15,7 @@ session_start();
         require_once("teachers.php");
 ?>
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
     <title><?php echo $level_name." - ".$course_name; ?></title>
 

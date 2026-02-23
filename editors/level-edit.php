@@ -25,7 +25,7 @@ while($level = $result->fetch_assoc()){
 ?>
 
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 <head>
 	<title>Level Editor - <?php echo $level_name; ?></title>
 
