@@ -147,7 +147,7 @@ function save() {
 
       if ($auth && $access) { ?>
 	  	<main id="main-content" class="container-md editor-main py-4">
-			<section class="editor-topbar mb-3" aria-label="Editor actions">
+			<section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
 				<div class="d-flex flex-wrap gap-2">
 					<a type="button" class="btn btn-secondary" id="toPortfolio" href="../levels.php#<?php echo $level_short_name;?>"><i class="bi bi-back"></i> Portfolio</a>
 					<a type="button" class="btn btn-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>

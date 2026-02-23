@@ -106,3 +106,7 @@ textarea:focus-visible {
     outline: 3px solid var(--editor-primary);
     outline-offset: 2px;
 }
+.editor-topbar.sticky-top {
+    top: calc(var(--editor-header-offset, 72px) + 0.5rem);
+    z-index: 1010;
+}

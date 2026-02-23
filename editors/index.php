@@ -37,7 +37,20 @@ if ($auth && $access) { ?>
         <h1 class="h3 mb-3">Curriculum Portfolio Editor</h1>
         <p class="mb-4">Select a level, then choose a course or learning experience to edit.</p>
 
-        <section class="editor-hero mb-4" aria-label="Quick actions">
+        <?php
+        $levelsNav = [];
+        $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
+        $query->execute();
+        $result = $query->get_result();
+        while ($levelRow = $result->fetch_assoc()) {
+            $levelsNav[] = [
+                'id' => (int) $levelRow['level_id'],
+                'name' => $levelRow['level_name']
+            ];
+        }
+        $result->free();
+        ?>
+        <section class="editor-topbar sticky-top mb-4" aria-label="Top actions">
             <div class="d-flex flex-wrap gap-2">
                 <a class="btn btn-secondary" id="toPortfolio" href="../index.php">
                     <i class="bi bi-arrow-return-left"></i> Back to Portfolio
@@ -48,15 +61,11 @@ if ($auth && $access) { ?>
             </div>
         </section>
 
-        <?php
-        $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
-        $query->execute();
-        $result = $query->get_result();
-        while ($levels = $result->fetch_assoc()) {
-            $levelId = (int) $levels['level_id'];
-            $levelName = htmlspecialchars($levels['level_name'], ENT_QUOTES, 'UTF-8');
+        <?php foreach ($levelsNav as $levelData) {
+                    $levelId = (int) $levelData['id'];
+                    $levelName = htmlspecialchars($levelData['name'], ENT_QUOTES, 'UTF-8');
             $levelHeadingId = "level-title-" . $levelId;
-            echo "<section class='editor-level card mb-4' aria-labelledby='".$levelHeadingId."'>";
+            echo "<section id='level-".$levelId."' class='editor-level card mb-4' aria-labelledby='".$levelHeadingId."'>";
             echo "<div class='card-header d-flex flex-wrap justify-content-between align-items-center gap-2'>";
             echo "<h2 class='h5 mb-0' id='".$levelHeadingId."'>".$levelName."</h2>";
             echo "<a class='btn btn-outline-secondary btn-sm' href='level-edit.php?level_id=".$levelId."'><i class='bi bi-pencil-square'></i> Edit level</a>";
@@ -100,12 +109,10 @@ if ($auth && $access) { ?>
                 echo "</div></article>";
             }
             echo "</div></div></section>";
-        }
-        $result->free();
+        } ?>
 
-        if (phpCAS::getUser() == "blm39" || phpCAS::getUser() == "karimay") {
-        ?>
-        <section class="pt-2" aria-labelledby="review-heading">
+        <?php if (phpCAS::getUser() == "blm39" || phpCAS::getUser() == "karimay") { ?>
+        <section id="review-section" class="pt-2" aria-labelledby="review-heading">
             <h2 id="review-heading" class="h4 mb-3">Review Submitted Changes</h2>
             <ul class="list-group mb-3">
                 <?php
