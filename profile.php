@@ -240,6 +240,7 @@ EOF;
 
 
             <div class="" role="region" aria-label="Controls">
+                <label for="q">Search citations</label>
                 <input class="container-md" id="q" type="search"
                     placeholder="Search in authors, title, venue, institution, URL…" />
                 

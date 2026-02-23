@@ -13,9 +13,12 @@ else {exit();}
   <meta charset="utf-8">
 	<title>Scholarly Work Review</title>
 	<meta name="description" content="" />
-  	<meta name="keywords" content="" />
+	<meta name="keywords" content="" />
 	<meta name="robots" content="" />
 	<!-- 	Style Sheet and Font info -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Martel:400,200' rel='stylesheet' type='text/css'>
 	<link href="review_style.css" rel="stylesheet" type="text/css" />
