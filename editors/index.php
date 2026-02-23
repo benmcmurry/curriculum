@@ -24,113 +24,124 @@ session_start();
 </head>
 
 <body>
-
-
+    <a class="skip-link" href="#main-content">Skip to editor content</a>
 
     <?php require_once("../content/header-short.php"); 
     if ($message) {
-	echo "<div class='container-md pt-4'>";
-	echo $message;
-	echo "</div>";
+	echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
     
 }
 
 if ($auth && $access) { ?>
-    <div id="title" class="container-fluid">
-        Curriculum Portfolio Editor Menu
-    </div>
-    <div class="container-md sticky-top pt-5 mb-2">
-        <div class="row justify-content-between">
-            <div class="btn-group col-3" role="group">
-            </div>
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-secondary" id="toPortfolio" href="../index.php"><i class="bi bi-arrow-return-left"></i>
-                    Back to the Portfolio </a>
+    <main id="main-content" class="container-md editor-main py-4">
+        <h1 class="h3 mb-3">Curriculum Portfolio Editor</h1>
+        <p class="mb-4">Select a level, then choose a course or learning experience to edit.</p>
 
+        <section class="editor-hero mb-4" aria-label="Quick actions">
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-secondary" id="toPortfolio" href="../index.php">
+                    <i class="bi bi-arrow-return-left"></i> Back to Portfolio
+                </a>
+                <a class="btn btn-secondary" id="toUsers" href="users.php">
+                    <i class="bi bi-table"></i> Access Table
+                </a>
             </div>
-             <div class="btn-group col-3" role="group">
-                    <a type="button" class="btn btn-secondary" id="toUsers" href="users.php"><i class="bi bi-table"></i>
-                    Access Table</a>
-            </div>
-            <div class="btn-group col-3" role="group">
-            </div>
+        </section>
 
-        </div>
+        <?php
+        $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
+        $query->execute();
+        $result = $query->get_result();
+        while ($levels = $result->fetch_assoc()) {
+            $levelId = (int) $levels['level_id'];
+            $levelName = htmlspecialchars($levels['level_name'], ENT_QUOTES, 'UTF-8');
+            $levelHeadingId = "level-title-" . $levelId;
+            echo "<section class='editor-level card mb-4' aria-labelledby='".$levelHeadingId."'>";
+            echo "<div class='card-header d-flex flex-wrap justify-content-between align-items-center gap-2'>";
+            echo "<h2 class='h5 mb-0' id='".$levelHeadingId."'>".$levelName."</h2>";
+            echo "<a class='btn btn-outline-secondary btn-sm' href='level-edit.php?level_id=".$levelId."'><i class='bi bi-pencil-square'></i> Edit level</a>";
+            echo "</div>";
+            echo "<div class='card-body'><div class='row g-3'>";
 
-    </div>
-    <div class="container-md pt-4">
+            $course_query = "Select Courses.course_id, Courses.course_name, Courses.course_short_name, Courses.level_id from Courses where Courses.level_id=".$levelId." order by course_order ASC";
+            if (!$course_result = $elc_db->query($course_query)) {
+                die('There was an error running the query [' . $elc_db->error . ']');
+            }
 
-    </div>
-    <?php
-    $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels order by level_order ASC");
-    $query->execute();
-    $result = $query->get_result();
-    while ($levels = $result->fetch_assoc()) {
-        echo "<div class='container-md mb-4 p-2 bg-light '>";
-        echo "<div class='row m-1'><div class='col p-2'><a class='w-100 text-center btn btn-secondary' href='level-edit.php?level_id=".$levels['level_id']."'><i class='bi bi-pencil-square'></i> ".$levels['level_name']."</a></div></div>";
-        $course_query = "Select Courses.course_id, Courses.course_name,Courses.course_short_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";      
-        if (!$course_result = $elc_db->query($course_query)) {
-            die('There was an error running the query [' . $elc_db->error . ']');
-        }
-        echo "<div class='row m-1 justify-content-between' id=''>";
-        while ($courses = $course_result->fetch_assoc()) {
-            echo "<div class='col p-2'>";
-            echo "<a class='btn btn-secondary mb-2 w-100' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
-            $learningExperienceQuery = $elc_db->prepare("Select *, LE_courses.course_id from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
-            $learningExperienceQuery->bind_param("s", $courses['course_id']);
-            $learningExperienceQuery->execute();
-            $learningExperienceResult = $learningExperienceQuery->get_result();
-           ?>
-         <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Learning Experiences
-            </button>
-            <ul class="dropdown-menu">
-            <?php
+            while ($courses = $course_result->fetch_assoc()) {
+                $courseId = (int) $courses['course_id'];
+                $courseName = htmlspecialchars($courses['course_name'], ENT_QUOTES, 'UTF-8');
+                $courseShortName = htmlspecialchars((string) $courses['course_short_name'], ENT_QUOTES, 'UTF-8');
+                echo "<article class='col-12 col-md-6 col-xl-3'>";
+                echo "<div class='course-card p-3 h-100'>";
+                echo "<h3 class='h6 mb-2'><a id='course-".$courseId."' class='d-inline-flex align-items-center gap-2' data-shortName='".$courseShortName."' data-name='".$courseName."' title='Edit course: ".$courseName."' href='course-edit.php?course_id=".$courseId."'><i class='bi bi-pencil-square' aria-hidden='true'></i><span>".$courseName."</span></a></h3>";
+                echo "<div class='d-grid gap-2 mb-3'>";
+                echo "<a class='btn btn-outline-primary btn-sm' href='le-edit.php?learningExperienceId=new&course_id=".$courseId."'><i class='bi bi-plus'></i> Add learning experience</a>";
+                echo "</div>";
+
+                $learningExperienceQuery = $elc_db->prepare("Select Learning_experiences.learning_experience_id, Learning_experiences.name from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
+                $learningExperienceQuery->bind_param("s", $courses['course_id']);
+                $learningExperienceQuery->execute();
+                $learningExperienceResult = $learningExperienceQuery->get_result();
+
+                echo "<p class='small fw-semibold mb-2'>Learning experiences</p>";
+                $hasLearningExperience = false;
+                echo "<ul class='list-group le-list'>";
                 while ($le = $learningExperienceResult->fetch_assoc()) {
-                    echo "<li><a class='dropdown-item' href='le-edit.php?learningExperienceId=".$le['learning_experience_id']."'><i class='bi bi-pencil-square'></i> ".$le['name']."</a></li>";
+                    $hasLearningExperience = true;
+                    $learningExperienceId = (int) $le['learning_experience_id'];
+                    $learningExperienceName = htmlspecialchars($le['name'], ENT_QUOTES, 'UTF-8');
+                    echo "<li class='list-group-item py-2'><a href='le-edit.php?learningExperienceId=".$learningExperienceId."'><i class='bi bi-pencil-square'></i> ".$learningExperienceName."</a></li>";
                 }
-                echo "<li><a id='new_le' class='dropdown-item' href='le-edit.php?learningExperienceId=new'><i class='bi bi-plus'></i> Learning Experience<a></li>";
-            echo "</ul></div></div>";
+                if (!$hasLearningExperience) {
+                    echo "<li class='list-group-item text-muted small'>No learning experiences connected yet.</li>";
+                }
+                echo "</ul>";
+                echo "</div></article>";
+            }
+            echo "</div></div></section>";
         }
-        echo "</div></div>";
-        
-    }
-    
         $result->free();
-      
-if (phpCAS::getUser() == "blm39"|| 'karimay') {
-    ?>
-            <div class="container-md pt-4">
 
-            <h2> Review Submitted Changes </h2>
-            <?php
-
-
-        $review_query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where needs_review = 1");
-        // $review_query = $elc_db->prepare("Select * from Courses_review where needs_review = 1");
-        $review_query->execute();
-        $result = $review_query->get_result();
-      while ($Courses_review = $result->fetch_assoc()) {
-      echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'><i class='bi bi-card-list'></i> ".$Courses_review['level_name']." - ".$Courses_review['course_name']."</a><br />";
-      }
-
-        $review_level_query = $elc_db->prepare("Select * from Levels_review where needs_review = 1");
-        $review_level_query->execute();
-        $review_level_query_results = $review_level_query->get_result();
-
-      while ($level_review = $review_level_query_results->fetch_assoc()) {
-      echo "<a href='review-level-edits.php?level_id=".$level_review['level_id']."'><i class='bi bi-card-checklist'></i> ".$level_review['level_name']."</a><br />";
-      }
-
-}
-
-?>
-        </div>
-    </div>
-
-
-    </div>
+        if (phpCAS::getUser() == "blm39" || phpCAS::getUser() == "karimay") {
+        ?>
+        <section class="pt-2" aria-labelledby="review-heading">
+            <h2 id="review-heading" class="h4 mb-3">Review Submitted Changes</h2>
+            <ul class="list-group mb-3">
+                <?php
+                $review_query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where needs_review = 1");
+                $review_query->execute();
+                $result = $review_query->get_result();
+                $hasCourseReviews = false;
+                while ($Courses_review = $result->fetch_assoc()) {
+                    $hasCourseReviews = true;
+                    $courseReviewName = htmlspecialchars($Courses_review['level_name']." - ".$Courses_review['course_name'], ENT_QUOTES, 'UTF-8');
+                    echo "<li class='list-group-item'><a href='review-edits.php?course_id=".(int) $Courses_review['course_id']."'><i class='bi bi-card-list'></i> ".$courseReviewName."</a></li>";
+                }
+                if (!$hasCourseReviews) {
+                    echo "<li class='list-group-item text-muted'>No course edit reviews pending.</li>";
+                }
+                ?>
+            </ul>
+            <ul class="list-group">
+                <?php
+                $review_level_query = $elc_db->prepare("Select * from Levels_review where needs_review = 1");
+                $review_level_query->execute();
+                $review_level_query_results = $review_level_query->get_result();
+                $hasLevelReviews = false;
+                while ($level_review = $review_level_query_results->fetch_assoc()) {
+                    $hasLevelReviews = true;
+                    $levelReviewName = htmlspecialchars($level_review['level_name'], ENT_QUOTES, 'UTF-8');
+                    echo "<li class='list-group-item'><a href='review-level-edits.php?level_id=".(int) $level_review['level_id']."'><i class='bi bi-card-checklist'></i> ".$levelReviewName."</a></li>";
+                }
+                if (!$hasLevelReviews) {
+                    echo "<li class='list-group-item text-muted'>No level edit reviews pending.</li>";
+                }
+                ?>
+            </ul>
+        </section>
+        <?php } ?>
+    </main>
     <footer>
         <?php include("../content/footer.html"); ?>
     </footer>

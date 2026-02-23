@@ -1,0 +1,108 @@
+:root {
+    --editor-bg: #f3f5f8;
+    --editor-surface: #ffffff;
+    --editor-border: #dbe3ea;
+    --editor-border-strong: #c8d4df;
+    --editor-text: #1f2a36;
+    --editor-muted: #5f6f7f;
+    --editor-primary: #0d6efd;
+    --editor-shadow: 0 2px 12px rgba(22, 39, 56, 0.06);
+    --editor-radius: 12px;
+}
+
+html,
+body {
+    background: var(--editor-bg);
+    color: var(--editor-text);
+    font-family: "Montserrat", "Segoe UI", Tahoma, sans-serif;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: var(--editor-primary);
+    color: #fff;
+    z-index: 1000;
+}
+
+.editor-main {
+    min-height: calc(100vh - 220px);
+}
+
+.editor-topbar,
+.editor-hero,
+.editor-panel {
+    background: var(--editor-surface);
+    border: 1px solid var(--editor-border);
+    border-radius: var(--editor-radius);
+    box-shadow: var(--editor-shadow);
+}
+
+.editor-topbar,
+.editor-hero,
+.editor-panel-body {
+    padding: 1rem;
+}
+
+.editor-panel-header {
+    padding: 0.8rem 1rem;
+    background: #f8fbff;
+    border-bottom: 1px solid #e7edf3;
+    border-radius: var(--editor-radius) var(--editor-radius) 0 0;
+}
+
+.editor-level {
+    border: 1px solid var(--editor-border);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface);
+    box-shadow: var(--editor-shadow);
+}
+
+.editor-level .card-header {
+    background: #f8fbff;
+    border-bottom: 1px solid #e7edf3;
+}
+
+.course-card {
+    border: 1px solid #e2e8ef;
+    border-radius: 10px;
+    background: var(--editor-surface);
+}
+
+.le-list {
+    max-height: 14rem;
+    overflow: auto;
+}
+
+.editor-save-dialog {
+    min-height: 1.5rem;
+}
+
+.editor-muted {
+    color: var(--editor-muted);
+}
+
+.editor-form-grid .form-label {
+    font-weight: 600;
+    margin-top: 0.75rem;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--editor-primary);
+    outline-offset: 2px;
+}

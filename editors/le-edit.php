@@ -192,34 +192,30 @@ function deleteLe() {
     </style>
 </head>
 <body>
+   <a class="skip-link" href="#main-content">Skip to editor content</a>
    <?php require_once("../content/header-short.php"); 
 if ($message) {
-	echo "<div class='container-md pt-4'>";
-	echo $message;
-	echo "</div>";
+	echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
 }
 ?>
 <?php if ($auth && $access) { ?>
-    <div class="container-md sticky-top pt-5 mb-2">
-		<div class="row justify-content-between">
-			<div class="btn-group col-3" role="group">
-			<a type="button" class="btn btn-primary" id="toPortfolio" href="../learning_experience.php?id=<?php echo $learningExperienceId;?>"><i class="bi bi-back"></i> Portfolio </a>
-					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i> Editor Menu</a>			</div>
-			
-			<div class="btn-group col-3" role="group">
-				<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
-				<a type="button" class="btn btn-danger" id="delete"><i class="bi bi-trash"></i> Delete</a>
-
+    <main id="main-content" class="container-md editor-main py-4">
+        <section class="editor-topbar mb-3" aria-label="Editor actions">
+            <div class="d-flex flex-wrap gap-2">
+                <a type="button" class="btn btn-secondary" id="toPortfolio" href="../learning_experience.php?id=<?php echo $learningExperienceId;?>"><i class="bi bi-back"></i> Portfolio</a>
+                <a type="button" class="btn btn-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
+                <a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
+                <a type="button" class="btn btn-danger" id="delete"><i class="bi bi-trash"></i> Delete</a>
             </div>
-		</div>
-	</div>
-    <div id="save_dialog"></div>
-    </div>
-<div class="container-md bg-light">
-		<h2>LE &amp; A Editor: <?php echo $name; ?></h2>
- 	 </div>
-    
-<div class='container-md pt-4'>
+        </section>
+
+        <div class="editor-save-dialog mb-3" id="save_dialog"></div>
+
+        <section class="editor-panel mb-3">
+            <div class="editor-panel-header">
+                <h2 class="h4 mb-0">LE &amp; A Editor: <?php echo $name; ?></h2>
+            </div>
+            <div class="editor-panel-body editor-form-grid">
             <div class="content">
                 <label for="name" class="form-label">Learning Experience Name</label> 
                  <div id="name" class="form-control" contenteditable="true" aria-describedby="learningExperienceNameHelp"><?php echo $name; ?></div>
@@ -249,7 +245,14 @@ if ($message) {
                     <div id="emphasisHelp" class="form-text mb-4">Which skill area does this learning experience primarily target?</div>
                 
             </div>
-                <h2 class='editor-style'>Courses</h2>
+            </div>
+        </section>
+
+        <section class="editor-panel mb-3">
+            <div class="editor-panel-header">
+                <h2 class='h5 mb-0'>Courses</h2>
+            </div>
+            <div class="editor-panel-body">
                 <p> Drag the courses from the Other courses list to connect the course with this learning experience. Drag courses from the Connected Courses list to disconnect them from the Learning Experience. </p>
                 <div class='row justify-content-evenly'>
                 <div class='col-3 p2 text-center'><h3>Connectected Courses</h3></div>
@@ -313,10 +316,12 @@ if ($message) {
                </div>  <!-- end potential courses list  -->
                 
                 </div>
-</div>
-            
-   
-<div class='container-md pt-4'>
+            </div>
+        </section>
+    </main>
         <?php } ?>
+    <footer>
+        <?php include("../content/footer.html"); ?>
+    </footer>
 </body>
 </html>

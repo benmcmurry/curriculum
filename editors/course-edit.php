@@ -160,33 +160,30 @@ function save() {
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to editor content</a>
 <?php require_once("../content/header-short.php"); 
 if ($message) {
-	echo "<div class='container-md pt-4'>";
-	echo $message;
-	echo "</div>";
+	echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
 }
 if ($auth && $access) { ?>
-	<div class="container-md sticky-top pt-5 mb-2">
-		<div class="row justify-content-between">
-			<div class="btn-group col-3" role="group">
-			<a type="button" class="btn btn-primary" id="toPortfolio" href="../course.php?course_id=<?php echo $course_id;?>"><i class="bi bi-back"></i> Portfolio </a>
-					<a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i> Editor Menu</a>			</div>
-			<div class="btn-group col-3" role="group">
-				<a type="button" class="btn btn-primary" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous Course</a>
-				<a type="button" class="btn btn-primary" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next Course <i class="bi bi-arrow-right-circle"></i></a>
+	<main id="main-content" class="container-md editor-main py-4">
+		<section class="editor-topbar mb-3" aria-label="Editor actions">
+			<div class="d-flex flex-wrap gap-2">
+				<a type="button" class="btn btn-secondary" id="toPortfolio" href="../course.php?course_id=<?php echo $course_id;?>"><i class="bi bi-back"></i> Portfolio</a>
+				<a type="button" class="btn btn-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
+				<a type="button" class="btn btn-outline-secondary" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous</a>
+				<a type="button" class="btn btn-outline-secondary" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next <i class="bi bi-arrow-right-circle"></i></a>
+				<a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
 			</div>
-			<div class="btn-group col-2" role="group">
-				<a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
+		</section>
+
+		<div class="editor-save-dialog mb-3" id="save_dialog"></div>
+
+		<section class="editor-panel mb-3">
+			<div class="editor-panel-header">
+				<h2 class="h4 mb-0">Course Editor: <?php echo $level_name." - ".$course_name; ?></h2>
 			</div>
-		</div>
-	</div>
-	<div class="container-md" id="save_dialog"></div>
-	<div class="container-md bg-light">
-		<h2>Course Editor: <?php echo $level_name." - ".$course_name; ?></h2>
- 	 </div>
-			
-	  <div class="container-md bg-light">
+			<div class="editor-panel-body editor-form-grid">
 		
 			<label for="course_name" class="form-label">Course Name</label> 
 			<div id="course_name" class="form-control" contenteditable="true" aria-describedby="courseNameHelp"><?php echo $course_name; ?></div>
@@ -216,8 +213,10 @@ if ($auth && $access) { ?>
 		<label for="box_folder" class="form-label">Box Folder Link</label>
 		<div id="box_folder" class="form-control" contenteditable="true" aria-describedby="googleDriveHelp"><?php echo $box_folder; ?></div>
 		<div id="googleDriveHelp" class="form-text mb-4">This the shareable link.</div>
-
-</div>
+</div></section></main>
   <?php } ?>
+<footer>
+	<?php include("../content/footer.html"); ?>
+</footer>
 </body>
 </html>
