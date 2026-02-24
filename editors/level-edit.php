@@ -149,8 +149,8 @@ function save() {
 	  	<main id="main-content" class="container-md editor-main py-4">
 			<section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
 				<div class="d-flex flex-wrap gap-2">
-					<a type="button" class="btn btn-secondary" id="toPortfolio" href="../levels.php#<?php echo $level_short_name;?>"><i class="bi bi-back"></i> Portfolio</a>
-					<a type="button" class="btn btn-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
+					<a type="button" class="btn btn-outline-secondary" id="toPortfolio" href="../levels.php#<?php echo $level_short_name;?>"><i class="bi bi-back"></i> Portfolio</a>
+					<a type="button" class="btn btn-outline-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
 					<a type="button" class="btn btn-outline-secondary" id="previous" href="level-edit.php?level_id=<?php echo $level_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous</a>
 					<a type="button" class="btn btn-outline-secondary" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next <i class="bi bi-arrow-right-circle"></i></a>
 					<a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
@@ -160,7 +160,7 @@ function save() {
 			<div class="editor-save-dialog mb-3" id="save_dialog"></div>
 
 			<section class="editor-panel mb-3">
-				<div class="editor-panel-header">
+				<div class="editor-panel-header editor-panel-header-level">
 					<h2 class="h4 mb-0">Level Editor: <?php echo $level_name; ?></h2>
 				</div>
 				<div class="editor-panel-body editor-form-grid">

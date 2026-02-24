@@ -49,15 +49,50 @@ if ($auth && $access) { ?>
             ];
         }
         $result->free();
+
+        $courseCountResult = $elc_db->query("SELECT COUNT(*) AS total_courses FROM Courses");
+        $courseCount = $courseCountResult ? (int) $courseCountResult->fetch_assoc()['total_courses'] : 0;
+        $levelCount = count($levelsNav);
+        $learningExperienceCountResult = $elc_db->query("SELECT COUNT(*) AS total_learning_experiences FROM Learning_experiences");
+        $learningExperienceCount = $learningExperienceCountResult ? (int) $learningExperienceCountResult->fetch_assoc()['total_learning_experiences'] : 0;
         ?>
         <section class="editor-topbar sticky-top mb-4" aria-label="Top actions">
             <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-secondary" id="toPortfolio" href="../index.php">
+                <a class="btn btn-outline-secondary" id="toPortfolio" href="../index.php">
                     <i class="bi bi-arrow-return-left"></i> Back to Portfolio
                 </a>
-                <a class="btn btn-secondary" id="toUsers" href="users.php">
+                <a class="btn btn-outline-secondary" id="toUsers" href="users.php">
                     <i class="bi bi-table"></i> Access Table
                 </a>
+            </div>
+        </section>
+
+        <section class="mb-4" aria-label="Editor summary">
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <div class="admin-card metric-card h-100">
+                        <div class="admin-card-body">
+                            <div class="metric-label">Levels</div>
+                            <div class="metric-value"><?php echo $levelCount; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="admin-card metric-card h-100">
+                        <div class="admin-card-body">
+                            <div class="metric-label">Courses</div>
+                            <div class="metric-value"><?php echo $courseCount; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="admin-card metric-card h-100">
+                        <div class="admin-card-body">
+                            <div class="metric-label">Learning Experiences</div>
+                            <div class="metric-value"><?php echo $learningExperienceCount; ?></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -82,11 +117,12 @@ if ($auth && $access) { ?>
                 $courseName = htmlspecialchars($courses['course_name'], ENT_QUOTES, 'UTF-8');
                 $courseShortName = htmlspecialchars((string) $courses['course_short_name'], ENT_QUOTES, 'UTF-8');
                 echo "<article class='col-12 col-md-6 col-xl-3'>";
-                echo "<div class='course-card p-3 h-100'>";
-                echo "<h3 class='h6 mb-2'><a id='course-".$courseId."' class='d-inline-flex align-items-center gap-2' data-shortName='".$courseShortName."' data-name='".$courseName."' title='Edit course: ".$courseName."' href='course-edit.php?course_id=".$courseId."'><i class='bi bi-pencil-square' aria-hidden='true'></i><span>".$courseName."</span></a></h3>";
-                echo "<div class='d-grid gap-2 mb-3'>";
-                echo "<a class='btn btn-outline-primary btn-sm' href='le-edit.php?learningExperienceId=new&course_id=".$courseId."'><i class='bi bi-plus'></i> Add learning experience</a>";
+                echo "<div class='admin-card h-100'>";
+                echo "<div class='admin-card-header d-flex justify-content-between align-items-center gap-2'>";
+                echo "<h3 id='course-".$courseId."' class='h6 mb-0 text-white' data-shortName='".$courseShortName."' data-name='".$courseName."'>".$courseName."</h3>";
+                echo "<a class='text-white fs-5' aria-label='Edit course ".$courseName."' title='Edit course ".$courseName."' href='course-edit.php?course_id=".$courseId."'><i class='bi bi-pencil-square'></i></a>";
                 echo "</div>";
+                echo "<div class='admin-card-body'>";
 
                 $learningExperienceQuery = $elc_db->prepare("Select Learning_experiences.learning_experience_id, Learning_experiences.name from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
                 $learningExperienceQuery->bind_param("s", $courses['course_id']);
@@ -106,6 +142,10 @@ if ($auth && $access) { ?>
                     echo "<li class='list-group-item text-muted small'>No learning experiences connected yet.</li>";
                 }
                 echo "</ul>";
+                echo "</div>";
+                echo "<div class='admin-card-footer d-grid'>";
+                echo "<a class='btn btn-outline-primary btn-sm' href='le-edit.php?learningExperienceId=new&course_id=".$courseId."'><i class='bi bi-plus'></i> Add learning experience</a>";
+                echo "</div>";
                 echo "</div></article>";
             }
             echo "</div></div></section>";
