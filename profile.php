@@ -34,7 +34,7 @@ session_start();
 
 
     <div id="title" class="container-fluid">ELC Lab School Profile</div>
-    <div class="container-md pt-4">
+    <main class="container-md portfolio-main">
         <p>Assessment is essential to improve and progress. Administrators of the College of Humanities, the
             Department of Linguistics and English Language, and the English Language Center need to know how well
             the English Language Center (ELC) is fulfilling its principal purpose as a lab school. Accordingly the
@@ -43,7 +43,11 @@ session_start();
                 opportunities</a>, <a href='#rp'>research and publications</a>, and <a href="#c"> citations lists of
                 academic work done at the ELC</a>.</p>
 
-        <h2>Our Pedagogy</h2>
+        <section id="p" class="portfolio-card mb-4">
+            <div class="portfolio-card-header-level">
+                <h2 class="h4 mb-0">Our Pedagogy</h2>
+            </div>
+            <div class="portfolio-card-body">
         <p><strong>Principled Pedagogical Practices of ELC Teachers</strong></p>
         <p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and
             all who may observe their classes.</p>
@@ -59,7 +63,14 @@ session_start();
 
         </ol>
         <p>For more detailed information, <a href="https://elc.byu.edu/teacher/ppp.php">click here</a>.</p>
-        <h2>Teaching Opportunities</h2>
+            </div>
+        </section>
+
+        <section id="to" class="portfolio-card mb-4">
+            <div class="portfolio-card-header-course">
+                <h2 class="h4 mb-0">Teaching Opportunities</h2>
+            </div>
+            <div class="portfolio-card-body">
         <table id="teaching" class='table table-striped'>
 
             <?php
@@ -142,8 +153,15 @@ session_start();
 
 EOF;
 ?>
+            </div>
+        </section>
 
-            <h2>Research and Publications</h2>
+        <section id="rp" class="portfolio-card mb-4">
+            <div class="portfolio-card-header-course">
+                <h2 class="h4 mb-0">Research, Publications, and Presentations</h2>
+            </div>
+            <div class="portfolio-card-body">
+            <h3>Academic Work (Total and Last 5 Years)</h3>
             <table class='table table-striped'>
 
                 <?php
@@ -174,7 +192,7 @@ EOF;
         }
 
         $resultStats->free();
-        $years = "<th><h1>Year</h1></th><td>Total**</th>";
+        $years = "<th>Year</th><td>Total**</th>";
         $dissertations  = "<th scope='row'>Dissertations</th><td>".$dissertation."</td>";
         $theses = "<th scope='row'>MA Theses</th><td>".$thesis."</td>";
         $projects = "<th scope='row'>MA Projects</th><td>".$project."</td>";
@@ -229,65 +247,70 @@ EOF;
             $i++;
         }
 ?>
+            <?php
+            echo <<<EOF
+<thead><tr>$years</tr></thead>
+<tr>$dissertations</tr>
+<tr>$theses</tr>
+<tr>$projects</tr>
+<tr>$publications</tr>
+<tr>$presentations</tr>
+EOF;
+            ?>
             </table>
-
-            <h3>All Citations (Total and Last 5 Years)</h3>
-            <div id="citationsSummary"></div>
-
-            <h2>Citations</h2>
+            <h3 id="c" class="mt-4">Citations</h3>
 
 
 
 
-            <div class="" role="region" aria-label="Controls">
+            <div role="region" aria-label="Controls">
                 <label for="q">Search citations</label>
                 <input class="container-md" id="q" type="search"
                     placeholder="Search in authors, title, venue, institution, URL…" />
-                
+
                 <div style="display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-top:8px;">
                     <div>Click a column to sort.</div>
                     <div style="display:flex; gap:8px; align-items:center; justify-content:flex-end; flex-wrap:wrap; margin-top:8px;">
-                        <label class="muted"> Rows/page
-                        <select id="pageSize">
-                            <option selected>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                    </label>
-                    <div id="pager" aria-label="Pagination" style="display:flex; gap:6px; align-items:center;">
-                        <button class="btn btn-light" id="prev">Prev</button>
-                        <span class="muted">
-                            Page <span id="pageNum">1</span> of <span id="pageCount">1</span>
-                        </span>
-                        <button class="btn btn-light" id="next">Next</button>
+                        <label class="muted">Rows/page
+                            <select id="pageSize">
+                                <option selected>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </label>
+                        <div id="pager" aria-label="Pagination" style="display:flex; gap:6px; align-items:center;">
+                            <button class="btn btn-light" id="prev">Prev</button>
+                            <span class="muted">
+                                Page <span id="pageNum">1</span> of <span id="pageCount">1</span>
+                            </span>
+                            <button class="btn btn-light" id="next">Next</button>
+                        </div>
                     </div>
-    </div>
                 </div>
             </div>
 
-            <div class="" style="margin-top:12px;">
+            <div style="margin-top:12px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                     <div><span class="count" id="shown">0</span> shown <span class="muted">(<span id="total">0</span>
                             total)</span></div>
                 </div>
-                <div style="">
+                <div>
                     <table id='citations' class='table table-striped' style="width:100%; table-layout:fixed;">
                         <thead>
                             <tr>
-                                <th class="sortable" width="7%" data-key="year" data-num="1">Year <span
-                                        class="arrow">↕</span></th>
-                                <th class="sortable" width="83%" data-key="cite">Citation (APA) <span
-                                        class="arrow">↕</span></th>
-                                <th class="sortable" width="10%" data-key="derivedType">Type <span
-                                        class="arrow">↕</span></th>
+                                <th class="sortable" width="7%" data-key="year" data-num="1">Year <span class="arrow">↕</span></th>
+                                <th class="sortable" width="83%" data-key="cite">Citation (APA) <span class="arrow">↕</span></th>
+                                <th class="sortable" width="10%" data-key="derivedType">Type <span class="arrow">↕</span></th>
                             </tr>
                         </thead>
                         <tbody id="tbody"></tbody>
                     </table>
                 </div>
             </div>
-    </div>
+            </div>
+        </section>
+    </main>
 
     <script src="js/citations.js"></script>
     <footer>
