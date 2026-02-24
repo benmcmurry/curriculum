@@ -24,8 +24,8 @@ while ($levels = $result->fetch_assoc()) {
         
 ?>
 <div id="header" class="container-fluid sticky-top">
-    <div class="row justify-content-between p-3    " id="byu-bar">
-        <div class="col-4"><a href="http://www.byu.edu"><img src="images/BYU-white.png" alt="BYU logo" /></a></div>
+    <div class="row justify-content-between p-3" id="byu-bar">
+        <div class="col-4"><a href="index.php"><img src="images/BYU-white.png" alt="ELC Curriculum Portfolio" /></a></div>
         <div class="col-8" id="user">
 
             <svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -97,12 +97,8 @@ while ($levels = $result->fetch_assoc()) {
         </div>
     </nav>
 </div>
-<div class="jumbotron" id="elc-bar">
+<!-- <div class="jumbotron" id="elc-bar">
     <div class="container-sm" data-bs-theme="dark">
-        <?php
-        
-        echo "<h1>".$name."</h1>";
-        ?>
     </div>
-</div>
+</div> -->
 </div>
