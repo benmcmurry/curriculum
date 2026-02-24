@@ -64,6 +64,11 @@ if ($auth && $access) { ?>
                 <a class="btn btn-outline-secondary" id="toUsers" href="users.php">
                     <i class="bi bi-table"></i> Access Table
                 </a>
+                <?php if (phpCAS::getUser() == "blm39") { ?>
+                <a class="btn btn-outline-secondary" id="toProfileEditor" href="profile-editor.php">
+                    <i class="bi bi-person-gear"></i> Edit Profile
+                </a>
+                <?php } ?>
             </div>
         </section>
 
