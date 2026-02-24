@@ -114,6 +114,20 @@ body {
     color: #fff;
 }
 
+.editor-panel-header-course .btn-outline-primary {
+    color: #002E5D;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.editor-panel-header-course .btn-outline-primary:hover,
+.editor-panel-header-course .btn-outline-primary:focus,
+.editor-panel-header-course .btn-outline-primary:active {
+    color: #001f3f;
+    background: #f0f4f8;
+    border-color: #f0f4f8;
+}
+
 .editor-level {
     border: 1px solid var(--editor-border);
     border-radius: var(--editor-radius);

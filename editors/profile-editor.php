@@ -10,7 +10,7 @@ include_once("admins.php");
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Profile Editor - Curriculum Portfolio</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="robots" content="" />
@@ -32,27 +32,6 @@ include_once("admins.php");
 
     }
 
-    th.rotate {
-        /* Something you can count on */
-        height: 200px;
-        white-space: nowrap;
-    }
-
-    th.rotate>div {
-        transform:
-            /* Magic Numbers */
-            translate(30px, 69px)
-            /* 45 is really 360 - 45 */
-            rotate(315deg);
-        width: 50px;
-    }
-
-    th.rotate>div>span {
-        width: 200px;
-        padding: 9px 10px;
-        border-bottom: 1px solid black;
-
-    }
     </style>
 </head>
 <!-- 	Javascript -->
@@ -169,53 +148,48 @@ function deletePopup(id) {
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to editor content</a>
     <?php require_once("../content/header-short.php"); ?>
 
-    <div id="title" class="container-fluid">
-        Profile Editor
-    </div>
+    <?php if ($auth && $access) { ?>
+    <main id="main-content" class="container-md editor-main py-4">
+        <section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-outline-secondary" href="../profile.php"><i class="bi bi-back"></i> Profile</a>
+                <a class="btn btn-outline-secondary" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
+            </div>
+        </section>
 
-    <div class="container-md pt-4">
+        <section class="editor-panel mb-3">
+            <div class="editor-panel-header editor-panel-header-level">
+                <h2 class="h4 mb-0">Profile Editor</h2>
+            </div>
+            <div class="editor-panel-body">
+                <p class="mb-0">Update profile statistics and citations used in the curriculum portfolio.</p>
+            </div>
+        </section>
 
-        <h2>Edit Statistics</h2>
-        <a type='button' class='btn btn-primary' id="add_semester" class="button"><i class="bi bi-plus"></i>
-            Semester</a>
-        <table id='teaching'>
+        <section class="editor-panel mb-3">
+            <div class="editor-panel-header editor-panel-header-course d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0">Edit Statistics</h2>
+                <a type='button' class='btn btn-outline-primary btn-sm' id="add_semester"><i class="bi bi-plus"></i> Semester</a>
+            </div>
+            <div class="editor-panel-body">
+                <div class="table-responsive">
+        <table id='teaching' class="table table-bordered align-middle">
             <thead>
                 <tr>
-                    <th class="rotate">
-                        <div><span>Semester</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Year</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Classes Taught</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Supplemental Classes Taught</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Classes taught by Students</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Graduate Practicum Students</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Undergraduate Practicum Students</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Tutoring Hours</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Class Observations</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Graduate Internships</span></div>
-                    </th>
-                    <th class="rotate">
-                        <div><span>Undergraduate Internships</span></div>
-                    </th>
+                    <th>Semester</th>
+                    <th>Year</th>
+                    <th>Classes Taught</th>
+                    <th>Supplemental Classes Taught</th>
+                    <th>Classes taught by Students</th>
+                    <th>Graduate Practicum Students</th>
+                    <th>Undergraduate Practicum Students</th>
+                    <th>Tutoring Hours</th>
+                    <th>Class Observations</th>
+                    <th>Graduate Internships</th>
+                    <th>Undergraduate Internships</th>
                 </tr>
             </thead>
             <?php
@@ -253,14 +227,17 @@ function deletePopup(id) {
 
 			?>
         </table>
+                </div>
+            </div>
+        </section>
 
-
-    </div>
-
-    <div class="container-md pt-4">
-        <h2> Edit a citation </h2>
-
-        <table id='citations'>
+        <section class="editor-panel mb-3">
+            <div class="editor-panel-header editor-panel-header-course">
+                <h2 class="h5 mb-0">Edit Citations</h2>
+            </div>
+            <div class="editor-panel-body">
+                <div class="table-responsive">
+        <table id='citations' class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
                     <td> Edit </td>
@@ -297,8 +274,11 @@ function deletePopup(id) {
 
 ?>
         </table>
-
-    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <?php } ?>
     <footer>
         <?php include("../content/footer.html"); ?>
     </footer>
