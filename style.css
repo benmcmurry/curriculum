@@ -7,8 +7,9 @@
 a.anchor {
   display: block;
   position: relative;
-  top: -5em;
+  top: -4.5em;
   visibility: hidden;
+  scroll-margin-top: 4.5em;
 }
 
 .jumbotron {
@@ -41,6 +42,15 @@ div#byu-bar {
 
 div#byu-bar img {
   height: 2em;
+}
+
+div#byu-bar #elc-title a{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 1.3em;
+  padding-left: 0.5em;
+  text-decoration: none;
 }
 div#user {
   line-height: 2em;
@@ -118,6 +128,9 @@ div#user a {
   #header h1 {
     font-size: 1.7em;
   }
+  div#byu-bar img {
+  height: 1.5em;
+}
 
 }
 OL {
@@ -197,3 +210,64 @@ OL>LI::before {
   .arrow {
     cursor: pointer;
   }
+
+/* Portfolio card UI */
+.portfolio-main {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.portfolio-card {
+  background: #fff;
+  border: 1px solid #dbe3ea;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(22, 39, 56, 0.06);
+  overflow: hidden;
+}
+
+.portfolio-card-header-level {
+  background: linear-gradient(90deg, #002E5D 0%, #0072CE 100%);
+  color: #fff;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #002E5D;
+}
+
+.portfolio-card-header-course {
+  background: linear-gradient(90deg, #0047BA 0%, #0072CE 100%);
+  color: #fff;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid #0047BA;
+}
+
+.portfolio-card-header-level h2,
+.portfolio-card-header-course h2,
+.portfolio-card-header-level h3,
+.portfolio-card-header-course h3 {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio-card-body {
+  padding: 1rem;
+}
+
+.portfolio-course-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.portfolio-course-links .btn {
+  border-color: #002E5D;
+  color: #002E5D;
+  background: #fff;
+  font-weight: 600;
+}
+
+.portfolio-course-links .btn:hover,
+.portfolio-course-links .btn:focus {
+  background: #002E5D;
+  color: #fff;
+  border-color: #002E5D;
+}
