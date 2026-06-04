@@ -1,11 +1,11 @@
 <?php
-session_start();
-    include_once("../../connectFiles/connect_cis.php");
-    if (isset($_GET['id'])) {$learningExperienceId = $_GET['id'];} else {header("Location: index.php");}
-    $query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id= ?");
-    $query->bind_param('s', $learningExperienceId);
-    $query->execute();
-    $result = $query->get_result();
+require_once __DIR__ . '/bootstrap.php';
+include_once("../../connectFiles/connect_cis.php");
+if (isset($_GET['id'])) {$learningExperienceId = $_GET['id'];} else {header("Location: index.php");}
+$query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id= ?");
+$query->bind_param('s', $learningExperienceId);
+$query->execute();
+$result = $query->get_result();
 
 while ($learningExperience = $result->fetch_assoc()) {
     $le_name = $learningExperience['name'];
@@ -33,8 +33,8 @@ if ($backRow = $backResult->fetch_assoc()) {
     $backLevelName = $backRow['level_name'];
     $backLevelShortName = $backRow['level_short_name'];
 }
-        include_once("cas-go.php");
-        include_once("teachers.php");
+include_once("cas-go.php");
+include_once("teachers.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

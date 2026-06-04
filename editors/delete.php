@@ -1,6 +1,5 @@
 <?php
-
-session_start();
+require_once __DIR__ . '/../bootstrap.php';
 include_once("../../../connectFiles/connect_cis.php");
 include_once("../cas-go.php");
 
