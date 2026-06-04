@@ -199,7 +199,10 @@ $result = $query->get_result();
                             <option value="admin">Admin</option>
                         </select>
                     </td>
-                    <td> <a class="btn btn-success" id="addUser" onclick="addUser()"><i class='bi bi-person-fill-add'></i></a>
+                    <td>
+                        <button type="button" class="btn btn-success" id="addUser" onclick="addUser()" aria-label="Add user">
+                            <i class="bi bi-person-fill-add" aria-hidden="true"></i>
+                        </button>
                     </td>
 
 
