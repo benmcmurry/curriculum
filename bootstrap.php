@@ -48,6 +48,36 @@ function curriculum_request_origin()
     return curriculum_request_scheme() . '://' . curriculum_request_host();
 }
 
+function curriculum_public_origin()
+{
+    $envOrigin = getenv('AR_PUBLIC_ORIGIN');
+    if ($envOrigin) {
+        return rtrim(trim($envOrigin), '/');
+    }
+
+    return curriculum_request_origin();
+}
+
+function curriculum_current_path()
+{
+    return strtok($_SERVER['REQUEST_URI'] ?? '/index.php', '?') ?: '/index.php';
+}
+
+function curriculum_remove_auth_params(array $params)
+{
+    unset($params['login'], $params['logout'], $params['ticket'], $params['auth']);
+    return $params;
+}
+
+function curriculum_current_url_without_auth_params()
+{
+    $path = curriculum_current_path();
+    $params = curriculum_remove_auth_params($_GET);
+    $query = http_build_query($params);
+
+    return curriculum_public_origin() . $path . ($query ? ('?' . $query) : '');
+}
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_set_cookie_params(array(
         'lifetime' => 0,
