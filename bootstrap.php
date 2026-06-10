@@ -52,7 +52,9 @@ function curriculum_public_origin()
 {
     $envOrigin = getenv('AR_PUBLIC_ORIGIN');
     if ($envOrigin) {
-        return rtrim(trim($envOrigin), '/');
+        return function_exists('shared_auth_normalize_origin')
+            ? shared_auth_normalize_origin($envOrigin)
+            : rtrim(trim($envOrigin), '/');
     }
 
     return curriculum_request_origin();
