@@ -64,7 +64,7 @@ echo "LP: $localpath, AP: $absolutepath"
     
         $result->free();
       
-if (phpCAS::getUser() == "blm39"|| 'karimay') {
+if (in_array(phpCAS::getUser(), array("blm39", "karimay"), true)) {
     ?>
             <div class="block">
                 <h2> Review Submitted Changes </h2>
