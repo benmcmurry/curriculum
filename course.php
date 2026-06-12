@@ -11,7 +11,7 @@ while ($title = $result->fetch_assoc()) {
     $course_name = $title['course_name'];
     $level_name = $title['level_name'];
 }
-include_once("cas-go.php");
+include_once("auth.php");
 require_once("teachers.php");
 ?>
 <!DOCTYPE html>

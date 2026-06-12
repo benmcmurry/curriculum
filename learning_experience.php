@@ -33,7 +33,7 @@ if ($backRow = $backResult->fetch_assoc()) {
     $backLevelName = $backRow['level_name'];
     $backLevelShortName = $backRow['level_short_name'];
 }
-include_once("cas-go.php");
+include_once("auth.php");
 include_once("teachers.php");
 ?>
 <!DOCTYPE html>

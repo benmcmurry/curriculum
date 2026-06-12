@@ -1,7 +1,7 @@
 <?php
 include_once("../../../connectFiles/connect_cis.php");
 
-include_once("../cas-go.php");
+include_once("../auth.php");
 require_once("admins.php"); 
 
 // if ($net_id == "blm39" || $net_id == "karimay") {

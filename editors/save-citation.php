@@ -1,7 +1,7 @@
 <?php
 
 include_once("../../../connectFiles/connect_cis.php");
-include_once("../cas-go.php");
+include_once("../auth.php");
 if (in_array($net_id, array('blm39', 'karimay'), true)) {echo "cleared!";}
 else {exit();}
 $citation = $_POST['citation'];

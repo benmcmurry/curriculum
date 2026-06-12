@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/bootstrap.php';
 include_once("../../connectFiles/connect_cis.php");
-include_once("cas-go.php");
+include_once("auth.php");
 include_once("teachers.php");
 ?>
 <!DOCTYPE html>

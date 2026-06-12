@@ -4,7 +4,7 @@ ini_set('display_errors', '1');
 date_default_timezone_set("America/Denver"); 
 require_once __DIR__ . '/bootstrap.php';
 require_once "../../connectFiles/connect_cis.php";
-require_once "cas-go.php";
+require_once "auth.php";
 require_once "teachers.php";
   
 ?>
