@@ -60,6 +60,32 @@ function curriculum_public_origin()
     return curriculum_request_origin();
 }
 
+function curriculum_shared_auth_broker_path()
+{
+    $envPath = getenv('AR_SHARED_AUTH_BROKER_PATH');
+    if ($envPath && is_file($envPath)) {
+        return $envPath;
+    }
+
+    $documentRoot = rtrim((string) ($_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
+    $candidates = array_filter(array(
+        dirname(__DIR__) . '/sharedAuth/broker.php',
+        dirname(__DIR__, 2) . '/sharedAuth/broker.php',
+        $documentRoot !== '' ? $documentRoot . '/Web/sharedAuth/broker.php' : null,
+        $documentRoot !== '' ? $documentRoot . '/sharedAuth/broker.php' : null,
+    ));
+
+    foreach ($candidates as $candidate) {
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+    }
+
+    throw new RuntimeException(
+        'Unable to locate sharedAuth/broker.php. Set AR_SHARED_AUTH_BROKER_PATH or place the file in a supported location.'
+    );
+}
+
 function curriculum_current_path()
 {
     return strtok($_SERVER['REQUEST_URI'] ?? '/index.php', '?') ?: '/index.php';

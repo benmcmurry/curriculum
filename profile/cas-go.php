@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
 
-require_once dirname($_SERVER['DOCUMENT_ROOT']) . '/Web/sharedAuth/broker.php';
+require_once curriculum_shared_auth_broker_path();
 
 $currentUser = shared_auth_current_session_user();
 if (!$currentUser) {
