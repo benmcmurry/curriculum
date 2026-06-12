@@ -180,7 +180,8 @@ OL>LI::before {
     right: 100%;
     left: auto;
     }
-    .dropdown-menu > li:hover > .dropdown-submenu {
+.dropdown-menu > li:hover > .dropdown-submenu,
+.dropdown-menu > li:focus-within > .dropdown-submenu {
     display: block;
     }
 

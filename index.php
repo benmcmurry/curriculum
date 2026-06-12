@@ -27,9 +27,9 @@ require_once "teachers.php";
 
         
 
-<div id="title" class="container-fluid">
+<h1 id="title" class="container-fluid">
     Guiding Principles for ELC Curriculum
-</div>
+</h1>
 
 <main class="container-md portfolio-main">
     <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development.
@@ -46,7 +46,12 @@ require_once "teachers.php";
                 resources, and facilities needed to maximize meaningful student participation. This encompasses what the
                 students are to learn and how they are to learn it, including how the teachers and the institution
                 facilitate, assess, and respond to this learning (adapted from Rogers, 1989, p. 26).</p>
-            <img style='float:right' src='images/triangle.png' alt='' />
+            <figure style="float:right; max-width: 300px; margin: 0 0 1rem 1rem;">
+                <img src="images/triangle.png" alt="Triangle diagram showing the curriculum balance of stable, responsive, and cohesive principles." style="display:block; width:100%; height:auto;" />
+                <figcaption style="font-size: 0.9rem; text-align: center; margin-top: 0.35rem;">
+                    Figure 1. Curriculum principles: stable, responsive, and cohesive.
+                </figcaption>
+            </figure>
             <p>All efforts associated with curriculum development and change seek an appropriate balance between three
                 interrelated principles to ensure the curriculum is stable, responsive, and cohesive (see Figure 1). </p>
             <p>Though all effective curricula must embrace some innovation, a stable curriculum implements change in a way
