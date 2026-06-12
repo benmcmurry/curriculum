@@ -64,7 +64,7 @@ if ($auth && $access) { ?>
                 <a class="btn btn-outline-secondary" id="toUsers" href="users.php">
                     <i class="bi bi-table"></i> Access Table
                 </a>
-                <?php if (phpCAS::getUser() == "blm39") { ?>
+                <?php if (isset($net_id) && (string) $net_id == "blm39") { ?>
                 <a class="btn btn-outline-secondary" id="toProfileEditor" href="profile-editor.php">
                     <i class="bi bi-person-gear"></i> Edit Profile
                 </a>
@@ -156,7 +156,7 @@ if ($auth && $access) { ?>
             echo "</div></div></section>";
         } ?>
 
-        <?php if (phpCAS::getUser() == "blm39" || phpCAS::getUser() == "karimay") { ?>
+        <?php if (isset($net_id) && in_array((string) $net_id, array("blm39", "karimay"), true)) { ?>
         <section id="review-section" class="pt-2" aria-labelledby="review-heading">
             <h2 id="review-heading" class="h4 mb-3">Review Submitted Changes</h2>
             <ul class="list-group mb-3">

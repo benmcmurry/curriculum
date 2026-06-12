@@ -64,7 +64,8 @@ echo "LP: $localpath, AP: $absolutepath"
     
         $result->free();
       
-if (in_array(phpCAS::getUser(), array("blm39", "karimay"), true)) {
+$currentNetId = isset($net_id) ? (string) $net_id : '';
+if (in_array($currentNetId, array("blm39", "karimay"), true)) {
     ?>
             <div class="block">
                 <h2> Review Submitted Changes </h2>

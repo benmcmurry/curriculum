@@ -19,7 +19,7 @@ function curriculum_request_scheme()
         return 'https';
     }
 
-    return 'http';
+    return 'https';
 }
 
 function curriculum_request_host()
@@ -78,6 +78,35 @@ function curriculum_current_url_without_auth_params()
     $query = http_build_query($params);
 
     return curriculum_public_origin() . $path . ($query ? ('?' . $query) : '');
+}
+
+function curriculum_clear_session_user()
+{
+    unset($_SESSION['auth_user']);
+}
+
+function curriculum_destroy_session()
+{
+    curriculum_clear_session_user();
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $cookieParams = session_get_cookie_params();
+        $_SESSION = array();
+
+        if (!headers_sent()) {
+            setcookie(
+                session_name(),
+                '',
+                time() - 3600,
+                $cookieParams['path'] ?? '/',
+                $cookieParams['domain'] ?? '',
+                !empty($cookieParams['secure']),
+                !empty($cookieParams['httponly'])
+            );
+        }
+
+        session_destroy();
+    }
 }
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
