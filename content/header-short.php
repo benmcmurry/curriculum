@@ -1,19 +1,34 @@
-<div id="header" class="container-fluid sticky-top">
-    <div class="row justify-content-between p-3    " id="byu-bar">
-        <div class="col-4"><a href="http://www.byu.edu"><img src="../images/BYU-white.png" alt="BYU logo" /></a></div>
-        <div class="col-8" id="user">
+<?php
+require_once dirname(__DIR__) . '/bootstrap.php';
+require_once dirname(__DIR__, 2) . '/shared-ui/layout.php';
 
-            <svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <path fill="currentcolor"
-                    d="M50 95c-26 0-34-18-34-18 3-12 8-18 17-18 5 5 10 7 17 7s12-2 17-7c9 0 14 6 17 18 0 0-7 18-34 18z">
-                </path>
-                <circle cx="50" cy="50" r="45" fill="none" stroke="currentcolor" stroke-width="10"></circle>
-                <circle fill="currentcolor" cx="50" cy="40" r="20"></circle>
-            </svg>
+$currentUser = shared_auth_current_session_user();
+$displayName = $currentUser
+    ? (isset($currentUser['name']) && trim((string) $currentUser['name']) !== '' ? $currentUser['name'] : (isset($currentUser['netid']) ? $currentUser['netid'] : 'Account'))
+    : '';
+$loginUrl = shared_auth_login_url(curriculum_current_url_without_auth_params(), 'curriculum');
+$logoutUrl = shared_auth_logout_url(curriculum_current_url_without_auth_params(), 'curriculum');
+$curriculumEditorMenuItems = array(
+    array('label' => 'Back to Portfolio', 'href' => '../index.php'),
+    array('label' => 'Access Table', 'href' => 'users.php')
+);
 
+if ($currentUser) {
+    $curriculumEditorMenuItems[] = array('label' => 'Profile', 'href' => 'profile-editor.php');
+}
 
-            <?php echo $button;?>
-
-        </div>
-    </div>
-</div>
+shared_ui_render_header(array(
+    'brand_href' => '../index.php',
+    'brand_label' => 'ELC Curriculum Portfolio',
+    'brand_image' => shared_ui_asset_url('assets/img/elc.png'),
+    'brand_image_alt' => 'ELC Curriculum Portfolio',
+    'brand_title' => 'Curriculum Portfolio',
+    'nav_items' => array(),
+    'user' => $currentUser,
+    'display_name' => $displayName,
+    'auth_href' => $loginUrl,
+    'logout_href' => $logoutUrl,
+    'menu_items' => $curriculumEditorMenuItems,
+    'sign_in_label' => 'Sign In',
+    'sign_out_label' => 'Sign Out'
+));

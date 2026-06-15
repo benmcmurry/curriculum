@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__DIR__) . '/shared-ui/bootstrap.php';
+
 function curriculum_request_scheme()
 {
     if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {

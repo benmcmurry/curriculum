@@ -19,13 +19,10 @@
 
 <?php include("content/styles_and_scripts.html"); ?>
 </head>
-<body>
+	<body>
 	<header>
 		<?php include("content/header.php"); ?>
 	</header>
-	<nav>
-		<?php include("content/nav-bar.php"); ?>
-	</nav>
 
 	<article>
 		<div class="main">

@@ -12,7 +12,10 @@
 
 html,
 body {
-    background: var(--editor-bg);
+    background:
+        radial-gradient(circle at top left, rgba(236, 244, 252, 0.96), transparent 32%),
+        radial-gradient(circle at top right, rgba(215, 230, 245, 0.62), transparent 28%),
+        linear-gradient(180deg, #f7fbff 0%, #eef6fd 52%, #e5eff9 100%);
     color: var(--editor-text);
 }
 

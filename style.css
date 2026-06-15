@@ -1,9 +1,27 @@
 :root {
   scroll-behavior: smooth;
+  --ui-navy: #002e5d;
+  --ui-blue: #0062b8;
+  --ui-ink: #16324f;
+  --ui-muted: #5b7088;
+  --ui-border: #d7dfeb;
+  --ui-surface: #ffffff;
+  --ui-surface-alt: #f5f8fc;
+  --ui-shadow: 0 16px 40px rgba(0, 46, 93, 0.12);
 }
+
+body {
+  margin: 0;
+  font-family: "Public Sans", sans-serif;
+  color: var(--ui-ink);
+  background:
+    radial-gradient(circle at top left, rgba(236, 244, 252, 0.96), transparent 32%),
+    radial-gradient(circle at top right, rgba(215, 230, 245, 0.62), transparent 28%),
+    linear-gradient(180deg, #f7fbff 0%, #eef6fd 52%, #e5eff9 100%);
+  padding-top: 4.75rem;
+}
+
 /* this fixes the scrolling to the wrong position due to the sticky content */
-
-
 a.anchor {
   display: block;
   position: relative;
@@ -19,52 +37,12 @@ a.anchor {
   background-position: center 40%;
   height: 200px;
 }
-#header {
-  background-color: white;
-  box-shadow: 0px 5px 10px 1px grey;
-}
-#header a {
-  text: rgb(0, 46, 93);
-}
-
-footer { 
-Margin-top: 2em;
-  padding: 1.5em;
-  border-top: solid 1px lightgrey;
-  text-align: center;
-}
-div#byu-bar {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  display: flex;
-  align-items: flex-start;
-  background-color: rgb(0, 46, 93);
-}
-
-div#byu-bar img {
-  height: 2em;
-}
-
-div#byu-bar #elc-title a{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  color: white;
-  font-size: 1.3em;
-  padding-left: 0.5em;
-  text-decoration: none;
-}
-div#user {
-  line-height: 2em;
-  height: 2em;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  color: white;
-  text-align: end;
-}
 
 #title {
   background-color: rgb(246, 246, 248);
   color: rgb(20, 20, 20);
   cursor: default;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Public Sans", sans-serif;
   font-size: 2em;
   font-weight: 700;
   text-align: center;
@@ -72,9 +50,36 @@ div#user {
   padding: 2em 0em;
 }
 
+.curriculum-nav {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--ui-border);
+  box-shadow: 0 8px 26px rgba(0, 31, 64, 0.12);
+  top: 4.75rem;
+  z-index: 1030;
+}
+
+.curriculum-nav .nav-link {
+  color: var(--ui-navy);
+  font-weight: 600;
+}
+
+.curriculum-nav .nav-link:hover,
+.curriculum-nav .nav-link:focus {
+  color: var(--ui-blue);
+}
+
+.curriculum-nav .navbar-toggler {
+  border-color: var(--ui-border);
+}
+
+.curriculum-nav .dropdown-menu {
+  border: 1px solid var(--ui-border);
+  box-shadow: var(--ui-shadow);
+}
+
 h2 {
-  color: rgb(0, 46, 93);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ui-navy);
+  font-family: "Public Sans", sans-serif;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -83,10 +88,10 @@ h2 {
 }
 
 h3 {
-  color: rgb(0, 46, 93);
+  color: var(--ui-navy);
   cursor: default;
   display: block;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Public Sans", sans-serif;
   font-size: 21.333281px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -94,18 +99,13 @@ h3 {
 }
 
 h4 {
-  color:Black;
+  color: Black;
   cursor: default;
   display: block;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Public Sans", sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
-}
-
-div#user a {
-  color: white;
-  text-decoration: none;
 }
 
 @media all and (max-width: 900px) {
@@ -125,14 +125,16 @@ div#user a {
   html {
     font-size: 12px;
   }
-  #header h1 {
+
+  #title {
     font-size: 1.7em;
   }
-  div#byu-bar img {
-  height: 1.5em;
+
+  .curriculum-nav {
+    top: 4.25rem;
+  }
 }
 
-}
 OL {
   counter-reset: item;
   position: relative;
@@ -143,13 +145,13 @@ OL {
   border-spacing: .3em 0em;
 }
 
-OL>LI {
+OL > LI {
   display: block;
   display: table-row;
   padding-left: 10px;
 }
 
-OL>LI::before {
+OL > LI::before {
   content: counters(item, ".") ". ";
   counter-increment: item;
   display: table-cell;
@@ -159,42 +161,43 @@ OL>LI::before {
   html {
     font-size: 10px;
   }
-  #header h1 {
+
+  #title {
     font-size: 1.8em;
-  }
-  #user {
-    background-color: rgb(0, 46, 93);
   }
 }
 
 .dropdown-menu li {
-    position: relative;
-    }
-    .dropdown-menu .dropdown-submenu {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: -7px;
-    }
-    .dropdown-menu .dropdown-submenu-left {
-    right: 100%;
-    left: auto;
-    }
+  position: relative;
+}
+
+.dropdown-menu .dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+
+.dropdown-menu .dropdown-submenu-left {
+  right: 100%;
+  left: auto;
+}
+
 .dropdown-menu > li:hover > .dropdown-submenu,
 .dropdown-menu > li:focus-within > .dropdown-submenu {
-    display: block;
-    }
+  display: block;
+}
 
 /* for reviewing edits */
-    ins, ins * {
-      color: green;
-      background: #dfd;
-  }
-  
-  del, del * {
-      color: red;
-      background: #fdd;
-  }
+ins, ins * {
+  color: green;
+  background: #dfd;
+}
+
+del, del * {
+  color: red;
+  background: #fdd;
+}
 
 .form-label {
   font-size: 14px;
@@ -204,13 +207,13 @@ OL>LI::before {
   display: block;
 }
 
-  btn-primary {
-    background-color: black;
-  }
+.btn-primary {
+  background-color: black;
+}
 
-  .arrow {
-    cursor: pointer;
-  }
+.arrow {
+  cursor: pointer;
+}
 
 /* Portfolio card UI */
 .portfolio-main {
@@ -219,25 +222,25 @@ OL>LI::before {
 }
 
 .portfolio-card {
-  background: #fff;
-  border: 1px solid #dbe3ea;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(22, 39, 56, 0.06);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--ui-border);
+  border-radius: 22px;
+  box-shadow: var(--ui-shadow);
   overflow: hidden;
 }
 
 .portfolio-card-header-level {
-  background: linear-gradient(90deg, #002E5D 0%, #0072CE 100%);
+  background: linear-gradient(90deg, var(--ui-navy) 0%, var(--ui-blue) 100%);
   color: #fff;
   padding: 0.7rem 1rem;
-  border-bottom: 1px solid #002E5D;
+  border-bottom: 1px solid var(--ui-navy);
 }
 
 .portfolio-card-header-course {
-  background: linear-gradient(90deg, #0047BA 0%, #0072CE 100%);
+  background: linear-gradient(90deg, #0047ba 0%, var(--ui-blue) 100%);
   color: #fff;
   padding: 0.75rem 0.9rem;
-  border-bottom: 1px solid #0047BA;
+  border-bottom: 1px solid #0047ba;
 }
 
 .portfolio-card-header-level h2,
@@ -260,15 +263,15 @@ OL>LI::before {
 }
 
 .portfolio-course-links .btn {
-  border-color: #002E5D;
-  color: #002E5D;
+  border-color: var(--ui-blue);
+  color: var(--ui-blue);
   background: #fff;
   font-weight: 600;
 }
 
 .portfolio-course-links .btn:hover,
 .portfolio-course-links .btn:focus {
-  background: #002E5D;
+  background: var(--ui-blue);
   color: #fff;
-  border-color: #002E5D;
+  border-color: var(--ui-blue);
 }
