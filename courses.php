@@ -20,11 +20,9 @@ include_once("teachers.php");
 <body>
     <?php include("content/header.php"); ?>
 
-    <div id="title" class="container-fluid">
-        Courses
-    </div>
-
     <main class="container-md portfolio-main">
+        <h1 id="title" class="container-fluid">Courses</h1>
+
         <?php
         $levelsQuery = $elc_db->prepare("SELECT level_id, level_name, level_short_name FROM Levels WHERE active = 1 ORDER BY level_order ASC");
         $levelsQuery->execute();
