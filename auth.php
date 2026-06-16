@@ -13,10 +13,10 @@ if ($currentUser) {
     $button = shared_auth_build_identity_button(
         isset($currentUser['name']) ? $currentUser['name'] : $net_id,
         isset($currentUser['provider']) ? $currentUser['provider'] : 'okta',
-        array('Sign Out' => $logoutUrl)
+        array('Logout' => $logoutUrl)
     );
 } else {
-    $button = "<a href='" . htmlspecialchars(shared_auth_login_url(curriculum_current_url_without_auth_params(), 'curriculum'), ENT_QUOTES, 'UTF-8') . "'>Sign In</a>";
+    $button = "<a href='" . htmlspecialchars(shared_auth_login_url(curriculum_current_url_without_auth_params(), 'curriculum'), ENT_QUOTES, 'UTF-8') . "'>Login</a>";
 }
 
 if (isset($_REQUEST['logout'])) {

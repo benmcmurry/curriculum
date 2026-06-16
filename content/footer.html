@@ -16,7 +16,7 @@ shared_ui_render_footer(array(
             'title' => 'Support',
             'items' => array(
                 array('label' => 'Profile', 'href' => 'profile.php'),
-                array('label' => 'Sign In / Out', 'href' => $currentUser ? shared_auth_logout_url(curriculum_current_url_without_auth_params(), 'curriculum') : shared_auth_login_url(curriculum_current_url_without_auth_params(), 'curriculum'))
+                array('label' => $currentUser ? 'Logout' : 'Login', 'href' => $currentUser ? shared_auth_logout_url(curriculum_current_url_without_auth_params(), 'curriculum') : shared_auth_login_url(curriculum_current_url_without_auth_params(), 'curriculum'))
             )
         ),
         array(

@@ -20,18 +20,14 @@ require_once "teachers.php";
 <?php include_once("content/styles_and_scripts.html"); ?>
 </head>
 <body>
-
-    
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
         <?php include("content/header.php"); ?>
 
-        
-
-<h1 id="title" class="container-fluid">
-    Guiding Principles for ELC Curriculum
-</h1>
-
-<main class="container-md portfolio-main">
+<main id="main-content" class="container-md portfolio-main">
+    <h1 id="title" class="container-fluid">
+        Guiding Principles for ELC Curriculum
+    </h1>
     <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development.
         Our curricular philosophy is divided into four sections dealing with <a href='#curriculum'>curricular development and curricular change</a>,
         <a href='#ppp'>pedagogical practice</a>, <a href='#skill_area'>teaching specific language skills</a>, and <a href="#students">student learning</a>.

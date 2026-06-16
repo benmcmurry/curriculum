@@ -29,6 +29,6 @@ shared_ui_render_header(array(
     'auth_href' => $loginUrl,
     'logout_href' => $logoutUrl,
     'menu_items' => $curriculumEditorMenuItems,
-    'sign_in_label' => 'Sign In',
-    'sign_out_label' => 'Sign Out'
+    'sign_in_label' => 'Login',
+    'sign_out_label' => 'Logout'
 ));
