@@ -239,19 +239,6 @@ div#level-nav a:hover {
     border: 6px solid white;
 }
 
-.pdf_icon {
-    float: right;
-    background-image: url("images/pdf-flat.png");
-    background-size: 48px 48px;
-    background-repeat: no-repeat;
-    padding: 24px 24px;
-    border-radius: 24px;
-}
-
-a.pdf_icon:hover {
-    background-image: url("images/pdf-flat2.png");
-}
-
 article {}
 
 div.content-background {
@@ -520,13 +507,6 @@ div.citations p {
 @media all and (max-width: 900px) {
     html {
         font-size: 13px;
-    }
-}
-
-@media all and (max-width: 800px) {
-    a.pdf_icon {
-        background-size: 32px 32px;
-        padding: 32px 32px 5px 32px;
     }
 }
 

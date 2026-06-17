@@ -22,18 +22,37 @@ include_once("teachers.php");
 <body>
 
 
-		<?php include("content/header.php"); ?>
+		<?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
+<main class="container portfolio-main">
+	<section class="hero-card portfolio-hero content-card-spotlight">
+		<p class="portfolio-eyebrow">Curriculum</p>
+		<h1 class="portfolio-title">Level Descriptors</h1>
+		<p class="portfolio-subtitle">These descriptors outline the language abilities students are expected to demonstrate by level and skill area, and they serve as the curricular target for instruction and assessment.</p>
+	</section>
 
-<div id="title" class="container-fluid">
-	Level Descriptors
-</div>
-<main class="container-md portfolio-main">
+	<section class="content-card content-card-compact content-card-nav mb-4">
+		<nav class="section-jump-nav" aria-label="Level descriptors navigation">
+			<p class="section-jump-label">Jump to level</p>
+			<ul>
+				<?php
+				$levelsForNavQuery = $elc_db->prepare("Select level_name, level_short_name from Levels where active=1 order by level_order ASC");
+				$levelsForNavQuery->execute();
+				$levelsForNavResult = $levelsForNavQuery->get_result();
+				while ($navLevel = $levelsForNavResult->fetch_assoc()) {
+					echo "<li><a href='#" . htmlspecialchars($navLevel['level_short_name'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($navLevel['level_name'], ENT_QUOTES, 'UTF-8') . "</a></li>";
+				}
+				$levelsForNavResult->free();
+				?>
+			</ul>
+		</nav>
+	</section>
+
 	<section class="portfolio-card mb-4">
 		<div class="portfolio-card-header-level">
 			<h2 class="h4 mb-0">How to Read These Descriptors</h2>
 		</div>
-		<div class="portfolio-card-body">
+		<div class="portfolio-card-body portfolio-rich-text">
 			<p>This document describes the language ability of our students according to proficiency level and skill area. As we
 				continue to revise and improve our existing curriculum, these descriptors will serve as a guide to
 				administrators, teachers, and students. Objectives will aim toward helping students reach these proficiency
@@ -66,17 +85,22 @@ include_once("teachers.php");
             echo "<a class='anchor' id='".$levels['level_short_name']."'></a>";
             echo "<section class='portfolio-card mb-4'>";
             echo "<div class='portfolio-card-header-level'><h2 class='h4 mb-0'>".$levels['level_name']."</h2></div>";
-            echo "<div class='portfolio-card-body'>";
+            echo "<div class='portfolio-card-body portfolio-rich-text'>";
             echo $levels['level_descriptor'];
             echo "<h3 class='h6 mt-4 mb-3'>Courses</h3>";
-            echo "<div class='portfolio-course-links'>";
+            echo "<div class='portfolio-item-grid'>";
                 $course_query = $elc_db->prepare("Select * from Courses where level_id = ? order by course_order");
 								$course_query->bind_param("s",$levels['level_id']);
 								$course_query->execute();
             		$courses_result = $course_query->get_result();
 					
             while ($courses = $courses_result->fetch_assoc()) {
-				echo "<a class='courses btn btn-outline-primary btn-sm' role='button' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='course.php?course_id=".$courses['course_id']."'>".$courses['course_name']."</a>";
+				echo "<article class='portfolio-item-card'>";
+				echo "<p class='portfolio-stat-label'>Course</p>";
+				echo "<h4>".htmlspecialchars($courses['course_name'], ENT_QUOTES, 'UTF-8')."</h4>";
+				echo "<p class='portfolio-item-meta'>Open this course to review the current description, materials, outcomes, and connected learning experiences.</p>";
+				echo "<a class='portfolio-chip-link' role='button' data-shortName='".htmlspecialchars($courses['course_short_name'], ENT_QUOTES, 'UTF-8')."' data-name='".htmlspecialchars($courses['course_name'], ENT_QUOTES, 'UTF-8')."' title='".htmlspecialchars($courses['course_name'], ENT_QUOTES, 'UTF-8')."' href='course.php?course_id=".$courses['course_id']."'>View Course</a>";
+				echo "</article>";
             }
                 
 			echo "</div></div></section>";
@@ -86,9 +110,7 @@ include_once("teachers.php");
 ?>
 </main>
 	
-	<footer>
-		<?php include("content/footer.html"); ?>
-	</footer>
+	<?php curriculum_render_footer(); ?>
 
 </body>
 </html>

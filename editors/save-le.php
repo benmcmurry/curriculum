@@ -6,7 +6,7 @@ $name =  $_POST['name'];
 $description = $_POST['description'];
 $short_description = $_POST['short_description'];
 $emphasis = $_POST['emphasis'];
-echo "Saved ".date('l jS \of F Y h:i:s A').".";
+echo "Saved on " . date('l jS \of F Y h:i:s A') . ".";
 
 
 $query_final = $elc_db->prepare("UPDATE Learning_experiences SET name=?, short_description=?, description=?, emphasis=?, updated_by=? WHERE learning_experience_id=?");

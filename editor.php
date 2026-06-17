@@ -1,104 +1,57 @@
 <?php
 require_once __DIR__ . '/bootstrap.php';
-require_once"../../connectFiles/connect_cis.php";
-require_once"auth.php";
-require_once"teachers.php";
-$localpath=getenv("SCRIPT_NAME");
-$absolutepath=realpath($localPath);
+require_once "../../connectFiles/connect_cis.php";
+require_once "auth.php";
+require_once "teachers.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Curriculum Portfolio - English Language Center</title>
-
-<!--    Meta Information -->
+    <title>Curriculum Editor - English Language Center</title>
     <meta charset="utf-8">
-    <meta name="description" content="This section of the ELC website outlines the ELC curriculum." />
-    <meta name="keywords" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
-    <meta name="robots" content="ELC, BYU, ESL, Curriculum, Levels, Learning, Outcomes" />
+    <meta name="description" content="Open the curriculum editor workspace for levels, courses, and learning experiences." />
+    <meta name="keywords" content="ELC, BYU, ESL, Curriculum, Editor" />
+    <meta name="robots" content="ELC, BYU, ESL, Curriculum, Editor" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<?php include_once("content/styles_and_scripts.html"); ?>
+    <?php include_once("content/styles_and_scripts.html"); ?>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_editor_header(array("home_path_prefix" => "", "editor_path_prefix" => "editors")); ?>
 
-    
-
-<?php require_once("content/header-short.php"); ?>
-<?php
-echo "LP: $localpath, AP: $absolutepath" 
-?>
-<div class="container-md pt-4">
-    <h2> Levels and Courses </h2>
-    <?php
-    $query = $elc_db->prepare("Select Levels.level_id, Levels.level_name from Levels where active=1 order by level_order ASC");
-    $query->execute();
-    $result = $query->get_result();
-    while ($levels = $result->fetch_assoc()) {
-        echo "<div class='container-md mb-3 pt-2 bg-light border border-primary'>";
-        echo "<div class='row m-1'><a class='col text-center btn btn-primary' href='level-edit.php?level_id=".$levels['level_id']."'><i class='bi bi-pencil-square'></i> ".$levels['level_name']."</a></div>";
-        $course_query = "Select Courses.course_id, Courses.course_name,Courses.course_short_name, Courses.level_id from Courses where Courses.level_id=".$levels['level_id']." order by course_order ASC";      
-        if (!$course_result = $elc_db->query($course_query)) {
-            die('There was an error running the query [' . $elc_db->error . ']');
-        }
-        echo "<div class='row m-1 p-0 justify-content-between' id=''>";
-        while ($courses = $course_result->fetch_assoc()) {
-            echo "<div class='col p-1'> <div class='list-group'><a class='text-center list-group-item list-group-item-action active' id='course-".$courses['course_id']."' data-shortName='".$courses['course_short_name']."' data-name='".$courses['course_name']."' title='".$courses['course_name']."' href='editors/course-edit.php?course_id=".$courses['course_id']."'><i class='bi bi-pencil-square'></i> ".$courses['course_name']."</a>";
-            $learningExperienceQuery = $elc_db->prepare("Select *, LE_courses.course_id from Learning_experiences inner join LE_courses on Learning_experiences.learning_experience_id = LE_courses.learning_experience_id where LE_courses.course_id=? order by name ASC");
-            $learningExperienceQuery->bind_param("s", $courses['course_id']);
-            $learningExperienceQuery->execute();
-            $learningExperienceResult = $learningExperienceQuery->get_result();
-            // echo "<div class='row'><div class='col'><div class='list-group'>";
-            while ($le = $learningExperienceResult->fetch_assoc()) {
-                echo "<a class='list-group-item list-group-item-action' href='editors/le-edit.php?learningExperienceId=".$le['learning_experience_id']."'><i class='bi bi-pencil-square'></i> ".$le['name']."</a>";
-            }
-            echo "<a id='new_le' class='list-group-item bg-info' href='editors/le-edit.php?learningExperienceId=new'><i class='bi bi-plus'></i> Learning
-            Experience<a>";
-            echo "</div></div>";
-        }
-        echo "</div></div>";
-        
-    }
-    
-        $result->free();
-      
-$currentNetId = isset($net_id) ? (string) $net_id : '';
-if (in_array($currentNetId, array("blm39", "karimay"), true)) {
-    ?>
-            <div class="block">
-                <h2> Review Submitted Changes </h2>
-                <?php
-
-
-        $review_query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where needs_review = 1");
-        // $review_query = $elc_db->prepare("Select * from Courses_review where needs_review = 1");
-        $review_query->execute();
-        $result = $review_query->get_result();
-      while ($Courses_review = $result->fetch_assoc()) {
-      echo "<a href='review-edits.php?course_id=".$Courses_review['course_id']."'>".$Courses_review['level_name']." - ".$Courses_review['course_name']."</a><br />";
-      }
-
-        $review_level_query = $elc_db->prepare("Select * from Levels_review where needs_review = 1");
-        $review_level_query->execute();
-        $review_level_query_results = $review_level_query->get_result();
-
-      while ($level_review = $review_level_query_results->fetch_assoc()) {
-      echo "<a href='review-level-edits.php?level_id=".$level_review['level_id']."'>".$level_review['level_name']."</a><br />";
-      }
-
-}
-
-?>
-            </div>
+<main id="main-content" class="container portfolio-main">
+    <section class="hero-card portfolio-hero content-card-spotlight">
+        <p class="portfolio-eyebrow">Editor</p>
+        <h1 class="portfolio-title">Curriculum Editing Workspace</h1>
+        <p class="portfolio-subtitle">Use the current editor workspace to manage level descriptors, course content, learning experiences, user access, and profile statistics.</p>
+        <div class="portfolio-chip-group mt-4">
+            <a class="portfolio-chip-link" href="editors/index.php">Open Editor Dashboard</a>
+            <a class="portfolio-chip-link" href="index.php">Back to Portfolio</a>
         </div>
+    </section>
 
+    <section class="portfolio-item-grid">
+        <article class="portfolio-item-card">
+            <p class="portfolio-stat-label">Levels and Courses</p>
+            <h2>Open the main editor dashboard</h2>
+            <p class="portfolio-item-meta">Browse levels, courses, and learning experiences in the redesigned editor workspace.</p>
+            <a class="portfolio-chip-link" href="editors/index.php">Go to Dashboard</a>
+        </article>
+        <article class="portfolio-item-card">
+            <p class="portfolio-stat-label">Access</p>
+            <h2>Manage editor permissions</h2>
+            <p class="portfolio-item-meta">Update user access and role settings for curriculum contributors.</p>
+            <a class="portfolio-chip-link" href="editors/users.php">Open Access Table</a>
+        </article>
+        <article class="portfolio-item-card">
+            <p class="portfolio-stat-label">Profile Data</p>
+            <h2>Edit profile statistics and citations</h2>
+            <p class="portfolio-item-meta">Maintain the institutional profile tables and citation library that support the public profile page.</p>
+            <a class="portfolio-chip-link" href="editors/profile-editor.php">Open Profile Editor</a>
+        </article>
+    </section>
+</main>
 
-</div>
-<footer>
-        <?php include("content/footer.html"); ?>
-    </footer>
-
+<?php curriculum_render_footer(); ?>
 </body>
 </html>

@@ -2,6 +2,9 @@
 require_once __DIR__ . '/bootstrap.php';
 include_once("../../connectFiles/connect_cis.php");
 if (isset($_GET['id'])) {$learningExperienceId = $_GET['id'];} else {header("Location: index.php");}
+$le_name = 'Learning Experience';
+$short_description = '';
+$description = '';
 $query = $elc_db->prepare("Select * from Learning_experiences where learning_experience_id= ?");
 $query->bind_param('s', $learningExperienceId);
 $query->execute();
@@ -53,26 +56,40 @@ include_once("teachers.php");
 </head>
 <body>
     
-        <?php include("content/header.php"); ?>
+        <?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
-        <div id="title" class="container-fluid"><?php echo $le_name; ?></div>
-        <main class="container-md portfolio-main">
+        <main class="container portfolio-main">
+            <section class="hero-card portfolio-hero content-card-spotlight">
+                <p class="portfolio-eyebrow">Learning Experience</p>
+                <h1 class="portfolio-title"><?php echo htmlspecialchars($le_name, ENT_QUOTES, 'UTF-8'); ?></h1>
+                <p class="portfolio-subtitle">Review the activity overview and see which courses currently connect to this learning experience.</p>
+                <div class="portfolio-chip-group mt-4">
+                    <?php if ($backCourseId !== null) { ?>
+                    <a class="portfolio-chip-link" href="course.php?course_id=<?php echo $backCourseId; ?>">
+                        Back to <?php echo htmlspecialchars($backCourseName); ?>
+                    </a>
+                    <?php } ?>
+                    <?php if ($backLevelShortName !== null) { ?>
+                    <a class="portfolio-chip-link" href="levels.php#<?php echo htmlspecialchars($backLevelShortName); ?>">
+                        Back to <?php echo htmlspecialchars($backLevelName); ?>
+                    </a>
+                    <?php } ?>
+                </div>
+            </section>
+
             <?php if ($backCourseId !== null || $backLevelShortName !== null) { ?>
-            <section class="portfolio-card mb-4">
-                <div class="portfolio-card-body">
-                    <div class="portfolio-course-links">
+            <section class="content-card content-card-compact content-card-nav mb-4">
+                <nav class="section-jump-nav" aria-label="Learning experience navigation">
+                    <p class="section-jump-label">Quick links</p>
+                    <ul>
                         <?php if ($backCourseId !== null) { ?>
-                        <a class="btn btn-outline-primary btn-sm" href="course.php?course_id=<?php echo $backCourseId; ?>">
-                            <i class="bi bi-arrow-left"></i> Back to <?php echo htmlspecialchars($backCourseName); ?>
-                        </a>
+                        <li><a href="course.php?course_id=<?php echo $backCourseId; ?>">Back to <?php echo htmlspecialchars($backCourseName); ?></a></li>
                         <?php } ?>
                         <?php if ($backLevelShortName !== null) { ?>
-                        <a class="btn btn-outline-primary btn-sm" href="levels.php#<?php echo htmlspecialchars($backLevelShortName); ?>">
-                            <i class="bi bi-arrow-left-circle"></i> Back to <?php echo htmlspecialchars($backLevelName); ?>
-                        </a>
+                        <li><a href="levels.php#<?php echo htmlspecialchars($backLevelShortName); ?>">Back to <?php echo htmlspecialchars($backLevelName); ?></a></li>
                         <?php } ?>
-                    </div>
-                </div>
+                    </ul>
+                </nav>
             </section>
             <?php } ?>
 
@@ -80,7 +97,7 @@ include_once("teachers.php");
                 <div class="portfolio-card-header-course">
                     <h2 class="h4 mb-0">Learning Experience Overview</h2>
                 </div>
-                <div class="portfolio-card-body">
+                <div class="portfolio-card-body portfolio-rich-text">
                     <?php echo $description; ?>
                 </div>
             </section>
@@ -90,7 +107,7 @@ include_once("teachers.php");
                     <h2 class="h5 mb-0">Connected Courses</h2>
                 </div>
                 <div class="portfolio-card-body">
-                    <div class="portfolio-course-links">
+                    <div class="portfolio-item-grid">
                     <?php
                     $query = $elc_db->prepare("Select LE_courses.course_id, Courses.course_name, Courses.course_short_name, Levels.level_id, Levels.level_short_name, LE_courses.id 
                             from LE_courses 
@@ -106,7 +123,12 @@ include_once("teachers.php");
                         $courseName = $selectedCourse['course_name'];
                         $levelShortName = $selectedCourse['level_short_name'];
                         $courseId = $selectedCourse['course_id'];
-                        echo "<a class='courses btn btn-outline-primary btn-sm' title='$levelShortName $courseName' id='$courseId' href='course.php?course_id=$courseId'>$levelShortName $courseName</a>";
+                        echo "<article class='portfolio-item-card'>";
+                        echo "<p class='portfolio-stat-label'>Connected Course</p>";
+                        echo "<h3>" . htmlspecialchars($levelShortName . " " . $courseName, ENT_QUOTES, 'UTF-8') . "</h3>";
+                        echo "<p class='portfolio-item-meta'>Open the course page to see where this learning experience fits into the broader sequence.</p>";
+                        echo "<a class='portfolio-chip-link' title='" . htmlspecialchars($levelShortName . " " . $courseName, ENT_QUOTES, 'UTF-8') . "' id='" . (int) $courseId . "' href='course.php?course_id=$courseId'>View Course</a>";
+                        echo "</article>";
                     }
                     ?>
                     </div>
@@ -114,8 +136,6 @@ include_once("teachers.php");
             </section>
         </main>
 
-    <footer>
-        <?php include("content/footer.html"); ?>
-    </footer>
+    <?php curriculum_render_footer(); ?>
 </body>
 </html>

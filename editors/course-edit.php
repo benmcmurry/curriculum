@@ -11,6 +11,7 @@ include_once("../../../connectFiles/connect_cis.php");
 
 include_once("../auth.php");
 include_once("admins.php");
+require_once __DIR__ . '/page_helpers.php';
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
 $query->execute();
@@ -47,10 +48,24 @@ $result = $query->get_result();
 <?php include("styles_and_scripts.html"); ?>
 <!-- 	Javascript -->
 	<script>
-	$(document).ready(function() {
+    function setCourseSaveStatus(message, tone) {
+      var saveDialog = $("#save_dialog");
+      saveDialog
+        .removeClass("alert alert-danger alert-success alert-info")
+        .addClass("editor-status");
+      if (tone === "error") {
+        saveDialog.addClass("alert alert-danger");
+      } else if (tone === "success") {
+        saveDialog.addClass("alert alert-success");
+      } else {
+        saveDialog.addClass("alert alert-info");
+      }
+      saveDialog.text(message);
+    }
 
+	$(document).ready(function() {
     current_course_name = $("#course_name").text();
-		current_course_description = $("#course_description").text(); console.log("current_course_description");
+		current_course_description = $("#course_description").text();
 		current_course_short_name = $("#course_short_name").text();
 		current_course_emphasis = $("#course_emphasis").text();
 		current_course_materials = $("#course_materials").text();
@@ -63,7 +78,7 @@ $result = $query->get_result();
 		save("button");
 	});
 
-	$("div").blur(function(){
+	$(".editor-form-grid [contenteditable='true']").blur(function(){
 		save(this.id);
 	});
 
@@ -110,7 +125,8 @@ $result = $query->get_result();
         });
 });
 
-function save() {
+	function save() {
+    setCourseSaveStatus("Saving course changes...", "info");
 
     //    if (current_course_name == $("#course_name").text() &&
     //       current_course_description == $("#course_description").text() &&
@@ -152,8 +168,8 @@ function save() {
 				box_folder: box_folder,
 				needs_review: "1",
 				}
-		}).done(function(phpfile) {
-		$("#save_dialog").html(phpfile);
+	}).done(function(phpfile) {
+		setCourseSaveStatus(phpfile, "success");
   		});
 }
 
@@ -161,23 +177,31 @@ function save() {
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to editor content</a>
-<?php require_once("../content/header-short.php"); 
-if ($message) {
-	echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
-}
-if ($auth && $access) { ?>
-	<main id="main-content" class="container-md editor-main py-4">
-		<section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
-			<div class="d-flex flex-wrap gap-2">
-				<a type="button" class="btn btn-outline-secondary" id="toPortfolio" href="../course.php?course_id=<?php echo $course_id;?>"><i class="bi bi-back"></i> Portfolio</a>
-				<a type="button" class="btn btn-outline-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
-				<a type="button" class="btn btn-outline-secondary" id="previous" href="course-edit.php?course_id=<?php echo $course_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous</a>
-				<a type="button" class="btn btn-outline-secondary" id="next" href="course-edit.php?course_id=<?php echo $course_id+1;?>">Next <i class="bi bi-arrow-right-circle"></i></a>
-				<a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
+<?php require_once dirname(__DIR__) . '/content/shared-shell.php'; curriculum_render_editor_header();
+if ($message) { ?>
+	<div class="container editor-access-state">
+		<section class="editor-panel">
+			<div class="editor-panel-body">
+				<div class="alert alert-info" role="status"><?php echo $message; ?></div>
 			</div>
 		</section>
+	</div>
+<?php }
+if ($auth && $access) { ?>
+	<main id="main-content" class="container editor-main py-4">
+		<?php
+		curriculum_render_editor_hero('Course Editor', $level_name . ' - ' . $course_name, 'Edit the public-facing course summary, materials, learning outcomes, and resource links that appear in the curriculum portfolio.');
+		curriculum_render_editor_actions('Editor actions', array(
+			array('id' => 'toPortfolio', 'href' => '../course.php?course_id=' . $course_id, 'label' => 'Open Live Course', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
+			array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
+			array('id' => 'previous', 'href' => 'course-edit.php?course_id=' . ($course_id - 1), 'label' => 'Previous Course', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'),
+			array('id' => 'next', 'href' => 'course-edit.php?course_id=' . ($course_id + 1), 'label' => 'Next Course', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'),
+			array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto'),
+		));
+		?>
 
-		<div class="editor-save-dialog mb-3" id="save_dialog"></div>
+		<p class="editor-helper-note">This page saves on blur and with the Save Changes button. TinyMCE fields use the same shared save flow as the rest of the editor.</p>
+		<div class="editor-save-dialog editor-status mb-3" id="save_dialog" aria-live="polite"></div>
 
 		<section class="editor-panel mb-3">
 			<div class="editor-panel-header editor-panel-header-course">
@@ -212,11 +236,9 @@ if ($auth && $access) { ?>
 		
 		<label for="box_folder" class="form-label">Box Folder Link</label>
 		<div id="box_folder" class="form-control" contenteditable="true" aria-describedby="googleDriveHelp"><?php echo $box_folder; ?></div>
-		<div id="googleDriveHelp" class="form-text mb-4">This the shareable link.</div>
+		<div id="googleDriveHelp" class="form-text mb-4">This is the shareable link.</div>
 </div></section></main>
   <?php } ?>
-<footer>
-	<?php include("../content/footer.html"); ?>
-</footer>
+<?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
 </html>

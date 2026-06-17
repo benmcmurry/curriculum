@@ -18,7 +18,8 @@ $query->execute();
 $result = $query->get_result();
 
 
-			echo "Saved ".date('l jS \of F Y h:i:s A').".";
+$status_message = $needs_review == 0 ? 'Saved and published' : 'Saved and queued for review';
+echo $status_message . ' on ' . date('l jS \of F Y h:i:s A') . '.';
 if ($needs_review == 0) {
 	$query_final = $elc_db->prepare("UPDATE Courses SET course_name=?, course_short_name=?,course_description=?, course_emphasis=?,course_materials=?, learning_outcomes =?, updated_by=?, box_folder=? WHERE course_id=?");
 	$query_final->bind_param("sssssssss", $course_name, $course_short_name, $course_description, $course_emphasis, $course_materials, $learning_outcomes, $net_id, $box_folder, $course_id);

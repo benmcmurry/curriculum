@@ -21,6 +21,15 @@ function curriculum_request_scheme()
         return 'https';
     }
 
+    $host = strtolower(curriculum_request_host());
+    if ($host === 'localhost'
+        || strpos($host, 'localhost:') === 0
+        || strpos($host, '127.0.0.1') === 0
+        || strpos($host, '[::1]') === 0
+        || $host === '::1') {
+        return 'http';
+    }
+
     return 'https';
 }
 

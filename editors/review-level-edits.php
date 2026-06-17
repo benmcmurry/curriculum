@@ -1,6 +1,7 @@
 <?php
 include_once("../../../connectFiles/connect_cis.php");
 include_once("../auth.php");
+require_once __DIR__ . '/page_helpers.php';
 
 $level_id = $_GET['level_id'];
 
@@ -91,6 +92,21 @@ $result_edits = $query_edits->get_result();
     <!-- 	Javascript -->
     <script>
     $(document).ready(function() {
+        var saveDialog = $("#save_dialog");
+        function setReviewStatus(message, tone) {
+            saveDialog
+                .removeClass("alert alert-danger alert-success alert-info")
+                .addClass("editor-status");
+            if (tone === "error") {
+                saveDialog.addClass("alert alert-danger");
+            } else if (tone === "success") {
+                saveDialog.addClass("alert alert-success");
+            } else {
+                saveDialog.addClass("alert alert-info");
+            }
+            saveDialog.text(message);
+        }
+
         $("#save").click(function() {
             save();
         } );
@@ -126,7 +142,7 @@ $result_edits = $query_edits->get_result();
                 level_updated_by: "<?php echo $level_updated_by_edits; ?>"
             }
         } ).done(function(phpfile) {
-            $("#save_dialog").html(phpfile);
+            setReviewStatus(phpfile, "success");
         } );
     }
     </script>
@@ -142,46 +158,47 @@ $result_edits = $query_edits->get_result();
 </head>
 
 <body>
-    <?php require_once("../content/header-short.php"); ?>
-    <div id="title" class="container-fluid">
-        Review Level Edits: <?php echo $level_name; ?>
-    </div>
-    <div class="container-md sticky-top pt-5 mb-2">
-        <div class="row justify-content-between">
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i>
-                    Editor Menu</a>
-            </div>
+    <?php require_once dirname(__DIR__) . "/content/shared-shell.php"; curriculum_render_editor_header(); ?>
+    <main class="container editor-main py-4">
+        <?php
+        curriculum_render_editor_hero('Review Queue', 'Review Level Edits', $level_name);
+        curriculum_render_editor_actions('Review actions', array(
+            array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Back to Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
+            array('href' => 'level-edit.php?level_id=' . $level_id, 'label' => 'Open Editable Version', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
+            array('id' => 'save', 'href' => null, 'label' => 'Publish Approved Changes', 'icon' => 'bi bi-check2-square', 'class' => 'btn btn-primary ms-auto'),
+        ));
+        ?>
 
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-primary" href="level-edit.php?level_id=<?php echo $level_id;?>"><i
-                        class="bi bi-pencil"></i> Edit</a>
-                <a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
-            </div>
-        </div>
+        <div class="editor-save-dialog editor-status mb-3" id="save_dialog" aria-live="polite"></div>
 
-    </div>
-
-    <div class="container-md pt-4" id="save_dialog"></div>
-    <div class="container-md pt-4">
-        <div class="container-md pt-4">
-
-            <?php $diff = htmldiff($level_name, $level_name_edits);	?>
+        <section class="editor-diff-grid">
+            <?php $diff = htmldiff($level_name, $level_name_edits); ?>
+            <article class="editor-diff-card">
                 <label for="level_name" class="form-label">Level Name</label>
-                <div id="level_name" class='form-control'> <?php echo $diff; ?></div>
-                <?php $diff = htmldiff($level_short_name, $level_short_name_edits);	?>
+                <div id="level_name" class='form-control'><?php echo $diff; ?></div>
+            </article>
+
+            <?php $diff = htmldiff($level_short_name, $level_short_name_edits); ?>
+            <article class="editor-diff-card">
                 <label for="level_short_name" class="form-label">Level Short Name</label>
-                <div id="level_short_name"class='form-control'> <?php echo $diff; ?></div>
-                <?php $diff = htmldiff($level_descriptor, $level_descriptor_edits);	?>
+                <div id="level_short_name" class='form-control'><?php echo $diff; ?></div>
+            </article>
+
+            <?php $diff = htmldiff($level_descriptor, $level_descriptor_edits); ?>
+            <article class="editor-diff-card">
                 <label for="level_descriptor" class="form-label">Descriptor</label>
-                <div id="level_descriptor" class='form-control'> <?php echo $diff; ?></div>
-              
+                <div id="level_descriptor" class='form-control'><?php echo $diff; ?></div>
+            </article>
+
+            <article class="editor-diff-card">
                 <label for="level_active" class="form-label">Active Status</label>
                 <div id="level_active" class='form-control'><?php
                 if ($level_active == $level_active_edits) {echo "Level will remain ".$level_active_label.".<br />"; }
                 else { echo "Level status will change from <del>".$level_active_label."</del> to <ins>".$level_active_edits_label."</ins>.<br />"; }
-                ?>
-            </div>
+                ?></div>
+            </article>
+        </section>
+    </main>
+    <?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
-
 </html>

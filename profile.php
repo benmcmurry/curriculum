@@ -6,6 +6,7 @@ require_once __DIR__ . '/bootstrap.php';
 require_once "../../connectFiles/connect_cis.php";
 require_once "auth.php";
 require_once "teachers.php";
+require_once __DIR__ . '/content/page_helpers.php';
   
 ?>
 <!DOCTYPE html>
@@ -23,18 +24,35 @@ require_once "teachers.php";
 
 
     <?php require "content/styles_and_scripts.html"; ?>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 </head>
 
 <body>
 
-    <?php require "content/header.php"; ?>
+    <?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
 
-    <div id="title" class="container-fluid">ELC Lab School Profile</div>
-    <main class="container-md portfolio-main">
+    <main class="container portfolio-main">
+        <?php
+        curriculum_render_portfolio_hero(array(
+            'eyebrow' => 'Profile',
+            'title' => 'ELC Lab School Profile',
+            'subtitle' => 'This profile summarizes key teaching opportunities, scholarly output, and reference material used to document the ELC’s work as a lab school.',
+            'actions' => array(
+                array('label' => 'Pedagogy', 'href' => '#p'),
+                array('label' => 'Teaching Opportunities', 'href' => '#to'),
+                array('label' => 'Research and Publications', 'href' => '#rp'),
+                array('label' => 'Citations', 'href' => '#c'),
+            ),
+        ));
+        curriculum_render_section_jump_nav('On this page', array(
+            array('label' => 'Pedagogy', 'href' => '#p'),
+            array('label' => 'Teaching Opportunities', 'href' => '#to'),
+            array('label' => 'Research and Publications', 'href' => '#rp'),
+            array('label' => 'Citation Library', 'href' => '#c'),
+        ), 'Profile sections');
+        ?>
+
+        <section class="content-card mb-4">
         <p>Assessment is essential to improve and progress. Administrators of the College of Humanities, the
             Department of Linguistics and English Language, and the English Language Center need to know how well
             the English Language Center (ELC) is fulfilling its principal purpose as a lab school. Accordingly the
@@ -42,12 +60,13 @@ require_once "teachers.php";
         <p> The profile is organized by a brief description of our <a href="#p">pedagogy</a>, <a href="#to">teaching
                 opportunities</a>, <a href='#rp'>research and publications</a>, and <a href="#c"> citations lists of
                 academic work done at the ELC</a>.</p>
+        </section>
 
         <section id="p" class="portfolio-card mb-4">
             <div class="portfolio-card-header-level">
                 <h2 class="h4 mb-0">Our Pedagogy</h2>
             </div>
-            <div class="portfolio-card-body">
+            <div class="portfolio-card-body portfolio-rich-text">
         <p><strong>Principled Pedagogical Practices of ELC Teachers</strong></p>
         <p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and
             all who may observe their classes.</p>
@@ -71,6 +90,8 @@ require_once "teachers.php";
                 <h2 class="h4 mb-0">Teaching Opportunities</h2>
             </div>
             <div class="portfolio-card-body">
+        <div class="portfolio-table-card">
+        <div class="table-responsive">
         <table id="teaching" class='table table-striped'>
 
             <?php
@@ -153,6 +174,8 @@ require_once "teachers.php";
 
 EOF;
 ?>
+        </div>
+        </div>
             </div>
         </section>
 
@@ -161,7 +184,9 @@ EOF;
                 <h2 class="h4 mb-0">Research, Publications, and Presentations</h2>
             </div>
             <div class="portfolio-card-body">
+            <div class="portfolio-table-card">
             <h3>Academic Work (Total and Last 5 Years)</h3>
+            <div class="table-responsive">
             <table class='table table-striped'>
 
                 <?php
@@ -258,6 +283,7 @@ EOF;
 EOF;
             ?>
             </table>
+            </div>
             <h3 id="c" class="mt-4">Citations</h3>
 
 
@@ -265,12 +291,12 @@ EOF;
 
             <div role="region" aria-label="Controls">
                 <label for="q">Search citations</label>
-                <input class="container-md" id="q" type="search"
+                <input class="form-control" id="q" type="search"
                     placeholder="Search in authors, title, venue, institution, URL…" />
 
-                <div style="display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-top:8px;">
+                <div class="portfolio-toolbar mt-2">
                     <div>Click a column to sort.</div>
-                    <div style="display:flex; gap:8px; align-items:center; justify-content:flex-end; flex-wrap:wrap; margin-top:8px;">
+                    <div class="portfolio-toolbar ms-auto">
                         <label class="muted">Rows/page
                             <select id="pageSize">
                                 <option selected>10</option>
@@ -279,7 +305,7 @@ EOF;
                                 <option>100</option>
                             </select>
                         </label>
-                        <div id="pager" aria-label="Pagination" style="display:flex; gap:6px; align-items:center;">
+                        <div id="pager" aria-label="Pagination" class="portfolio-toolbar">
                             <button class="btn btn-light" id="prev">Prev</button>
                             <span class="muted">
                                 Page <span id="pageNum">1</span> of <span id="pageCount">1</span>
@@ -291,11 +317,11 @@ EOF;
             </div>
 
             <div style="margin-top:12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <div class="portfolio-toolbar mb-2">
                     <div><span class="count" id="shown">0</span> shown <span class="muted">(<span id="total">0</span>
                             total)</span></div>
                 </div>
-                <div>
+                <div class="table-responsive">
                     <table id='citations' class='table table-striped' style="width:100%; table-layout:fixed;">
                         <thead>
                             <tr>
@@ -309,13 +335,12 @@ EOF;
                 </div>
             </div>
             </div>
+            </div>
         </section>
     </main>
 
     <script src="js/citations.js"></script>
-    <footer>
-        <?php require "content/footer.html"; ?>
-    </footer>
+    <?php curriculum_render_footer(); ?>
 
 
 </body>

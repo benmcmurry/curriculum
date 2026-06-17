@@ -20,18 +20,20 @@
 <?php include("content/styles_and_scripts.html"); ?>
 </head>
 	<body>
-	<header>
-		<?php include("content/header.php"); ?>
-	</header>
+		<?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
-	<article>
-		<div class="main">
-		<p> The following resources are available to support teaching at the English Language Center. </p>
-		<iframe class='google_folder' src="https://drive.google.com/embeddedfolderview?id=0B9DQPyJT9PIUV2ZGNmlYQTJEQmM#list" width='100%' height='500px' frameborder='0'></iframe></div>
-	</article>
-	<footer>
-		<?php include("content/footer.html"); ?>
-	</footer>
+	<main class="container portfolio-main">
+		<section class="hero-card portfolio-hero content-card-spotlight">
+			<p class="portfolio-eyebrow">Resources</p>
+			<h1 class="portfolio-title">Teaching Resources</h1>
+			<p class="portfolio-subtitle">The following shared resources are available to support teaching at the English Language Center.</p>
+		</section>
+
+		<section class="portfolio-table-card">
+			<iframe class="google_folder" src="https://drive.google.com/embeddedfolderview?id=0B9DQPyJT9PIUV2ZGNmlYQTJEQmM#list" title="Teaching resources folder"></iframe>
+		</section>
+	</main>
+	<?php curriculum_render_footer(); ?>
 
 
 </body>

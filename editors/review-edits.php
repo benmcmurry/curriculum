@@ -3,6 +3,7 @@ $course_id = $_GET['course_id'];
 
 include_once("../../../connectFiles/connect_cis.php");
 include_once("../auth.php");
+require_once __DIR__ . '/page_helpers.php';
 
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");
 $query->bind_param("s", $course_id);
@@ -106,6 +107,20 @@ $edit_result = $edits_query->get_result();
     <!-- 	Javascript -->
     <script>
     $(document).ready(function() {
+        var saveDialog = $("#save_dialog");
+        function setReviewStatus(message, tone) {
+            saveDialog
+                .removeClass("alert alert-danger alert-success alert-info")
+                .addClass("editor-status");
+            if (tone === "error") {
+                saveDialog.addClass("alert alert-danger");
+            } else if (tone === "success") {
+                saveDialog.addClass("alert alert-success");
+            } else {
+                saveDialog.addClass("alert alert-info");
+            }
+            saveDialog.text(message);
+        }
 
 
         $("#save").click(function() {
@@ -143,80 +158,76 @@ $edit_result = $edits_query->get_result();
                 needs_review: "0",
             }
         }).done(function(phpfile) {
-            $("#save_dialog").html(phpfile);
-            console.log("Did it run?")
+            setReviewStatus(phpfile, "success");
         });
     }
     </script>
 </head>
 
 <body>
-    <?php require_once("../content/header-short.php"); ?>
-    <div id="title" class="container-fluid">
-        Review Edits: <?php echo $level_name." - ".$course_name; ?>
-    </div>
-    <div class="container-md sticky-top pt-5 mb-2">
-        <div class="row justify-content-between">
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-primary" id="go_back" href="index.php"><i class="bi bi-pencil"></i>
-                    Editor Menu</a>
-            </div>
+    <?php require_once dirname(__DIR__) . "/content/shared-shell.php"; curriculum_render_editor_header(); ?>
+    <main class="container editor-main py-4">
+        <?php
+        curriculum_render_editor_hero('Review Queue', 'Review Course Edits', $level_name . ' - ' . $course_name);
+        curriculum_render_editor_actions('Review actions', array(
+            array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Back to Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
+            array('href' => 'course-edit.php?course_id=' . $course_id, 'label' => 'Open Editable Version', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
+            array('id' => 'save', 'href' => null, 'label' => 'Publish Approved Changes', 'icon' => 'bi bi-check2-square', 'class' => 'btn btn-primary ms-auto'),
+        ));
+        ?>
 
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-primary" href="course-edit.php?course_id=<?php echo $course_id;?>"><i
-                        class="bi bi-pencil"></i> Edit</a>
-                <a type="button" class="btn btn-primary" id="save"><i class="bi bi-server"></i> Save</a>
-            </div>
-        </div>
+        <div class="editor-save-dialog editor-status mb-3" id="save_dialog" aria-live="polite"></div>
 
-    </div>
+        <section class="editor-diff-grid">
+            <article class="editor-diff-card">
+                <label for="edits" class="form-label">Edit Time and Author</label>
+                <div id="edits" class='form-control'>Last updated at <?php echo $updated_on_edits; ?> by <?php echo $updated_by_edits; ?></div>
+            </article>
 
-    </div>
-    <div class="container-md pt-4" id="save_dialog"></div>
-    <div class="container-md pt-4">
+            <?php $diff = htmldiff($course_name, $course_name_edits); ?>
+            <article class="editor-diff-card">
+                <label for="course_name" class="form-label">Course Name</label>
+                <div id="course_name" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
+            <?php $diff = htmldiff($course_short_name, $course_short_name_edits); ?>
+            <article class="editor-diff-card">
+                <label for="course_short_name" class="form-label">Course Short Name</label>
+                <div id="course_short_name" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
+            <?php $diff = htmldiff($course_description, $course_description_edits); ?>
+            <article class="editor-diff-card">
+                <label for="course_description" class="form-label">Course Description</label>
+                <div id="course_description" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
-	<label for="level_short_name" class="form-label">Edit Time and Author</label>
+            <?php $diff = htmldiff($course_emphasis, $course_emphasis_edits); ?>
+            <article class="editor-diff-card">
+                <label for="course_emphasis" class="form-label">Course Emphasis</label>
+                <div id="course_emphasis" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
-        <div id="edits" class='form-control'>Last updated at <?php echo $updated_on_edits; ?> by
-        <?php echo $updated_by_edits; ?></div>
+            <?php $diff = htmldiff($course_materials, $course_materials_edits); ?>
+            <article class="editor-diff-card">
+                <label for="course_materials" class="form-label">Course Books and Materials</label>
+                <div id="course_materials" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
+            <?php $diff = htmldiff($learning_outcomes, $learning_outcomes_edits); ?>
+            <article class="editor-diff-card">
+                <label for="learning_outcomes" class="form-label">Course Learning Outcomes</label>
+                <div id="learning_outcomes" class='form-control'><?php echo $diff; ?></div>
+            </article>
 
-    <?php $diff = htmldiff($course_name, $course_name_edits);	?>
-       <label for="course_name" class="form-label">Course Name</label>
-        <div id="course_name" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($course_short_name, $course_short_name_edits);	?>
-       <label for="course_short_name" class="form-label">Course Short Name</label>
-        <div id="course_short_name" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($course_description, $course_description_edits);?>
-       <label for="course_description" class="form-label">Course Description</label>
-        <div id="course_description" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($course_emphasis, $course_emphasis_edits);?>
-       <label for="course_emphasis" class="form-label">Course Emphasis</label>
-        <div id="course_emphasis" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($course_materials, $course_materials_edits);?>
-       <label for="course_materials" class="form-label">Course Books and Materials</label>
-        <div id="course_materials" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($learning_outcomes, $learning_outcomes_edits);?>
-       <label for="learning_outcomes" class="form-label">Course Learning Outcomes</label>
-        <div id="learning_outcomes" class='form-control'><?php echo $diff; ?></div>
-    
-    <?php $diff = htmldiff($box_folder, $box_folder_edits); ?>
-       <label for="box_folder" class="form-label">Box Folder Link</label>
-        <div id="box_folder" class='form-control'><?php echo $diff; ?></div>
-    
-
-
-
-
-    </div>
-    
+            <?php $diff = htmldiff($box_folder, $box_folder_edits); ?>
+            <article class="editor-diff-card">
+                <label for="box_folder" class="form-label">Box Folder Link</label>
+                <div id="box_folder" class='form-control'><?php echo $diff; ?></div>
+            </article>
+        </section>
+    </main>
+    <?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
 
 </html>

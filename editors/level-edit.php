@@ -8,6 +8,7 @@ if ($level_id > 9) {$message = "Invalid level. Showing last level."; $level_id =
 include_once("../../../connectFiles/connect_cis.php");
 include_once("../auth.php");
 include_once("admins.php");
+require_once __DIR__ . '/page_helpers.php';
 $query = $elc_db->prepare("Select * from Levels_review where level_id= ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
@@ -42,8 +43,22 @@ while($level = $result->fetch_assoc()){
 
 	<!-- 	Javascript -->
 	<script>
-	$(document).ready(function() {
+    function setLevelSaveStatus(message, tone) {
+      var saveDialog = $("#save_dialog");
+      saveDialog
+        .removeClass("alert alert-danger alert-success alert-info")
+        .addClass("editor-status");
+      if (tone === "error") {
+        saveDialog.addClass("alert alert-danger");
+      } else if (tone === "success") {
+        saveDialog.addClass("alert alert-success");
+      } else {
+        saveDialog.addClass("alert alert-info");
+      }
+      saveDialog.text(message);
+    }
 
+	$(document).ready(function() {
 		current_level_name = $("#level_name").text();
 		current_level_descriptor = $("#level_descriptor").text();
 		current_level_short_name = $("#level_short_name").text();
@@ -53,7 +68,7 @@ while($level = $result->fetch_assoc()){
 		save("save button");
 	});
 
-	$("div").blur(function(){
+	$(".editor-form-grid [contenteditable='true']").blur(function(){
 		save(this.id);
 	});
 
@@ -104,11 +119,13 @@ while($level = $result->fetch_assoc()){
 });
 
 function save() {
-		 if (current_level_name == $("#level_name").text() &&
+		if (current_level_name == $("#level_name").text() &&
 		 current_level_descriptor == $("#level_descriptor").text() &&
 		 current_level_short_name == $("#level_short_name").text() &&
 		 current_level_active == $("#level_active").text())
-		 {return;}
+		{return;}
+
+		setLevelSaveStatus("Saving level changes...", "info");
 
 		// if ( ==  ||  ==  ||  == $("#level_short_name").text())
 		level_id = <?php echo $level_id; ?>;
@@ -130,8 +147,8 @@ function save() {
 				needs_review: "1",
 				level_updated_by: "<?php echo $level_updated_by; ?>"
 				}
-		}).done(function(phpfile) {
-		$("#save_dialog").html(phpfile);
+	}).done(function(phpfile) {
+		setLevelSaveStatus(phpfile, "success");
   		});
 }
 
@@ -139,25 +156,33 @@ function save() {
 </head>
 <body>
 	<a class="skip-link" href="#main-content">Skip to editor content</a>
-	<?php require_once("../content/header-short.php"); 
-	if ($message) {
-		echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
-	}
+	<?php require_once dirname(__DIR__) . '/content/shared-shell.php'; curriculum_render_editor_header();
+	if ($message) { ?>
+		<div class="container editor-access-state">
+			<section class="editor-panel">
+				<div class="editor-panel-body">
+					<div class="alert alert-info" role="status"><?php echo $message; ?></div>
+				</div>
+			</section>
+		</div>
+	<?php }
 
 
       if ($auth && $access) { ?>
-	  	<main id="main-content" class="container-md editor-main py-4">
-			<section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
-				<div class="d-flex flex-wrap gap-2">
-					<a type="button" class="btn btn-outline-secondary" id="toPortfolio" href="../levels.php#<?php echo $level_short_name;?>"><i class="bi bi-back"></i> Portfolio</a>
-					<a type="button" class="btn btn-outline-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
-					<a type="button" class="btn btn-outline-secondary" id="previous" href="level-edit.php?level_id=<?php echo $level_id-1;?>"><i class="bi bi-arrow-left-circle"></i> Previous</a>
-					<a type="button" class="btn btn-outline-secondary" id="next" href="level-edit.php?level_id=<?php echo $level_id+1;?>">Next <i class="bi bi-arrow-right-circle"></i></a>
-					<a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
-				</div>
-			</section>
+	  	<main id="main-content" class="container editor-main py-4">
+			<?php
+			curriculum_render_editor_hero('Level Editor', $level_name, 'Update the level name, short name, status, and descriptor that power the published curriculum pages.');
+			curriculum_render_editor_actions('Editor actions', array(
+				array('id' => 'toPortfolio', 'href' => '../levels.php#' . $level_short_name, 'label' => 'Open Live Level', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
+				array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
+				array('id' => 'previous', 'href' => 'level-edit.php?level_id=' . ($level_id - 1), 'label' => 'Previous Level', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'),
+				array('id' => 'next', 'href' => 'level-edit.php?level_id=' . ($level_id + 1), 'label' => 'Next Level', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'),
+				array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto'),
+			));
+			?>
 
-			<div class="editor-save-dialog mb-3" id="save_dialog"></div>
+			<p class="editor-helper-note">This page saves on blur and with the Save Changes button. The active switch updates the status immediately.</p>
+			<div class="editor-save-dialog editor-status mb-3" id="save_dialog" aria-live="polite"></div>
 
 			<section class="editor-panel mb-3">
 				<div class="editor-panel-header editor-panel-header-level">
@@ -166,16 +191,16 @@ function save() {
 				<div class="editor-panel-body editor-form-grid">
 		<label for="level_short_name" class="form-label">Level Short Name</label>
 		<div id="level_short_name" class="form-control" contenteditable="true" aria-describedby="shortNameHelp"><?php echo $level_short_name; ?></div>
-		<div id="shortNameHelp" class="form-text mb-4">Limit to 1 or 2 characters. (i.e. FA)</div>
+		<div id="shortNameHelp" class="form-text mb-4">Limit to 1 or 2 characters, such as FA.</div>
 
 
 		<label for="level_name" class="form-label">Level Name</label>
 		<div id="level_name" class="form-control rte" contenteditable="true" aria-describedby="levelNameHelp"><?php echo $level_name; ?></div>
-		<div id="levelNameHelp" class="form-text mb-4">Please use standard naming conventions. (i.e. Foundations A)</div>
+		<div id="levelNameHelp" class="form-text mb-4">Please use standard naming conventions, such as Foundations A.</div>
 
 		<label for="level_descriptor" class="form-label">Descriptor</label>
 			<div id="level_descriptor" class="form-control" aria-describedby="descriptorHelp"><?php echo $level_descriptor; ?></div>
-			<div id="descriptorHelp" class="form-text mb-4">Level Descriptors should include function and text-type.</div>
+			<div id="descriptorHelp" class="form-text mb-4">Level descriptors should include function and text-type.</div>
 		
 		
 <div class="form-check form-switch">
@@ -193,8 +218,6 @@ function save() {
 			</section>
 		</main>
 	<?php } ?>
-	<footer>
-        <?php include("../content/footer.html"); ?>
-    </footer>
+	<?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
 </html>

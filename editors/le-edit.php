@@ -4,6 +4,12 @@ include_once("../../../connectFiles/connect_cis.php");
 $learningExperienceId = $_GET['learningExperienceId'];
 include_once("../auth.php");
 include_once("admins.php");
+$name = "Learning Experience";
+$short_description = "";
+$description = "";
+$emphasis = "None";
+$updatedBy = "";
+$courses = array();
 if ($learningExperienceId == "new") {
     $query = $elc_db->prepare("Insert into Learning_experiences (name, created_by, created_on) values ('Untitled Learning Experience', ?, NOW())");
     $query->bind_param("s", $net_id);
@@ -46,8 +52,22 @@ while ($learningExperience = $result->fetch_assoc()) {
 <?php include("styles_and_scripts.html"); ?>
 <!-- 	Javascript -->
 <script>
-    $(document).ready(function() {
+    function setLESaveStatus(message, tone) {
+        var saveDialog = $("#save_dialog");
+        saveDialog
+            .removeClass("alert alert-danger alert-success alert-info")
+            .addClass("editor-status");
+        if (tone === "error") {
+            saveDialog.addClass("alert alert-danger");
+        } else if (tone === "success") {
+            saveDialog.addClass("alert alert-success");
+        } else {
+            saveDialog.addClass("alert alert-info");
+        }
+        saveDialog.text(message);
+    }
 
+    $(document).ready(function() {
         $("#emphasis option[value='<?php echo $emphasis; ?>']").prop('selected',true); 
         current_name = $("#name").text();
         current_short_description = $("#short_description").text();
@@ -61,7 +81,7 @@ while ($learningExperience = $result->fetch_assoc()) {
         deleteLe();
     });
 
-    $("div").on("blur", function(){
+    $(".editor-form-grid [contenteditable='true']").on("blur", function(){
         save(this.id);
     });
 
@@ -74,13 +94,11 @@ while ($learningExperience = $result->fetch_assoc()) {
     });
 
     $('input:checkbox').change(function(){save();}); //calls save function when checkbox status changes.
-    $( "#connected_courses" ).on( "sortstop", function( event, ui ) {console.log} );
+    $( "#connected_courses" ).on( "sortstop", function( event, ui ) { return; } );
     $("#connected_courses, #potential_courses").sortable({
         connectWith: ".connectedSortable",
         stop: function( event, ui ) {
             var id = ui.item.attr("id"); //gets id of sorted item
-            console.log(id);
-            console.log(this.id);
             if (this.id == "potential_courses") {
                 $("#"+id).removeClass("text-bg-warning").addClass("text-bg-success"); //changes class on sort
                 connect_to_course(id, "add"); //calls function for ajax add to database
@@ -132,6 +150,7 @@ while ($learningExperience = $result->fetch_assoc()) {
 net_id = '<?php echo $net_id; ?>';
 learningExperienceId = <?php echo $learningExperienceId; ?>;
     function connect_to_course(id, action) {
+        setLESaveStatus(action === "add" ? "Linking course..." : "Removing course link...", "info");
         $.ajax({
             type: "POST",
             url: "connect_to_course.php",
@@ -141,12 +160,13 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
                 id: id,
                 action: action
             }}).done(function(phpfile){
-                $("#save_dialog").html(phpfile);
+                setLESaveStatus(phpfile, "success");
             });
         
     }
 
     function save() {
+      setLESaveStatus("Saving learning experience changes...", "info");
       
      
      name = $("#name").text();
@@ -165,7 +185,7 @@ learningExperienceId = <?php echo $learningExperienceId; ?>;
              emphasis: emphasis
              }
      }).done(function(phpfile) {
-     $("#save_dialog").html(phpfile);
+     setLESaveStatus(phpfile, "success");
      });
 }
 
@@ -177,7 +197,7 @@ function deleteLe() {
             learningExperienceId: learningExperienceId,
         }
         }).done(function(phpfile) {
-            $("#save_dialog").html(phpfile);
+            setLESaveStatus(phpfile, "success");
             window.open("index.php");
 
         });
@@ -193,23 +213,36 @@ function deleteLe() {
 </head>
 <body>
    <a class="skip-link" href="#main-content">Skip to editor content</a>
-   <?php require_once("../content/header-short.php"); 
-if ($message) {
-	echo "<div class='container-md pt-4'><div class='alert alert-info' role='status'>".$message."</div></div>";
-}
+   <?php require_once dirname(__DIR__) . '/content/shared-shell.php'; curriculum_render_editor_header();
+if ($message) { ?>
+	<div class="container editor-access-state">
+		<section class="editor-panel">
+			<div class="editor-panel-body">
+				<div class="alert alert-info" role="status"><?php echo $message; ?></div>
+			</div>
+		</section>
+	</div>
+<?php }
 ?>
 <?php if ($auth && $access) { ?>
-    <main id="main-content" class="container-md editor-main py-4">
+    <main id="main-content" class="container editor-main py-4">
+        <section class="editor-hero">
+            <p class="editor-eyebrow">Learning Experience Editor</p>
+            <h1 class="h3 mb-2"><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="mb-0">Edit the activity description, manage its emphasis, and connect it to the courses where it belongs.</p>
+        </section>
+
         <section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
             <div class="d-flex flex-wrap gap-2">
-                <a type="button" class="btn btn-outline-secondary" id="toPortfolio" href="../learning_experience.php?id=<?php echo $learningExperienceId;?>"><i class="bi bi-back"></i> Portfolio</a>
-                <a type="button" class="btn btn-outline-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
-                <a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-server"></i> Save</a>
-                <a type="button" class="btn btn-danger" id="delete"><i class="bi bi-trash"></i> Delete</a>
+                <a type="button" class="btn btn-outline-secondary" id="toPortfolio" href="../learning_experience.php?id=<?php echo $learningExperienceId;?>"><i class="bi bi-arrow-up-right-square"></i> Open Live Page</a>
+                <a type="button" class="btn btn-outline-secondary" id="go_back" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Dashboard</a>
+                <a type="button" class="btn btn-primary ms-auto" id="save"><i class="bi bi-save2"></i> Save Changes</a>
+                <a type="button" class="btn btn-danger" id="delete"><i class="bi bi-trash"></i> Delete Learning Experience</a>
             </div>
         </section>
 
-        <div class="editor-save-dialog mb-3" id="save_dialog"></div>
+        <p class="editor-helper-note">This page saves automatically when you leave a field, and the course-linking area updates immediately when you drag an item across lists.</p>
+        <div class="editor-save-dialog editor-status mb-3" id="save_dialog" aria-live="polite"></div>
 
         <section class="editor-panel mb-3">
             <div class="editor-panel-header editor-panel-header-course">
@@ -254,12 +287,10 @@ if ($message) {
             </div>
             <div class="editor-panel-body">
                 <p> Drag the courses from the Other courses list to connect the course with this learning experience. Drag courses from the Connected Courses list to disconnect them from the Learning Experience. </p>
-                <div class='row justify-content-evenly'>
-                <div class='col-3 p2 text-center'><h3>Connectected Courses</h3></div>
-                <div class='col-3 p2 text-center'><h3>Other Courses</h3></div>
-                </div>
-                <div class='row justify-content-evenly'>
-                    <div id="connected_courses" class='col-3 p-2 list-group bg-light connectedSortable border border-primary-subtle border-2'>
+                <div class='editor-sort-grid'>
+                    <div class='editor-sort-column'>
+                    <h3>Connected Courses</h3>
+                    <div id="connected_courses" class='list-group bg-light connectedSortable border border-primary-subtle border-2'>
                 
                 <?php
                     $query = $elc_db->prepare("Select 
@@ -285,7 +316,7 @@ if ($message) {
                         echo "<div class='m-1 connected_course list-group-item text-bg-success text-center rounded-2' id='$courseId'>$levelShortName $courseName</div>";
                         array_push($courses,$selectedCourse['course_id']);
                     }
-                echo "</div><div id='potential_courses' class='col-3 p-2 list-group bg-light connectedSortable border border-primary-subtle border-2'>";
+                echo "</div></div><div class='editor-sort-column'><h3>Other Courses</h3><div id='potential_courses' class='list-group bg-light connectedSortable border border-primary-subtle border-2'>";
                 
                     $query = $elc_db->prepare("Select 
                     Courses.course_name, 
@@ -313,15 +344,12 @@ if ($message) {
                     }
 
                 ?>
-               </div>  <!-- end potential courses list  -->
-                
+               </div></div>  <!-- end potential courses list  -->
                 </div>
             </div>
         </section>
     </main>
         <?php } ?>
-    <footer>
-        <?php include("../content/footer.html"); ?>
-    </footer>
+    <?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
 </html>

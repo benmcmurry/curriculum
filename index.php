@@ -3,6 +3,7 @@ require_once __DIR__ . '/bootstrap.php';
 require_once "../../connectFiles/connect_cis.php";
 require_once "auth.php";
 require_once "teachers.php";
+require_once __DIR__ . '/content/page_helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,16 +23,27 @@ require_once "teachers.php";
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-        <?php include("content/header.php"); ?>
+    <?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
-<main id="main-content" class="container-md portfolio-main">
-    <h1 id="title" class="container-fluid">
-        Guiding Principles for ELC Curriculum
-    </h1>
-    <p>The following represent our values and beliefs regarding language teaching, learning and curriculum development.
-        Our curricular philosophy is divided into four sections dealing with <a href='#curriculum'>curricular development and curricular change</a>,
-        <a href='#ppp'>pedagogical practice</a>, <a href='#skill_area'>teaching specific language skills</a>, and <a href="#students">student learning</a>.
-    </p>
+<main id="main-content" class="container portfolio-main">
+    <?php
+    curriculum_render_portfolio_hero(array(
+        'eyebrow' => 'Curriculum Portfolio',
+        'title' => 'Guiding Principles for ELC Curriculum',
+        'subtitle' => 'This portfolio explains the principles that shape curriculum design, pedagogical practice, skill-area instruction, and student learning across the ELC.',
+        'stats' => array(
+            array('label' => 'Curriculum', 'value' => '4', 'description' => 'Core philosophy sections organized for quick reference.'),
+            array('label' => 'Practice', 'value' => '8', 'description' => 'Pedagogical practices that anchor day-to-day teaching.'),
+            array('label' => 'Skill Areas', 'value' => 'Dynamic', 'description' => 'Pulled from the current curriculum database.'),
+        ),
+    ));
+    curriculum_render_section_jump_nav('On this page', array(
+        array('label' => 'Curriculum Development', 'href' => '#curriculum'),
+        array('label' => 'Pedagogical Practice', 'href' => '#ppp'),
+        array('label' => 'Teaching Specific Skills', 'href' => '#skill_area'),
+        array('label' => 'Student Learning', 'href' => '#students'),
+    ), 'Guiding principles sections');
+    ?>
 
     <section id='curriculum' class="portfolio-card mb-4">
         <div class="portfolio-card-header-level">
@@ -42,9 +54,9 @@ require_once "teachers.php";
                 resources, and facilities needed to maximize meaningful student participation. This encompasses what the
                 students are to learn and how they are to learn it, including how the teachers and the institution
                 facilitate, assess, and respond to this learning (adapted from Rogers, 1989, p. 26).</p>
-            <figure style="float:right; max-width: 300px; margin: 0 0 1rem 1rem;">
-                <img src="images/triangle.png" alt="Triangle diagram showing the curriculum balance of stable, responsive, and cohesive principles." style="display:block; width:100%; height:auto;" />
-                <figcaption style="font-size: 0.9rem; text-align: center; margin-top: 0.35rem;">
+            <figure class="portfolio-figure portfolio-figure-floating">
+                <img src="images/triangle.png" alt="Triangle diagram showing the curriculum balance of stable, responsive, and cohesive principles." />
+                <figcaption>
                     Figure 1. Curriculum principles: stable, responsive, and cohesive.
                 </figcaption>
             </figure>
@@ -63,7 +75,7 @@ require_once "teachers.php";
         <div class="portfolio-card-header-level">
             <h2 class="h4 mb-0">Pedagogical Practice</h2>
         </div>
-        <div class="portfolio-card-body">
+        <div class="portfolio-card-body portfolio-rich-text">
             <p>ELC teachers strive to exemplify the following pedagogical practices for themselves, their students, and all who
                 may observe their classes.</p>
             <h3>1. Rely on course outcomes</h3>
@@ -172,7 +184,7 @@ require_once "teachers.php";
         <div class="portfolio-card-header-level">
             <h2 class="h4 mb-0">Teaching Specific Language Skills</h2>
         </div>
-        <div class="portfolio-card-body">
+        <div class="portfolio-card-body portfolio-rich-text">
             <?php
                 $query = $elc_db->prepare("Select * from Skill_areas where list_order != '0'  order by list_order ASC");
                 $query->execute();
@@ -189,7 +201,7 @@ require_once "teachers.php";
         <div class="portfolio-card-header-level">
             <h2 class="h4 mb-0">Student Learning</h2>
         </div>
-        <div class="portfolio-card-body">
+        <div class="portfolio-card-body portfolio-rich-text">
             <p>We believe that student learning is optimized when students are:</p>
             <h3><strong>A</strong>ware</h3>
             <p>Students know why they are studying English at the ELC. They set specific goals for their English development and
@@ -222,9 +234,7 @@ require_once "teachers.php";
     </section>
 </main>
 
-    <footer>
-        <?php include("content/footer.html"); ?>
-    </footer>
+    <?php curriculum_render_footer(); ?>
 
 </body>
 </html>

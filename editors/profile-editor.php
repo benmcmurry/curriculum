@@ -3,6 +3,7 @@
 include_once("../../../connectFiles/connect_cis.php");
 include_once("../auth.php");
 include_once("admins.php");
+require_once __DIR__ . '/page_helpers.php';
 ?>
 
 <!DOCTYPE html>
@@ -33,132 +34,209 @@ include_once("admins.php");
     }
 
     </style>
-</head>
-<!-- 	Javascript -->
 <script>
-$(document).ready(function() {
-    $('#citations').dataTable({
-        aLengthMenu: [
-            [10, 20, 50, -1],
-            [10, 20, 50, "All"]
-        ],
-    });
+document.addEventListener("DOMContentLoaded", function () {
+    var statusBox = document.getElementById("display_box");
+    var teachingTable = document.getElementById("teaching");
+    var addSemesterButton = document.getElementById("add_semester");
+    var citationModal = document.getElementById("popup");
+    var modalBody = citationModal ? citationModal.querySelector(".modal-body") : null;
+    var modalFooter = citationModal ? citationModal.querySelector(".modal-footer") : null;
+    var bootstrapModal = citationModal && window.bootstrap && typeof window.bootstrap.Modal === "function"
+        ? new window.bootstrap.Modal(citationModal)
+        : null;
 
-    $("td").on("blur", function() {
-        value = $(this).text();
-        data = this.id.split('-');
-        stat_id = data[0];
-        field = data[1];
-        console.log(value);
-        console.log(stat_id);
-        console.log(field);
+    function showProfileMessage(message) {
+        if (statusBox) {
+            statusBox.innerHTML = message;
+        }
+    }
 
-        $.ajax({
+    function postForm(url, data) {
+        return fetch(url, {
             method: "POST",
-            url: "edit-stat.php",
+            body: data
+        }).then(function (response) {
+            return response.text();
+        });
+    }
 
-            data: {
-                stat_id: stat_id,
-                field: field,
-                value: value,
+    function showCitationModal() {
+        if (bootstrapModal) {
+            bootstrapModal.show();
+            return;
+        }
+
+        if (citationModal) {
+            citationModal.classList.add("show");
+            citationModal.style.display = "block";
+            citationModal.removeAttribute("aria-hidden");
+            citationModal.setAttribute("aria-modal", "true");
+            document.body.classList.add("modal-open");
+        }
+    }
+
+    function hideCitationModal() {
+        if (bootstrapModal) {
+            bootstrapModal.hide();
+            return;
+        }
+
+        if (citationModal) {
+            citationModal.classList.remove("show");
+            citationModal.style.display = "none";
+            citationModal.setAttribute("aria-hidden", "true");
+            citationModal.removeAttribute("aria-modal");
+            document.body.classList.remove("modal-open");
+        }
+    }
+
+    if (window.jQuery && window.jQuery.fn && window.jQuery.fn.dataTable) {
+        window.jQuery("#citations").dataTable({
+            aLengthMenu: [
+                [10, 20, 50, -1],
+                [10, 20, 50, "All"]
+            ],
+        });
+    }
+
+    if (teachingTable) {
+        teachingTable.addEventListener("focusout", function (event) {
+            var cell = event.target.closest("[contenteditable='true']");
+            if (!cell || !cell.id) {
+                return;
             }
-        }).done(function(phpfile) {
-            $("#display_box").html(phpfile);
-        });
-    });
 
-    $("a#add_semester").on("click", function() {
-        $.ajax({
-            method: "POST",
-            url: "add_semester.php",
-        }).done(function(phpfile) {
-            $("#display_box").html(phpfile);
-        });
-    });
-    $('.openPopup').on('click', function() {
-        var dataURL = $(this).attr('data-href');
-        var fullLink = "edit-popup.php?id=" + dataURL;
+            var data = cell.id.split("-");
+            var formData = new FormData();
+            formData.append("stat_id", data[0]);
+            formData.append("field", data[1]);
+            formData.append("value", cell.textContent.trim());
 
-        $('.modal-body').load(fullLink, function() {
-            $('#popup').modal('show');
+            postForm("edit-stat.php", formData).then(showProfileMessage);
         });
-        $('.modal-footer').html(
-            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="button" id="' +
-            dataURL + '" class="save btn btn-primary" onClick="save(this.id)">Save changes</button>'
-            );
-    });
+    }
 
+    if (addSemesterButton) {
+        addSemesterButton.addEventListener("click", function () {
+            postForm("add_semester.php", new FormData()).then(function (message) {
+                showProfileMessage(message);
+                window.location.reload();
+            });
+        });
+    }
+
+    window.openCitationPopup = function (dataURL) {
+        if (!dataURL || !modalBody || !modalFooter) {
+            return;
+        }
+
+        fetch("edit-popup.php?id=" + encodeURIComponent(dataURL))
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (html) {
+                modalBody.innerHTML = html;
+                modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="button" id="' +
+                    dataURL + '" class="save btn btn-primary">Save changes</button>';
+                var saveButton = modalFooter.querySelector(".save");
+                if (saveButton) {
+                    saveButton.addEventListener("click", function () {
+                        save(this.id);
+                    });
+                }
+                showCitationModal();
+            });
+    };
+
+    document.addEventListener("click", function (event) {
+        var openLink = event.target.closest(".openPopup");
+        if (openLink) {
+            event.preventDefault();
+            window.openCitationPopup(openLink.getAttribute("data-href"));
+            return;
+        }
+
+        if (event.target.closest("[data-bs-dismiss='modal']") || event.target.classList.contains("modal")) {
+            hideCitationModal();
+        }
+    });
 });
 
 function save(id) {
+    var citationNode = document.getElementById(id + "-citation");
+    var typeNode = document.querySelector("#" + id + "-type option:checked");
+    if (!citationNode || !typeNode) {
+        return;
+    }
 
-    console.log("saving");
-    citation = $("#" + id + "-citation").html();
-    citationParts = $("#" + id + "-citation").text();
-    parts = citationParts.split(").");
-    parts2 = parts[0].split("(");
-    year = parts2[1];
+    var citation = citationNode.innerHTML;
+    var citationParts = citationNode.textContent;
+    var parts = citationParts.split(").");
+    var parts2 = parts[0].split("(");
+    var year = parts2[1];
+    var authors = parts2[0].replace(/&amp; |<p>/gi, "");
 
-    authors = parts2[0].replace(/&amp; |<p>/gi, "");
     citation = citation.replace(/<[\/]{0,1}(span)[^><]*>/ig, "");
     citation = citation.replace(/<[\/]{0,1}(p)[^><]*>/ig, "");
     citation = "<p>" + citation + "</p>";
-    type = $("#" + id + "-type option:selected").text();
-    console.log("ID: " + id + ", Year: " + year + ", Authors: " + authors + ", Type: " + type);
 
+    var formData = new FormData();
+    formData.append("id", id);
+    formData.append("citation", citation);
+    formData.append("year", year);
+    formData.append("authors", authors);
+    formData.append("type", typeNode.textContent);
 
-
-    $.ajax({
+    fetch("edit-citation.php", {
         method: "POST",
-        url: "edit-citation.php",
-        data: {
-            id: id,
-            citation: citation,
-            year: year,
-            authors: authors,
-            type: type,
-        }
-    }).done(function(phpfile) {
-        $("#" + id + "-save_dialog").html(phpfile);
-    });
-
+        body: formData
+    })
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (message) {
+            var saveDialog = document.getElementById(id + "-save_dialog");
+            if (saveDialog) {
+                saveDialog.innerHTML = message;
+            }
+        });
 }
 
 function deletePopup(id) {
-
-    id = id.split("-");
-
-    var delete_citation = confirm("Do you want to delete this reference?");
-    if (delete_citation == true) {
-        $.ajax({
-            method: "POST",
-            url: "delete.php",
-            data: {
-                id: id[1],
-
-            }
-        }).done(function() {
-            location.reload();
-        });
-
-
+    var idParts = id.split("-");
+    if (!window.confirm("Do you want to delete this reference?")) {
+        return;
     }
+
+    var formData = new FormData();
+    formData.append("id", idParts[1]);
+
+    fetch("delete.php", {
+        method: "POST",
+        body: formData
+    }).then(function () {
+        window.location.reload();
+    });
 }
 </script>
 </head>
 
 <body>
     <a class="skip-link" href="#main-content">Skip to editor content</a>
-    <?php require_once("../content/header-short.php"); ?>
+    <?php require_once dirname(__DIR__) . "/content/shared-shell.php"; curriculum_render_editor_header(); ?>
 
     <?php if ($auth && $access) { ?>
-    <main id="main-content" class="container-md editor-main py-4">
-        <section class="editor-topbar sticky-top mb-3" aria-label="Editor actions">
-            <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-outline-secondary" href="../profile.php"><i class="bi bi-back"></i> Profile</a>
-                <a class="btn btn-outline-secondary" href="index.php"><i class="bi bi-grid-3x3-gap"></i> Editor Menu</a>
-            </div>
-        </section>
+    <main id="main-content" class="container editor-main py-4">
+        <?php
+        curriculum_render_editor_hero('Profile Editor', 'Lab School Profile Data', 'Maintain the teaching opportunity statistics and citation records that feed the public profile page.');
+        curriculum_render_editor_actions('Editor actions', array(
+            array('href' => '../profile.php', 'label' => 'View Live Page', 'icon' => 'bi bi-back', 'class' => 'btn btn-outline-secondary'),
+            array('href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
+        ));
+        ?>
+        <p class="editor-helper-note">Statistics save when a cell loses focus. Citation edits open in a modal editor and save when you confirm the changes.</p>
+        <div class="editor-status" id="display_box" aria-live="polite"></div>
 
         <section class="editor-panel mb-3">
             <div class="editor-panel-header editor-panel-header-level">
@@ -172,9 +250,10 @@ function deletePopup(id) {
         <section class="editor-panel mb-3">
             <div class="editor-panel-header editor-panel-header-course d-flex justify-content-between align-items-center">
                 <h2 class="h5 mb-0">Edit Statistics</h2>
-                <a type='button' class='btn btn-outline-primary btn-sm' id="add_semester"><i class="bi bi-plus"></i> Semester</a>
+                <button type='button' class='btn btn-outline-primary btn-sm' id="add_semester"><i class="bi bi-plus"></i> Add Semester Row</button>
             </div>
             <div class="editor-panel-body">
+                <div class="editor-table-shell">
                 <div class="table-responsive">
         <table id='teaching' class="table table-bordered align-middle">
             <thead>
@@ -228,6 +307,7 @@ function deletePopup(id) {
 			?>
         </table>
                 </div>
+                </div>
             </div>
         </section>
 
@@ -236,6 +316,7 @@ function deletePopup(id) {
                 <h2 class="h5 mb-0">Edit Citations</h2>
             </div>
             <div class="editor-panel-body">
+                <div class="editor-table-shell">
                 <div class="table-responsive">
         <table id='citations' class="table table-striped table-bordered align-middle">
             <thead>
@@ -258,7 +339,7 @@ function deletePopup(id) {
 
 			?>
             <tr>
-                <td> <a href="javascript:void(0);" data-href="<?php echo $pubs['id']; ?>"
+                <td> <a href="javascript:void(0);" data-href="<?php echo $pubs['id']; ?>" onclick="openCitationPopup('<?php echo $pubs['id']; ?>'); return false;"
                         class='btn btn-primary openPopup'><i class="bi bi-pencil"></i>Edit</a></td>
                 <td> <?php echo $pubs['year']; ?></td>
                 <td> <?php echo $pubs['type']; ?></td>
@@ -275,13 +356,12 @@ function deletePopup(id) {
 ?>
         </table>
                 </div>
+                </div>
             </div>
         </section>
     </main>
     <?php } ?>
-    <footer>
-        <?php include("../content/footer.html"); ?>
-    </footer>
+    <?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 
 
     <!-- <div id="faded-background"></div> -->
@@ -289,7 +369,6 @@ function deletePopup(id) {
     <div id="popup-content">
     </div>
 </div> -->
-    <div id="display_box"></div>
     <!-- Modal -->
     <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

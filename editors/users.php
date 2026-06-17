@@ -3,6 +3,7 @@ include_once("../../../connectFiles/connect_cis.php");
 
 include_once("../auth.php");
 require_once("admins.php"); 
+require_once __DIR__ . '/page_helpers.php';
 
 // if ($net_id == "blm39" || $net_id == "karimay") {
 // } else {
@@ -14,7 +15,8 @@ $query->execute();
 $result = $query->get_result();
 
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Curriculum Editor - Access Table</title>
 
@@ -28,6 +30,17 @@ $result = $query->get_result();
 
     <?php include("styles_and_scripts.html"); ?>
     <script>
+        function showAccessMessage(message, tone) {
+            var updateBox = document.querySelector("#update");
+            updateBox.className = "editor-status";
+            if (tone === "error") {
+                updateBox.classList.add("alert", "alert-danger");
+            } else {
+                updateBox.classList.remove("alert-danger");
+            }
+            updateBox.innerHTML = message;
+        }
+
         function updateName(id, full_name) {
             var fd = new FormData();
             fd.append('id', id);
@@ -35,7 +48,7 @@ $result = $query->get_result();
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                    document.querySelector("#update").innerHTML = xmlHttp.responseText;
+                    showAccessMessage(xmlHttp.responseText, "success");
                 }
             }
             xmlHttp.open("post", "phpScripts/updateName.php");
@@ -49,7 +62,7 @@ $result = $query->get_result();
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                    document.querySelector("#update").innerHTML = xmlHttp.responseText;
+                    showAccessMessage(xmlHttp.responseText, "success");
                 }
             }
             xmlHttp.open("post", "phpScripts/updateNetid.php");
@@ -63,7 +76,7 @@ $result = $query->get_result();
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                    document.querySelector("#update").innerHTML = xmlHttp.responseText;
+                    showAccessMessage(xmlHttp.responseText, "success");
                 }
             }
             xmlHttp.open("post", "phpScripts/updateAccess.php");
@@ -77,112 +90,91 @@ $result = $query->get_result();
             access = document.querySelector("#newAccess").value;
 
             if (full_name == "" || net_id == "" || access == "choose") {
-                document.querySelector("#update").innerHTML = "Please complete all fields.";
+                showAccessMessage("Please complete all fields.", "error");
 
             } else {
-                console.log(full_name);
-                console.log(net_id);
-                console.log(access);
                 fd.append('full_name', full_name);
                 fd.append('net_id', net_id);
                 fd.append('access', access);
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                        document.querySelector("#update").innerHTML = xmlHttp.responseText;
+                        showAccessMessage(xmlHttp.responseText, "success");
+                        location.reload();
                     }
                 }
                 xmlHttp.open("post", "phpScripts/addUser.php");
                 xmlHttp.send(fd);
-                // location.reload();
             }
         }
         function removeUser(id) {
+            if (!window.confirm("Remove this user from the access table?")) {
+                return;
+            }
             var fd = new FormData();
             fd.append('id', id);
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                    document.querySelector("#update").innerHTML = xmlHttp.responseText;
+                    showAccessMessage(xmlHttp.responseText, "success");
+                    location.reload();
                 }
             }
             xmlHttp.open("post", "phpScripts/removeUser.php");
             xmlHttp.send(fd);
-            location.reload();
         }
     </script>
     <style>
-        table {
-            width: 100%;
-        }
-
         td,
         option {
-            padding: 3px;
             text-align: center;
             vertical-align: middle;
-        }
-
-        input,
-        select {
-            width: 100%;
-            line-height: 2em;
-
-        }
-
-        select {
-            font-size: 1.7em;
-        }
-
-        .full_width {
-            width: 100%
         }
     </style>
 
 </head>
 
 <body>
-    <?php require_once("../content/header-short.php"); 
-     require_once("../content/header-short.php"); 
-    if ($message) {
-	echo "<div class='container-md pt-4'>";
-	echo $message;
-	echo "</div>";
-    
-}
+    <?php require_once dirname(__DIR__) . '/content/shared-shell.php'; curriculum_render_editor_header();
+    if ($message) { ?>
+        <div class="container editor-access-state">
+            <section class="editor-panel">
+                <div class="editor-panel-body">
+                    <div class="alert alert-info" role="status"><?php echo $message; ?></div>
+                </div>
+            </section>
+        </div>
+    <?php }
     if ($auth && $access) { ?>
+    <main id="main-content" class="container editor-main py-4">
+        <?php
+        curriculum_render_editor_hero('Administration', 'Access Table', 'Manage who can edit the curriculum and which contributors have teacher or admin access.');
+        curriculum_render_editor_actions('Access actions', array(
+            array('id' => 'toPortfolio', 'href' => '../index.php', 'label' => 'Back to Site', 'icon' => 'bi bi-arrow-return-left', 'class' => 'btn btn-outline-secondary'),
+            array('id' => 'toEditor', 'href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-pencil', 'class' => 'btn btn-outline-secondary'),
+        ));
+        ?>
 
-        <div id="title" class="container-fluid">
-        Curriculum Editor - Access Table <br />
-    <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-secondary" id="toPortfolio" href="../index.php"><i class="bi bi-arrow-return-left"></i>
-                    Portfolio </a>
+        <p class="editor-helper-note">Changes save as soon as a name, netid, or access level field loses focus.</p>
+        <div class="editor-status" id="update" aria-live="polite"></div>
 
+        <section class="editor-panel mb-4">
+            <div class="editor-panel-header editor-panel-header-course">
+                <h2 class="h5 mb-0">User Access Management</h2>
             </div>
-            <div class="btn-group col-3" role="group">
-                <a type="button" class="btn btn-secondary" id="toEditor" href="index.php"><i class="bi bi-pencil"></i>
-                    Edit Menu </a>
-
-            </div>
-    </div>  
-
-
-        <div class="container-fluid" id="update" style="height: 2em; font-size:12px; font-weight:light;text-align:center"></div>
-<div class="container-md pt-4">
-        <div class="content">
-       
-            <table id="newUser">
-               
-            </table>
-
-
-           
-            <table id="users">
+            <div class="editor-panel-body">
+                <div class="editor-table-shell">
+                    <div class="table-responsive">
+            <table id="users" class="table align-middle">
+                <thead>
                 <tr>
                     <th>Full Name</th>
                     <th>net_id</th>
                     <th>access</th>
+                    <th>remove</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
                         <input type="text" name="newName" id="newName" placeholder="Full Name">
@@ -200,8 +192,8 @@ $result = $query->get_result();
                         </select>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" id="addUser" onclick="addUser()" aria-label="Add user">
-                            <i class="bi bi-person-fill-add" aria-hidden="true"></i>
+                        <button type="button" class="btn btn-success" id="addUser" onclick="addUser()">
+                            <i class="bi bi-person-fill-add" aria-hidden="true"></i> Add
                         </button>
                     </td>
 
@@ -238,13 +230,19 @@ $result = $query->get_result();
                             </select>
                         </td>
                         <td>
-                        <a class="btn btn-danger" id="removeUser" onclick="removeUser(<?php echo $users['id']; ?>)"><i class='bi bi-person-fill-x'></i></a>
+                        <button type="button" class="btn btn-danger" id="removeUser" onclick="removeUser(<?php echo $users['id']; ?>)"><i class='bi bi-person-fill-x'></i> Remove</button>
                         </td>
                     </tr>
                 <?php }
                 ?>
+                </tbody>
             </table>
-        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
+    </main>
     <?php } ?>
+    <?php curriculum_render_footer(array("path_prefix" => "..", "profile_path" => "editors/profile-editor.php", "include_bootstrap_bundle" => false)); ?>
 </body>
+</html>
