@@ -7,7 +7,7 @@ $course_id = $_GET['course_id']; $message ="";
 if ($course_id < 1) {$message =  "Invalid course. Showing first course."; $course_id = 1;}
 if ($course_id > 37) {$message =  "Invalid course. showing last course."; $course_id = 37;}
 
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 
 include_once("../auth.php");
 include_once("admins.php");

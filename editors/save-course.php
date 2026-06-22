@@ -1,5 +1,5 @@
 <?php
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 $course_id = $_POST['course_id'];
 $net_id =  $_POST['net_id'];
 $course_name =  $_POST['course_name'];

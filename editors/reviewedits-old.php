@@ -1,7 +1,7 @@
 <?php
 $course_id = $_GET['course_id'];
 
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 include_once("../auth.php");
 
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id = ?");

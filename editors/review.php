@@ -1,6 +1,6 @@
 <?php
 
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 // require_once $_SERVER['DOCUMENT_ROOT'] . '/Mail.php';
 include_once("../auth.php");
 if (in_array($net_id, array('blm39', 'karimay'), true)) {echo "cleared!";}

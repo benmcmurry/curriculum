@@ -1,5 +1,5 @@
 <?php
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 $level_id = $_POST['level_id'];
 $net_id = $_POST['net_id'];
 $level_name = $_POST['level_name'];

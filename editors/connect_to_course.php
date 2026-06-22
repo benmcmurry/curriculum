@@ -1,5 +1,5 @@
 <?php
-include_once("../../../connectFiles/connect_cis.php");
+include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 $learningExperienceId = $_POST['learningExperienceId'];
 $net_id =  $_POST['net_id'];
 $learningExperienceId =  $_POST['learningExperienceId'];
@@ -22,4 +22,3 @@ if ($action=="remove") {
     echo "removed ".date('l jS \of F Y h:i:s A').".";
     
 }
-
