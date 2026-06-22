@@ -7,18 +7,68 @@
 // - PHP 8+ recommended
 // - MySQL table `references_ris` as defined previously
 //
-// IMPORTANT: Update DB credentials below.
+// IMPORTANT: DB credentials are loaded from the private config root.
 
 declare(strict_types=1);
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
-// ---------------------- CONFIG ----------------------
-const DB_HOST = '127.0.0.1';
-const DB_NAME = 'ELC_Curriculum';
-const DB_USER = 'curriculum';
-const DB_PASS = '8521curriculum';
-// ----------------------------------------------------
+function load_curriculum_profile_bibliography_config(): array
+{
+    static $config = null;
+
+    if ($config !== null) {
+        return $config;
+    }
+
+    $config = array();
+    $privateRoot = getenv('APP_PRIVATE_ROOT');
+    if ($privateRoot !== false && trim((string) $privateRoot) !== '') {
+        $privateRoot = rtrim(trim((string) $privateRoot), '/');
+        $candidate = $privateRoot . '/curriculum_profile_bibliography.php';
+        if (is_readable($candidate)) {
+            $loaded = include $candidate;
+            if (is_array($loaded)) {
+                $config = $loaded;
+                return $config;
+            }
+        }
+    }
+
+    $candidates = array(
+        dirname(__DIR__, 3) . '/private-config/curriculum_profile_bibliography.php',
+        dirname(__DIR__, 4) . '/private-config/curriculum_profile_bibliography.php',
+    );
+
+    foreach ($candidates as $candidate) {
+        if (!is_readable($candidate)) {
+            continue;
+        }
+
+        $loaded = include $candidate;
+        if (is_array($loaded)) {
+            $config = $loaded;
+            return $config;
+        }
+    }
+
+    return $config;
+}
+
+$curriculumProfileBibliographyConfig = load_curriculum_profile_bibliography_config();
+
+if (!defined('DB_HOST')) {
+    define('DB_HOST', (string) ($curriculumProfileBibliographyConfig['db_host'] ?? '127.0.0.1'));
+}
+if (!defined('DB_NAME')) {
+    define('DB_NAME', (string) ($curriculumProfileBibliographyConfig['db_name'] ?? 'ELC_Curriculum'));
+}
+if (!defined('DB_USER')) {
+    define('DB_USER', (string) ($curriculumProfileBibliographyConfig['db_user'] ?? ''));
+}
+if (!defined('DB_PASS')) {
+    define('DB_PASS', (string) ($curriculumProfileBibliographyConfig['db_pass'] ?? ''));
+}
 
 
 function db(): PDO {
