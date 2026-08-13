@@ -25,18 +25,18 @@ include_once("teachers.php");
 		<?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
 <main class="container portfolio-main">
-	<section class="hero-card portfolio-hero content-card-spotlight">
+	<section class="hero-card portfolio-hero portfolio-hero-full-bleed content-card-spotlight">
 		<p class="portfolio-eyebrow">Curriculum</p>
 		<h1 class="portfolio-title">Level Descriptors</h1>
 		<p class="portfolio-subtitle">These descriptors outline the language abilities students are expected to demonstrate by level and skill area, and they serve as the curricular target for instruction and assessment.</p>
 	</section>
 
-	<section class="content-card content-card-compact content-card-nav mb-4">
+	<section class="content-card content-card-compact content-card-nav page-jump-bar mb-4">
 		<nav class="section-jump-nav" aria-label="Level descriptors navigation">
-			<p class="section-jump-label">Jump to level</p>
+			<p class="section-jump-label">Jump to level <span class="section-jump-mobile-hint">(Scroll left and right)</span></p>
 			<ul>
 				<?php
-				$levelsForNavQuery = $elc_db->prepare("Select level_name, level_short_name from Levels where active=1 order by level_order ASC");
+				$levelsForNavQuery = $elc_db->prepare("Select level_name, level_short_name from Levels where active=1 order by CASE program WHEN 'full_time' THEN 0 ELSE 1 END, level_order ASC");
 				$levelsForNavQuery->execute();
 				$levelsForNavResult = $levelsForNavQuery->get_result();
 				while ($navLevel = $levelsForNavResult->fetch_assoc()) {
@@ -78,18 +78,23 @@ include_once("teachers.php");
 	</section>
 
 	<?php
-        $query = $elc_db->prepare("Select * from Levels where active=1 order by level_order ASC");
+		$query = $elc_db->prepare("Select * from Levels where active=1 order by CASE program WHEN 'full_time' THEN 0 ELSE 1 END, level_order ASC");
 				$query->execute();
 				$result = $query->get_result();
+        $currentProgram = null;
         while ($levels = $result->fetch_assoc()) {
-            echo "<a class='anchor' id='".$levels['level_short_name']."'></a>";
+			if ($currentProgram !== $levels['program']) {
+				$currentProgram = $levels['program'];
+				echo "<section class='program-divider'><h2>" . ($currentProgram === 'part_time' ? 'Part-time Program' : 'Full-time Program') . "</h2><span aria-hidden='true'></span></section>";
+			}
+            echo "<a class='anchor' id='".htmlspecialchars($levels['level_short_name'], ENT_QUOTES, 'UTF-8')."'></a>";
             echo "<section class='portfolio-card mb-4'>";
-            echo "<div class='portfolio-card-header-level'><h2 class='h4 mb-0'>".$levels['level_name']."</h2></div>";
+            echo "<div class='portfolio-card-header-level'><h2 class='h4 mb-0'>".htmlspecialchars($levels['level_name'], ENT_QUOTES, 'UTF-8')."</h2></div>";
             echo "<div class='portfolio-card-body portfolio-rich-text'>";
             echo $levels['level_descriptor'];
             echo "<h3 class='h6 mt-4 mb-3'>Courses</h3>";
             echo "<div class='portfolio-item-grid'>";
-                $course_query = $elc_db->prepare("Select * from Courses where level_id = ? order by course_order");
+				$course_query = $elc_db->prepare("Select * from Courses where level_id = ? and active=1 order by course_order");
 								$course_query->bind_param("s",$levels['level_id']);
 								$course_query->execute();
             		$courses_result = $course_query->get_result();

@@ -1,14 +1,15 @@
 <?php
 
 
-$level_id = $_GET['level_id'];$message ="";
-if ($level_id < 1) {$message = "Invalid level. Showing first level."; $level_id = 1;}
-if ($level_id > 9) {$message = "Invalid level. Showing last level."; $level_id = 8;}
+$level_id = filter_input(INPUT_GET, 'level_id', FILTER_VALIDATE_INT);
+$message = "";
 
 include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 include_once("../auth.php");
 include_once("admins.php");
 require_once __DIR__ . '/page_helpers.php';
+require_once __DIR__ . '/level_management_helpers.php';
+if (!$level_id) { header('Location: index.php'); exit; }
 $query = $elc_db->prepare("Select * from Levels_review where level_id= ? ");
 $query->bind_param("s", $level_id);
 $query->execute();
@@ -22,6 +23,9 @@ while($level = $result->fetch_assoc()){
 
 
 	}
+if (!isset($level_name)) { header('Location: index.php'); exit; }
+$previousLevelId = curriculum_level_adjacent_id($elc_db, $level_id, 'previous');
+$nextLevelId = curriculum_level_adjacent_id($elc_db, $level_id, 'next');
 
 ?>
 
@@ -172,13 +176,14 @@ function save() {
 	  	<main id="main-content" class="container editor-main py-4">
 			<?php
 			curriculum_render_editor_hero('Level Editor', $level_name, 'Update the level name, short name, status, and descriptor that power the published curriculum pages.');
-			curriculum_render_editor_actions('Editor actions', array(
+			$levelActions = array(
 				array('id' => 'toPortfolio', 'href' => '../levels.php#' . $level_short_name, 'label' => 'Open Live Level', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
 				array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
-				array('id' => 'previous', 'href' => 'level-edit.php?level_id=' . ($level_id - 1), 'label' => 'Previous Level', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'),
-				array('id' => 'next', 'href' => 'level-edit.php?level_id=' . ($level_id + 1), 'label' => 'Next Level', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'),
-				array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto'),
-			));
+			);
+			if ($previousLevelId) { $levelActions[] = array('id' => 'previous', 'href' => 'level-edit.php?level_id=' . $previousLevelId, 'label' => 'Previous Level', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'); }
+			if ($nextLevelId) { $levelActions[] = array('id' => 'next', 'href' => 'level-edit.php?level_id=' . $nextLevelId, 'label' => 'Next Level', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'); }
+			$levelActions[] = array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto');
+			curriculum_render_editor_actions('Editor actions', $levelActions);
 			?>
 
 			<p class="editor-helper-note">This page saves on blur and with the Save Changes button. The active switch updates the status immediately.</p>

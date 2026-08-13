@@ -24,7 +24,8 @@ if ($needs_review == 0) {
       
 }
 
-$query_backup = $elc_db->prepare("Insert into Levels_backup (level_id, level_name, level_short_name, level_descriptor, level_updated_by, level_updated_on) Values (?, ?, ?, ?, ?, now() )");
-$query_backup->bind_param("sssss", $level_id, $level_name, $level_short_name, $level_descriptor, $level_updated_by);
+
+$query_backup = $elc_db->prepare("INSERT INTO Levels_backup (level_id, level_order, program, level_name, level_short_name, level_descriptor, active, level_updated_by, level_updated_on, shared_user_id) SELECT level_id, level_order, program, level_name, level_short_name, level_descriptor, active, level_updated_by, NOW(), shared_user_id FROM Levels_review WHERE level_id = ?");
+$query_backup->bind_param("s", $level_id);
 	$query_backup->execute();
 	$result_backup = $query_backup->get_result();

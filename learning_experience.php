@@ -24,7 +24,7 @@ $backQuery = $elc_db->prepare("Select Courses.course_id, Courses.course_name, Le
     from LE_courses
     inner join Courses on LE_courses.course_id = Courses.course_id
     inner join Levels on Courses.level_id = Levels.level_id
-    where LE_courses.learning_experience_id = ?
+    where LE_courses.learning_experience_id = ? and Levels.active = 1 and Courses.active = 1
     order by Levels.level_order ASC, Courses.course_order ASC
     limit 1");
 $backQuery->bind_param('s', $learningExperienceId);
@@ -115,7 +115,7 @@ include_once("teachers.php");
                                 Courses 
                                 natural join 
                                 Levels
-                            where learning_experience_id=?");
+                            where learning_experience_id=? and Levels.active=1 and Courses.active=1");
                     $query->bind_param("s", $learningExperienceId);
                     $query->execute();
                     $result = $query->get_result();

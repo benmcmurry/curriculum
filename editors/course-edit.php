@@ -3,15 +3,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);	
 
-$course_id = $_GET['course_id']; $message ="";
-if ($course_id < 1) {$message =  "Invalid course. Showing first course."; $course_id = 1;}
-if ($course_id > 37) {$message =  "Invalid course. showing last course."; $course_id = 37;}
+$course_id = filter_input(INPUT_GET, 'course_id', FILTER_VALIDATE_INT); $message ="";
 
 include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 3) . '/private-config') . '/connectFiles/connect_cis.php');
 
 include_once("../auth.php");
 include_once("admins.php");
 require_once __DIR__ . '/page_helpers.php';
+require_once __DIR__ . '/level_management_helpers.php';
+if (!$course_id) { header('Location: index.php'); exit; }
 $query = $elc_db->prepare("Select *, Levels.level_name from Courses_review inner join Levels on Courses_review.level_id=Levels.level_id where course_id= ?");
 $query->bind_param("s", $course_id);
 $query->execute();
@@ -29,6 +29,9 @@ $result = $query->get_result();
       $learning_experiences = $course['learning_experiences'];
       $box_folder = $course['box_folder'];
   }
+if (!isset($course_name)) { header('Location: index.php'); exit; }
+$previousCourseId = curriculum_course_adjacent_id($elc_db, $course_id, 'previous');
+$nextCourseId = curriculum_course_adjacent_id($elc_db, $course_id, 'next');
 
 ?>
 
@@ -191,13 +194,14 @@ if ($auth && $access) { ?>
 	<main id="main-content" class="container editor-main py-4">
 		<?php
 		curriculum_render_editor_hero('Course Editor', $level_name . ' - ' . $course_name, 'Edit the public-facing course summary, materials, learning outcomes, and resource links that appear in the curriculum portfolio.');
-		curriculum_render_editor_actions('Editor actions', array(
+		$courseActions = array(
 			array('id' => 'toPortfolio', 'href' => '../course.php?course_id=' . $course_id, 'label' => 'Open Live Course', 'icon' => 'bi bi-arrow-up-right-square', 'class' => 'btn btn-outline-secondary'),
 			array('id' => 'go_back', 'href' => 'index.php', 'label' => 'Editor Dashboard', 'icon' => 'bi bi-grid-3x3-gap', 'class' => 'btn btn-outline-secondary'),
-			array('id' => 'previous', 'href' => 'course-edit.php?course_id=' . ($course_id - 1), 'label' => 'Previous Course', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'),
-			array('id' => 'next', 'href' => 'course-edit.php?course_id=' . ($course_id + 1), 'label' => 'Next Course', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'),
-			array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto'),
-		));
+		);
+		if ($previousCourseId) { $courseActions[] = array('id' => 'previous', 'href' => 'course-edit.php?course_id=' . $previousCourseId, 'label' => 'Previous Course', 'icon' => 'bi bi-arrow-left-circle', 'class' => 'btn btn-outline-secondary'); }
+		if ($nextCourseId) { $courseActions[] = array('id' => 'next', 'href' => 'course-edit.php?course_id=' . $nextCourseId, 'label' => 'Next Course', 'icon' => 'bi bi-arrow-right-circle', 'class' => 'btn btn-outline-secondary'); }
+		$courseActions[] = array('id' => 'save', 'href' => null, 'label' => 'Save Changes', 'icon' => 'bi bi-save2', 'class' => 'btn btn-primary ms-auto');
+		curriculum_render_editor_actions('Editor actions', $courseActions);
 		?>
 
 		<p class="editor-helper-note">This page saves on blur and with the Save Changes button. TinyMCE fields use the same shared save flow as the rest of the editor.</p>

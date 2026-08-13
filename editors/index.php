@@ -64,6 +64,7 @@ require_once __DIR__ . '/page_helpers.php';
         $dashboardActions = array(
             array('id' => 'toPortfolio', 'href' => '../index.php', 'label' => 'Back to Site', 'icon' => 'bi bi-arrow-return-left', 'class' => 'btn btn-outline-secondary'),
             array('id' => 'toUsers', 'href' => 'users.php', 'label' => 'Manage Access', 'icon' => 'bi bi-table', 'class' => 'btn btn-outline-secondary'),
+            array('href' => 'manage-levels.php', 'label' => 'Manage Levels', 'icon' => 'bi bi-layers', 'class' => 'btn btn-primary'),
         );
         if (isset($net_id) && (string) $net_id == "blm39") {
             $dashboardActions[] = array('id' => 'toProfileEditor', 'href' => 'profile-editor.php', 'label' => 'Edit Profile Data', 'icon' => 'bi bi-person-gear', 'class' => 'btn btn-outline-secondary');

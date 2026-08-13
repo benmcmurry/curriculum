@@ -8,7 +8,7 @@ function curriculum_render_portfolio_hero(array $config): void
     $stats = isset($config['stats']) && is_array($config['stats']) ? $config['stats'] : array();
     $actions = isset($config['actions']) && is_array($config['actions']) ? $config['actions'] : array();
 
-    echo "<section class='hero-card portfolio-hero content-card-spotlight'>";
+    echo "<section class='hero-card portfolio-hero portfolio-hero-full-bleed content-card-spotlight'>";
     if ($eyebrow !== '') {
         echo "<p class='portfolio-eyebrow'>" . htmlspecialchars($eyebrow, ENT_QUOTES, 'UTF-8') . "</p>";
     }
@@ -53,9 +53,9 @@ function curriculum_render_section_jump_nav(string $label, array $items, string 
         return;
     }
 
-    echo "<section class='content-card content-card-compact content-card-nav mb-4'>";
+    echo "<section class='content-card content-card-compact content-card-nav page-jump-bar mb-4'>";
     echo "<nav class='section-jump-nav' aria-label='" . htmlspecialchars($ariaLabel, ENT_QUOTES, 'UTF-8') . "'>";
-    echo "<p class='section-jump-label'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</p>";
+    echo "<p class='section-jump-label'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . ($label === 'Jump to level' ? " <span class='section-jump-mobile-hint'>(Scroll left and right)</span>" : '') . "</p>";
     echo "<ul>";
     foreach ($items as $item) {
         $href = isset($item['href']) ? (string) $item['href'] : '#';

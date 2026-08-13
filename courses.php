@@ -23,7 +23,7 @@ require_once __DIR__ . '/content/page_helpers.php';
 
     <main class="container portfolio-main">
         <?php
-        $levelsQuery = $elc_db->prepare("SELECT level_id, level_name, level_short_name FROM Levels WHERE active = 1 ORDER BY level_order ASC");
+        $levelsQuery = $elc_db->prepare("SELECT level_id, level_name, level_short_name, program FROM Levels WHERE active = 1 ORDER BY CASE program WHEN 'full_time' THEN 0 ELSE 1 END, level_order ASC");
         $levelsQuery->execute();
         $levelsResult = $levelsQuery->get_result();
         $levels = array();
@@ -38,10 +38,6 @@ require_once __DIR__ . '/content/page_helpers.php';
             'eyebrow' => 'Curriculum',
             'title' => 'Courses',
             'subtitle' => 'Browse courses by level, jump to a section quickly, or open an individual course page for descriptions, outcomes, and connected learning experiences.',
-            'stats' => array(
-                array('label' => 'Active Levels', 'value' => (string) count($levels), 'description' => 'All currently published instructional levels.'),
-                array('label' => 'Course Access', 'value' => 'Grouped', 'description' => 'Each level section contains direct links to its courses.'),
-            ),
         ));
         $courseJumpItems = array();
         foreach ($levels as $level) {
@@ -54,8 +50,18 @@ require_once __DIR__ . '/content/page_helpers.php';
         ?>
 
         <?php
-        $coursesQuery = $elc_db->prepare("SELECT course_id, course_name, course_short_name FROM Courses WHERE level_id = ? ORDER BY course_order ASC");
+        $coursesQuery = $elc_db->prepare("SELECT course_id, course_name, course_short_name FROM Courses WHERE level_id = ? AND active = 1 ORDER BY course_order ASC");
+        $currentProgram = null;
         foreach ($levels as $level) {
+            if ($currentProgram !== $level['program']) {
+                $currentProgram = $level['program'];
+                ?>
+                <section class="program-divider" aria-label="<?php echo htmlspecialchars($currentProgram === 'part_time' ? 'Part-time' : 'Full-time', ENT_QUOTES, 'UTF-8'); ?> program">
+                    <h2><?php echo $currentProgram === 'part_time' ? 'Part-time Program' : 'Full-time Program'; ?></h2>
+                    <span aria-hidden="true"></span>
+                </section>
+                <?php
+            }
             $levelId = (string) $level['level_id'];
             $coursesQuery->bind_param('s', $levelId);
             $coursesQuery->execute();

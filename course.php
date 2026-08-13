@@ -2,7 +2,7 @@
 require_once __DIR__ . '/bootstrap.php';
 include_once((getenv('APP_PRIVATE_ROOT') ? rtrim(trim((string) getenv('APP_PRIVATE_ROOT')), '/') : dirname(__DIR__, 2) . '/private-config') . '/connectFiles/connect_cis.php');
 if (isset($_GET['course_id'])) {$course_id = $_GET['course_id'];} else {header("Location: index.php");}
-$title_query = $elc_db->prepare("Select Courses.course_name, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id= ?");
+$title_query = $elc_db->prepare("Select Courses.course_name, Levels.level_name from Courses inner join Levels on Courses.level_id=Levels.level_id where course_id= ? and Courses.active=1 and Levels.active=1");
 $title_query->bind_param('s', $course_id);
 $title_query->execute();
 $result = $title_query->get_result();
@@ -10,6 +10,10 @@ $result = $title_query->get_result();
 while ($title = $result->fetch_assoc()) {
     $course_name = $title['course_name'];
     $level_name = $title['level_name'];
+}
+if (!isset($course_name)) {
+    http_response_code(404);
+    exit('Course not found.');
 }
 include_once("auth.php");
 require_once("teachers.php");
@@ -33,11 +37,15 @@ require_once("teachers.php");
     <?php require_once __DIR__ . "/content/shared-shell.php"; curriculum_render_site_header(); ?>
 
     <?php
-    $query = $elc_db->prepare("Select *, Levels.level_name, Skill_areas.skill_area_philosophy from Courses inner join Levels on Courses.level_id=Levels.level_id inner join Skill_areas on Courses.skill_area=Skill_areas.id where course_id=?");
+$query = $elc_db->prepare("Select *, Levels.level_name, Skill_areas.skill_area_philosophy from Courses inner join Levels on Courses.level_id=Levels.level_id inner join Skill_areas on Courses.skill_area=Skill_areas.id where course_id=? and Courses.active=1 and Levels.active=1");
     $query->bind_param('s', $course_id);
     $query->execute();
     $result = $query->get_result();
     $course = $result->fetch_assoc();
+    if (!$course) {
+        http_response_code(404);
+        exit('Course not found.');
+    }
     ?>
 
     <main class="container portfolio-main">

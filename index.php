@@ -31,11 +31,6 @@ require_once __DIR__ . '/content/page_helpers.php';
         'eyebrow' => 'Curriculum Portfolio',
         'title' => 'Guiding Principles for ELC Curriculum',
         'subtitle' => 'This portfolio explains the principles that shape curriculum design, pedagogical practice, skill-area instruction, and student learning across the ELC.',
-        'stats' => array(
-            array('label' => 'Curriculum', 'value' => '4', 'description' => 'Core philosophy sections organized for quick reference.'),
-            array('label' => 'Practice', 'value' => '8', 'description' => 'Pedagogical practices that anchor day-to-day teaching.'),
-            array('label' => 'Skill Areas', 'value' => 'Dynamic', 'description' => 'Pulled from the current curriculum database.'),
-        ),
     ));
     curriculum_render_section_jump_nav('On this page', array(
         array('label' => 'Curriculum Development', 'href' => '#curriculum'),
