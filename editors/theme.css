@@ -1,5 +1,4 @@
 :root {
-    --editor-bg: linear-gradient(180deg, #f7fbff 0%, #eef6fd 52%, #e5eff9 100%);
     --editor-surface: rgba(255, 255, 255, 0.94);
     --editor-surface-strong: #ffffff;
     --editor-surface-alt: rgba(248, 250, 252, 0.96);
@@ -17,10 +16,6 @@
 
 html,
 body {
-    background:
-        radial-gradient(circle at top left, rgba(236, 244, 252, 0.96), transparent 32%),
-        radial-gradient(circle at top right, rgba(215, 230, 245, 0.62), transparent 28%),
-        var(--editor-bg);
     color: var(--editor-text);
 }
 
